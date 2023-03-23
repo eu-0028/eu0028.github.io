@@ -25,6 +25,10 @@ p, li, dd, dt, address {
 
 header {
   margin-bottom: 10px;
-  display: flex;
   flex-flow: row wrap;
+  background-color: rgba(0,255,0,0.5);
+  padding: 1%;
+  display: block;
+  height: 60px;
+  padding-top: 20.15px;
 }
