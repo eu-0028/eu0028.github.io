@@ -78,6 +78,52 @@
     sections.forEach(function (s) { spy.observe(s.el); });
   }
 
+  /* --- Запуск анимаций, привязанных к смыслу ------------- */
+  function runOnce(selector, cb) {
+    var el = document.querySelector(selector);
+    if (!el) return;
+    if (reduced || !('IntersectionObserver' in window)) { cb(el); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        cb(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.25 });
+    io.observe(el);
+  }
+
+  /* Полосы занятости растут слева направо: это ось времени */
+  runOnce('.tl', function (el) { el.classList.add('is-run'); });
+
+  /* Метки на карте появляются по очереди, ведя взгляд по географии */
+  runOnce('.map', function (el) { el.classList.add('is-run'); });
+
+  /* Цифры отсчитываются, чтобы читатель их действительно прочитал */
+  var counters = document.querySelectorAll('[data-count]');
+  Array.prototype.forEach.call(counters, function (node) {
+    var target = parseInt(node.getAttribute('data-count'), 10);
+    if (isNaN(target)) return;
+    if (reduced || !('IntersectionObserver' in window)) return;
+    node.textContent = '0';
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var t0 = null, dur = 900;
+        var step = function (ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          node.textContent = String(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    io.observe(node);
+  });
+
   /* --- Карта: на узком экране открываем на странах проектов -- */
   var mapScroll = document.querySelector('.map__scroll');
   if (mapScroll) {

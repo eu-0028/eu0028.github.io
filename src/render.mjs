@@ -66,7 +66,7 @@ function figures(t) {
   const items = t.figures.items
     .map(
       (f) => `<div class="figure rise">
-        <span class="figure__v num">${esc(f.value)}</span>
+        <span class="figure__v num" data-count="${attr(f.value)}">${esc(f.value)}</span>
         <span class="figure__u">${esc(f.unit)}</span>
         <p class="figure__l">${esc(f.label)}</p>
       </div>`
@@ -282,7 +282,7 @@ function geo(t) {
       const m = byKey.get(it.key);
       if (!m) return '';
       const n = String(i + 1).padStart(2, '0');
-      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%"><i>${n}</i></span>`;
+      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%;--i:${i}"><i>${n}</i></span>`;
     })
     .join('');
 
@@ -353,7 +353,7 @@ function timeline(t) {
     .join('');
 
   const rows = s.timeline
-    .map((r) => {
+    .map((r, ri) => {
       const a = monthIndex(r.from) - from;
       const b = (r.to ? monthIndex(r.to) : now) - from + 1;
       const open = r.to ? '' : ' bar--open';
@@ -361,7 +361,7 @@ function timeline(t) {
       return `<div class="tl__row">
         <span class="tl__label">${esc(r.t)}</span>
         <div class="tl__track">
-          <span class="bar bar--${r.kind}${open}" style="left:${pct(a)}%;width:${pct(b - a)}%"${label}></span>
+          <span class="bar bar--${r.kind}${open}" style="left:${pct(a)}%;width:${pct(b - a)}%;--i:${ri}"${label}></span>
         </div>
       </div>`;
     })
@@ -490,8 +490,7 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/source-serif-4-${pre}-300700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/ibm-plex-sans-${pre}-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/onest-${pre}-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/styles.css">
 ${jsonLd(t)}
