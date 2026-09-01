@@ -185,9 +185,9 @@ if (missing.length) throw new Error('Не найдены страны: ' + missi
 /* Внешний SVG: сам переключает цвета по системной теме */
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="World map">
 <style>
-.l{fill:#e6e0d2;stroke:#d5cdbb;stroke-width:.5}
-.m{fill:#c8ab6d;stroke:#8a6c2f;stroke-width:.6}
-@media (prefers-color-scheme:dark){.l{fill:#282a21;stroke:#3a3c30}.m{fill:#6d5722;stroke:#c8a75a}}
+.l{fill:#e0e4ea;stroke:#cdd3db;stroke-width:.5}
+.m{fill:#9fb4e2;stroke:#1e4bad;stroke-width:.6}
+@media (prefers-color-scheme:dark){.l{fill:#1c212b;stroke:#2a3140}.m{fill:#2f4f96;stroke:#7ea3f0}}
 </style>
 <path class="l" d="${base}"/>
 <path class="m" d="${markedPaths}"/>

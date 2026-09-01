@@ -40,7 +40,7 @@ function hero(t, hasCv, hasPortrait) {
     <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
       <div>
         <p class="label hero__eyebrow"><span>${esc(h.eyebrow)}</span></p>
-        <h1 class="hero__h1">${esc(h.lead)} <em>${esc(h.leadEm)}</em> ${esc(h.leadTail)}</h1>
+        <h1 class="hero__h1">${esc(h.lead)} <em>${esc(h.leadEm)}</em>${h.leadTail ? ' ' + esc(h.leadTail) : ''}</h1>
         <div class="prose"><p class="lede">${esc(h.para)}</p></div>
         <div class="hero__cta">
           <a class="btn" href="#contact">${esc(h.ctaPrimary)}${arrow}</a>
@@ -51,8 +51,8 @@ function hero(t, hasCv, hasPortrait) {
       ${hasPortrait ? `<div class="hero__media">
         <figure class="portrait" data-portrait>
           <img src="/assets/img/portrait.jpg" alt="${attr(h.portraitAlt)}" width="800" height="1000" fetchpriority="high">
-          <span class="portrait__fallback" aria-hidden="true">${esc(h.eyebrow.split(' ').map((w) => w[0]).join(''))}</span>
-          <figcaption class="portrait__cap">${esc(h.eyebrow)}</figcaption>
+          <span class="portrait__fallback" aria-hidden="true">${esc(h.name.split(' ').map((w) => w[0]).join(''))}</span>
+          <figcaption class="portrait__cap">${esc(h.name)}</figcaption>
         </figure>
       </div>` : ''}
     </div>
@@ -415,7 +415,7 @@ function footer(t) {
   <div class="shell">
     <div class="ftr__grid">
       <div>
-        <p class="ftr__mark">${esc(t.hero.eyebrow)}</p>
+        <p class="ftr__mark">${esc(t.hero.name)}</p>
         <p class="ftr__sub">${esc(t.career.jobs[0].role + ', ' + t.career.jobs[0].org)}</p>
       </div>
       <div>
@@ -446,7 +446,7 @@ function jsonLd(t) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: t.hero.eyebrow,
+    name: t.hero.name,
     jobTitle: t.career.jobs[0].role,
     description: t.description,
     url: shared.domain + (t.lang === 'en' ? '/en/' : '/'),
@@ -475,7 +475,7 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(t.title)}</title>
 <meta name="description" content="${attr(t.description)}">
-<meta name="author" content="${attr(t.hero.eyebrow)}">
+<meta name="author" content="${attr(t.hero.name)}">
 <link rel="canonical" href="${attr(canonical)}">
 <link rel="alternate" hreflang="ru" href="${attr(shared.domain)}/">
 <link rel="alternate" hreflang="en" href="${attr(shared.domain)}/en/">
@@ -485,10 +485,10 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta property="og:description" content="${attr(t.description)}">
 <meta property="og:url" content="${attr(canonical)}">
 <meta property="og:locale" content="${attr(t.ogLocale)}">
-<meta property="og:site_name" content="${attr(t.hero.eyebrow)}">
+<meta property="og:site_name" content="${attr(t.hero.name)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#14150f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/source-serif-4-${pre}-300700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/ibm-plex-sans-${pre}-400-normal.woff2" as="font" type="font/woff2" crossorigin>

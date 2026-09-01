@@ -18,7 +18,7 @@ export const ru = {
   altLabel: 'English',
   altHref: '/en/',
   homeHref: '/',
-  title: 'Евгений Шутов — международные проекты, делегации и деловые мероприятия',
+  title: 'Евгений Шутов — международные проекты и делегации, португальский C1',
   description:
     'Специалист-международник, МГИМО. Латинская Америка, португальский и английский C1. Сопровождение иностранных делегаций, организация деловых мероприятий, договоры и отчётность по государственным контрактам.',
   ogLocale: 'ru_RU',
@@ -40,12 +40,13 @@ export const ru = {
   ],
 
   hero: {
-    eyebrow: 'Евгений Шутов',
-    lead: 'Международные проекты,',
-    leadEm: 'делегации',
-    leadTail: 'и деловые мероприятия',
+    name: 'Евгений Шутов',
+    eyebrow: 'Евгений Шутов · Consult Invest ITIC',
+    lead: 'Отвечаю за то, чтобы международный проект',
+    leadEm: 'состоялся',
+    leadTail: '',
     para:
-      'Руководитель российского офиса Consult Invest ITIC. Латинская Америка, португальский и английский C1 — переговоры и документы без переводчика.',
+      'Веду делегации, переговоры и документы на португальском и английском — от первого письма в министерство до отчёта, принятого заказчиком.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
@@ -443,12 +444,13 @@ export const en = {
   ],
 
   hero: {
-    eyebrow: 'Evgeny Shutov',
-    lead: 'International projects,',
-    leadEm: 'delegations',
-    leadTail: 'and business events',
+    name: 'Evgeny Shutov',
+    eyebrow: 'Evgeny Shutov · Consult Invest ITIC',
+    lead: 'I make international projects',
+    leadEm: 'actually happen',
+    leadTail: '',
     para:
-      'Country Manager for Russia at Consult Invest ITIC. Latin America; Portuguese and English at C1, negotiating without an interpreter.',
+      'I run delegations, negotiations and paperwork in Portuguese and English, from the first ministry letter to the final accepted report.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the projects',
     portraitAlt: 'Evgeny Shutov',
