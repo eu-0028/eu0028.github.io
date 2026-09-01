@@ -32,21 +32,20 @@ export const ru = {
   nav: [
     { href: '#profile', label: 'О себе', n: '01' },
     { href: '#practice', label: 'Направления', n: '02' },
-    { href: '#work', label: 'Проекты', n: '03' },
-    { href: '#current', label: '2026', n: '04' },
-    { href: '#career', label: 'Опыт', n: '05' },
-    { href: '#contact', label: 'Контакты', n: '06' },
+    { href: '#geo', label: 'География', n: '03' },
+    { href: '#work', label: 'Проекты', n: '04' },
+    { href: '#current', label: '2026', n: '05' },
+    { href: '#career', label: 'Опыт', n: '06' },
+    { href: '#contact', label: 'Контакты', n: '07' },
   ],
 
   hero: {
-    eyebrow: 'Москва · МГИМО · Латинская Америка',
-    name: 'Евгений Шутов',
+    eyebrow: 'Евгений Шутов',
     lead: 'Международные проекты,',
     leadEm: 'делегации',
     leadTail: 'и деловые мероприятия',
-    role: 'Consult Invest ITIC — руководитель российского офиса',
     para:
-      'Специалист-международник, основной регион — Латинская Америка. Португальский и английский на уровне C1: веду переговоры и документы напрямую, без переводчика. Сопровождаю иностранные делегации, организую деловые мероприятия и отвечаю за договоры и отчётность, вплоть до государственных контрактов.',
+      'Руководитель российского офиса Consult Invest ITIC. Латинская Америка, португальский и английский C1 — переговоры и документы без переводчика.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
@@ -125,8 +124,31 @@ export const ru = {
     ],
   },
 
-  work: {
+  geo: {
     n: '03',
+    kicker: 'География',
+    title: 'Где я работал',
+    intro: 'Двенадцать стран, в которых у меня были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке.',
+    legendMarked: 'Страны проектов',
+    legendRest: 'Остальной мир',
+    items: [
+      { key: 'Brazil', name: 'Бразилия', note: 'Делегация «Интервидения», трансляция на бразильском телевидении, фестиваль молодёжи, обращение в Министерство туризма' },
+      { key: 'Russia', name: 'Россия', note: 'База, Москва. Российское направление Consult Invest ITIC, форумы и государственные контракты' },
+      { key: 'United Arab Emirates', name: 'ОАЭ', note: 'Делегация «Интервидения-2025»; экономическая зона Рас-эль-Хайма' },
+      { key: 'Saudi Arabia', name: 'Саудовская Аравия', note: 'Russia Bridge Program, «Интервидение-2026» в Эр-Рияде' },
+      { key: 'Ethiopia', name: 'Эфиопия', note: 'Делегация «Интервидения-2025»' },
+      { key: 'Kenya', name: 'Кения', note: 'Делегация «Интервидения-2025»' },
+      { key: 'Madagascar', name: 'Мадагаскар', note: 'Делегация «Интервидения-2025»' },
+      { key: 'China', name: 'Китай', note: 'Документы по запуску офиса в Шэньчжэне' },
+      { key: 'Uzbekistan', name: 'Узбекистан', note: 'Привлечение клиентов для RAKEZ, работа с AKFA Group' },
+      { key: 'Kazakhstan', name: 'Казахстан', note: 'Привлечение клиентов для RAKEZ' },
+      { key: 'India', name: 'Индия', note: 'Делегация форума AGORA' },
+      { key: 'South Africa', name: 'ЮАР', note: 'Делегация форума AGORA' },
+    ],
+  },
+
+  work: {
+    n: '04',
     kicker: 'Избранные проекты',
     title: 'Что сделано',
     items: [
@@ -241,7 +263,7 @@ export const ru = {
   },
 
   current: {
-    n: '04',
+    n: '05',
     kicker: 'В работе сейчас',
     title: '2026 год',
     intro: 'Проекты, которые веду прямо сейчас.',
@@ -275,9 +297,27 @@ export const ru = {
   },
 
   career: {
-    n: '05',
+    n: '06',
     kicker: 'Опыт и образование',
     title: 'Хронология',
+    timelineTitle: 'Занятость по месяцам',
+    timelineNote: 'Часть проектов шла параллельно с основной работой.',
+    timelineFrom: '2024-04',
+    timelineTo: '2026-12',
+    ongoing: 'по настоящее время',
+    nowLabel: 'сейчас',
+    legendRole: 'Должности',
+    legendProject: 'Проекты',
+    timeline: [
+      { t: 'Consult Invest ITIC', from: '2025-08', to: null, kind: 'role' },
+      { t: 'Финансовый консультант', from: '2024-08', to: '2025-12', kind: 'role' },
+      { t: 'Атташе и переводчик', from: '2024-04', to: '2025-04', kind: 'role' },
+      { t: 'Интервидение-2025', from: '2025-08', to: '2025-09', kind: 'project' },
+      { t: 'Бизнес-инкубатор ШОС', from: '2025-09', to: '2025-12', kind: 'project' },
+      { t: 'Russia Bridge Program', from: '2025-11', to: '2025-12', kind: 'project' },
+      { t: 'RAKEZ', from: '2026-01', to: '2026-05', kind: 'project' },
+      { t: 'AGORA', from: '2026-01', to: '2026-04', kind: 'project' },
+    ],
     jobsTitle: 'Опыт работы',
     jobs: [
       {
@@ -338,10 +378,10 @@ export const ru = {
     ],
     langTitle: 'Языки',
     langs: [
-      { l: 'Русский', v: 'родной' },
-      { l: 'Португальский', v: 'C1 — дипломатическая, юридическая и коммерческая лексика' },
-      { l: 'Английский', v: 'C1 — свободное профессиональное владение' },
-      { l: 'Испанский', v: 'B1 — рабочий уровень' },
+      { l: 'Русский', v: 'родной', lvl: 4, cap: 'Родной' },
+      { l: 'Португальский', v: 'дипломатическая, юридическая и коммерческая лексика', lvl: 3, cap: 'C1' },
+      { l: 'Английский', v: 'свободное профессиональное владение', lvl: 3, cap: 'C1' },
+      { l: 'Испанский', v: 'рабочий уровень', lvl: 2, cap: 'B1' },
     ],
     skillTitle: 'Навыки',
     skills: [
@@ -355,7 +395,7 @@ export const ru = {
   },
 
   contact: {
-    n: '06',
+    n: '07',
     kicker: 'Контакты',
     title: 'Готов обсудить задачу или позицию',
     d: 'Отвечаю лично. Если вопрос по международному проекту, напишите сразу суть, страну и сроки — так будет быстрее.',
@@ -381,7 +421,7 @@ export const en = {
   altLabel: 'Русский',
   altHref: '/',
   homeHref: '/en/',
-  title: 'Evgeny Shutov — international projects, delegations and business events',
+  title: 'Evgeny Shutov. International projects, delegations and business events',
   description:
     'International affairs specialist, MGIMO. Latin America; Portuguese and English at C1. Foreign delegations and protocol, international event management, contracts and state-contract reporting.',
   ogLocale: 'en_US',
@@ -395,21 +435,20 @@ export const en = {
   nav: [
     { href: '#profile', label: 'About', n: '01' },
     { href: '#practice', label: 'Practice', n: '02' },
-    { href: '#work', label: 'Projects', n: '03' },
-    { href: '#current', label: '2026', n: '04' },
-    { href: '#career', label: 'Experience', n: '05' },
-    { href: '#contact', label: 'Contact', n: '06' },
+    { href: '#geo', label: 'Geography', n: '03' },
+    { href: '#work', label: 'Projects', n: '04' },
+    { href: '#current', label: '2026', n: '05' },
+    { href: '#career', label: 'Experience', n: '06' },
+    { href: '#contact', label: 'Contact', n: '07' },
   ],
 
   hero: {
-    eyebrow: 'Moscow · MGIMO · Latin America',
-    name: 'Evgeny Shutov',
+    eyebrow: 'Evgeny Shutov',
     lead: 'International projects,',
     leadEm: 'delegations',
     leadTail: 'and business events',
-    role: 'Consult Invest ITIC — Country Manager, Russia',
     para:
-      'International affairs specialist focused on Latin America. Portuguese and English at C1: I negotiate and handle documents directly, without an interpreter. I accompany foreign delegations, run business events, and take responsibility for contracts and reporting, including under state contracts.',
+      'Country Manager for Russia at Consult Invest ITIC. Latin America; Portuguese and English at C1, negotiating without an interpreter.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the projects',
     portraitAlt: 'Evgeny Shutov',
@@ -421,7 +460,7 @@ export const en = {
       { value: '45', unit: 'people', label: 'Across five national delegations at Intervision 2025, which I ran from invitation to departure' },
       { value: '134', unit: 'countries', label: 'Signal reach of the Brazilian broadcast, which I arranged single-handedly' },
       { value: '9', unit: 'M ₽', label: 'State-contract expenditure that I reconciled into a report backed by source documents' },
-      { value: '677', unit: 'companies', label: 'Reached across Russia, Uzbekistan and Kazakhstan against a plan of 300–400 over three months' },
+      { value: '677', unit: 'companies', label: 'Reached across Russia, Uzbekistan and Kazakhstan against a plan of 300-400 over three months' },
     ],
   },
 
@@ -437,7 +476,7 @@ export const en = {
     facts: [
       {
         k: 'Education',
-        v: 'MGIMO, International Relations, BA with honours. MA in Economics — international financial analysis, accounting and audit.',
+        v: 'MGIMO, International Relations, BA with honours. MA in Economics: international financial analysis, accounting and audit.',
       },
       {
         k: 'Languages',
@@ -472,7 +511,7 @@ export const en = {
       },
       {
         t: 'Contracts, procurement and reporting',
-        d: 'Project paperwork — from contractor agreements to the final report under a state contract.',
+        d: 'Project paperwork, from contractor agreements to the final report under a state contract.',
         b: ['Reporting under state contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acts, commercial proposals', 'HR administration and compliance'],
       },
       {
@@ -488,8 +527,31 @@ export const en = {
     ],
   },
 
-  work: {
+  geo: {
     n: '03',
+    kicker: 'Geography',
+    title: 'Where I have worked',
+    intro: 'Twelve countries where I have run projects, negotiations or delegations. The numbers on the map match the numbers in the list.',
+    legendMarked: 'Project countries',
+    legendRest: 'Rest of the world',
+    items: [
+      { key: 'Brazil', name: 'Brazil', note: 'Intervision delegation, the Brazilian television broadcast, the youth festival, the application to the Ministry of Tourism' },
+      { key: 'Russia', name: 'Russia', note: 'Base, Moscow. The Russian practice of Consult Invest ITIC, forums and state contracts' },
+      { key: 'United Arab Emirates', name: 'UAE', note: 'Intervision 2025 delegation; Ras Al Khaimah Economic Zone' },
+      { key: 'Saudi Arabia', name: 'Saudi Arabia', note: 'Russia Bridge Program, Intervision 2026 in Riyadh' },
+      { key: 'Ethiopia', name: 'Ethiopia', note: 'Intervision 2025 delegation' },
+      { key: 'Kenya', name: 'Kenya', note: 'Intervision 2025 delegation' },
+      { key: 'Madagascar', name: 'Madagascar', note: 'Intervision 2025 delegation' },
+      { key: 'China', name: 'China', note: 'Documentation for the launch of the Shenzhen office' },
+      { key: 'Uzbekistan', name: 'Uzbekistan', note: 'Client acquisition for RAKEZ, work with AKFA Group' },
+      { key: 'Kazakhstan', name: 'Kazakhstan', note: 'Client acquisition for RAKEZ' },
+      { key: 'India', name: 'India', note: 'AGORA forum delegation' },
+      { key: 'South Africa', name: 'South Africa', note: 'AGORA forum delegation' },
+    ],
+  },
+
+  work: {
+    n: '04',
     kicker: 'Selected projects',
     title: 'What has been delivered',
     items: [
@@ -498,15 +560,15 @@ export const en = {
         img: 'work-intervision.jpg',
         imgAlt: 'Delegations at Intervision 2025',
         sub: 'International music contest',
-        meta: 'August — September 2025 · Live Arena, Moscow',
+        meta: 'August-September 2025 · Live Arena, Moscow',
         role: 'Project manager, national delegations',
         d: 'I joined the project less than a month before the contest as a Portuguese-speaking specialist. The contest was held under presidential decree with the support of the Russian Foreign Ministry, in a 20,000-seat arena.',
         b: [
-          'Five national delegations — Brazil, Madagascar, Kenya, Ethiopia and the UAE — totalling 45 people.',
+          'Five national delegations totalling 45 people: Brazil, Madagascar, Kenya, Ethiopia and the UAE.',
           'Co-organiser agreements with national governments, visa support, accommodation, transport and a ten-day visit programme.',
           'Selected and supervised five delegation attachés, one per country.',
           'Conducted all work with the Brazilian side in Portuguese: the artist, the production team, the broadcaster and the ministry of culture.',
-          'Arranged the broadcast of the contest on Brazilian television single-handedly: prepared and translated the broadcaster’s document package — the organisation’s charter, HR documents, agreements and memoranda.',
+          'Arranged the broadcast of the contest on Brazilian television single-handedly: prepared and translated the broadcaster’s document package: the organisation’s charter, HR documents, agreements and memoranda.',
         ],
         m: [
           { v: '45', l: 'delegation members' },
@@ -520,13 +582,13 @@ export const en = {
         img: 'work-sco.jpg',
         imgAlt: 'SCO Business Incubator, Omsk',
         sub: 'State contract: reporting and financial audit',
-        meta: 'September — December 2025 · programme held in Omsk',
+        meta: 'September-December 2025 · programme held in Omsk',
         role: 'Head of reporting under the state contract',
-        d: 'Client: the Directorate of the World Youth Festival. The programme ran on 19–23 August 2025, with more than 100 participants from all ten SCO member states.',
+        d: 'Client: the Directorate of the World Youth Festival. The programme ran on 19-23 August 2025, with more than 100 participants from all ten SCO member states.',
         b: [
           'Final report of more than 3,000 pages: collected, structured and formatted training materials across 25 workshop sessions.',
-          'Wrote summaries and handouts for roughly 12 sessions from scratch — no source materials existed.',
-          'Handled financial reporting single-handedly: reconciled around 10 contractor agreements — interpreters, catering, staff, logistics.',
+          'Wrote summaries and handouts for roughly 12 sessions from scratch, because no source materials existed.',
+          'Handled financial reporting single-handedly: reconciled around 10 contractor agreements covering interpreters, catering, staff and logistics.',
           'Agreed document corrections with suppliers and produced a fully balanced expense report of 9 million roubles, backed by source documents and internal orders.',
         ],
         m: [
@@ -540,10 +602,10 @@ export const en = {
         t: 'Russia Bridge Program',
         img: 'work-bridge.jpg',
         imgAlt: 'Russia Bridge Program, Moscow',
-        sub: 'First Russian–Saudi business acceleration programme',
-        meta: 'November — December 2025 · Moscow',
+        sub: 'First Russian-Saudi business acceleration programme',
+        meta: 'November-December 2025 · Moscow',
         role: 'Co-organiser',
-        d: 'The programme ran on 4–5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and the Ambassador of Saudi Arabia.',
+        d: 'The programme ran on 4-5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and the Ambassador of Saudi Arabia.',
         b: [
           'Sales and outreach: around 200 calls and some 1,000 impressions across Telegram and the web.',
           'Brought in 30 paying participants and arranged 15 business meetings between Russian and foreign companies.',
@@ -564,15 +626,15 @@ export const en = {
         img: 'work-rakez.jpg',
         imgAlt: 'RAKEZ project work',
         sub: 'Ras Al Khaimah Economic Zone, UAE · Russia and CIS markets',
-        meta: 'January — May 2026',
+        meta: 'January-May 2026',
         role: 'Client acquisition and single point of contact',
         d: 'Responsible for client acquisition across Russia and the CIS for the UAE free economic zone, and the single point of contact for all Russian and CIS counterparties on behalf of RAKEZ.',
         b: [
-          'Reached around 677 companies across Russia, Uzbekistan and Kazakhstan against a plan of 300–400 over three months.',
+          'Reached around 677 companies across Russia, Uzbekistan and Kazakhstan against a plan of 300-400 over three months.',
           'Generated around 313 responses expressing initial interest against a target of 300.',
           'Designed and ran a cold outreach campaign: 512 selected companies, around 275 substantive replies.',
           'Built a separate client base for each of the three countries.',
-          'Advanced three prospects to preliminary quotation through discovery calls; maintained six warm contacts, including AKFA Group — Uzbekistan, more than 30,000 employees.',
+          'Advanced three prospects to preliminary quotation through discovery calls; maintained six warm contacts, including AKFA Group in Uzbekistan, which has more than 30,000 employees.',
         ],
         m: [
           { v: '677', l: 'companies reached' },
@@ -586,9 +648,9 @@ export const en = {
         img: 'work-agora.jpg',
         imgAlt: 'AGORA forum, Soluxe Hotel',
         sub: 'International business forum',
-        meta: 'January — April 2026 · Soluxe Hotel, Moscow',
+        meta: 'January-April 2026 · Soluxe Hotel, Moscow',
         role: 'Head of forum sales',
-        d: 'Led sales for the international business forum of 25–26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
+        d: 'Led sales for the international business forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
         b: [
           'Handled all correspondence and communication with foreign guests in English, including the Indian and South African delegations.',
           'Found four interested entrepreneurs at the forum itself.',
@@ -604,14 +666,14 @@ export const en = {
   },
 
   current: {
-    n: '04',
+    n: '05',
     kicker: 'Currently running',
     title: 'The 2026 slate',
     intro: 'Projects I am running right now.',
     items: [
       {
         t: 'International Youth Festival 2026',
-        meta: 'Yekaterinburg · 11–17 September 2026',
+        meta: 'Yekaterinburg · 11-17 September 2026',
         d: 'Coordinating the Brazilian delegation within the festival’s children’s programme: 10,000 participants from 191 countries, including 1,000 teenagers aged 14 to 17. All correspondence with the Brazilian side in Portuguese, collection and verification of participant documents, logistics and accompaniment of the group in Russia.',
       },
       {
@@ -626,7 +688,7 @@ export const en = {
       },
       {
         t: 'BRICS Business Incubator',
-        meta: 'In-person programme 2027–2028',
+        meta: 'In-person programme 2027-2028',
         d: 'Prepared the application to the Brazilian Ministry of Tourism for grant support of the in-person programme.',
       },
       {
@@ -638,39 +700,57 @@ export const en = {
   },
 
   career: {
-    n: '05',
+    n: '06',
     kicker: 'Experience and education',
     title: 'Chronology',
+    timelineTitle: 'Month by month',
+    timelineNote: 'Several projects ran in parallel with the main role.',
+    timelineFrom: '2024-04',
+    timelineTo: '2026-12',
+    ongoing: 'to date',
+    nowLabel: 'now',
+    legendRole: 'Roles',
+    legendProject: 'Projects',
+    timeline: [
+      { t: 'Consult Invest ITIC', from: '2025-08', to: null, kind: 'role' },
+      { t: 'Financial adviser', from: '2024-08', to: '2025-12', kind: 'role' },
+      { t: 'Attaché and interpreter', from: '2024-04', to: '2025-04', kind: 'role' },
+      { t: 'Intervision 2025', from: '2025-08', to: '2025-09', kind: 'project' },
+      { t: 'SCO Business Incubator', from: '2025-09', to: '2025-12', kind: 'project' },
+      { t: 'Russia Bridge Program', from: '2025-11', to: '2025-12', kind: 'project' },
+      { t: 'RAKEZ', from: '2026-01', to: '2026-05', kind: 'project' },
+      { t: 'AGORA', from: '2026-01', to: '2026-04', kind: 'project' },
+    ],
     jobsTitle: 'Experience',
     jobs: [
       {
         org: 'Consult Invest ITIC',
         note: 'International trade, investment and consulting company',
-        period: 'August 2025 — present',
+        period: 'August 2025 to present',
         role: 'Country Manager, Russia',
-        sub: 'Legally appointed general director from January 2026 · manager of international commercial projects, August — December 2025',
+        sub: 'Legally appointed general director from January 2026 · manager of international commercial projects, August-December 2025',
         b: [
           'I head the Russian practice of a company present in six countries across BRICS, the SCO and the Gulf. I am responsible for client acquisition, project delivery and work with government bodies across Russia and the CIS.',
           'Closed a documentation gap inherited from previous management: prepared the agency agreement and completion act for the launch of the Shenzhen office, working directly with source documents in Chinese and English.',
-          'Built HR administration and compliance from scratch — internal labour regulations, employment contracts, occupational safety documentation — and brought new staff into the system.',
+          'Built HR administration and compliance from scratch, covering internal labour regulations, employment contracts and occupational safety documentation, then brought new staff into the system.',
           'Represent the company at closed business events: Greenwood Business Park, the Atlanty club, partner forums.',
         ],
       },
       {
         org: 'Financial adviser',
         note: 'Personal financial planning and investment consulting',
-        period: 'August 2024 — December 2025',
+        period: 'August 2024 to December 2025',
         role: 'Private practice',
         b: [
           'Advised 20 clients: individual financial plans covering goal setting, emergency fund formation, budget optimisation and debt reduction. Every client reached their target reserve.',
           'Built diversified portfolios on portfolio-theory principles, including a gold allocation. Average client return in 2025 was plus 5% against a declining Russian equity market.',
-          'Structured long-term savings through unit-linked insurance products and short-term growth instruments — money market funds and bonds.',
+          'Structured long-term savings through unit-linked insurance products and short-term growth instruments such as money market funds and bonds.',
         ],
       },
       {
         org: 'Attaché and interpreter',
         note: 'International forums in Moscow',
-        period: 'April 2024 — April 2025',
+        period: 'April 2024 to April 2025',
         role: 'Brazilian delegation',
         b: [
           'Attaché to the Brazilian delegation at Roscongress and MGIMO events, BRICS Working Group.',
@@ -682,13 +762,13 @@ export const en = {
     edu: [
       {
         org: 'MGIMO University',
-        period: '2026 — 2028',
+        period: '2026-2028',
         role: 'MA, Economics',
         d: 'Specialisation: international financial analysis, accounting and audit.',
       },
       {
         org: 'MGIMO University',
-        period: '2022 — 2026',
+        period: '2022-2026',
         role: 'BA, International Relations, with honours',
         d: 'Degree with foreign languages: Portuguese as first language, English as second. Thesis: “Brazilian economic diplomacy as an instrument for advancing and implementing foreign policy objectives in Latin America”.',
       },
@@ -701,10 +781,10 @@ export const en = {
     ],
     langTitle: 'Languages',
     langs: [
-      { l: 'Russian', v: 'native' },
-      { l: 'Portuguese', v: 'C1 — diplomatic, legal and commercial vocabulary' },
-      { l: 'English', v: 'C1 — full professional proficiency' },
-      { l: 'Spanish', v: 'B1 — working proficiency' },
+      { l: 'Russian', v: 'native', lvl: 4, cap: 'Native' },
+      { l: 'Portuguese', v: 'diplomatic, legal and commercial vocabulary', lvl: 3, cap: 'C1' },
+      { l: 'English', v: 'full professional proficiency', lvl: 3, cap: 'C1' },
+      { l: 'Spanish', v: 'working proficiency', lvl: 2, cap: 'B1' },
     ],
     skillTitle: 'Skills',
     skills: [
@@ -718,10 +798,10 @@ export const en = {
   },
 
   contact: {
-    n: '06',
+    n: '07',
     kicker: 'Contact',
     title: 'Open to a brief or a position',
-    d: 'I reply personally. For an international project, lead with the substance, the country and the timeline — that will be quickest.',
+    d: 'I reply personally. For an international project, lead with the substance, the country and the timeline. That will be quickest.',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
     tgLabel: 'Telegram',

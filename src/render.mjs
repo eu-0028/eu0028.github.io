@@ -1,4 +1,5 @@
 import { shared } from './content.mjs';
+import { mapMeta } from './map.generated.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const attr = (s) => esc(s).replace(/"/g, '&quot;');
@@ -29,17 +30,16 @@ function header(t, base) {
 
 /* --- обложка -------------------------------------------- */
 
-function hero(t, hasCv) {
+function hero(t, hasCv, hasPortrait) {
   const h = t.hero;
   const cv = hasCv
     ? `<a class="btn btn--ghost" href="/assets/shutov-cv.pdf" download>${esc(t.cvLabel)}</a>`
     : '';
   return `<section class="hero">
   <div class="shell">
-    <div class="hero__grid" data-hero-grid>
+    <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
       <div>
         <p class="label hero__eyebrow"><span>${esc(h.eyebrow)}</span></p>
-        <p class="hero__name">${esc(h.name)}</p>
         <h1 class="hero__h1">${esc(h.lead)} <em>${esc(h.leadEm)}</em> ${esc(h.leadTail)}</h1>
         <div class="prose"><p class="lede">${esc(h.para)}</p></div>
         <div class="hero__cta">
@@ -47,15 +47,14 @@ function hero(t, hasCv) {
           <a class="btn btn--ghost" href="#work">${esc(h.ctaSecondary)}</a>
           ${cv}
         </div>
-        <p class="hero__role">${esc(h.role)}</p>
       </div>
-      <div class="hero__media">
+      ${hasPortrait ? `<div class="hero__media">
         <figure class="portrait" data-portrait>
           <img src="/assets/img/portrait.jpg" alt="${attr(h.portraitAlt)}" width="800" height="1000" fetchpriority="high">
-          <span class="portrait__fallback" aria-hidden="true">${esc(h.name.split(' ').map((w) => w[0]).join(''))}</span>
-          <figcaption class="portrait__cap">${esc(h.name)}</figcaption>
+          <span class="portrait__fallback" aria-hidden="true">${esc(h.eyebrow.split(' ').map((w) => w[0]).join(''))}</span>
+          <figcaption class="portrait__cap">${esc(h.eyebrow)}</figcaption>
         </figure>
-      </div>
+      </div>` : ''}
     </div>
   </div>
 </section>`;
@@ -228,7 +227,18 @@ function career(t) {
     )
     .join('');
   const langs = s.langs
-    .map((l) => `<div><dt>${esc(l.l)}</dt><dd>${esc(l.v)}</dd></div>`)
+    .map((l) => {
+      const dots = [1, 2, 3, 4]
+        .map((n) => `<i${n <= l.lvl ? ' class="on"' : ''}></i>`)
+        .join('');
+      return `<div class="lang__row">
+        <dt>${esc(l.l)}</dt>
+        <dd>
+          <span class="lang__top"><span class="meter" aria-hidden="true">${dots}</span><span class="lang__cap">${esc(l.cap)}</span></span>
+          <span class="lang__d">${esc(l.v)}</span>
+        </dd>
+      </div>`;
+    })
     .join('');
   const skills = s.skills
     .map((k) => `<div><dt>${esc(k.k)}</dt><dd>${esc(k.v)}</dd></div>`)
@@ -239,7 +249,8 @@ function career(t) {
       ${aside(s.n, s.kicker)}
       <div>
         <h2 class="h2 rise" style="margin-bottom:clamp(2rem,4vw,3rem)">${esc(s.title)}</h2>
-        <p class="subhead">${esc(s.jobsTitle)}</p>
+        ${timeline(t)}
+        <p class="subhead" style="margin-top:clamp(3rem,6vw,4.5rem)">${esc(s.jobsTitle)}</p>
         <div class="tl">${jobs}</div>
         <p class="subhead" style="margin-top:clamp(3rem,6vw,4.5rem)">${esc(s.eduTitle)}</p>
         <div class="tl">${edu}</div>
@@ -259,26 +270,139 @@ function career(t) {
 </section>`;
 }
 
-/* --- контакты ------------------------------------------- */
 
-function contact(t) {
-  const s = t.contact;
-  return `<section class="band band--sunk" id="contact">
+/* --- география ------------------------------------------ */
+
+function geo(t) {
+  const s = t.geo;
+  const byKey = new Map(mapMeta.marks.map((m) => [m.key, m]));
+
+  const pins = s.items
+    .map((it, i) => {
+      const m = byKey.get(it.key);
+      if (!m) return '';
+      const n = String(i + 1).padStart(2, '0');
+      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%"><i>${n}</i></span>`;
+    })
+    .join('');
+
+  const rows = s.items
+    .map(
+      (it, i) => `<li class="geo__row" data-i="${i}">
+        <span class="geo__n">${String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <p class="geo__name">${esc(it.name)}</p>
+          <p class="geo__note">${esc(it.note)}</p>
+        </div>
+      </li>`
+    )
+    .join('');
+
+  return `<section class="band band--sunk" id="geo">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
       <div>
-        <h2 class="contact__h rise">${esc(s.title)}</h2>
-        <p class="lede rise" style="margin-top:1.5rem;max-width:48ch">${esc(s.d)}</p>
-        <dl class="contact__rows rise">
-          <div class="crow"><dt>${esc(s.emailLabel)}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
-          <div class="crow"><dt>${esc(s.phoneLabel)}</dt><dd><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></dd></div>
-          <div class="crow"><dt>${esc(s.tgLabel)}</dt><dd><a href="${attr(shared.telegramHref)}" rel="noopener">${esc(shared.telegram)}</a></dd></div>
-          <div class="crow"><dt>${esc(s.cityLabel)}</dt><dd><span>${esc(s.city)}</span></dd></div>
-        </dl>
-        <p class="note rise">${esc(s.note)}</p>
+        <h2 class="h2 rise">${esc(s.title)}</h2>
+        <p class="lede rise" style="margin-top:1.25rem;max-width:54ch">${esc(s.intro)}</p>
       </div>
     </div>
+    <figure class="map map--wide rise">
+      <div class="map__scroll">
+        <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
+          <img src="/assets/map.svg" alt="" width="1200" height="${Math.round(1200 * mapMeta.ratio)}" loading="lazy" decoding="async">
+          ${pins}
+        </div>
+      </div>
+      <figcaption class="map__legend">
+        <span class="key key--marked">${esc(s.legendMarked)}</span>
+        <span class="key key--rest">${esc(s.legendRest)}</span>
+      </figcaption>
+    </figure>
+    <ol class="geo geo--wide" data-geo>${rows}</ol>
+  </div>
+</section>`;
+}
+
+/* --- диаграмма занятости -------------------------------- */
+
+const monthIndex = (ym) => {
+  const [y, m] = ym.split('-').map(Number);
+  return y * 12 + (m - 1);
+};
+
+function timeline(t) {
+  const s = t.career;
+  const from = monthIndex(s.timelineFrom);
+  const to = monthIndex(s.timelineTo);
+  const span = to - from + 1;
+  const d = new Date();
+  const now = Math.min(to, d.getFullYear() * 12 + d.getMonth());
+  const pct = (n) => ((n / span) * 100).toFixed(3);
+
+  const ticks = [];
+  for (let i = from; i <= to; i++) {
+    if (i % 12 === 0) ticks.push({ year: i / 12, at: i - from });
+  }
+
+  const grid =
+    ticks.map((k) => `<span style="left:${pct(k.at)}%"></span>`).join('') +
+    `<span class="tl__now" style="left:${pct(now - from + 1)}%"></span>`;
+  const axis = ticks
+    .map((k) => `<span class="tl__year num" style="left:${pct(k.at)}%">${k.year}</span>`)
+    .join('');
+
+  const rows = s.timeline
+    .map((r) => {
+      const a = monthIndex(r.from) - from;
+      const b = (r.to ? monthIndex(r.to) : now) - from + 1;
+      const open = r.to ? '' : ' bar--open';
+      const label = r.to ? '' : ` title="${attr(s.ongoing)}"`;
+      return `<div class="tl__row">
+        <span class="tl__label">${esc(r.t)}</span>
+        <div class="tl__track">
+          <span class="bar bar--${r.kind}${open}" style="left:${pct(a)}%;width:${pct(b - a)}%"${label}></span>
+        </div>
+      </div>`;
+    })
+    .join('');
+
+  return `<div class="tl rise">
+    <p class="subhead">${esc(s.timelineTitle)}</p>
+    <div class="tl__body">
+      <div class="tl__grid" aria-hidden="true">${grid}</div>
+      ${rows}
+    </div>
+    <div class="tl__row tl__row--axis" aria-hidden="true">
+      <span class="tl__label"></span>
+      <div class="tl__track">${axis}<span class="tl__year tl__year--now" style="left:${pct(now - from + 1)}%">${esc(s.nowLabel)}</span></div>
+    </div>
+    <p class="tl__legend">
+      <span class="key key--role">${esc(s.legendRole)}</span>
+      <span class="key key--project">${esc(s.legendProject)}</span>
+      <span class="tl__note">${esc(s.timelineNote)}</span>
+    </p>
+  </div>`;
+}
+
+/* --- контакты ------------------------------------------- */
+
+function contact(t) {
+  const s = t.contact;
+  return `<section class="band band--sunk contact" id="contact">
+  <div class="shell">
+    <p class="label contact__kicker rise"><span>${esc(s.n)}</span><span>${esc(s.kicker)}</span></p>
+    <h2 class="contact__h rise">${esc(s.title)}</h2>
+    <div class="contact__grid">
+      <p class="lede rise">${esc(s.d)}</p>
+      <dl class="contact__rows rise">
+        <div class="crow"><dt>${esc(s.emailLabel)}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
+        <div class="crow"><dt>${esc(s.phoneLabel)}</dt><dd><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></dd></div>
+        <div class="crow"><dt>${esc(s.tgLabel)}</dt><dd><a href="${attr(shared.telegramHref)}" rel="noopener">${esc(shared.telegram)}</a></dd></div>
+        <div class="crow"><dt>${esc(s.cityLabel)}</dt><dd><span>${esc(s.city)}</span></dd></div>
+      </dl>
+    </div>
+    <p class="note rise">${esc(s.note)}</p>
   </div>
 </section>`;
 }
@@ -291,8 +415,8 @@ function footer(t) {
   <div class="shell">
     <div class="ftr__grid">
       <div>
-        <p class="ftr__mark">${esc(t.hero.name)}</p>
-        <p class="ftr__sub">${esc(t.hero.role)}</p>
+        <p class="ftr__mark">${esc(t.hero.eyebrow)}</p>
+        <p class="ftr__sub">${esc(t.career.jobs[0].role + ', ' + t.career.jobs[0].org)}</p>
       </div>
       <div>
         <p class="ftr__t">${esc(t.footer.navTitle)}</p>
@@ -322,8 +446,8 @@ function jsonLd(t) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: t.hero.name,
-    jobTitle: t.hero.role.split('·')[0].trim(),
+    name: t.hero.eyebrow,
+    jobTitle: t.career.jobs[0].role,
     description: t.description,
     url: shared.domain + (t.lang === 'en' ? '/en/' : '/'),
     email: 'mailto:' + shared.email,
@@ -339,7 +463,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, images = new Set() } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set() } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   const base = t.lang === 'en' ? '/en/' : '/';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
@@ -351,7 +475,7 @@ export function page(t, { hasCv = false, images = new Set() } = {}) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(t.title)}</title>
 <meta name="description" content="${attr(t.description)}">
-<meta name="author" content="${attr(t.hero.name)}">
+<meta name="author" content="${attr(t.hero.eyebrow)}">
 <link rel="canonical" href="${attr(canonical)}">
 <link rel="alternate" hreflang="ru" href="${attr(shared.domain)}/">
 <link rel="alternate" hreflang="en" href="${attr(shared.domain)}/en/">
@@ -361,7 +485,7 @@ export function page(t, { hasCv = false, images = new Set() } = {}) {
 <meta property="og:description" content="${attr(t.description)}">
 <meta property="og:url" content="${attr(canonical)}">
 <meta property="og:locale" content="${attr(t.ogLocale)}">
-<meta property="og:site_name" content="${attr(t.hero.name)}">
+<meta property="og:site_name" content="${attr(t.hero.eyebrow)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14150f" media="(prefers-color-scheme: dark)">
@@ -376,10 +500,11 @@ ${jsonLd(t)}
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${header(t, base)}
 <main id="main">
-${hero(t, hasCv)}
+${hero(t, hasCv, hasPortrait)}
 ${figures(t)}
 ${profile(t)}
 ${practice(t)}
+${geo(t)}
 ${work(t, images)}
 ${current(t)}
 ${career(t)}

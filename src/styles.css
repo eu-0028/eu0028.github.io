@@ -860,7 +860,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   .burger { display: inline-flex; }
   .hero__grid { grid-template-columns: 1fr; align-items: start; }
   .hero__media { order: -1; max-width: 17rem; }
-  .grid2, .proj__grid, .current__row, .ftr__grid { grid-template-columns: 1fr; }
+  .grid2, .proj__grid, .current__row, .ftr__grid { grid-template-columns: minmax(0, 1fr); }
   .aside, .proj__meta { position: static; }
   .aside { display: flex; align-items: baseline; gap: .75rem; }
   .aside__k { border-top: 0; padding-top: 0; }
@@ -931,3 +931,222 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-top: .7rem;
 }
 @media print { .shot { display: none; } }
+
+/* --- 20. Карта географии --------------------------------- */
+
+.map { margin: clamp(2rem, 4vw, 3rem) 0 0; min-width: 0; }
+
+.map__scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.map__frame { position: relative; min-width: 720px; aspect-ratio: var(--ar); }
+.map__frame img { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.pin { position: absolute; transform: translate(-50%, -50%); z-index: 1; }
+.pin i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: .5625rem;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--paper);
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--paper-sunk);
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.pin.is-hot i { background: var(--brass); transform: scale(1.3); }
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.key::before { content: ''; width: .75rem; height: .75rem; border: 1px solid; }
+.key--marked::before { background: #c8ab6d; border-color: #8a6c2f; }
+.key--rest::before   { background: #e6e0d2; border-color: #d5cdbb; }
+.key--role::before    { background: var(--ink); border-color: var(--ink); }
+.key--project::before { background: var(--brass); border-color: var(--brass); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .key--marked::before { background: #6d5722; border-color: #c8a75a; }
+  :root:not([data-theme='light']) .key--rest::before   { background: #282a21; border-color: #3a3c30; }
+}
+:root[data-theme='dark'] .key--marked::before { background: #6d5722; border-color: #c8a75a; }
+:root[data-theme='dark'] .key--rest::before   { background: #282a21; border-color: #3a3c30; }
+
+.map__legend { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: .85rem; }
+
+.geo { margin-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--rule); }
+.geo__row {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: .75rem;
+  padding: .95rem .5rem .95rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  transition: background .2s var(--ease);
+}
+.geo__row.is-hot { background: color-mix(in srgb, var(--brass) 9%, transparent); }
+.geo__n {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--brass);
+  padding-top: .3rem;
+}
+.geo__name { font-weight: 600; }
+.geo__note { color: var(--ink-3); font-size: var(--t-small); margin-top: .15rem; text-wrap: pretty; }
+
+@media (min-width: 920px) {
+  .geo { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap); }
+}
+
+/* --- 21. Диаграмма занятости ----------------------------- */
+
+.tl { --tl-label: 12rem; margin-bottom: clamp(1rem, 2vw, 1.5rem); }
+.tl__body { position: relative; }
+.tl__grid {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  left: calc(var(--tl-label) + 1rem);
+}
+.tl__grid span { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+
+.tl__row {
+  display: grid;
+  grid-template-columns: var(--tl-label) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding-block: .45rem;
+}
+.tl__label { font-size: .875rem; color: var(--ink-2); text-align: right; }
+.tl__track { position: relative; height: 1.4rem; }
+
+.bar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: .5rem;
+  min-width: 3px;
+}
+.bar--role { background: var(--ink); }
+.bar--project { background: var(--brass); }
+.bar--open {
+  -webkit-mask-image: linear-gradient(to right, #000 68%, transparent);
+  mask-image: linear-gradient(to right, #000 68%, transparent);
+}
+
+.tl__row--axis {
+  padding-top: .6rem;
+  margin-top: .4rem;
+  border-top: 1px solid var(--rule);
+}
+.tl__row--axis .tl__track { height: 1.1rem; }
+.tl__year {
+  position: absolute;
+  top: .1rem;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--ink-3);
+}
+
+.tl__legend { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; margin-top: 1.1rem; }
+.tl__note {
+  font-family: var(--font-sans);
+  font-size: var(--t-small);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-3);
+}
+
+@media (max-width: 760px) {
+  .tl { --tl-label: 0rem; }
+  .tl__row { grid-template-columns: minmax(0, 1fr); gap: .3rem; padding-block: .6rem; }
+  .tl__label { text-align: left; }
+  .tl__grid { left: 0; }
+}
+
+/* --- 22. Шкала владения языком --------------------------- */
+
+.lang__row dd { display: flex; flex-direction: column; gap: .35rem; }
+.lang__top { display: flex; align-items: center; gap: .65rem; }
+.meter { display: inline-flex; gap: 3px; }
+.meter i { width: 1.15rem; height: .3rem; background: var(--rule); }
+.meter i.on { background: var(--brass); }
+.lang__cap {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  color: var(--ink-2);
+}
+.lang__d { font-size: var(--t-small); color: var(--ink-3); }
+
+@media (max-width: 760px) {
+  .pin i { width: 1.05rem; height: 1.05rem; font-size: .5rem; box-shadow: 0 0 0 1.5px var(--paper-sunk); }
+}
+
+@media print {
+  .map__scroll { break-inside: avoid; }
+  .tl__body, .tl__row { break-inside: avoid; }
+  .pin i { box-shadow: none; }
+}
+
+/* Отметка текущего момента на шкале занятости */
+.tl__now {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, var(--brass) 0 3px, transparent 3px 6px);
+}
+.tl__year--now { color: var(--brass); }
+
+/* --- 23. Слом ритма: карта и контакты вне общей сетки ---- */
+
+.map--wide { margin-top: clamp(2.5rem, 5vw, 4rem); }
+
+.geo--wide { margin-top: clamp(2rem, 4vw, 3rem); }
+@media (min-width: 720px)  { .geo--wide { grid-template-columns: 1fr 1fr; display: grid; column-gap: var(--gap); } }
+@media (min-width: 1100px) { .geo--wide { grid-template-columns: repeat(3, 1fr); } }
+
+.contact__kicker {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.contact__kicker span:first-child { color: var(--brass); }
+
+.contact .contact__h { max-width: 16ch; }
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: var(--gap);
+  align-items: start;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.contact .contact__rows { margin-top: 0; }
+
+@media (max-width: 880px) {
+  .contact__grid { grid-template-columns: minmax(0, 1fr); }
+}

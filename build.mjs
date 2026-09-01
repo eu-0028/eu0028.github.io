@@ -10,6 +10,7 @@ const hasCv = await exists('assets/shutov-cv.pdf');
 
 /* В вёрстку попадают только те фотографии, которые реально лежат в assets/img */
 await mkdir('assets/img', { recursive: true });
+const hasPortrait = await exists('assets/img/portrait.jpg');
 const images = new Set(
   (await readdir('assets/img')).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
 );
@@ -21,8 +22,8 @@ await copyFile('src/styles.css', 'assets/styles.css');
 await copyFile('src/app.js', 'assets/app.js');
 await copyFile('src/favicon.svg', 'favicon.svg');
 
-await writeFile('index.html', page(ru, { hasCv, images }));
-await writeFile('en/index.html', page(en, { hasCv, images }));
+await writeFile('index.html', page(ru, { hasCv, hasPortrait, images }));
+await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images }));
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(
@@ -62,4 +63,5 @@ await writeFile('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${shared.doma
 const fonts = (await readdir('assets/fonts')).length;
 console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, robots.txt`);
 console.log(`Шрифтов: ${fonts} · Резюме PDF: ${hasCv ? 'подключено' : 'нет файла assets/shutov-cv.pdf — кнопка скрыта'}`);
+console.log(`Портрет: ${hasPortrait ? 'подключён' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
 console.log(`Фотографии проектов: ${images.size ? [...images].join(', ') : 'нет — блоки с фото не выводятся'}`);
