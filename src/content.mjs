@@ -52,10 +52,9 @@ export const ru = {
   figures: {
     eyebrow: 'Итоги в цифрах',
     items: [
-      { value: '15', unit: 'млн ₽', label: 'Суммарная выручка по проектам за 2025 год' },
-      { value: '50', unit: 'млн ₽', label: 'Прошло через договоры и отчетность, которые я вел' },
-      { value: '13', unit: 'стран', label: 'С представителями которых работал лично' },
-      { value: '5', unit: 'мероприятий', label: 'Крупных международных, суммарно больше 200 участников' },
+      { value: '50', unit: 'млн ₽', label: 'Суммарный объем проектов, которые я вел в 2025 году' },
+      { value: '13', unit: 'стран', label: 'Работал с их представителями лично' },
+      { value: '5', unit: 'международных мероприятий', label: 'Суммарно больше 200 участников' },
     ],
   },
 
@@ -276,7 +275,7 @@ export const ru = {
     edu: [
       {
         org: 'МГИМО МИД России',
-        logo: 'mgimo.svg',
+        logo: 'mgimo',
         tracks: [
           { period: '2022-2026', role: 'Бакалавриат, «Международные отношения», с отличием' },
           { period: '2026-2028', role: 'Магистратура, «Экономика»' },
@@ -345,10 +344,9 @@ export const en = {
   figures: {
     eyebrow: 'The numbers',
     items: [
-      { value: '15', unit: 'mln RUB', label: 'Total project revenue in 2025' },
-      { value: '50', unit: 'mln RUB', label: 'Passed through the contracts and reporting I handled' },
-      { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
-      { value: '5', unit: 'events', label: 'Major international ones, more than 200 participants in total' },
+      { value: '50', unit: 'mln RUB', label: 'Combined value of the projects I ran in 2025' },
+      { value: '13', unit: 'countries', label: 'Worked with their representatives in person' },
+      { value: '5', unit: 'international events', label: 'More than 200 participants in total' },
     ],
   },
 
@@ -569,7 +567,7 @@ export const en = {
     edu: [
       {
         org: 'MGIMO University',
-        logo: 'mgimo.svg',
+        logo: 'mgimo-en',
         tracks: [
           { period: '2022-2026', role: 'BA, International Relations, with honours' },
           { period: '2026-2028', role: 'MA, Economics' },

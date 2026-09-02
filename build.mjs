@@ -12,9 +12,13 @@ const hasCv = await exists('assets/shutov-cv.pdf');
 /* В вёрстку попадают только те фотографии, которые реально лежат в assets/img */
 await mkdir('assets/img', { recursive: true });
 const hasPortrait = await exists('assets/img/portrait.jpg');
-const logos = new Set(
-  (await readdir('assets/img')).filter((f) => /^(mgimo|ufmg)\.svg$/i.test(f))
-);
+/* Логотип задается основой имени (mgimo, mgimo-en), а сборка находит файл
+   с любым подходящим расширением. Так его можно положить как угодно. */
+const logos = new Map();
+for (const f of await readdir('assets/img')) {
+  const m = /^([a-z0-9-]+)\.(svg|png|webp)$/i.exec(f);
+  if (m && !logos.has(m[1].toLowerCase())) logos.set(m[1].toLowerCase(), f);
+}
 const icons = {};
 for (const f of await readdir('assets/icons')) {
   if (!f.endsWith('.svg')) continue;
@@ -101,6 +105,11 @@ const fonts = (await readdir('assets/fonts')).length;
 console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, robots.txt`);
 console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}`);
 console.log(`Шрифтов: ${fonts} · Резюме PDF: ${hasCv ? 'подключено' : 'нет файла assets/shutov-cv.pdf — кнопка скрыта'}`);
-console.log(`Портрет: ${hasPortrait ? 'подключён' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
+console.log(`Портрет: ${hasPortrait ? 'подключено' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
 console.log(`Фоновые снимки: ${backdrops.size ? [...backdrops].join(', ') : 'нет — секции без фона'}`);
 console.log(`Фотографии проектов: ${images.size ? [...images].join(', ') : 'нет — блоки с фото не выводятся'}`);
+const needLogos = ['mgimo', 'mgimo-en'].filter((n) => !logos.has(n));
+console.log(
+  `Логотипы: ${logos.size ? [...logos.values()].join(', ') : 'нет'}` +
+    (needLogos.length ? ` · не хватает assets/img/${needLogos.join('.(svg|png), assets/img/')}.(svg|png)` : '')
+);

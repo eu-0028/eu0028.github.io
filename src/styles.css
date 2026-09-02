@@ -780,7 +780,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   text-wrap: balance;
 }
 
-.contact__rows { margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
+.contact__rows { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
 .crow {
   display: grid;
@@ -1134,10 +1134,14 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 /* --- 23. Слом ритма: карта и контакты вне общей сетки ---- */
 
+/* Карта выходит за колонку текста, но не до самых краев экрана:
+   так она читается как отдельный объект, а не как фон страницы. */
 .map--bleed {
+  --map-w: min(100vw - 2.5rem, 1520px);
   margin-top: clamp(2.5rem, 5vw, 4rem);
-  margin-inline: calc(50% - 50vw);
-  max-width: 100vw;
+  width: var(--map-w);
+  margin-inline: calc(50% - var(--map-w) / 2);
+  max-width: none;
 }
 .map, .map * { -webkit-user-select: none; user-select: none; }
 
@@ -1165,6 +1169,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 .contact .contact__rows { margin-top: 0; }
+/* Первая строка контактов встает вровень с первой строкой текста слева */
+.contact .crow:first-child { padding-top: 0; }
 
 @media (max-width: 880px) {
   .contact__grid { grid-template-columns: minmax(0, 1fr); }
@@ -1300,7 +1306,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: clamp(2.5rem, 5vw, 4rem);
   border-top: 1px solid var(--rule);
 }
@@ -1334,14 +1340,9 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   color: var(--ink-3);
   text-wrap: pretty;
 }
-@media (max-width: 1040px) {
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
-  .stat:nth-child(2) { padding-right: 0; }
-}
-@media (max-width: 560px) {
+@media (max-width: 880px) {
   .stats { grid-template-columns: minmax(0, 1fr); }
-  .stat { border-left: 0; padding-inline: 0; }
+  .stat { border-left: 0; padding-inline: 0; padding-top: 1.5rem; }
 }
 
 /* --- 29. Карта: страна поднимается под курсором ---------- */
@@ -1363,6 +1364,11 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   transition: transform .25s var(--ease), fill .25s var(--ease), filter .25s var(--ease);
 }
 .ctry-hit { fill: transparent; stroke: none; pointer-events: fill; cursor: pointer; }
+/* Нажатие по стране ничего не открывает, так что и рамки вокруг нее быть
+   не должно: браузер иначе обводит фигуру черным прямоугольником. */
+.map { -webkit-tap-highlight-color: transparent; }
+.map__hot, .map__hot * { outline: none; }
+.map__hot :focus, .map__hot :focus-visible { outline: none; }
 
 .cg:hover .ctry,
 .cg.is-hot .ctry {

@@ -265,7 +265,7 @@ function about(t, logos) {
     .map(
       (e) => `<div class="edu reveal">
         <div class="edu__org">
-          ${e.logo && logos.has(e.logo) ? `<img class="edu__logo" src="${R}assets/img/${attr(e.logo)}" alt="" width="44" height="44" loading="lazy">` : ''}
+          ${e.logo && logos.get(e.logo) ? `<img class="edu__logo" src="${R}assets/img/${attr(logos.get(e.logo))}" alt="" width="44" height="44" loading="lazy">` : ''}
           <p class="edu__name">${esc(e.org)}</p>
         </div>
         <ul class="edu__tracks">${e.tracks
@@ -363,7 +363,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css' } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;

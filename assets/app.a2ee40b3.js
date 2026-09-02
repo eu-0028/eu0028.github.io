@@ -51,7 +51,7 @@
         entry.target.classList.add('is-in');
         io.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px 25% 0px', threshold: 0 });
     Array.prototype.forEach.call(rises, function (el) { io.observe(el); });
   }
 
@@ -89,7 +89,7 @@
         cb(e.target);
         io.unobserve(e.target);
       });
-    }, { threshold: 0.25 });
+    }, { rootMargin: '0px 0px 10% 0px', threshold: 0 });
     io.observe(el);
   }
 
@@ -126,7 +126,7 @@
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        var t0 = null, dur = 1800;
+        var t0 = null, dur = 1200;
         var step = function (ts) {
           if (t0 === null) t0 = ts;
           var p = Math.min((ts - t0) / dur, 1);
@@ -134,9 +134,9 @@
           node.textContent = fmt(Math.round(target * eased));
           if (p < 1) requestAnimationFrame(step);
         };
-        setTimeout(function () { requestAnimationFrame(step); }, 200);
+        setTimeout(function () { requestAnimationFrame(step); }, 80);
       });
-    }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
     io.observe(node);
   });
 
