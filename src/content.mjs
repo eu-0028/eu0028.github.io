@@ -16,11 +16,11 @@ export const ru = {
   dir: 'ltr',
   altLang: 'en',
   altLabel: 'English',
-  altHref: '/en/',
+  altHref: 'en/index.html',
   homeHref: '/',
   title: 'Евгений Шутов. Международные проекты и делегации, португальский C1',
   description:
-    'Международник со специализацией на Латинской Америке. Английский C2, португальский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
+    'Специалист-международник по странам БРИКС и Латинской Америке. Английский C2, португальский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
   ogLocale: 'ru_RU',
 
   brand: 'Шутов',
@@ -30,8 +30,8 @@ export const ru = {
   cvLabel: 'Резюме PDF',
 
   nav: [
-    { href: '#work', label: 'Проекты', n: '01' },
-    { href: '#practice', label: 'Направления', n: '02' },
+    { href: '#practice', label: 'Направления', n: '01' },
+    { href: '#work', label: 'Проекты', n: '02' },
     { href: '#geo', label: 'География', n: '03' },
     { href: '#current', label: '2026', n: '04' },
     { href: '#about', label: 'О себе', n: '05' },
@@ -45,14 +45,24 @@ export const ru = {
     leadEm: 'состоялся',
     leadTail: '',
     para:
-      'Международник со специализацией на Латинской Америке. Провожу иностранные делегации, собираю международные мероприятия и закрываю их документами и отчетностью.',
+      'Специалист-международник по странам БРИКС и Латинской Америке. Веду клиентов и переговоры на трех языках, документы готовлю сам, без юриста.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
   },
 
+  figures: {
+    eyebrow: 'Итоги в цифрах',
+    items: [
+      { value: '8', unit: 'млн ₽', label: 'Выручка по двум проектам: Бизнес-инкубатор ШОС и «Интервидение»' },
+      { value: '50', unit: 'млн ₽', label: 'Прошло через договоры и отчетность, которые я вел' },
+      { value: '13', unit: 'стран', label: 'С представителями которых работал лично' },
+      { value: '9', unit: 'делегаций', label: 'Иностранных за карьеру, пять из них за один месяц' },
+    ],
+  },
+
   work: {
-    n: '01',
+    n: '02',
     kicker: 'Проекты',
     title: 'Что сделано',
     timelineTitle: 'Занятость по месяцам',
@@ -185,10 +195,10 @@ export const ru = {
   },
 
   practice: {
-    n: '02',
+    n: '01',
     kicker: 'Направления',
     title: 'Что я делаю',
-    intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны выше.',
+    intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны ниже.',
     items: [
       {
         t: 'Сопровождение иностранных делегаций',
@@ -315,11 +325,11 @@ export const en = {
   dir: 'ltr',
   altLang: 'ru',
   altLabel: 'Русский',
-  altHref: '/',
+  altHref: '../index.html',
   homeHref: '/en/',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
-    'International affairs specialist focused on Latin America. English at C2, Portuguese at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
+    'International affairs specialist for BRICS and Latin America. English at C2, Portuguese at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
   ogLocale: 'en_US',
 
   brand: 'Shutov',
@@ -329,8 +339,8 @@ export const en = {
   cvLabel: 'CV in PDF',
 
   nav: [
-    { href: '#work', label: 'Projects', n: '01' },
-    { href: '#practice', label: 'Practice', n: '02' },
+    { href: '#practice', label: 'Practice', n: '01' },
+    { href: '#work', label: 'Projects', n: '02' },
     { href: '#geo', label: 'Geography', n: '03' },
     { href: '#current', label: '2026', n: '04' },
     { href: '#about', label: 'About', n: '05' },
@@ -344,14 +354,24 @@ export const en = {
     leadEm: 'actually happen',
     leadTail: '',
     para:
-      'International affairs specialist focused on Latin America. I run foreign delegations, build international events, and close them out with the contracts and reporting.',
+      'International affairs specialist for BRICS and Latin America. I handle clients and negotiations in three languages and draft contracts myself.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the projects',
     portraitAlt: 'Evgeny Shutov',
   },
 
+  figures: {
+    eyebrow: 'The numbers',
+    items: [
+      { value: '8', unit: 'M ₽', label: 'Revenue across two projects: the SCO Business Incubator and Intervision' },
+      { value: '50', unit: 'M ₽', label: 'Passed through the contracts and reporting I handled' },
+      { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
+      { value: '9', unit: 'delegations', label: 'Foreign ones to date, five of them inside a single month' },
+    ],
+  },
+
   work: {
-    n: '01',
+    n: '02',
     kicker: 'Projects',
     title: 'What has been delivered',
     timelineTitle: 'Month by month',
@@ -484,10 +504,10 @@ export const en = {
   },
 
   practice: {
-    n: '02',
+    n: '01',
     kicker: 'Practice',
     title: 'What I do',
-    intro: 'Five areas. Each has completed projects behind it, set out above.',
+    intro: 'Five areas. Each has completed projects behind it, set out below.',
     items: [
       {
         t: 'Running foreign delegations',

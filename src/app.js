@@ -100,14 +100,14 @@
   runOnce('.map', function (el) { el.classList.add('is-run'); });
 
   /* Цифры отсчитываются, чтобы читатель их действительно прочитал.
-     Считаем медленно и только когда блок хорошо виден, а не при загрузке. */
+     Настоящее значение стоит в разметке сразу: если наблюдатель почему-то
+     не сработает, посетитель увидит число, а не ноль. */
   var counters = document.querySelectorAll('[data-count]');
   Array.prototype.forEach.call(counters, function (node) {
     var raw = node.getAttribute('data-count');
-    var m = /^([0-9][0-9\s\u00a0,]*)(.*)$/.exec(raw);
+    var m = /^([0-9][0-9\s\u00a0,]*[0-9]|[0-9])(.*)$/.exec(raw);
     if (!m) return;
-    var digits = m[1].replace(/[\s\u00a0,]/g, '');
-    var target = parseInt(digits, 10);
+    var target = parseInt(m[1].replace(/[\s\u00a0,]/g, ''), 10);
     if (isNaN(target)) return;
     var suffix = m[2];
     var spaced = /[\s\u00a0]/.test(m[1]);
@@ -117,11 +117,12 @@
       return str + suffix;
     };
     if (reduced || !('IntersectionObserver' in window)) return;
-    node.textContent = fmt(0);
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
+        node.textContent = fmt(0);
         var t0 = null, dur = 1800;
         var step = function (ts) {
           if (t0 === null) t0 = ts;
@@ -130,9 +131,9 @@
           node.textContent = fmt(Math.round(target * eased));
           if (p < 1) requestAnimationFrame(step);
         };
-        setTimeout(function () { requestAnimationFrame(step); }, 250);
+        setTimeout(function () { requestAnimationFrame(step); }, 200);
       });
-    }, { threshold: 0.95, rootMargin: '0px 0px -12% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
     io.observe(node);
   });
 

@@ -7,8 +7,9 @@ const list = (items) => items.map((b) => `<li>${esc(b)}</li>`).join('');
 
 const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.2"/></svg>';
 
+let R = '';                                   // префикс до корня сайта
 const flag = (code, eager) =>
-  `<img class="flag" src="/assets/flags/${attr(code)}.svg" alt="" width="27" height="20"${eager ? '' : ' loading="lazy"'} decoding="async">`;
+  `<img class="flag" src="${R}assets/flags/${attr(code)}.svg" alt="" width="27" height="20"${eager ? '' : ' loading="lazy"'} decoding="async">`;
 
 const aside = (n, kicker) =>
   `<div class="aside"><span class="aside__n">${esc(n)}</span><span class="aside__k">${esc(kicker)}</span></div>`;
@@ -37,7 +38,7 @@ function header(t, base) {
 
 function hero(t, hasCv, hasPortrait) {
   const h = t.hero;
-  const cv = hasCv ? `<a class="btn btn--ghost" href="/assets/shutov-cv.pdf" download>${esc(t.cvLabel)}</a>` : '';
+  const cv = hasCv ? `<a class="btn btn--ghost" href="${R}assets/shutov-cv.pdf" download>${esc(t.cvLabel)}</a>` : '';
   return `<section class="hero">
   <div class="shell">
     <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
@@ -53,11 +54,33 @@ function hero(t, hasCv, hasPortrait) {
       </div>
       ${hasPortrait ? `<div class="hero__media">
         <figure class="portrait" data-portrait>
-          <img src="/assets/img/portrait.jpg" alt="${attr(h.portraitAlt)}" width="800" height="1000" fetchpriority="high">
+          <img src="${R}assets/img/portrait.jpg" alt="${attr(h.portraitAlt)}" width="800" height="1000" fetchpriority="high">
           <figcaption class="portrait__cap">${esc(h.name)}</figcaption>
         </figure>
       </div>` : ''}
     </div>
+  </div>
+</section>`;
+}
+
+
+/* --- полоса цифр: единственный цветной блок на странице -- */
+
+function figures(t) {
+  const s = t.figures;
+  const items = s.items
+    .map(
+      (f, i) => `<div class="fig reveal" style="--i:${i}">
+        <span class="fig__v num" data-count="${attr(f.value)}">${esc(f.value)}</span>
+        <span class="fig__u">${esc(f.unit)}</span>
+        <p class="fig__l">${esc(f.label)}</p>
+      </div>`
+    )
+    .join('');
+  return `<section class="figs" aria-label="${attr(s.eyebrow)}">
+  <div class="shell">
+    <p class="figs__kicker">${esc(s.eyebrow)}</p>
+    <div class="figs__grid">${items}</div>
   </div>
 </section>`;
 }
@@ -136,7 +159,7 @@ function work(t, images) {
             <div class="proj__t"><h3 class="h3">${esc(p.t)}</h3></div>
             <p class="proj__sub">${esc(p.sub)}</p>
             <p class="proj__d">${esc(p.d)}</p>
-            ${p.img && images.has(p.img) ? `<figure class="shot"><img src="/assets/img/${attr(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
+            ${p.img && images.has(p.img) ? `<figure class="shot"><img src="${R}assets/img/${attr(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
             <ul class="rules-list">${list(p.b)}</ul>
             <div class="metrics">${p.m
               .map((m) => `<div class="metric"><span class="metric__v num" data-count="${attr(m.v)}">${esc(m.v)}</span><span class="metric__l">${esc(m.l)}</span></div>`)
@@ -227,7 +250,7 @@ function geo(t) {
     <figure class="map map--wide reveal">
       <div class="map__scroll">
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
-          <img src="/assets/map.svg" alt="" width="1200" height="${Math.round(1200 * mapMeta.ratio)}" loading="lazy" decoding="async">
+          <img src="${R}assets/map.svg" alt="" width="1200" height="${Math.round(1200 * mapMeta.ratio)}" loading="lazy" decoding="async">
           ${pins}
         </div>
       </div>
@@ -291,7 +314,7 @@ function about(t, logos) {
     .map(
       (e) => `<div class="edu reveal">
         <div class="edu__org">
-          ${e.logo && logos.has(e.logo) ? `<img class="edu__logo" src="/assets/img/${attr(e.logo)}" alt="" width="44" height="44" loading="lazy">` : ''}
+          ${e.logo && logos.has(e.logo) ? `<img class="edu__logo" src="${R}assets/img/${attr(e.logo)}" alt="" width="44" height="44" loading="lazy">` : ''}
           <p class="edu__name">${esc(e.org)}</p>
         </div>
         <ul class="edu__tracks">${e.tracks
@@ -393,7 +416,8 @@ function jsonLd(t) {
 
 export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set() } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
-  const base = t.lang === 'en' ? '/en/' : '/';
+  R = t.lang === 'en' ? '../' : '';
+  const base = t.lang === 'en' ? 'index.html' : 'index.html';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
 
   return `<!doctype html>
@@ -417,10 +441,10 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/onest-${pre}-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts.css">
-<link rel="stylesheet" href="/assets/styles.css">
+<link rel="icon" href="${R}favicon.svg" type="image/svg+xml">
+<link rel="preload" href="${R}assets/fonts/onest-${pre}-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${R}assets/fonts.css">
+<link rel="stylesheet" href="${R}assets/styles.css">
 ${jsonLd(t)}
 </head>
 <body>
@@ -428,15 +452,16 @@ ${jsonLd(t)}
 ${header(t, base)}
 <main id="main">
 ${hero(t, hasCv, hasPortrait)}
-${work(t, images)}
+${figures(t)}
 ${practice(t)}
+${work(t, images)}
 ${geo(t)}
 ${current(t)}
 ${about(t, logos)}
 ${contact(t)}
 </main>
 ${footer(t)}
-<script src="/assets/app.js" defer></script>
+<script src="${R}assets/app.js" defer></script>
 </body>
 </html>`;
 }
