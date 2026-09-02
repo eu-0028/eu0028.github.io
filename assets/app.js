@@ -118,11 +118,14 @@
     };
     if (reduced || !('IntersectionObserver' in window)) return;
 
+    /* Обнуляем сразу при загрузке: иначе цифра сбрасывалась на нуль
+       уже на глазах у читателя, когда блок доходил до нужной высоты. */
+    node.textContent = fmt(0);
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        node.textContent = fmt(0);
         var t0 = null, dur = 1800;
         var step = function (ts) {
           if (t0 === null) t0 = ts;
@@ -152,9 +155,9 @@
   var geoList = document.querySelector('[data-geo]');
   if (geoList) {
     var pins = document.querySelectorAll('.pin');
-    var ctrys = document.querySelectorAll('.ctry');
+    var groups = document.querySelectorAll('.cg');
     var setHot = function (i, on) {
-      [pins[i], ctrys[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
+      [pins[i], groups[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
         if (el) el.classList.toggle('is-hot', on);
       });
     };
@@ -165,9 +168,11 @@
       el.addEventListener('focus', function () { setHot(i, true); });
       el.addEventListener('blur', function () { setHot(i, false); });
     };
+    /* Курсор ловит неподвижный слой, а поднимается его копия на слое
+       отрисовки. Иначе страна уезжает из-под курсора и начинает дребезжать. */
     Array.prototype.forEach.call(geoList.querySelectorAll('[data-i]'), bind);
     Array.prototype.forEach.call(pins, bind);
-    Array.prototype.forEach.call(ctrys, bind);
+    Array.prototype.forEach.call(groups, bind);
   }
 
   /* --- Портрет: аккуратная заглушка, если файла нет ------ */

@@ -45,7 +45,7 @@ export const ru = {
     leadEm: 'состоялся',
     leadTail: '',
     para:
-      'Веду переговоры на трех языках и решаю задачи бизнеса под ключ. Страны БРИКС и Латинская Америка.',
+      'Веду переговоры на трех языках и решаю задачи бизнеса под ключ. Работаю со странами БРИКС и Латинской Америкой.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
@@ -54,10 +54,10 @@ export const ru = {
   figures: {
     eyebrow: 'Итоги в цифрах',
     items: [
-      { value: '8', unit: 'млн ₽', label: 'Выручка по двум проектам: Бизнес-инкубатор ШОС и «Интервидение»' },
+      { value: '15', unit: 'млн ₽', label: 'Суммарная выручка по проектам за год' },
       { value: '50', unit: 'млн ₽', label: 'Прошло через договоры и отчетность, которые я вел' },
       { value: '13', unit: 'стран', label: 'С представителями которых работал лично' },
-      { value: '9', unit: 'делегаций', label: 'Иностранных за карьеру, пять из них за один месяц' },
+      { value: '5', unit: 'мероприятий', label: 'Крупных международных, суммарно больше 200 участников' },
     ],
   },
 
@@ -218,10 +218,8 @@ export const ru = {
   geo: {
     n: '4',
     kicker: 'География',
-    title: 'Где я работал',
-    intro: 'Двенадцать стран, в которых у меня были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке.',
-    legendMarked: 'Страны проектов',
-    legendRest: 'Остальной мир',
+    title: 'С кем я работал',
+    intro: 'Двенадцать стран, с представителями которых были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке.',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Бразилия', note: 'Делегация «Интервидения», трансляция на бразильском телевидении, фестиваль молодежи' },
       { key: 'Russia', flag: 'ru', name: 'Россия', note: 'База, Москва. Российское направление Consult Invest ITIC, форумы и государственные контракты' },
@@ -341,7 +339,7 @@ export const en = {
     leadEm: 'actually happen',
     leadTail: '',
     para:
-      'I negotiate in three languages and take business problems through to a finished result. BRICS countries and Latin America.',
+      'I negotiate in three languages and take business problems through to a finished result. I work with BRICS countries and Latin America.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the projects',
     portraitAlt: 'Evgeny Shutov',
@@ -350,10 +348,10 @@ export const en = {
   figures: {
     eyebrow: 'The numbers',
     items: [
-      { value: '8', unit: 'M ₽', label: 'Revenue across two projects: the SCO Business Incubator and Intervision' },
+      { value: '15', unit: 'M ₽', label: 'Total project revenue over a year' },
       { value: '50', unit: 'M ₽', label: 'Passed through the contracts and reporting I handled' },
       { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
-      { value: '9', unit: 'delegations', label: 'Foreign ones to date, five of them inside a single month' },
+      { value: '5', unit: 'events', label: 'Major international ones, more than 200 participants in total' },
     ],
   },
 
@@ -514,10 +512,8 @@ export const en = {
   geo: {
     n: '4',
     kicker: 'Geography',
-    title: 'Where I have worked',
-    intro: 'Twelve countries where I have run projects, negotiations or delegations. The numbers on the map match the numbers in the list.',
-    legendMarked: 'Project countries',
-    legendRest: 'Rest of the world',
+    title: 'Who I have worked with',
+    intro: 'Twelve countries whose representatives I have worked with on projects, negotiations or delegations. The numbers on the map match the numbers in the list.',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Brazil', note: 'Intervision delegation, the Brazilian television broadcast, the youth festival' },
       { key: 'Russia', flag: 'ru', name: 'Russia', note: 'Base, Moscow. The Russian practice of Consult Invest ITIC, forums and state contracts' },

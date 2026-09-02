@@ -9,6 +9,12 @@ const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10
 
 let R = '';                                   // префикс до корня сайта
 let ICONS = {};
+let BACKDROPS = new Set();
+/* Фоновый снимок появляется, только если файл действительно лежит в assets/img */
+const art = (id) => {
+  const f = [...BACKDROPS].find((n) => n.startsWith('bg-' + id + '.'));
+  return f ? ` band--art" style="--bg:url(${R}assets/img/${f})` : '';
+};
 const icon = (name) =>
   ICONS[name] ? `<svg class="ico" viewBox="0 0 256 256" aria-hidden="true" focusable="false">${ICONS[name]}</svg>` : '';
 const flag = (code, eager) =>
@@ -26,7 +32,7 @@ function header(t, base) {
     .join('');
   return `<header class="hdr" data-hdr>
   <div class="shell hdr__in">
-    <a class="brand" href="${attr(base)}"><span class="brand__mark" aria-hidden="true">ES</span><span class="brand__name">${esc(t.brand)}</span></a>
+    <a class="brand" href="${attr(base)}" aria-label="${attr(t.hero.name)}"><span class="brand__mark">ES</span></a>
     <nav class="hdr__nav" aria-label="${attr(t.footer.navTitle)}">${nav}</nav>
     <div class="hdr__side">
       <a class="lang" href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}" lang="${attr(t.altLang)}">${esc(t.altLang.toUpperCase())}</a>
@@ -93,7 +99,7 @@ function work(t, images) {
       </article>`
     )
     .join('');
-  return `<section class="band band--sunk" id="work">
+  return `<section class="band band--sunk${art('work')}" id="work">
   <div class="shell">
     <div class="grid2" style="margin-bottom:clamp(2rem,4vw,3rem)">
       ${aside(s.n, s.kicker)}
@@ -111,9 +117,9 @@ function practice(t) {
   const rows = s.items
     .map(
       (it, i) => `<div class="practice__row reveal">
-        <span class="practice__n">${i + 1}</span>
+        <span class="practice__n">${icon(it.icon)}</span>
         <div>
-          <div class="practice__head">${icon(it.icon)}<h3 class="h3">${esc(it.t)}</h3></div>
+          <h3 class="h3">${esc(it.t)}</h3>
           <p class="practice__d">${esc(it.d)}</p>
         </div>
         <div class="practice__tags"><ul class="rules-list rules-list--sm">${list(it.b)}</ul></div>
@@ -148,11 +154,16 @@ function geo(t) {
     })
     .join('');
 
-  const countries = s.items
+  const defs = s.items
     .map((it, i) => {
       const m = byKey.get(it.key);
-      return m ? `<path class="ctry" data-i="${i}" d="${m.d}"><title>${esc(it.name)}</title></path>` : '';
+      return m ? `<path id="c${i}" d="${m.d}"/>` : '';
     })
+    .join('');
+  const groups = s.items
+    .map(
+      (it, i) => `<g class="cg" data-i="${i}"><use class="ctry" href="#c${i}"/><use class="ctry-hit" href="#c${i}"><title>${esc(it.name)}</title></use></g>`
+    )
     .join('');
 
   const rows = s.items
@@ -168,7 +179,7 @@ function geo(t) {
     )
     .join('');
 
-  return `<section class="band band--sunk" id="geo">
+  return `<section class="band${art('geo')}" id="geo">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -177,18 +188,17 @@ function geo(t) {
         <p class="lede reveal" style="margin-top:1.25rem;max-width:54ch">${esc(s.intro)}</p>
       </div>
     </div>
-    <figure class="map map--wide reveal">
+    <figure class="map map--bleed reveal">
       <div class="map__scroll">
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
           <img src="${R}assets/map-base.svg" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
-          <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" aria-hidden="true" focusable="false">${countries}</svg>
+          <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" focusable="false">
+            <defs>${defs}</defs>
+            ${groups}
+          </svg>
           ${pins}
         </div>
       </div>
-      <figcaption class="map__legend">
-        <span class="key key--marked">${esc(s.legendMarked)}</span>
-        <span class="key key--rest">${esc(s.legendRest)}</span>
-      </figcaption>
     </figure>
     <ol class="geo geo--wide" data-geo>${rows}</ol>
   </div>
@@ -210,7 +220,7 @@ function current(t) {
       </div>`
     )
     .join('');
-  return `<section class="band" id="current">
+  return `<section class="band band--sunk${art('current')}" id="current">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -265,7 +275,7 @@ function about(t, logos) {
     )
     .join('');
 
-  return `<section class="band band--sunk" id="about">
+  return `<section class="band band--sunk${art('about')}" id="about">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -287,16 +297,16 @@ function about(t, logos) {
 
 function contact(t) {
   const s = t.contact;
-  return `<section class="band contact" id="contact">
+  return `<section class="band contact${art('contact')}" id="contact">
   <div class="shell">
     <p class="label contact__kicker reveal"><span>${esc(s.n)}</span><span>${esc(s.kicker)}</span></p>
     <h2 class="contact__h reveal">${esc(s.title)}</h2>
     <div class="contact__grid">
       <p class="lede reveal">${esc(s.d)}</p>
       <dl class="contact__rows reveal">
-        <div class="crow"><dt>${esc(s.tgLabel)}</dt><dd><a href="${attr(shared.telegramHref)}" rel="noopener">${esc(shared.telegram)}</a></dd></div>
-        <div class="crow"><dt>${esc(s.emailLabel)}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
-        <div class="crow"><dt>${esc(s.phoneLabel)}</dt><dd><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></dd></div>
+        <div class="crow"><dt aria-label="${attr(s.tgLabel)}">${icon('telegram-logo')}</dt><dd><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></dd></div>
+        <div class="crow"><dt aria-label="${attr(s.emailLabel)}">${icon('envelope-simple')}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
+        <div class="crow"><dt aria-label="${attr(s.phoneLabel)}">${icon('phone')}</dt><dd><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></dd></div>
       </dl>
     </div>
   </div>
@@ -321,7 +331,7 @@ function footer(t) {
       <div>
         <p class="ftr__t">${esc(t.footer.contactTitle)}</p>
         <ul>
-          <li><a href="${attr(shared.telegramHref)}" rel="noopener">${esc(shared.telegram)}</a></li>
+          <li><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></li>
           <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
           <li><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></li>
           <li><a href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}">${esc(t.altLabel)}</a></li>
@@ -356,10 +366,11 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {} } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {}, backdrops = new Set() } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
+  BACKDROPS = backdrops;
   const base = t.lang === 'en' ? 'index.html' : 'index.html';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
 

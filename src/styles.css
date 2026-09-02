@@ -29,10 +29,10 @@
   --shell:  1280px;
   --gutter: clamp(1.25rem, 5vw, 4.5rem);
   --gap:    clamp(1.75rem, 4vw, 3.5rem);
-  --band:   clamp(4.5rem, 9vw, 8.5rem);
+  --band:   clamp(3.25rem, 6vw, 6rem);
   --hdr:    4.25rem;
 
-  --t-display: clamp(2.6rem, 1.1rem + 5.6vw, 6.25rem);
+  --t-display: clamp(2.3rem, 1rem + 4.4vw, 4.9rem);
   --t-h2:      clamp(2rem, 1.2rem + 3vw, 3.75rem);
   --t-h3:      clamp(1.15rem, 1rem + 0.65vw, 1.5rem);
   --t-lede:    clamp(1.25rem, 1.05rem + 0.7vw, 1.7rem);
@@ -592,7 +592,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .practice__row {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-columns: 2.75rem minmax(0, 6fr) minmax(0, 5fr);
   gap: var(--gap);
   padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
   border-bottom: 1px solid var(--rule-soft);
@@ -608,14 +608,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 .practice__row:hover::before { width: 100%; }
 
-.practice__n {
-  font-family: var(--font-mono);
-  font-size: var(--t-label);
-  font-weight: 500;
-  letter-spacing: .1em;
-  color: var(--accent);
-  padding-top: .4rem;
-}
+.practice__n { padding-top: .15rem; }
+.practice__n .ico { width: 1.85rem; height: 1.85rem; margin-top: 0; }
 .practice__d { color: var(--ink-2); margin-top: .6rem; text-wrap: pretty; }
 
 .rules-list--sm > li {
@@ -785,20 +779,14 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .crow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  grid-template-columns: 2.5rem minmax(0, 1fr);
   gap: var(--gap);
   align-items: baseline;
   padding-block: 1.35rem;
   border-bottom: 1px solid var(--rule-soft);
 }
-.crow dt {
-  font-family: var(--font-mono);
-  font-size: var(--t-label);
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
+.crow dt { color: var(--accent); }
+.crow dt .ico { width: 1.6rem; height: 1.6rem; margin-top: 0; }
 .crow dd a, .crow dd span {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 1rem + .6vw, 1.5rem);
@@ -961,7 +949,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   border: 1px solid var(--rule);
   background: var(--paper);
 }
-.map__frame { position: relative; min-width: 720px; aspect-ratio: var(--ar); }
+.map__frame { position: relative; min-width: 860px; aspect-ratio: var(--ar); }
 .map__frame img { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 .pin { position: absolute; transform: translate(-50%, -50%); z-index: 1; }
@@ -1139,7 +1127,12 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 /* --- 23. Слом ритма: карта и контакты вне общей сетки ---- */
 
-.map--wide { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.map--bleed {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-inline: calc(50% - 50vw);
+  max-width: 100vw;
+}
+.map, .map * { -webkit-user-select: none; user-select: none; }
 
 .geo--wide { margin-top: clamp(2rem, 4vw, 3rem); }
 @media (min-width: 720px)  { .geo--wide { grid-template-columns: 1fr 1fr; display: grid; column-gap: var(--gap); } }
@@ -1256,7 +1249,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .edus { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
 .edu {
-  border-top: 2px solid var(--ink);
+  border-top: 1px solid var(--rule);
   padding-top: 1.35rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
@@ -1355,29 +1348,34 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   height: 100%;
   overflow: visible;
 }
+/* Страна нарисована одним слоем, а курсор ловит второй, неподвижный.
+   Поэтому при подъеме фигура не уезжает из-под курсора и не дребезжит. */
 .ctry {
   fill: #9fb4e2;
   stroke: #1e4bad;
   stroke-width: .6;
-  cursor: pointer;
-  transform-box: fill-box;
-  transform-origin: center;
+  pointer-events: none;
   transition: transform .25s var(--ease), fill .25s var(--ease), filter .25s var(--ease);
 }
-.ctry.is-hot {
-  transform: translateY(-6px) scale(1.03);
+.ctry-hit { fill: transparent; stroke: none; pointer-events: fill; cursor: pointer; }
+
+.cg:hover .ctry,
+.cg.is-hot .ctry {
+  transform: translateY(-7px);
   fill: var(--accent);
-  filter: drop-shadow(0 6px 8px rgba(18, 21, 26, .35));
+  filter: drop-shadow(0 7px 9px rgba(18, 21, 26, .4));
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .ctry { fill: #2f4f96; stroke: #7ea3f0; }
-  :root:not([data-theme='light']) .ctry.is-hot { fill: #7ea3f0; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .6)); }
+  :root:not([data-theme='light']) .cg:hover .ctry,
+  :root:not([data-theme='light']) .cg.is-hot .ctry { fill: #7ea3f0; filter: drop-shadow(0 7px 10px rgba(0, 0, 0, .6)); }
 }
 :root[data-theme='dark'] .ctry { fill: #2f4f96; stroke: #7ea3f0; }
-:root[data-theme='dark'] .ctry.is-hot { fill: #7ea3f0; }
+:root[data-theme='dark'] .cg:hover .ctry,
+:root[data-theme='dark'] .cg.is-hot .ctry { fill: #7ea3f0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ctry.is-hot { transform: none; }
+  .cg:hover .ctry, .cg.is-hot .ctry { transform: none; }
 }
 
 /* --- 30. Знак в шапке и иконки направлений --------------- */
@@ -1399,4 +1397,26 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .brand:hover .brand__mark { background: var(--accent); color: var(--paper); }
 
 .practice__head { display: flex; align-items: flex-start; gap: .7rem; }
-.ico { width: 1.5rem; height: 1.5rem; flex: none; color: var(--accent); margin-top: .1em; }
+.ico { width: 1.5rem; height: 1.5rem; flex: none; color: var(--accent); fill: currentColor; margin-top: .1em; }
+
+/* --- 31. Фоновый снимок раздела -------------------------- */
+/* Включается сам, как только в assets/img появится bg-<раздел>.jpg */
+
+.band--art { position: relative; isolation: isolate; }
+.band--art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  opacity: .08;
+  filter: grayscale(1) contrast(1.1);
+  pointer-events: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .band--art::before { opacity: .12; }
+}
+:root[data-theme='dark'] .band--art::before { opacity: .12; }
+@media print { .band--art::before { display: none; } }
