@@ -20,7 +20,7 @@ export const ru = {
   homeHref: '/',
   title: 'Евгений Шутов. Международные проекты и делегации, португальский C1',
   description:
-    'Международник со специализацией на Латинской Америке. Португальский и английский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
+    'Международник со специализацией на Латинской Америке. Английский C2, португальский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
   ogLocale: 'ru_RU',
 
   brand: 'Шутов',
@@ -275,9 +275,9 @@ export const ru = {
     ],
     langTitle: 'Языки',
     langs: [
-      { flag: 'br', l: 'Португальский', cap: 'C1', lvl: 3, v: 'переговоры, договоры, документы' },
-      { flag: 'gb', l: 'Английский', cap: 'C1', lvl: 3, v: 'переговоры, договоры, документы' },
-      { flag: 'es', l: 'Испанский', cap: 'B1', lvl: 2, v: 'рабочий уровень' },
+      { flag: 'gb', l: 'Английский', cap: 'C2', lvl: 4 },
+      { flag: 'br', l: 'Португальский', cap: 'C1', lvl: 3 },
+      { flag: 'es', l: 'Испанский', cap: 'B1', lvl: 2 },
     ],
     eduTitle: 'Образование',
     edu: [
@@ -319,7 +319,7 @@ export const en = {
   homeHref: '/en/',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
-    'International affairs specialist focused on Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
+    'International affairs specialist focused on Latin America. English at C2, Portuguese at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
   ogLocale: 'en_US',
 
   brand: 'Shutov',
@@ -574,9 +574,9 @@ export const en = {
     ],
     langTitle: 'Languages',
     langs: [
-      { flag: 'br', l: 'Portuguese', cap: 'C1', lvl: 3, v: 'negotiation, contracts, documents' },
-      { flag: 'gb', l: 'English', cap: 'C1', lvl: 3, v: 'negotiation, contracts, documents' },
-      { flag: 'es', l: 'Spanish', cap: 'B1', lvl: 2, v: 'working proficiency' },
+      { flag: 'gb', l: 'English', cap: 'C2', lvl: 4 },
+      { flag: 'br', l: 'Portuguese', cap: 'C1', lvl: 3 },
+      { flag: 'es', l: 'Spanish', cap: 'B1', lvl: 2 },
     ],
     eduTitle: 'Education',
     edu: [

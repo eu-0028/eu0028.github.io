@@ -283,7 +283,6 @@ function about(t, logos) {
         <p class="lng__name">${esc(l.l)}</p>
         <p class="lng__cap">${esc(l.cap)}</p>
         <span class="meter" aria-hidden="true">${[1, 2, 3, 4].map((n) => `<i${n <= l.lvl ? ' class="on"' : ''}></i>`).join('')}</span>
-        <p class="lng__v">${esc(l.v)}</p>
       </div>`
     )
     .join('');
