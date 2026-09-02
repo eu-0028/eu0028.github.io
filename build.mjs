@@ -11,6 +11,9 @@ const hasCv = await exists('assets/shutov-cv.pdf');
 /* В вёрстку попадают только те фотографии, которые реально лежат в assets/img */
 await mkdir('assets/img', { recursive: true });
 const hasPortrait = await exists('assets/img/portrait.jpg');
+const logos = new Set(
+  (await readdir('assets/img')).filter((f) => /^(mgimo|ufmg)\.svg$/i.test(f))
+);
 const images = new Set(
   (await readdir('assets/img')).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
 );
@@ -22,8 +25,8 @@ await copyFile('src/styles.css', 'assets/styles.css');
 await copyFile('src/app.js', 'assets/app.js');
 await copyFile('src/favicon.svg', 'favicon.svg');
 
-await writeFile('index.html', page(ru, { hasCv, hasPortrait, images }));
-await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images }));
+await writeFile('index.html', page(ru, { hasCv, hasPortrait, images, logos }));
+await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images, logos }));
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(

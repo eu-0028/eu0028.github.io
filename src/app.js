@@ -41,7 +41,7 @@
   }
 
   /* --- Появление блоков при прокрутке -------------------- */
-  var rises = document.querySelectorAll('.rise');
+  var rises = document.querySelectorAll('.reveal');
   if (reduced || !('IntersectionObserver' in window)) {
     Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-in'); });
   } else {
@@ -99,28 +99,40 @@
   /* Метки на карте появляются по очереди, ведя взгляд по географии */
   runOnce('.map', function (el) { el.classList.add('is-run'); });
 
-  /* Цифры отсчитываются, чтобы читатель их действительно прочитал */
+  /* Цифры отсчитываются, чтобы читатель их действительно прочитал.
+     Считаем медленно и только когда блок хорошо виден, а не при загрузке. */
   var counters = document.querySelectorAll('[data-count]');
   Array.prototype.forEach.call(counters, function (node) {
-    var target = parseInt(node.getAttribute('data-count'), 10);
+    var raw = node.getAttribute('data-count');
+    var m = /^([0-9][0-9\s\u00a0,]*)(.*)$/.exec(raw);
+    if (!m) return;
+    var digits = m[1].replace(/[\s\u00a0,]/g, '');
+    var target = parseInt(digits, 10);
     if (isNaN(target)) return;
+    var suffix = m[2];
+    var spaced = /[\s\u00a0]/.test(m[1]);
+    var fmt = function (n) {
+      var str = String(n);
+      if (spaced) str = str.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+      return str + suffix;
+    };
     if (reduced || !('IntersectionObserver' in window)) return;
-    node.textContent = '0';
+    node.textContent = fmt(0);
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        var t0 = null, dur = 900;
+        var t0 = null, dur = 1800;
         var step = function (ts) {
           if (t0 === null) t0 = ts;
           var p = Math.min((ts - t0) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          node.textContent = String(Math.round(target * eased));
+          var eased = 1 - Math.pow(1 - p, 4);
+          node.textContent = fmt(Math.round(target * eased));
           if (p < 1) requestAnimationFrame(step);
         };
-        requestAnimationFrame(step);
+        setTimeout(function () { requestAnimationFrame(step); }, 250);
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.95, rootMargin: '0px 0px -12% 0px' });
     io.observe(node);
   });
 
