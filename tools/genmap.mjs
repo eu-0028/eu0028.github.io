@@ -164,7 +164,7 @@ function geomToPath(geom) {
   return { d, centre };
 }
 
-let base = '', markedPaths = '';
+let base = '';
 const marks = [];
 
 for (const geom of topo.objects.countries.geometries) {
@@ -174,37 +174,38 @@ for (const geom of topo.objects.countries.geometries) {
   if (!d) continue;
   if (MARKED.has(name)) {
     const [ru, en] = MARKED.get(name);
-    markedPaths += d;
-    marks.push({ key: name, ru, en, centre });
+    marks.push({ key: name, ru, en, centre, d });
   } else base += d;
 }
 
 const missing = [...MARKED.values()].map((v) => v[0]).filter((ru) => !marks.some((m) => m.ru === ru));
 if (missing.length) throw new Error('Не найдены страны: ' + missing.join(', '));
 
-/* Внешний SVG: сам переключает цвета по системной теме */
+/* Фон карты: всё, кроме стран проектов. Отдаётся картинкой и кэшируется. */
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="World map">
 <style>
 .l{fill:#e0e4ea;stroke:#cdd3db;stroke-width:.5}
-.m{fill:#9fb4e2;stroke:#1e4bad;stroke-width:.6}
-@media (prefers-color-scheme:dark){.l{fill:#1c212b;stroke:#2a3140}.m{fill:#2f4f96;stroke:#7ea3f0}}
+@media (prefers-color-scheme:dark){.l{fill:#1c212b;stroke:#2a3140}}
 </style>
 <path class="l" d="${base}"/>
-<path class="m" d="${markedPaths}"/>
 </svg>`;
 
 mkdirSync('assets', { recursive: true });
-writeFileSync('assets/map.svg', svg);
+writeFileSync('assets/map-base.svg', svg);
 
+/* Страны проектов встраиваются в разметку: только так их можно поднимать курсором. */
 writeFileSync(
   'src/map.generated.mjs',
   `/* Сгенерировано tools/genmap.mjs. Вручную не править. */
 export const mapMeta = {
+  w: ${W},
+  h: ${H},
   ratio: ${(H / W).toFixed(4)},
   marks: ${JSON.stringify(marks)},
 };
 `
 );
 
-console.log(`assets/map.svg — ${(svg.length / 1024).toFixed(1)} КБ, viewBox 0 0 ${W} ${H}`);
-console.log(`подсвечено стран: ${marks.length}`);
+const kb = (n) => (n / 1024).toFixed(1) + ' КБ';
+console.log(`assets/map-base.svg — ${kb(svg.length)}`);
+console.log(`контуры стран в разметке — ${kb(marks.reduce((a, m) => a + m.d.length, 0))}, стран ${marks.length}`);

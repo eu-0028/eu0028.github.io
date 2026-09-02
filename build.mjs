@@ -1,5 +1,5 @@
 /* Сборка статического сайта. Запуск: node build.mjs */
-import { mkdir, writeFile, copyFile, access, rm, readdir } from 'node:fs/promises';
+import { mkdir, writeFile, copyFile, access, rm, readdir, readFile } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { ru, en, shared } from './src/content.mjs';
 import { page } from './src/render.mjs';
@@ -14,6 +14,13 @@ const hasPortrait = await exists('assets/img/portrait.jpg');
 const logos = new Set(
   (await readdir('assets/img')).filter((f) => /^(mgimo|ufmg)\.svg$/i.test(f))
 );
+const icons = {};
+for (const f of await readdir('assets/icons')) {
+  if (!f.endsWith('.svg')) continue;
+  const raw = await readFile(`assets/icons/${f}`, 'utf8');
+  icons[f.replace('.svg', '')] = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').trim();
+}
+
 const images = new Set(
   (await readdir('assets/img')).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
 );
@@ -25,8 +32,8 @@ await copyFile('src/styles.css', 'assets/styles.css');
 await copyFile('src/app.js', 'assets/app.js');
 await copyFile('src/favicon.svg', 'favicon.svg');
 
-await writeFile('index.html', page(ru, { hasCv, hasPortrait, images, logos }));
-await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images, logos }));
+await writeFile('index.html', page(ru, { hasCv, hasPortrait, images, logos, icons }));
+await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images, logos, icons }));
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(
@@ -44,6 +51,9 @@ await writeFile(
 <p class="hero__cta"><a class="btn" href="/">На главную</a><a class="btn btn--ghost" href="/en/" lang="en">Home</a></p>
 </div></main></body></html>`
 );
+
+const yo = (page(ru, { hasCv, hasPortrait, images, logos, icons }).match(/[ёЁ]/g) || []).length;
+if (yo) throw new Error(`В русском тексте снова буква ё: ${yo} шт.`);
 
 const today = new Date().toISOString().slice(0, 10);
 await writeFile(

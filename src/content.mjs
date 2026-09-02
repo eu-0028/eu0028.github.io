@@ -30,12 +30,12 @@ export const ru = {
   cvLabel: 'Резюме PDF',
 
   nav: [
-    { href: '#practice', label: 'Направления', n: '01' },
-    { href: '#work', label: 'Проекты', n: '02' },
-    { href: '#geo', label: 'География', n: '03' },
-    { href: '#current', label: '2026', n: '04' },
-    { href: '#about', label: 'О себе', n: '05' },
-    { href: '#contact', label: 'Контакты', n: '06' },
+    { href: '#about', label: 'О себе', n: '1' },
+    { href: '#practice', label: 'Направления', n: '2' },
+    { href: '#work', label: 'Проекты', n: '3' },
+    { href: '#geo', label: 'География', n: '4' },
+    { href: '#current', label: '2026', n: '5' },
+    { href: '#contact', label: 'Контакты', n: '6' },
   ],
 
   hero: {
@@ -45,7 +45,7 @@ export const ru = {
     leadEm: 'состоялся',
     leadTail: '',
     para:
-      'Специалист-международник по странам БРИКС и Латинской Америке. Веду клиентов и переговоры на трех языках, документы готовлю сам, без юриста.',
+      'Веду переговоры на трех языках и решаю задачи бизнеса под ключ. Страны БРИКС и Латинская Америка.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
@@ -62,27 +62,9 @@ export const ru = {
   },
 
   work: {
-    n: '02',
+    n: '3',
     kicker: 'Проекты',
     title: 'Что сделано',
-    timelineTitle: 'Занятость по месяцам',
-    timelineNote: 'Часть проектов шла параллельно с основной работой.',
-    timelineFrom: '2024-04',
-    timelineTo: '2026-12',
-    ongoing: 'по настоящее время',
-    nowLabel: 'сейчас',
-    legendRole: 'Должности',
-    legendProject: 'Проекты',
-    timeline: [
-      { t: 'Consult Invest ITIC', from: '2025-08', to: null, kind: 'role' },
-      { t: 'Финансовый консультант', from: '2024-08', to: '2025-12', kind: 'role' },
-      { t: 'Атташе и переводчик', from: '2024-04', to: '2025-04', kind: 'role' },
-      { t: 'Интервидение-2025', from: '2025-08', to: '2025-09', kind: 'project' },
-      { t: 'Бизнес-инкубатор ШОС', from: '2025-09', to: '2025-12', kind: 'project' },
-      { t: 'Russia Bridge Program', from: '2025-11', to: '2025-12', kind: 'project' },
-      { t: 'RAKEZ', from: '2026-01', to: '2026-05', kind: 'project' },
-      { t: 'AGORA', from: '2026-01', to: '2026-04', kind: 'project' },
-    ],
     items: [
       {
         t: 'Интервидение-2025',
@@ -195,33 +177,38 @@ export const ru = {
   },
 
   practice: {
-    n: '01',
+    n: '2',
     kicker: 'Направления',
     title: 'Что я делаю',
     intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны ниже.',
     items: [
       {
         t: 'Сопровождение иностранных делегаций',
+        icon: 'users-three',
         d: 'От первого письма в министерство до отъезда группы.',
         b: ['Договоры соорганизатора с правительствами стран', 'Визовая поддержка, размещение, транспорт', 'Программа пребывания делегации', 'Подбор и кураторство атташе', 'Работа с посольствами и государственными ведомствами'],
       },
       {
         t: 'Организация международных мероприятий',
+        icon: 'microphone-stage',
         d: 'Форумы, конкурсы и акселерационные программы целиком.',
         b: ['Деловая программа и спикеры', 'Продажи и набор участников', 'Площадка, проживание, подрядчики', 'Прием платежей и договорная база'],
       },
       {
         t: 'Договоры, закупки и отчетность',
+        icon: 'file-text',
         d: 'Документы проекта, вплоть до отчета по государственному контракту.',
         b: ['Отчетность по государственным контрактам', 'Сверка договоров с подрядчиками и первичных документов', 'Агентские договоры, акты, коммерческие предложения', 'Кадровое делопроизводство и комплаенс'],
       },
       {
         t: 'Развитие бизнеса и выход на рынки',
+        icon: 'trend-up',
         d: 'Привлечение клиентов на рынках России и СНГ с измеримыми показателями.',
         b: ['Лидогенерация и холодные продажи', 'База клиентов по странам', 'Исследование рынка и конкурентный анализ', 'Финансовое моделирование и юнит-экономика'],
       },
       {
         t: 'Перевод и языковое сопровождение',
+        icon: 'translate',
         d: 'Португальский и английский в дипломатической, юридической, коммерческой и технической лексике.',
         b: ['Последовательный перевод на форумах', 'Перевод договоров, регламентов и уставных документов', 'Техническая документация', 'Деловая и дипломатическая переписка'],
       },
@@ -229,7 +216,7 @@ export const ru = {
   },
 
   geo: {
-    n: '03',
+    n: '4',
     kicker: 'География',
     title: 'Где я работал',
     intro: 'Двенадцать стран, в которых у меня были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке.',
@@ -252,7 +239,7 @@ export const ru = {
   },
 
   current: {
-    n: '04',
+    n: '5',
     kicker: 'В работе сейчас',
     title: '2026 год',
     intro: 'Проекты, которые веду прямо сейчас.',
@@ -276,7 +263,7 @@ export const ru = {
   },
 
   about: {
-    n: '05',
+    n: '1',
     kicker: 'О себе',
     title: 'Как это выглядит на практике',
     paras: [
@@ -303,7 +290,7 @@ export const ru = {
   },
 
   contact: {
-    n: '06',
+    n: '6',
     kicker: 'Контакты',
     title: 'Открыт к предложениям',
     d: 'Пишите в Telegram или на почту. Отвечаю сам.',
@@ -339,12 +326,12 @@ export const en = {
   cvLabel: 'CV in PDF',
 
   nav: [
-    { href: '#practice', label: 'Practice', n: '01' },
-    { href: '#work', label: 'Projects', n: '02' },
-    { href: '#geo', label: 'Geography', n: '03' },
-    { href: '#current', label: '2026', n: '04' },
-    { href: '#about', label: 'About', n: '05' },
-    { href: '#contact', label: 'Contact', n: '06' },
+    { href: '#about', label: 'About', n: '1' },
+    { href: '#practice', label: 'Practice', n: '2' },
+    { href: '#work', label: 'Projects', n: '3' },
+    { href: '#geo', label: 'Geography', n: '4' },
+    { href: '#current', label: '2026', n: '5' },
+    { href: '#contact', label: 'Contact', n: '6' },
   ],
 
   hero: {
@@ -354,7 +341,7 @@ export const en = {
     leadEm: 'actually happen',
     leadTail: '',
     para:
-      'International affairs specialist for BRICS and Latin America. I handle clients and negotiations in three languages and draft contracts myself.',
+      'I negotiate in three languages and take business problems through to a finished result. BRICS countries and Latin America.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the projects',
     portraitAlt: 'Evgeny Shutov',
@@ -371,27 +358,9 @@ export const en = {
   },
 
   work: {
-    n: '02',
+    n: '3',
     kicker: 'Projects',
     title: 'What has been delivered',
-    timelineTitle: 'Month by month',
-    timelineNote: 'Several projects ran in parallel with the main role.',
-    timelineFrom: '2024-04',
-    timelineTo: '2026-12',
-    ongoing: 'to date',
-    nowLabel: 'now',
-    legendRole: 'Roles',
-    legendProject: 'Projects',
-    timeline: [
-      { t: 'Consult Invest ITIC', from: '2025-08', to: null, kind: 'role' },
-      { t: 'Financial adviser', from: '2024-08', to: '2025-12', kind: 'role' },
-      { t: 'Attaché and interpreter', from: '2024-04', to: '2025-04', kind: 'role' },
-      { t: 'Intervision 2025', from: '2025-08', to: '2025-09', kind: 'project' },
-      { t: 'SCO Business Incubator', from: '2025-09', to: '2025-12', kind: 'project' },
-      { t: 'Russia Bridge Program', from: '2025-11', to: '2025-12', kind: 'project' },
-      { t: 'RAKEZ', from: '2026-01', to: '2026-05', kind: 'project' },
-      { t: 'AGORA', from: '2026-01', to: '2026-04', kind: 'project' },
-    ],
     items: [
       {
         t: 'Intervision 2025',
@@ -504,33 +473,38 @@ export const en = {
   },
 
   practice: {
-    n: '01',
+    n: '2',
     kicker: 'Practice',
     title: 'What I do',
     intro: 'Five areas. Each has completed projects behind it, set out below.',
     items: [
       {
         t: 'Running foreign delegations',
+        icon: 'users-three',
         d: 'From the first letter to a ministry through to the group’s departure.',
         b: ['Co-organiser agreements with national governments', 'Visa support, accommodation, transport', 'The delegation’s visit programme', 'Selecting and supervising attachés', 'Work with embassies and government agencies'],
       },
       {
         t: 'International event management',
+        icon: 'microphone-stage',
         d: 'Forums, contests and acceleration programmes, end to end.',
         b: ['Business programme and speakers', 'Sales and participant recruitment', 'Venue, accommodation, contractors', 'Payment processing and contract base'],
       },
       {
         t: 'Contracts, procurement and reporting',
+        icon: 'file-text',
         d: 'Project paperwork, up to the final report under a state contract.',
         b: ['Reporting under state contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acts, commercial proposals', 'HR administration and compliance'],
       },
       {
         t: 'Business development and market entry',
+        icon: 'trend-up',
         d: 'Client acquisition across Russia and the CIS against measurable targets.',
         b: ['Lead generation and cold outreach', 'Client base built per country', 'Market research and competitive analysis', 'Financial modelling and unit economics'],
       },
       {
         t: 'Translation and language support',
+        icon: 'translate',
         d: 'Portuguese and English across diplomatic, legal, commercial and technical vocabulary.',
         b: ['Consecutive interpreting at forums', 'Translation of contracts, regulations and statutory documents', 'Technical documentation', 'Business and diplomatic correspondence'],
       },
@@ -538,7 +512,7 @@ export const en = {
   },
 
   geo: {
-    n: '03',
+    n: '4',
     kicker: 'Geography',
     title: 'Where I have worked',
     intro: 'Twelve countries where I have run projects, negotiations or delegations. The numbers on the map match the numbers in the list.',
@@ -561,7 +535,7 @@ export const en = {
   },
 
   current: {
-    n: '04',
+    n: '5',
     kicker: 'Currently running',
     title: 'The 2026 slate',
     intro: 'Projects I am running right now.',
@@ -585,7 +559,7 @@ export const en = {
   },
 
   about: {
-    n: '05',
+    n: '1',
     kicker: 'About',
     title: 'What this looks like in practice',
     paras: [
@@ -612,7 +586,7 @@ export const en = {
   },
 
   contact: {
-    n: '06',
+    n: '6',
     kicker: 'Contact',
     title: 'Open to offers',
     d: 'Write to me on Telegram or by email. I reply myself.',

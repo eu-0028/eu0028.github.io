@@ -148,23 +148,26 @@
     window.addEventListener('load', centreMap);
   }
 
-  /* --- Карта: подсветка метки при наведении на страну ---- */
+  /* --- Карта: страна, метка и строка списка подсвечиваются вместе -- */
   var geoList = document.querySelector('[data-geo]');
   if (geoList) {
     var pins = document.querySelectorAll('.pin');
+    var ctrys = document.querySelectorAll('.ctry');
     var setHot = function (i, on) {
-      var pin = pins[i];
-      if (pin) pin.classList.toggle('is-hot', on);
-      var row = geoList.querySelector('[data-i="' + i + '"]');
-      if (row) row.classList.toggle('is-hot', on);
+      [pins[i], ctrys[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
+        if (el) el.classList.toggle('is-hot', on);
+      });
     };
     var bind = function (el) {
       var i = el.getAttribute('data-i');
       el.addEventListener('mouseenter', function () { setHot(i, true); });
       el.addEventListener('mouseleave', function () { setHot(i, false); });
+      el.addEventListener('focus', function () { setHot(i, true); });
+      el.addEventListener('blur', function () { setHot(i, false); });
     };
     Array.prototype.forEach.call(geoList.querySelectorAll('[data-i]'), bind);
     Array.prototype.forEach.call(pins, bind);
+    Array.prototype.forEach.call(ctrys, bind);
   }
 
   /* --- Портрет: аккуратная заглушка, если файла нет ------ */

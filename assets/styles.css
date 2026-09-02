@@ -1297,62 +1297,106 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 
 
-/* --- 28. Полоса цифр ------------------------------------- */
 
-.figs {
-  background: var(--figs-bg);
-  color: var(--figs-fg);
-  padding-block: clamp(3rem, 6.5vw, 5.5rem);
-}
-.figs__kicker {
-  font-family: var(--font-mono);
-  font-size: var(--t-label);
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--figs-dim);
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--figs-rule);
-  margin-bottom: clamp(2rem, 4vw, 3.25rem);
-}
-.figs__grid {
+/* --- 28. Линейка цифр в разделе «О себе» ----------------- */
+
+.stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1.75rem, 3.5vw, 3.5rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--rule);
 }
-.fig__v {
+.stat { padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 2vw, 2rem) 0; border-left: 1px solid var(--rule); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat:last-child { padding-right: 0; }
+.stat__v {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
   font-weight: 700;
   line-height: .9;
   letter-spacing: -.05em;
 }
-.fig__u {
+.stat__u {
   display: block;
   font-family: var(--font-mono);
   font-size: var(--t-label);
   font-weight: 500;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--figs-fg);
-  margin-top: .8rem;
+  color: var(--accent);
+  margin-top: .75rem;
 }
-.fig__l {
-  margin-top: 1rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--figs-rule);
+.stat__l {
+  margin-top: .9rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--rule-soft);
   font-size: var(--t-small);
   line-height: 1.45;
-  color: var(--figs-dim);
+  color: var(--ink-3);
   text-wrap: pretty;
 }
-
-@media (max-width: 1040px) { .figs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px)  { .figs__grid { grid-template-columns: minmax(0, 1fr); } }
-
-@media print {
-  .figs { background: none; color: #000; border-block: 1px solid #bbb; }
-  .figs__kicker, .fig__l { color: #444; }
-  .fig__l, .figs__kicker { border-color: #ccc; }
+@media (max-width: 1040px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+  .stat:nth-child(2) { padding-right: 0; }
 }
+@media (max-width: 560px) {
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stat { border-left: 0; padding-inline: 0; }
+}
+
+/* --- 29. Карта: страна поднимается под курсором ---------- */
+
+.map__hot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ctry {
+  fill: #9fb4e2;
+  stroke: #1e4bad;
+  stroke-width: .6;
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .25s var(--ease), fill .25s var(--ease), filter .25s var(--ease);
+}
+.ctry.is-hot {
+  transform: translateY(-6px) scale(1.03);
+  fill: var(--accent);
+  filter: drop-shadow(0 6px 8px rgba(18, 21, 26, .35));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .ctry { fill: #2f4f96; stroke: #7ea3f0; }
+  :root:not([data-theme='light']) .ctry.is-hot { fill: #7ea3f0; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .6)); }
+}
+:root[data-theme='dark'] .ctry { fill: #2f4f96; stroke: #7ea3f0; }
+:root[data-theme='dark'] .ctry.is-hot { fill: #7ea3f0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ctry.is-hot { transform: none; }
+}
+
+/* --- 30. Знак в шапке и иконки направлений --------------- */
+
+.brand { display: inline-flex; align-items: center; gap: .6rem; }
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: .8125rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.brand:hover .brand__mark { background: var(--accent); color: var(--paper); }
+
+.practice__head { display: flex; align-items: flex-start; gap: .7rem; }
+.ico { width: 1.5rem; height: 1.5rem; flex: none; color: var(--accent); margin-top: .1em; }

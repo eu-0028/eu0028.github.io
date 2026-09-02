@@ -8,6 +8,9 @@ const list = (items) => items.map((b) => `<li>${esc(b)}</li>`).join('');
 const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.2"/></svg>';
 
 let R = '';                                   // префикс до корня сайта
+let ICONS = {};
+const icon = (name) =>
+  ICONS[name] ? `<svg class="ico" viewBox="0 0 256 256" aria-hidden="true" focusable="false">${ICONS[name]}</svg>` : '';
 const flag = (code, eager) =>
   `<img class="flag" src="${R}assets/flags/${attr(code)}.svg" alt="" width="27" height="20"${eager ? '' : ' loading="lazy"'} decoding="async">`;
 
@@ -23,7 +26,7 @@ function header(t, base) {
     .join('');
   return `<header class="hdr" data-hdr>
   <div class="shell hdr__in">
-    <a class="brand" href="${attr(base)}">${esc(t.brand)}</a>
+    <a class="brand" href="${attr(base)}"><span class="brand__mark" aria-hidden="true">ES</span><span class="brand__name">${esc(t.brand)}</span></a>
     <nav class="hdr__nav" aria-label="${attr(t.footer.navTitle)}">${nav}</nav>
     <div class="hdr__side">
       <a class="lang" href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}" lang="${attr(t.altLang)}">${esc(t.altLang.toUpperCase())}</a>
@@ -64,85 +67,6 @@ function hero(t, hasCv, hasPortrait) {
 }
 
 
-/* --- полоса цифр: единственный цветной блок на странице -- */
-
-function figures(t) {
-  const s = t.figures;
-  const items = s.items
-    .map(
-      (f, i) => `<div class="fig reveal" style="--i:${i}">
-        <span class="fig__v num" data-count="${attr(f.value)}">${esc(f.value)}</span>
-        <span class="fig__u">${esc(f.unit)}</span>
-        <p class="fig__l">${esc(f.label)}</p>
-      </div>`
-    )
-    .join('');
-  return `<section class="figs" aria-label="${attr(s.eyebrow)}">
-  <div class="shell">
-    <p class="figs__kicker">${esc(s.eyebrow)}</p>
-    <div class="figs__grid">${items}</div>
-  </div>
-</section>`;
-}
-
-/* --- диаграмма занятости -------------------------------- */
-
-const monthIndex = (ym) => {
-  const [y, m] = ym.split('-').map(Number);
-  return y * 12 + (m - 1);
-};
-
-function timeline(s) {
-  const from = monthIndex(s.timelineFrom);
-  const to = monthIndex(s.timelineTo);
-  const span = to - from + 1;
-  const d = new Date();
-  const now = Math.min(to, d.getFullYear() * 12 + d.getMonth());
-  const pct = (n) => ((n / span) * 100).toFixed(3);
-
-  const ticks = [];
-  for (let i = from; i <= to; i++) if (i % 12 === 0) ticks.push({ year: i / 12, at: i - from });
-
-  const grid =
-    ticks.map((k) => `<span style="left:${pct(k.at)}%"></span>`).join('') +
-    `<span class="tl__now" style="left:${pct(now - from + 1)}%"></span>`;
-  const axis =
-    ticks.map((k) => `<span class="tl__year num" style="left:${pct(k.at)}%">${k.year}</span>`).join('') +
-    `<span class="tl__year tl__year--now" style="left:${pct(now - from + 1)}%">${esc(s.nowLabel)}</span>`;
-
-  const rows = s.timeline
-    .map((r, ri) => {
-      const a = monthIndex(r.from) - from;
-      const b = (r.to ? monthIndex(r.to) : now) - from + 1;
-      const open = r.to ? '' : ' bar--open';
-      const title = r.to ? '' : ` title="${attr(s.ongoing)}"`;
-      return `<div class="tl__row">
-        <span class="tl__label">${esc(r.t)}</span>
-        <div class="tl__track">
-          <span class="bar bar--${r.kind}${open}" style="left:${pct(a)}%;width:${pct(b - a)}%;--i:${ri}"${title}></span>
-        </div>
-      </div>`;
-    })
-    .join('');
-
-  return `<div class="tl reveal">
-    <p class="subhead">${esc(s.timelineTitle)}</p>
-    <div class="tl__body">
-      <div class="tl__grid" aria-hidden="true">${grid}</div>
-      ${rows}
-    </div>
-    <div class="tl__row tl__row--axis" aria-hidden="true">
-      <span class="tl__label"></span>
-      <div class="tl__track">${axis}</div>
-    </div>
-    <p class="tl__legend">
-      <span class="key key--role">${esc(s.legendRole)}</span>
-      <span class="key key--project">${esc(s.legendProject)}</span>
-      <span class="tl__note">${esc(s.timelineNote)}</span>
-    </p>
-  </div>`;
-}
-
 /* --- проекты -------------------------------------------- */
 
 function work(t, images) {
@@ -175,7 +99,6 @@ function work(t, images) {
       ${aside(s.n, s.kicker)}
       <h2 class="h2 reveal">${esc(s.title)}</h2>
     </div>
-    ${timeline(s)}
     ${items}
   </div>
 </section>`;
@@ -188,9 +111,9 @@ function practice(t) {
   const rows = s.items
     .map(
       (it, i) => `<div class="practice__row reveal">
-        <span class="practice__n">${String(i + 1).padStart(2, '0')}</span>
+        <span class="practice__n">${i + 1}</span>
         <div>
-          <h3 class="h3">${esc(it.t)}</h3>
+          <div class="practice__head">${icon(it.icon)}<h3 class="h3">${esc(it.t)}</h3></div>
           <p class="practice__d">${esc(it.d)}</p>
         </div>
         <div class="practice__tags"><ul class="rules-list rules-list--sm">${list(it.b)}</ul></div>
@@ -221,14 +144,21 @@ function geo(t) {
     .map((it, i) => {
       const m = byKey.get(it.key);
       if (!m) return '';
-      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%;--i:${i}"><i>${String(i + 1).padStart(2, '0')}</i></span>`;
+      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%;--i:${i}"><i>${i + 1}</i></span>`;
+    })
+    .join('');
+
+  const countries = s.items
+    .map((it, i) => {
+      const m = byKey.get(it.key);
+      return m ? `<path class="ctry" data-i="${i}" d="${m.d}"><title>${esc(it.name)}</title></path>` : '';
     })
     .join('');
 
   const rows = s.items
     .map(
       (it, i) => `<li class="geo__row reveal" data-i="${i}">
-        <span class="geo__n">${String(i + 1).padStart(2, '0')}</span>
+        <span class="geo__n">${i + 1}</span>
         ${flag(it.flag)}
         <div>
           <p class="geo__name">${esc(it.name)}</p>
@@ -250,7 +180,8 @@ function geo(t) {
     <figure class="map map--wide reveal">
       <div class="map__scroll">
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
-          <img src="${R}assets/map.svg" alt="" width="1200" height="${Math.round(1200 * mapMeta.ratio)}" loading="lazy" decoding="async">
+          <img src="${R}assets/map-base.svg" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
+          <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" aria-hidden="true" focusable="false">${countries}</svg>
           ${pins}
         </div>
       </div>
@@ -299,6 +230,16 @@ function about(t, logos) {
   const s = t.about;
   const paras = s.paras.map((p) => `<p>${esc(p)}</p>`).join('');
 
+  const stats = t.figures.items
+    .map(
+      (f) => `<div class="stat reveal">
+        <span class="stat__v num" data-count="${attr(f.value)}">${esc(f.value)}</span>
+        <span class="stat__u">${esc(f.unit)}</span>
+        <p class="stat__l">${esc(f.label)}</p>
+      </div>`
+    )
+    .join('');
+
   const langs = s.langs
     .map(
       (l) => `<div class="lng reveal">
@@ -333,6 +274,7 @@ function about(t, logos) {
         <div class="prose reveal" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
       </div>
     </div>
+    <div class="stats">${stats}</div>
     <p class="subhead subhead--wide">${esc(s.langTitle)}</p>
     <div class="lngs">${langs}</div>
     <p class="subhead subhead--wide">${esc(s.eduTitle)}</p>
@@ -414,9 +356,10 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set() } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {} } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
+  ICONS = icons;
   const base = t.lang === 'en' ? 'index.html' : 'index.html';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
 
@@ -452,12 +395,11 @@ ${jsonLd(t)}
 ${header(t, base)}
 <main id="main">
 ${hero(t, hasCv, hasPortrait)}
-${figures(t)}
+${about(t, logos)}
 ${practice(t)}
 ${work(t, images)}
 ${geo(t)}
 ${current(t)}
-${about(t, logos)}
 ${contact(t)}
 </main>
 ${footer(t)}
