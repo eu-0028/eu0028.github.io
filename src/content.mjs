@@ -2,8 +2,6 @@
 // Ничего не выдумано: если данных нет, поля нет.
 
 export const shared = {
-  phone: '+7 929 773-11-04',
-  phoneHref: '+79297731104',
   email: 'mail@e-shutov.ru',
   telegram: '@Taback_1028',
   telegramHref: 'https://t.me/Taback_1028',
@@ -54,7 +52,7 @@ export const ru = {
   figures: {
     eyebrow: 'Итоги в цифрах',
     items: [
-      { value: '15', unit: 'млн ₽', label: 'Суммарная выручка по проектам за год' },
+      { value: '15', unit: 'млн ₽', label: 'Суммарная выручка по проектам за 2025 год' },
       { value: '50', unit: 'млн ₽', label: 'Прошло через договоры и отчетность, которые я вел' },
       { value: '13', unit: 'стран', label: 'С представителями которых работал лично' },
       { value: '5', unit: 'мероприятий', label: 'Крупных международных, суммарно больше 200 участников' },
@@ -180,7 +178,7 @@ export const ru = {
     n: '2',
     kicker: 'Направления',
     title: 'Что я делаю',
-    intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны ниже.',
+    intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны ниже',
     items: [
       {
         t: 'Сопровождение иностранных делегаций',
@@ -219,7 +217,7 @@ export const ru = {
     n: '4',
     kicker: 'География',
     title: 'С кем я работал',
-    intro: 'Двенадцать стран, с представителями которых были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке.',
+    intro: 'Двенадцать стран, с представителями которых были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Бразилия', note: 'Делегация «Интервидения», трансляция на бразильском телевидении, фестиваль молодежи' },
       { key: 'Russia', flag: 'ru', name: 'Россия', note: 'База, Москва. Российское направление Consult Invest ITIC, форумы и государственные контракты' },
@@ -240,7 +238,7 @@ export const ru = {
     n: '5',
     kicker: 'В работе сейчас',
     title: '2026 год',
-    intro: 'Проекты, которые веду прямо сейчас.',
+    intro: 'Проекты, которые веду прямо сейчас',
     items: [
       {
         t: 'Международный фестиваль молодежи 2026',
@@ -292,7 +290,6 @@ export const ru = {
     kicker: 'Контакты',
     title: 'Открыт к предложениям',
     d: 'Пишите в Telegram или на почту. Отвечаю сам.',
-    phoneLabel: 'Телефон',
     emailLabel: 'Почта',
     tgLabel: 'Telegram',
   },
@@ -348,8 +345,8 @@ export const en = {
   figures: {
     eyebrow: 'The numbers',
     items: [
-      { value: '15', unit: 'M ₽', label: 'Total project revenue over a year' },
-      { value: '50', unit: 'M ₽', label: 'Passed through the contracts and reporting I handled' },
+      { value: '15', unit: 'mln RUB', label: 'Total project revenue in 2025' },
+      { value: '50', unit: 'mln RUB', label: 'Passed through the contracts and reporting I handled' },
       { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
       { value: '5', unit: 'events', label: 'Major international ones, more than 200 participants in total' },
     ],
@@ -398,7 +395,7 @@ export const en = {
         ],
         m: [
           { v: '3,000+', l: 'pages of report' },
-          { v: '9M ₽', l: 'reconciled' },
+          { v: '9 mln RUB', l: 'reconciled' },
           { v: '25', l: 'workshop sessions' },
           { v: '10', l: 'SCO member states' },
         ],
@@ -474,7 +471,7 @@ export const en = {
     n: '2',
     kicker: 'Practice',
     title: 'What I do',
-    intro: 'Five areas. Each has completed projects behind it, set out below.',
+    intro: 'Five areas. Each has completed projects behind it, set out below',
     items: [
       {
         t: 'Running foreign delegations',
@@ -513,7 +510,7 @@ export const en = {
     n: '4',
     kicker: 'Geography',
     title: 'Who I have worked with',
-    intro: 'Twelve countries whose representatives I have worked with on projects, negotiations or delegations. The numbers on the map match the numbers in the list.',
+    intro: 'Twelve countries whose representatives I have worked with on projects, negotiations or delegations. The numbers on the map match the numbers in the list',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Brazil', note: 'Intervision delegation, the Brazilian television broadcast, the youth festival' },
       { key: 'Russia', flag: 'ru', name: 'Russia', note: 'Base, Moscow. The Russian practice of Consult Invest ITIC, forums and state contracts' },
@@ -534,7 +531,7 @@ export const en = {
     n: '5',
     kicker: 'Currently running',
     title: 'The 2026 slate',
-    intro: 'Projects I am running right now.',
+    intro: 'Projects I am running right now',
     items: [
       {
         t: 'International Youth Festival 2026',
@@ -586,7 +583,6 @@ export const en = {
     kicker: 'Contact',
     title: 'Open to offers',
     d: 'Write to me on Telegram or by email. I reply myself.',
-    phoneLabel: 'Phone',
     emailLabel: 'Email',
     tgLabel: 'Telegram',
   },

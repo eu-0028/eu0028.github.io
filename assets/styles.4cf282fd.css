@@ -32,7 +32,7 @@
   --band:   clamp(3.25rem, 6vw, 6rem);
   --hdr:    4.25rem;
 
-  --t-display: clamp(2.3rem, 1rem + 4.4vw, 4.9rem);
+  --t-display: clamp(2.05rem, .95rem + 3.55vw, 4.05rem);
   --t-h2:      clamp(2rem, 1.2rem + 3vw, 3.75rem);
   --t-h3:      clamp(1.15rem, 1rem + 0.65vw, 1.5rem);
   --t-lede:    clamp(1.25rem, 1.05rem + 0.7vw, 1.7rem);
@@ -405,6 +405,11 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .hero__grid[data-noportrait='true'] .hero__h1,
 .hero__grid[data-noportrait='true'] .lede { max-width: 20ch; }
 .hero__grid[data-noportrait='true'] .lede { max-width: 58ch; }
+
+.hero .lede {
+  font-size: clamp(1.1rem, .98rem + .45vw, 1.4rem);
+  line-height: 1.55;
+}
 
 .hero__eyebrow {
   display: flex;
@@ -779,8 +784,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .crow {
   display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: var(--gap);
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  gap: 1.1rem;
   align-items: baseline;
   padding-block: 1.35rem;
   border-bottom: 1px solid var(--rule-soft);
@@ -882,7 +887,9 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   .figures { grid-template-columns: 1fr; }
   .figure { border-left: 0; padding-inline: 0; border-bottom: 1px solid var(--rule); }
   .figure:last-child { border-bottom: 0; }
-  .fact, .crow, .deflist > div { grid-template-columns: 1fr; gap: .4rem; }
+  .fact, .deflist > div { grid-template-columns: 1fr; gap: .4rem; }
+  /* Контакты остаются строкой: значок слева, адрес справа */
+  .crow { grid-template-columns: 1.9rem minmax(0, 1fr); gap: .85rem; align-items: center; padding-block: 1.1rem; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 

@@ -306,7 +306,6 @@ function contact(t) {
       <dl class="contact__rows reveal">
         <div class="crow"><dt aria-label="${attr(s.tgLabel)}">${icon('telegram-logo')}</dt><dd><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></dd></div>
         <div class="crow"><dt aria-label="${attr(s.emailLabel)}">${icon('envelope-simple')}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
-        <div class="crow"><dt aria-label="${attr(s.phoneLabel)}">${icon('phone')}</dt><dd><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></dd></div>
       </dl>
     </div>
   </div>
@@ -333,7 +332,6 @@ function footer(t) {
         <ul>
           <li><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></li>
           <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
-          <li><a href="tel:${attr(shared.phoneHref)}" class="num">${esc(shared.phone)}</a></li>
           <li><a href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}">${esc(t.altLabel)}</a></li>
         </ul>
       </div>
@@ -356,7 +354,6 @@ function jsonLd(t) {
     description: t.description,
     url: shared.domain + (t.lang === 'en' ? '/en/' : '/'),
     email: 'mailto:' + shared.email,
-    telephone: shared.phone,
     knowsLanguage: t.about.langs.map((l) => l.l),
     alumniOf: { '@type': 'CollegeOrUniversity', name: t.about.edu[0].org },
     sameAs: [shared.telegramHref],
@@ -366,7 +363,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {}, backdrops = new Set() } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Set(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
@@ -397,8 +394,8 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="${R}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${R}assets/fonts/onest-${pre}-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${R}assets/fonts.css">
-<link rel="stylesheet" href="${R}assets/styles.css">
+<link rel="stylesheet" href="${R}assets/${fontsName}">
+<link rel="stylesheet" href="${R}assets/${cssName}">
 ${jsonLd(t)}
 </head>
 <body>
@@ -414,7 +411,7 @@ ${current(t)}
 ${contact(t)}
 </main>
 ${footer(t)}
-<script src="${R}assets/app.js" defer></script>
+<script src="${R}assets/${jsName}" defer></script>
 </body>
 </html>`;
 }
