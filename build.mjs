@@ -29,8 +29,11 @@ for (const f of await readdir('assets/icons')) {
 const backdrops = new Set(
   (await readdir('assets/img')).filter((f) => /^bg-(about|work|geo|current|contact)\.(jpe?g|png|webp)$/i.test(f))
 );
+/* Фотографии проектов: все, что лежит в assets/img, кроме логотипов и портрета */
 const images = new Set(
-  (await readdir('assets/img')).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
+  (await readdir('assets/img')).filter(
+    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait)[-.]/i.test(f)
+  )
 );
 
 await mkdir('en', { recursive: true });
@@ -108,7 +111,7 @@ console.log(`Шрифтов: ${fonts} · Резюме PDF: ${hasCv ? 'подкл
 console.log(`Портрет: ${hasPortrait ? 'подключено' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
 console.log(`Фоновые снимки: ${backdrops.size ? [...backdrops].join(', ') : 'нет — секции без фона'}`);
 console.log(`Фотографии проектов: ${images.size ? [...images].join(', ') : 'нет — блоки с фото не выводятся'}`);
-const needLogos = ['mgimo', 'mgimo-en'].filter((n) => !logos.has(n));
+const needLogos = ['mgimo'].filter((n) => !logos.has(n));
 console.log(
   `Логотипы: ${logos.size ? [...logos.values()].join(', ') : 'нет'}` +
     (needLogos.length ? ` · не хватает assets/img/${needLogos.join('.(svg|png), assets/img/')}.(svg|png)` : '')

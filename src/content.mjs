@@ -567,7 +567,7 @@ export const en = {
     edu: [
       {
         org: 'MGIMO University',
-        logo: 'mgimo-en',
+        logo: 'mgimo',
         tracks: [
           { period: '2022-2026', role: 'BA, International Relations, with honours' },
           { period: '2026-2028', role: 'MA, Economics' },

@@ -1269,7 +1269,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 .edu + .edu { margin-top: clamp(1.5rem, 3vw, 2.25rem); border-top: 1px solid var(--rule); padding-top: 1.35rem; }
 .edu__org { display: flex; align-items: center; gap: .9rem; }
-.edu__logo { width: 44px; height: 44px; object-fit: contain; flex: none; }
+.edu__logo { width: 88px; height: auto; flex: none; }
 .edu__name {
   font-family: var(--font-display);
   font-size: 1.2rem;

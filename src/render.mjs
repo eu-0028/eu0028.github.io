@@ -265,7 +265,7 @@ function about(t, logos) {
     .map(
       (e) => `<div class="edu reveal">
         <div class="edu__org">
-          ${e.logo && logos.get(e.logo) ? `<img class="edu__logo" src="${R}assets/img/${attr(logos.get(e.logo))}" alt="" width="44" height="44" loading="lazy">` : ''}
+          ${e.logo && logos.get(e.logo) ? `<img class="edu__logo" src="${R}assets/img/${attr(logos.get(e.logo))}" alt="" width="88" height="54" loading="lazy" decoding="async">` : ''}
           <p class="edu__name">${esc(e.org)}</p>
         </div>
         <ul class="edu__tracks">${e.tracks
