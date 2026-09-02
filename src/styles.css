@@ -1256,14 +1256,12 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .edus { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
 .edu {
-  border-top: 1px solid var(--rule);
-  padding-top: 1.35rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--gap);
   align-items: start;
 }
-.edu + .edu { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+.edu + .edu { margin-top: clamp(1.5rem, 3vw, 2.25rem); border-top: 1px solid var(--rule); padding-top: 1.35rem; }
 .edu__org { display: flex; align-items: center; gap: .9rem; }
 .edu__logo { width: 44px; height: 44px; object-fit: contain; flex: none; }
 .edu__name {
@@ -1274,12 +1272,12 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   line-height: 1.2;
 }
 .edu__tracks { margin-top: 0; }
+.edu__tracks li + li { border-top: 1px solid var(--rule-soft); }
 .edu__tracks li {
   display: grid;
   grid-template-columns: 6.5rem minmax(0, 1fr);
   gap: 1rem;
   padding-block: .8rem;
-  border-top: 1px solid var(--rule-soft);
 }
 .edu__period {
   font-family: var(--font-mono);
