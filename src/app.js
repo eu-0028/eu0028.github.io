@@ -51,7 +51,11 @@
         entry.target.classList.add('is-in');
         io.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px 25% 0px', threshold: 0 });
+    /* Порог нулевой: у высокого блока проценты его собственной высоты
+       складываются в пол-экрана, и он появлялся уже прокрученным. Зона
+       наблюдения чуть выше нижнего края, чтобы подъем начинался в тот
+       момент, когда блок входит в кадр, и читатель успевал его увидеть. */
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
     Array.prototype.forEach.call(rises, function (el) { io.observe(el); });
   }
 

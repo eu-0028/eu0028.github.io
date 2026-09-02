@@ -780,26 +780,6 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   text-wrap: balance;
 }
 
-.contact__rows { margin-top: clamp(2.5rem, 5vw, 4rem); }
-
-.crow {
-  display: grid;
-  grid-template-columns: 2.1rem minmax(0, 1fr);
-  gap: 1.1rem;
-  align-items: baseline;
-  padding-block: 1.35rem;
-  border-bottom: 1px solid var(--rule-soft);
-}
-.crow dt { color: var(--accent); }
-.crow dt .ico { width: 1.6rem; height: 1.6rem; margin-top: 0; }
-.crow dd a, .crow dd span {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1rem + .6vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -.02em;
-}
-.crow dd a { border-bottom: 1px solid var(--rule); transition: color .2s var(--ease), border-color .2s var(--ease); }
-.crow dd a:hover { color: var(--accent); border-color: var(--accent); }
 
 .note {
   font-size: var(--t-small);
@@ -888,8 +868,6 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   .figure { border-left: 0; padding-inline: 0; border-bottom: 1px solid var(--rule); }
   .figure:last-child { border-bottom: 0; }
   .fact, .deflist > div { grid-template-columns: 1fr; gap: .4rem; }
-  /* Контакты остаются строкой: значок слева, адрес справа */
-  .crow { grid-template-columns: 1.9rem minmax(0, 1fr); gap: .85rem; align-items: center; padding-block: 1.1rem; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -920,8 +898,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   .proj, .tl__item, .practice__row, .current__row { break-inside: avoid; }
   .grid2 { grid-template-columns: minmax(0,2fr) minmax(0,10fr); }
   .reveal { opacity: 1 !important; transform: none !important; }
+  .card { break-inside: avoid; }
   a { text-decoration: none; }
-  .crow dd a::after { content: ''; }
 }
 
 /* --- 19. Фотография проекта ------------------------------ */
@@ -1161,19 +1139,48 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .contact .contact__h { max-width: 16ch; }
 
-.contact__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: var(--gap);
-  align-items: start;
-  margin-top: clamp(2rem, 4vw, 3rem);
-}
-.contact .contact__rows { margin-top: 0; }
-/* Первая строка контактов встает вровень с первой строкой текста слева */
-.contact .crow:first-child { padding-top: 0; }
+/* Контакты — два одинаковых блока во всю ширину. Раньше приглашение
+   стояло в узкой колонке слева, а адреса в широкой справа: половина
+   строки пустовала, и две части не читались как одно целое. */
+.contact__lede { margin-top: 1.25rem; max-width: 46ch; }
 
-@media (max-width: 880px) {
-  .contact__grid { grid-template-columns: minmax(0, 1fr); }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+.card {
+  display: block;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--rule);
+  background: var(--paper-card);
+  transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease);
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card__top { display: flex; align-items: center; gap: .65rem; color: var(--accent); }
+.card__top .ico { width: 1.5rem; height: 1.5rem; }
+.card__k {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.card__v {
+  display: block;
+  margin-top: 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1rem + .7vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.card:hover .card__v { color: var(--accent); }
+
+@media (max-width: 700px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
 }
 
 

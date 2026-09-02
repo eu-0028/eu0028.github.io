@@ -301,12 +301,16 @@ function contact(t) {
   <div class="shell">
     <p class="label contact__kicker reveal"><span>${esc(s.n)}</span><span>${esc(s.kicker)}</span></p>
     <h2 class="contact__h reveal">${esc(s.title)}</h2>
-    <div class="contact__grid">
-      <p class="lede reveal">${esc(s.d)}</p>
-      <dl class="contact__rows reveal">
-        <div class="crow"><dt aria-label="${attr(s.tgLabel)}">${icon('telegram-logo')}</dt><dd><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></dd></div>
-        <div class="crow"><dt aria-label="${attr(s.emailLabel)}">${icon('envelope-simple')}</dt><dd><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></dd></div>
-      </dl>
+    <p class="lede contact__lede reveal">${esc(s.d)}</p>
+    <div class="cards reveal">
+      <a class="card" href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">
+        <span class="card__top">${icon('telegram-logo')}<span class="card__k">${esc(s.tgLabel)}</span></span>
+        <span class="card__v">${esc(shared.telegram)}</span>
+      </a>
+      <a class="card" href="mailto:${attr(shared.email)}">
+        <span class="card__top">${icon('envelope-simple')}<span class="card__k">${esc(s.emailLabel)}</span></span>
+        <span class="card__v">${esc(shared.email)}</span>
+      </a>
     </div>
   </div>
 </section>`;
