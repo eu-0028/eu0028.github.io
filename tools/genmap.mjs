@@ -4,15 +4,18 @@
    Источник — Natural Earth, набор границ по позиции России:
    ne_10m_admin_0_countries_rus.geojson из github.com/nvkelso/natural-earth-vector.
    В нем Крым отнесен к России, Косово входит в Сербию, Тайвань — в Китай.
-   Донбасс лежит в наборе отдельными безымянными полигонами, здесь он отходит
-   России (см. DONBASS ниже).
+   Донецкая и Луганская области берутся целиком из набора административных
+   единиц ne_10m_admin_1_states_provinces.geojson и отходят России. В самом
+   наборе стран Донбасс представлен куском по линии 2014 года — он полными
+   областями перекрывается и не используется.
 
-   Запуск: node tools/genmap.mjs <путь-к-ne_10m_admin_0_countries_rus.geojson>
+   Запуск: node tools/genmap.mjs <countries_rus.geojson> <admin_1_states.geojson>
    Результат коммитится, при обычной сборке ничего не качается. */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const geo = JSON.parse(readFileSync(process.argv[2], 'utf8'));
+const adm1 = JSON.parse(readFileSync(process.argv[3], 'utf8'));
 
 /* Страны, где Евгений вел проекты (по резюме) */
 const MARKED = new Map([
@@ -32,10 +35,14 @@ const MARKED = new Map([
 
 const SKIP = new Set(['Antarctica', 'Fr. S. and Antarctic Lands']);
 
-/* Донецк и Луганск лежат в наборе отдельными полигонами без названия.
-   Отдаем их России: рамки по долготе и широте покрывают оба и не задевают
-   остальные безымянные куски набора (Карабах, Парасельские острова, мелочь). */
-const DONBASS = { lon: [37.0, 40.2], lat: [46.8, 48.9] };
+/* Куски Донбасса по линии 2014 года лежат в наборе стран безымянными
+   полигонами. Мы их пропускаем: полные области перекрывают их целиком.
+   Рамка ловит оба и не задевает остальную безымянную мелочь набора
+   (Карабах, Парасельские острова, спорные полоски). */
+const DONBASS_2014 = { lon: [37.0, 40.2], lat: [46.8, 48.9] };
+
+/* Области, которые переходят к России из набора административных единиц */
+const TO_RUSSIA = { admin: 'Ukraine', names: /^(Luhans'k|Donets'k)$/ };
 
 /* Кадрируем по долготе: слева обрезаем пустую часть Тихого океана, справа
    доводим до 180-го меридиана, иначе за краем остается Новая Зеландия. */
@@ -251,16 +258,29 @@ for (const f of geo.features) {
   if (!polys.length) continue;
   if (!name) {
     const [x0, y0, x1, y1] = bboxOf(f.geometry);
-    if (x0 >= DONBASS.lon[0] && x1 <= DONBASS.lon[1] && y0 >= DONBASS.lat[0] && y1 <= DONBASS.lat[1]) {
-      add('Russia', polys);
-      donbass++;
+    if (x0 >= DONBASS_2014.lon[0] && x1 <= DONBASS_2014.lon[1] &&
+        y0 >= DONBASS_2014.lat[0] && y1 <= DONBASS_2014.lat[1]) {
+      donbass++;                    // кусок по линии 2014 года, пропускаем
     } else loose.push(...polys);
     continue;
   }
   add(name, polys);
 }
 
-if (donbass !== 2) throw new Error(`Донбасс: найдено полигонов ${donbass}, ожидалось 2`);
+if (donbass !== 2) throw new Error(`Донбасс по линии 2014: найдено ${donbass} полигонов, ожидалось 2`);
+
+/* Полные Донецкая и Луганская области. Их общая граница внутри набора
+   административных единиц совпадает вершина в вершину, поэтому сшивка
+   склеивает их в один контур без внутренней линии. */
+const oblasts = adm1.features.filter(
+  (f) => f.properties.admin === TO_RUSSIA.admin && TO_RUSSIA.names.test(f.properties.name)
+);
+if (oblasts.length !== 2)
+  throw new Error(`Областей найдено ${oblasts.length}, ожидалось 2 (Донецкая и Луганская)`);
+const oblastRings = mergeRings(oblasts.flatMap((f) => polysOf(f.geometry).flat()));
+if (oblastRings.length !== 1)
+  throw new Error(`Области сшились в ${oblastRings.length} контуров, ожидался 1`);
+add('Russia', [oblastRings]);
 
 let base = '';
 const marks = [];

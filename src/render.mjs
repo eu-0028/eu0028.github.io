@@ -21,14 +21,14 @@ const flag = (code, eager) =>
   `<img class="flag" src="${R}assets/flags/${attr(code)}.svg" alt="" width="27" height="20"${eager ? '' : ' loading="lazy"'} decoding="async">`;
 
 const aside = (n, kicker) =>
-  `<div class="aside"><span class="aside__n">${esc(n)}</span><span class="aside__k">${esc(kicker)}</span></div>`;
+  `<div class="aside"><span class="aside__k">${esc(kicker)}</span></div>`;
 
 /* --- шапка и меню --------------------------------------- */
 
 function header(t, base) {
   const nav = t.nav.map((i) => `<a href="${attr(i.href)}" data-nav>${esc(i.label)}</a>`).join('');
   const drawer = t.nav
-    .map((i) => `<a href="${attr(i.href)}" data-drawer-link><span>${esc(i.n)}</span><span>${esc(i.label)}</span></a>`)
+    .map((i) => `<a href="${attr(i.href)}" data-drawer-link>${esc(i.label)}</a>`)
     .join('');
   return `<header class="hdr" data-hdr>
   <div class="shell hdr__in">
@@ -300,7 +300,7 @@ function contact(t) {
   const s = t.contact;
   return `<section class="band contact${art('contact')}" id="contact">
   <div class="shell">
-    <p class="label contact__kicker reveal"><span>${esc(s.n)}</span><span>${esc(s.kicker)}</span></p>
+    <p class="contact__kicker reveal">${esc(s.kicker)}</p>
     <h2 class="contact__h reveal">${esc(s.title)}</h2>
     <p class="lede contact__lede reveal">${esc(s.d)}</p>
     <div class="cards reveal">

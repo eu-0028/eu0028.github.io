@@ -52,9 +52,9 @@ export const ru = {
   figures: {
     eyebrow: 'Итоги в цифрах',
     items: [
-      { value: '50', unit: 'млн ₽', label: 'Суммарный объем проектов, которые я вел в 2025 году' },
-      { value: '13', unit: 'стран', label: 'Работал с их представителями лично' },
-      { value: '5', unit: 'международных мероприятий', label: 'Суммарно больше 200 участников' },
+      { value: '50', unit: 'млн ₽', label: 'Совокупная стоимость проектов под моим руководством в 2025 году' },
+      { value: '13', unit: 'стран', label: 'С представителями которых работал лично' },
+      { value: '5', unit: 'международных мероприятий', label: 'Проведено с общим охватом 2000+ участников' },
     ],
   },
 
@@ -177,37 +177,37 @@ export const ru = {
     n: '2',
     kicker: 'Направления',
     title: 'Что я делаю',
-    intro: 'Пять направлений. По каждому есть законченные проекты, они разобраны ниже',
+    intro: 'Пять направлений. По каждому из них есть успешные проекты, они разобраны ниже',
     items: [
       {
-        t: 'Сопровождение иностранных делегаций',
-        icon: 'users-three',
-        d: 'От первого письма в министерство до отъезда группы.',
-        b: ['Договоры соорганизатора с правительствами стран', 'Визовая поддержка, размещение, транспорт', 'Программа пребывания делегации', 'Подбор и кураторство атташе', 'Работа с посольствами и государственными ведомствами'],
-      },
-      {
-        t: 'Организация международных мероприятий',
-        icon: 'microphone-stage',
-        d: 'Форумы, конкурсы и акселерационные программы целиком.',
-        b: ['Деловая программа и спикеры', 'Продажи и набор участников', 'Площадка, проживание, подрядчики', 'Прием платежей и договорная база'],
+        t: 'Развитие бизнеса и выход на новые рынки',
+        icon: 'trend-up',
+        d: 'Привлечение клиентов на рынках России и СНГ с измеримыми показателями',
+        b: ['Лидогенерация и холодные продажи', 'База клиентов по странам', 'Исследование рынка и конкурентный анализ', 'Финансовое моделирование и юнит-экономика'],
       },
       {
         t: 'Договоры, закупки и отчетность',
         icon: 'file-text',
-        d: 'Документы проекта, вплоть до отчета по государственному контракту.',
+        d: 'Документы проекта, включая отчетность по государственным контрактам',
         b: ['Отчетность по государственным контрактам', 'Сверка договоров с подрядчиками и первичных документов', 'Агентские договоры, акты, коммерческие предложения', 'Кадровое делопроизводство и комплаенс'],
-      },
-      {
-        t: 'Развитие бизнеса и выход на рынки',
-        icon: 'trend-up',
-        d: 'Привлечение клиентов на рынках России и СНГ с измеримыми показателями.',
-        b: ['Лидогенерация и холодные продажи', 'База клиентов по странам', 'Исследование рынка и конкурентный анализ', 'Финансовое моделирование и юнит-экономика'],
       },
       {
         t: 'Перевод и языковое сопровождение',
         icon: 'translate',
-        d: 'Португальский и английский в дипломатической, юридической, коммерческой и технической лексике.',
+        d: 'Португальский и английский на уровне рабочего инструмента',
         b: ['Последовательный перевод на форумах', 'Перевод договоров, регламентов и уставных документов', 'Техническая документация', 'Деловая и дипломатическая переписка'],
+      },
+      {
+        t: 'Организация международных мероприятий',
+        icon: 'microphone-stage',
+        d: 'Форумы, конкурсы и акселерационные программы',
+        b: ['Деловая программа и спикеры', 'Продажи и набор участников', 'Площадка, проживание, подрядчики', 'Прием платежей и договорная база'],
+      },
+      {
+        t: 'Сопровождение иностранных делегаций',
+        icon: 'users-three',
+        d: 'От первого письма в министерство до отъезда группы',
+        b: ['Договоры соорганизатора с правительствами стран', 'Визовая поддержка, размещение, транспорт', 'Программа пребывания делегации', 'Подбор и кураторство атташе', 'Работа с посольствами и государственными ведомствами'],
       },
     ],
   },
@@ -262,8 +262,8 @@ export const ru = {
     kicker: 'О себе',
     title: 'Как это выглядит на практике',
     paras: [
-      'Я международник со специализацией на Латинской Америке. С бразильской стороной работаю на португальском, без переводчика.',
-      'Проект обычно выглядит так. Из другой страны приезжает делегация, и кто-то должен договориться с ее правительством, оформить визы, поселить людей и провести программу на десять дней. Потом кто-то должен собрать договоры с подрядчиками, свести расходы и сдать отчет так, чтобы его принял государственный заказчик. Обе части делаю я.',
+      'Я специалист-международник, специализирующийся на работе со странами БРИКС и Латинской Америки. С бразильской стороной работаю на португальском, без переводчика.',
+      'Проект обычно выглядит так. Компания хочет зайти на внешний рынок, и кто-то должен найти там партнеров и довести дело до подписанного договора. Потом сделку надо исполнить: провести закупки, рассчитаться с подрядчиками и закрыть отчет, который принимает государственный заказчик. Обе части делаю я.',
     ],
     langTitle: 'Языки',
     langs: [
@@ -277,8 +277,8 @@ export const ru = {
         org: 'МГИМО МИД России',
         logo: 'mgimo',
         tracks: [
-          { period: '2022-2026', role: 'Бакалавриат, «Международные отношения», с отличием' },
-          { period: '2026-2028', role: 'Магистратура, «Экономика»' },
+          { period: '2026-2028', role: 'Магистратура, «Экономика». Международный финансовый анализ, учет и аудит' },
+          { period: '2022-2026', role: 'Бакалавриат, «Международные отношения». Специализация: Бразилия и Латинская Америка' },
         ],
       },
     ],
@@ -344,9 +344,9 @@ export const en = {
   figures: {
     eyebrow: 'The numbers',
     items: [
-      { value: '50', unit: 'mln RUB', label: 'Combined value of the projects I ran in 2025' },
-      { value: '13', unit: 'countries', label: 'Worked with their representatives in person' },
-      { value: '5', unit: 'international events', label: 'More than 200 participants in total' },
+      { value: '50', unit: 'mln RUB', label: 'Combined value of the projects I led in 2025' },
+      { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
+      { value: '5', unit: 'international events', label: 'Held for a combined audience of 2000+' },
     ],
   },
 
@@ -469,37 +469,37 @@ export const en = {
     n: '2',
     kicker: 'Practice',
     title: 'What I do',
-    intro: 'Five areas. Each has completed projects behind it, set out below',
+    intro: 'Five areas. Each one has successful projects behind it, set out below',
     items: [
       {
-        t: 'Running foreign delegations',
-        icon: 'users-three',
-        d: 'From the first letter to a ministry through to the group’s departure.',
-        b: ['Co-organiser agreements with national governments', 'Visa support, accommodation, transport', 'The delegation’s visit programme', 'Selecting and supervising attachés', 'Work with embassies and government agencies'],
-      },
-      {
-        t: 'International event management',
-        icon: 'microphone-stage',
-        d: 'Forums, contests and acceleration programmes, end to end.',
-        b: ['Business programme and speakers', 'Sales and participant recruitment', 'Venue, accommodation, contractors', 'Payment processing and contract base'],
+        t: 'Business development and entry into new markets',
+        icon: 'trend-up',
+        d: 'Client acquisition across Russia and the CIS against measurable targets',
+        b: ['Lead generation and cold outreach', 'Client base built per country', 'Market research and competitive analysis', 'Financial modelling and unit economics'],
       },
       {
         t: 'Contracts, procurement and reporting',
         icon: 'file-text',
-        d: 'Project paperwork, up to the final report under a state contract.',
+        d: 'Project paperwork, including reporting under state contracts',
         b: ['Reporting under state contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acts, commercial proposals', 'HR administration and compliance'],
-      },
-      {
-        t: 'Business development and market entry',
-        icon: 'trend-up',
-        d: 'Client acquisition across Russia and the CIS against measurable targets.',
-        b: ['Lead generation and cold outreach', 'Client base built per country', 'Market research and competitive analysis', 'Financial modelling and unit economics'],
       },
       {
         t: 'Translation and language support',
         icon: 'translate',
-        d: 'Portuguese and English across diplomatic, legal, commercial and technical vocabulary.',
+        d: 'Portuguese and English as working tools',
         b: ['Consecutive interpreting at forums', 'Translation of contracts, regulations and statutory documents', 'Technical documentation', 'Business and diplomatic correspondence'],
+      },
+      {
+        t: 'International event management',
+        icon: 'microphone-stage',
+        d: 'Forums, contests and acceleration programmes',
+        b: ['Business programme and speakers', 'Sales and participant recruitment', 'Venue, accommodation, contractors', 'Payment processing and contract base'],
+      },
+      {
+        t: 'Running foreign delegations',
+        icon: 'users-three',
+        d: 'From the first letter to a ministry through to the group’s departure',
+        b: ['Co-organiser agreements with national governments', 'Visa support, accommodation, transport', 'The delegation’s visit programme', 'Selecting and supervising attachés', 'Work with embassies and government agencies'],
       },
     ],
   },
@@ -554,8 +554,8 @@ export const en = {
     kicker: 'About',
     title: 'What this looks like in practice',
     paras: [
-      'I am an international affairs specialist focused on Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
-      'A project usually looks like this. A delegation arrives from another country, and someone has to reach an agreement with its government, arrange visas, house the group and run a ten-day programme. Then someone has to gather the contractor agreements, reconcile the spending and file a report the state client will accept. I do both halves.',
+      'I am an international affairs specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
+      'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with contractors and close the report that the state client signs off. I do both halves.',
     ],
     langTitle: 'Languages',
     langs: [
@@ -569,8 +569,8 @@ export const en = {
         org: 'MGIMO University',
         logo: 'mgimo',
         tracks: [
-          { period: '2022-2026', role: 'BA, International Relations, with honours' },
-          { period: '2026-2028', role: 'MA, Economics' },
+          { period: '2026-2028', role: 'MA, Economics. International financial analysis, accounting and audit' },
+          { period: '2022-2026', role: 'BA, International Relations. Specialisation: Brazil and Latin America' },
         ],
       },
     ],
