@@ -1363,13 +1363,19 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 /* Страна нарисована одним слоем, а курсор ловит второй, неподвижный.
    Поэтому при подъеме фигура не уезжает из-под курсора и не дребезжит. */
-.ctry {
-  fill: #9fb4e2;
+/* Страна собирается из нескольких кусков: у России это Донбасс, Крым,
+   Калининград и острова. Толстый контур рисуется ПОД заливкой: внутренние
+   стыки заливка закрывает целиком, наружу остается половина линии. Иначе
+   посреди страны шли бы лишние границы. */
+.ctry { pointer-events: none; transition: transform .25s var(--ease), filter .25s var(--ease); }
+.ctry-edge {
+  fill: none;
   stroke: #1e4bad;
-  stroke-width: .6;
-  pointer-events: none;
-  transition: transform .25s var(--ease), fill .25s var(--ease), filter .25s var(--ease);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  transition: stroke .25s var(--ease);
 }
+.ctry-fill { fill: #9fb4e2; stroke: none; transition: fill .25s var(--ease); }
 .ctry-hit { fill: transparent; stroke: none; pointer-events: fill; cursor: pointer; }
 /* Нажатие по стране ничего не открывает, так что и рамки вокруг нее быть
    не должно: браузер иначе обводит фигуру черным прямоугольником. */
@@ -1380,17 +1386,23 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .cg:hover .ctry,
 .cg.is-hot .ctry {
   transform: translateY(-7px);
-  fill: var(--accent);
   filter: drop-shadow(0 7px 9px rgba(18, 21, 26, .4));
 }
+.cg:hover .ctry-fill, .cg.is-hot .ctry-fill { fill: var(--accent); }
+.cg:hover .ctry-edge, .cg.is-hot .ctry-edge { stroke: var(--accent); }
+
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .ctry { fill: #2f4f96; stroke: #7ea3f0; }
+  :root:not([data-theme='light']) .ctry-fill { fill: #2f4f96; }
+  :root:not([data-theme='light']) .ctry-edge { stroke: #7ea3f0; }
   :root:not([data-theme='light']) .cg:hover .ctry,
-  :root:not([data-theme='light']) .cg.is-hot .ctry { fill: #7ea3f0; filter: drop-shadow(0 7px 10px rgba(0, 0, 0, .6)); }
+  :root:not([data-theme='light']) .cg.is-hot .ctry { filter: drop-shadow(0 7px 10px rgba(0, 0, 0, .6)); }
+  :root:not([data-theme='light']) .cg:hover .ctry-fill,
+  :root:not([data-theme='light']) .cg.is-hot .ctry-fill { fill: #7ea3f0; }
 }
-:root[data-theme='dark'] .ctry { fill: #2f4f96; stroke: #7ea3f0; }
-:root[data-theme='dark'] .cg:hover .ctry,
-:root[data-theme='dark'] .cg.is-hot .ctry { fill: #7ea3f0; }
+:root[data-theme='dark'] .ctry-fill { fill: #2f4f96; }
+:root[data-theme='dark'] .ctry-edge { stroke: #7ea3f0; }
+:root[data-theme='dark'] .cg:hover .ctry-fill,
+:root[data-theme='dark'] .cg.is-hot .ctry-fill { fill: #7ea3f0; }
 
 @media (prefers-reduced-motion: reduce) {
   .cg:hover .ctry, .cg.is-hot .ctry { transform: none; }

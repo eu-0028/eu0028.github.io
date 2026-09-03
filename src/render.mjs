@@ -162,7 +162,8 @@ function geo(t) {
     .join('');
   const groups = s.items
     .map(
-      (it, i) => `<g class="cg" data-i="${i}"><use class="ctry" href="#c${i}"/><use class="ctry-hit" href="#c${i}"><title>${esc(it.name)}</title></use></g>`
+      (it, i) =>
+        `<g class="cg" data-i="${i}"><g class="ctry"><use class="ctry-edge" href="#c${i}"/><use class="ctry-fill" href="#c${i}"/></g><use class="ctry-hit" href="#c${i}"><title>${esc(it.name)}</title></use></g>`
     )
     .join('');
 
