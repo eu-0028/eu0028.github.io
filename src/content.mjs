@@ -18,7 +18,7 @@ export const ru = {
   homeHref: '/',
   title: 'Евгений Шутов. Международные проекты и делегации, португальский C1',
   description:
-    'Специалист-международник по странам БРИКС и Латинской Америке. Английский C2, португальский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
+    'Специалист-международник по странам БРИКС и Латинской Америки. Португальский и английский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
   ogLocale: 'ru_RU',
 
   brand: 'Шутов',
@@ -43,7 +43,7 @@ export const ru = {
     leadEm: 'состоялся',
     leadTail: '',
     para:
-      'Веду переговоры на трех языках и решаю задачи бизнеса под ключ. Работаю со странами БРИКС и Латинской Америкой.',
+      'Веду переговоры на трех языках и решаю задачи бизнеса под ключ. Работаю со странами БРИКС и Латинской Америки.',
     ctaPrimary: 'Написать',
     ctaSecondary: 'Смотреть проекты',
     portraitAlt: 'Евгений Шутов',
@@ -73,9 +73,9 @@ export const ru = {
         d: 'Пришел на проект меньше чем за месяц до конкурса как специалист со знанием португальского языка. Конкурс проводился по указу Президента при поддержке МИД России, зал на 20 000 мест.',
         b: [
           'Пять национальных делегаций общей численностью 45 человек: Бразилия, Мадагаскар, Кения, Эфиопия, ОАЭ.',
-          'Договоры соорганизатора с правительствами стран, визовая поддержка, размещение, транспорт и десятидневная программа пребывания.',
+          'Отвечал за договоры соорганизатора с правительствами стран, визовую поддержку, размещение, транспорт и программу пребывания на десять дней.',
           'Отобрал и курировал пять атташе делегаций, по одному на страну.',
-          'Всю работу с бразильской стороной вел на португальском: артист, продюсерская команда, телевещатель, министерство культуры.',
+          'С бразильской стороной работал на португальском: артист, продюсерская команда, телевещатель, министерство культуры.',
           'Самостоятельно организовал трансляцию конкурса на бразильском телевидении. Подготовил и перевел пакет документов для вещателя: устав организации, кадровые документы, соглашения и меморандумы.',
         ],
         m: [
@@ -92,11 +92,11 @@ export const ru = {
         sub: 'Государственный контракт: отчетность и финансовый аудит',
         meta: 'сентябрь—декабрь 2025 · программа в Омске',
         role: 'Руководитель отчетности по государственному контракту',
-        d: 'Заказчик — Дирекция Всемирного фестиваля молодежи. Программа прошла 19–23 августа 2025 года, в ней участвовали больше 100 человек из всех десяти государств — членов ШОС.',
+        d: 'Заказчик — Дирекция Всемирного фестиваля молодежи. Программа прошла 19–23 августа 2025 года, в ней участвовали больше 100 человек из всех десяти государств ШОС.',
         b: [
           'Итоговый отчет больше чем на 3 000 страниц: собрал, структурировал и оформил учебные материалы по 25 воркшоп-сессиям.',
-          'Конспекты и раздаточные материалы примерно для 12 сессий написал с нуля, потому что исходных материалов не существовало.',
-          'Единолично вел финансовую отчетность: сверил около 10 договоров с подрядчиками по переводу, кейтерингу, персоналу и логистике.',
+          'Конспекты и раздаточные материалы для 12 сессий написал с нуля, потому что исходных материалов не существовало.',
+          'Единолично вел финансовую отчетность: сверил 10 договоров с подрядчиками по переводу, кейтерингу, персоналу и логистике.',
           'Согласовал корректировки документов с поставщиками и подготовил полностью сбалансированный отчет о расходах на 9 млн рублей с первичными документами и внутренними приказами.',
         ],
         m: [
@@ -115,12 +115,12 @@ export const ru = {
         role: 'Соорганизатор',
         d: 'Программа прошла 4–5 декабря 2025 года, в ней участвовали больше 60 человек. Открывали ее председатель Комитета Государственной Думы по международным делам Леонид Слуцкий и посол Саудовской Аравии.',
         b: [
-          'Продажи и привлечение: около 200 звонков и порядка 1 000 показов в Telegram и в интернете.',
+          'Продажи и привлечение: 200 звонков и около 1 000 показов в Telegram и в интернете.',
           'Привлек 30 платных участников и организовал 15 деловых встреч между российскими и иностранными компаниями.',
           'Отобрал 9 российских проектов для питч-сессии; три из них получили прямую инвестиционную поддержку и освобождение от платы за коммерческую лицензию от венчурного фонда Value Makers Studio.',
           'Согласовал договоры по площадке и проживанию с московскими отелями и добился ставок ниже рыночных и дополнительных скидок.',
           'Настроил прием платежей, подготовил шаблоны коммерческих предложений и договоры оказания услуг.',
-          'Вел всю переписку и переговоры с приехавшей саудовской делегацией на английском языке.',
+          'Переписку и переговоры с приехавшей саудовской делегацией вел на английском.',
         ],
         m: [
           { v: '60+', l: 'участников' },
@@ -133,16 +133,16 @@ export const ru = {
         t: 'RAKEZ',
         img: 'work-rakez.jpg',
         imgAlt: 'Работа по проекту RAKEZ',
-        sub: 'Экономическая зона Рас-эль-Хайма, ОАЭ · рынки России и СНГ',
+        sub: 'Экономическая зона Рас-эль-Хайма, ОАЭ',
         meta: 'январь—май 2026',
-        role: 'Привлечение клиентов и единая точка контакта',
-        d: 'Отвечал за привлечение клиентов на рынках России и СНГ для свободной экономической зоны ОАЭ и был единой точкой контакта для всех российских и СНГ-контрагентов от лица RAKEZ.',
+        role: 'Привлечение клиентов на рынках России и СНГ',
+        d: 'Отвечал за привлечение клиентов для свободной экономической зоны ОАЭ на рынках России и СНГ. Все обращения контрагентов шли через меня.',
         b: [
-          'Охватил около 677 предприятий в России, Узбекистане и Казахстане при плане 300-400 за три месяца.',
-          'Получил около 313 откликов с первичным интересом при плановом показателе 300.',
-          'Разработал и провел кампанию холодных продаж: 512 отобранных предприятий, около 275 содержательных ответов.',
+          'Охватил 677 предприятий в России, Узбекистане и Казахстане при плане 300–400 за три месяца.',
+          'Получил 313 откликов с первичным интересом при плане 300.',
+          'Разработал и провел кампанию холодных продаж: 512 отобранных предприятий, 275 содержательных ответов.',
           'Выстроил отдельную базу клиентов по каждой из трех стран.',
-          'Довел трех потенциальных клиентов до предварительного коммерческого расчета через ознакомительные звонки; вел шесть теплых контактов, включая AKFA Group из Узбекистана, где работает больше 30 000 человек.',
+          'Довел трех потенциальных клиентов до стадии коммерческого предложения через установочные звонки; вел шесть теплых контактов, включая AKFA Group из Узбекистана, где работает больше 30 000 человек.',
         ],
         m: [
           { v: '677', l: 'предприятий охвачено' },
@@ -158,9 +158,9 @@ export const ru = {
         sub: 'Международный деловой форум',
         meta: 'январь—апрель 2026 · отель Soluxe, Москва',
         role: 'Руководитель продаж форума',
-        d: 'Руководил продажами международного делового форума 25–26 апреля 2026 года со стороны Consult Invest ITIC как партнера-исполнителя AGORA.',
+        d: 'Руководил продажами форума 25–26 апреля 2026 года со стороны Consult Invest ITIC, партнера-исполнителя AGORA.',
         b: [
-          'Вел всю переписку и общение с иностранными гостями на английском языке, включая индийскую и южноафриканскую делегации.',
+          'Общался с иностранными гостями на английском, включая индийскую и южноафриканскую делегации.',
           'Нашел четырех заинтересованных предпринимателей на площадке форума.',
           'Форум освещали «Россия-1», НТВ и RuNews24.',
         ],
@@ -188,7 +188,7 @@ export const ru = {
       {
         t: 'Договоры, закупки и отчетность',
         icon: 'file-text',
-        d: 'Документы проекта, включая отчетность по государственным контрактам',
+        d: 'Готовлю сам, в том числе на иностранных языках',
         b: ['Отчетность по государственным контрактам', 'Сверка договоров с подрядчиками и первичных документов', 'Агентские договоры, акты, коммерческие предложения', 'Кадровое делопроизводство и комплаенс'],
       },
       {
@@ -242,17 +242,17 @@ export const ru = {
       {
         t: 'Международный фестиваль молодежи 2026',
         meta: 'Екатеринбург · 11–17 сентября 2026',
-        d: 'Координирую делегацию Бразилии в детской программе фестиваля: 10 000 участников из 191 страны, из них 1 000 подростков от 14 до 17 лет. Веду всю переписку с бразильской стороной на португальском, собираю и проверяю документы участников, отвечаю за логистику и сопровождение группы в России.',
+        d: 'Координирую делегацию Бразилии в детской программе фестиваля: 10 000 участников из 191 страны, из них 1 000 подростков от 14 до 17 лет. Веду переписку с бразильской стороной на португальском, собираю и проверяю документы участников, отвечаю за логистику и сопровождение группы в России.',
       },
       {
         t: '«Наше поколение» 2026',
         meta: 'Международный детский музыкальный конкурс',
-        d: 'Перевел на португальский язык весь пакет конкурсных документов: регламент, брифинг для делегаций, анкету участника и требования к конкурсным номерам. Договорился об участии бразильского члена жюри и подобрал исполнителя, который представит страну в финале.',
+        d: 'Перевел на португальский весь пакет конкурсных документов: регламент, брифинг для делегаций, анкету участника и требования к номерам. Договорился об участии бразильского члена жюри и подобрал исполнителя, который представит страну в финале.',
       },
       {
         t: 'Интервидение-2026',
         meta: 'Эр-Рияд, Саудовская Аравия · декабрь 2026',
-        d: 'Занимаюсь организацией конкурса. В 2025 году провел на нем делегации пяти стран.',
+        d: 'В 2025 году провел на конкурсе делегации пяти стран, сейчас участвую в подготовке следующего.',
       },
     ],
   },
@@ -267,8 +267,8 @@ export const ru = {
     ],
     langTitle: 'Языки',
     langs: [
-      { flag: 'gb', l: 'Английский', cap: 'C2', lvl: 4 },
-      { flag: 'br', l: 'Португальский', cap: 'C1', lvl: 3 },
+      { flag: 'br', l: 'Португальский', cap: 'C1', lvl: 4 },
+      { flag: 'gb', l: 'Английский', cap: 'C1', lvl: 4 },
       { flag: 'es', l: 'Испанский', cap: 'B1', lvl: 2 },
     ],
     eduTitle: 'Образование',
@@ -277,8 +277,8 @@ export const ru = {
         org: 'МГИМО МИД России',
         logo: 'mgimo',
         tracks: [
-          { period: '2026-2028', role: 'Магистратура, «Экономика». Международный финансовый анализ, учет и аудит' },
-          { period: '2022-2026', role: 'Бакалавриат, «Международные отношения». Специализация: Бразилия и Латинская Америка' },
+          { period: '2026-2028', role: 'Магистратура, «Экономика»', note: 'Международный финансовый анализ, учет и аудит' },
+          { period: '2022-2026', role: 'Бакалавриат, «Международные отношения»', note: 'Специализация: Бразилия и Латинская Америка' },
         ],
       },
     ],
@@ -310,7 +310,7 @@ export const en = {
   homeHref: '/en/',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
-    'International affairs specialist for BRICS and Latin America. English at C2, Portuguese at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
+    'International affairs specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
   ogLocale: 'en_US',
 
   brand: 'Shutov',
@@ -365,9 +365,9 @@ export const en = {
         d: 'I joined the project less than a month before the contest as a Portuguese-speaking specialist. The contest was held under presidential decree with the support of the Russian Foreign Ministry, in a 20,000-seat arena.',
         b: [
           'Five national delegations totalling 45 people: Brazil, Madagascar, Kenya, Ethiopia and the UAE.',
-          'Co-organiser agreements with national governments, visa support, accommodation, transport and a ten-day visit programme.',
+          'Handled the co-organiser agreements with national governments, visa support, accommodation, transport and the ten-day visit programme.',
           'Selected and supervised five delegation attachés, one per country.',
-          'Conducted all work with the Brazilian side in Portuguese: the artist, the production team, the broadcaster and the ministry of culture.',
+          'With the Brazilian side I worked in Portuguese: the artist, the production team, the broadcaster and the ministry of culture.',
           'Arranged the broadcast of the contest on Brazilian television single-handedly. Prepared and translated the broadcaster’s document package: the organisation’s charter, HR documents, agreements and memoranda.',
         ],
         m: [
@@ -384,18 +384,18 @@ export const en = {
         sub: 'State contract: reporting and financial audit',
         meta: 'September-December 2025 · programme held in Omsk',
         role: 'Head of reporting under the state contract',
-        d: 'Client: the Directorate of the World Youth Festival. The programme ran on 19-23 August 2025, with more than 100 participants from all ten SCO member states.',
+        d: 'Client: the Directorate of the World Youth Festival. The programme ran on 19-23 August 2025, with more than 100 participants from all ten SCO states.',
         b: [
           'Final report of more than 3,000 pages: collected, structured and formatted training materials across 25 workshop sessions.',
-          'Wrote summaries and handouts for roughly 12 sessions from scratch, because no source materials existed.',
-          'Handled financial reporting single-handedly: reconciled around 10 contractor agreements covering interpreters, catering, staff and logistics.',
+          'Wrote summaries and handouts for 12 sessions from scratch, because no source materials existed.',
+          'Handled financial reporting single-handedly: reconciled 10 contractor agreements covering interpreters, catering, staff and logistics.',
           'Agreed document corrections with suppliers and produced a fully balanced expense report of 9 million roubles, backed by source documents and internal orders.',
         ],
         m: [
           { v: '3,000+', l: 'pages of report' },
           { v: '9 mln RUB', l: 'reconciled' },
           { v: '25', l: 'workshop sessions' },
-          { v: '10', l: 'SCO member states' },
+          { v: '10', l: 'SCO states' },
         ],
       },
       {
@@ -407,12 +407,12 @@ export const en = {
         role: 'Co-organiser',
         d: 'The programme ran on 4-5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and the Ambassador of Saudi Arabia.',
         b: [
-          'Sales and outreach: around 200 calls and some 1,000 impressions across Telegram and the web.',
+          'Sales and outreach: 200 calls and about 1,000 impressions across Telegram and the web.',
           'Brought in 30 paying participants and arranged 15 business meetings between Russian and foreign companies.',
           'Selected 9 Russian projects for the pitch session; three received direct investment support and a commercial licence fee waiver from the venture fund Value Makers Studio.',
           'Negotiated venue and accommodation contracts with Moscow hotels, securing below-market rates and additional discounts.',
           'Set up payment processing and prepared commercial proposal templates and service agreements.',
-          'Handled all correspondence and negotiation with the visiting Saudi delegation in English.',
+          'Correspondence and negotiation with the visiting Saudi delegation ran in English.',
         ],
         m: [
           { v: '60+', l: 'participants' },
@@ -425,16 +425,16 @@ export const en = {
         t: 'RAKEZ',
         img: 'work-rakez.jpg',
         imgAlt: 'RAKEZ project work',
-        sub: 'Ras Al Khaimah Economic Zone, UAE · Russia and CIS markets',
+        sub: 'Ras Al Khaimah Economic Zone, UAE',
         meta: 'January-May 2026',
-        role: 'Client acquisition and single point of contact',
-        d: 'Responsible for client acquisition across Russia and the CIS for the UAE free economic zone, and the single point of contact for all Russian and CIS counterparties on behalf of RAKEZ.',
+        role: 'Client acquisition across Russia and the CIS',
+        d: 'Responsible for client acquisition for the UAE free economic zone across Russia and the CIS. Every counterparty enquiry came through me.',
         b: [
-          'Reached around 677 companies across Russia, Uzbekistan and Kazakhstan against a plan of 300-400 over three months.',
-          'Generated around 313 responses expressing initial interest against a target of 300.',
-          'Designed and ran a cold outreach campaign: 512 selected companies, around 275 substantive replies.',
+          'Reached 677 companies across Russia, Uzbekistan and Kazakhstan against a plan of 300–400 over three months.',
+          'Generated 313 responses expressing initial interest against a target of 300.',
+          'Designed and ran a cold outreach campaign: 512 selected companies, 275 substantive replies.',
           'Built a separate client base for each of the three countries.',
-          'Advanced three prospects to preliminary quotation through discovery calls; maintained six warm contacts, including AKFA Group in Uzbekistan, which has more than 30,000 employees.',
+          'Advanced three prospects to the commercial proposal stage through discovery calls; maintained six warm contacts, including AKFA Group in Uzbekistan, which has more than 30,000 employees.',
         ],
         m: [
           { v: '677', l: 'companies reached' },
@@ -450,9 +450,9 @@ export const en = {
         sub: 'International business forum',
         meta: 'January-April 2026 · Soluxe Hotel, Moscow',
         role: 'Head of forum sales',
-        d: 'Led sales for the international business forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
+        d: 'Led sales for the forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
         b: [
-          'Handled all correspondence and communication with foreign guests in English, including the Indian and South African delegations.',
+          'Spoke with foreign guests in English, including the Indian and South African delegations.',
           'Found four interested entrepreneurs at the forum itself.',
           'The forum was covered by Rossiya-1, NTV and RuNews24.',
         ],
@@ -480,7 +480,7 @@ export const en = {
       {
         t: 'Contracts, procurement and reporting',
         icon: 'file-text',
-        d: 'Project paperwork, including reporting under state contracts',
+        d: 'I draft them myself, foreign-language documents included',
         b: ['Reporting under state contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acts, commercial proposals', 'HR administration and compliance'],
       },
       {
@@ -534,7 +534,7 @@ export const en = {
       {
         t: 'International Youth Festival 2026',
         meta: 'Yekaterinburg · 11-17 September 2026',
-        d: 'Coordinating the Brazilian delegation within the festival’s children’s programme: 10,000 participants from 191 countries, including 1,000 teenagers aged 14 to 17. All correspondence with the Brazilian side in Portuguese, collection and verification of participant documents, logistics and accompaniment of the group in Russia.',
+        d: 'Coordinating the Brazilian delegation within the festival’s children’s programme: 10,000 participants from 191 countries, including 1,000 teenagers aged 14 to 17. Correspondence with the Brazilian side in Portuguese, collection and verification of participant documents, logistics and accompaniment of the group in Russia.',
       },
       {
         t: 'Our Generation 2026',
@@ -544,7 +544,7 @@ export const en = {
       {
         t: 'Intervision 2026',
         meta: 'Riyadh, Saudi Arabia · December 2026',
-        d: 'Working on the organisation of the contest. In 2025 I ran five national delegations through it.',
+        d: 'In 2025 I ran five national delegations through the contest; now I am helping prepare the next one.',
       },
     ],
   },
@@ -559,8 +559,8 @@ export const en = {
     ],
     langTitle: 'Languages',
     langs: [
-      { flag: 'gb', l: 'English', cap: 'C2', lvl: 4 },
-      { flag: 'br', l: 'Portuguese', cap: 'C1', lvl: 3 },
+      { flag: 'br', l: 'Portuguese', cap: 'C1', lvl: 4 },
+      { flag: 'gb', l: 'English', cap: 'C1', lvl: 4 },
       { flag: 'es', l: 'Spanish', cap: 'B1', lvl: 2 },
     ],
     eduTitle: 'Education',
@@ -569,8 +569,8 @@ export const en = {
         org: 'MGIMO University',
         logo: 'mgimo',
         tracks: [
-          { period: '2026-2028', role: 'MA, Economics. International financial analysis, accounting and audit' },
-          { period: '2022-2026', role: 'BA, International Relations. Specialisation: Brazil and Latin America' },
+          { period: '2026-2028', role: 'MA, Economics', note: 'International financial analysis, accounting and audit' },
+          { period: '2022-2026', role: 'BA, International Relations', note: 'Specialisation: Brazil and Latin America' },
         ],
       },
     ],

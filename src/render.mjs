@@ -10,6 +10,7 @@ const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10
 let R = '';                                   // префикс до корня сайта
 let ICONS = {};
 let BACKDROPS = new Set();
+let MAP = 'map-base.svg';
 /* Фоновый снимок появляется, только если файл действительно лежит в assets/img */
 const art = (id) => {
   const f = [...BACKDROPS].find((n) => n.startsWith('bg-' + id + '.'));
@@ -192,7 +193,7 @@ function geo(t) {
     <figure class="map map--bleed reveal">
       <div class="map__scroll">
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
-          <img src="${R}assets/map-base.svg" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
+          <img src="${R}assets/${MAP}" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
           <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" focusable="false">
             <defs>${defs}</defs>
             ${groups}
@@ -270,7 +271,10 @@ function about(t, logos) {
           <p class="edu__name">${esc(e.org)}</p>
         </div>
         <ul class="edu__tracks">${e.tracks
-          .map((k) => `<li><span class="edu__period num">${esc(k.period)}</span><span class="edu__role">${esc(k.role)}</span></li>`)
+          .map(
+            (k) =>
+              `<li><span class="edu__period num">${esc(k.period)}</span><span class="edu__role">${esc(k.role)}${k.note ? `<span class="edu__note">${esc(k.note)}</span>` : ''}</span></li>`
+          )
           .join('')}</ul>
       </div>`
     )
@@ -368,11 +372,12 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css' } = {}) {
+export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
   BACKDROPS = backdrops;
+  MAP = mapName;
   const base = t.lang === 'en' ? 'index.html' : 'index.html';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
 
@@ -381,6 +386,8 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Метка сборки: по ней сразу видно, какая версия реально лежит на сервере -->
+<meta name="build" content="${attr(cssName)} ${attr(mapName)}">
 <title>${esc(t.title)}</title>
 <meta name="description" content="${attr(t.description)}">
 <meta name="author" content="${attr(t.hero.name)}">

@@ -45,21 +45,27 @@ await mkdir('assets/img', { recursive: true });
 const hash = (txt) => createHash('sha1').update(txt).digest('hex').slice(0, 8);
 
 for (const f of await readdir('assets')) {
-  if (/^(styles|app|fonts)\.[0-9a-f]{8}\.(css|js)$/.test(f)) await rm(`assets/${f}`);
+  if (/^(styles|app|fonts|map-base)\.[0-9a-f]{8}\.(css|js|svg)$/.test(f)) await rm(`assets/${f}`);
 }
 
 const cssRaw = await readFile('src/styles.css', 'utf8');
 const jsRaw = await readFile('src/app.js', 'utf8');
 const fontsRaw = await readFile('assets/fonts.css', 'utf8');
+/* Фон карты обязан быть с хешем: он в одной системе координат с контурами
+   стран, которые вшиты в разметку. Старый фон из кеша под новыми контурами
+   съезжает — страны оказываются не на своих местах. */
+const mapRaw = await readFile('assets/map-base.svg', 'utf8');
 
 const cssName = `styles.${hash(cssRaw)}.css`;
 const jsName = `app.${hash(jsRaw)}.js`;
 const fontsName = `fonts.${hash(fontsRaw)}.css`;
+const mapName = `map-base.${hash(mapRaw)}.svg`;
 
 await writeFile(`assets/${cssName}`, cssRaw);
 await writeFile(`assets/${jsName}`, jsRaw);
 await writeFile(`assets/${fontsName}`, fontsRaw);
-const assetNames = { cssName, jsName, fontsName };
+await writeFile(`assets/${mapName}`, mapRaw);
+const assetNames = { cssName, jsName, fontsName, mapName };
 
 await copyFile('src/favicon.svg', 'favicon.svg');
 
@@ -106,7 +112,7 @@ await writeFile('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${shared.doma
 
 const fonts = (await readdir('assets/fonts')).length;
 console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, robots.txt`);
-console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}`);
+console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}, ${mapName}`);
 console.log(`Шрифтов: ${fonts} · Резюме PDF: ${hasCv ? 'подключено' : 'нет файла assets/shutov-cv.pdf — кнопка скрыта'}`);
 console.log(`Портрет: ${hasPortrait ? 'подключено' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
 console.log(`Фоновые снимки: ${backdrops.size ? [...backdrops].join(', ') : 'нет — секции без фона'}`);

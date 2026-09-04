@@ -1286,7 +1286,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   color: var(--accent);
   padding-top: .2rem;
 }
-.edu__role { color: var(--ink-2); text-wrap: pretty; }
+.edu__role { color: var(--ink); text-wrap: pretty; }
+.edu__note { display: block; margin-top: .25rem; color: var(--ink-3); font-size: var(--t-small); }
 
 @media (max-width: 760px) {
   .edu { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
