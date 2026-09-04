@@ -160,8 +160,14 @@
   if (geoList) {
     var tags = document.querySelectorAll('.tag');
     var groups = document.querySelectorAll('.cg');
+    /* Ищем по data-i, а не по номеру в разметке: страны на карте выложены
+       по площади, чтобы мелкие не уходили под крупные соседние. */
+    var byIndex = function (list, i) {
+      for (var k = 0; k < list.length; k++) if (list[k].getAttribute('data-i') === String(i)) return list[k];
+      return null;
+    };
     var setHot = function (i, on) {
-      [tags[i], groups[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
+      [byIndex(tags, i), byIndex(groups, i), geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
         if (el) el.classList.toggle('is-hot', on);
       });
     };

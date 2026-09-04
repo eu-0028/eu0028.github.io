@@ -149,11 +149,22 @@ function geo(t) {
 
   /* Вместо номерных меток — подпись страны, которая всплывает при наведении.
      Нумерация заставляла сверять карту со списком и выглядела как сноски. */
+  /* У крупной страны подпись ложится на нее, у мелкой встает над контуром:
+     иначе плашка полностью накрывает то, что называет. */
+  const bbox = (d) => {
+    const pts = [...d.matchAll(/(-?[0-9.]+) (-?[0-9.]+)/g)];
+    if (!pts.length) return null;
+    const xs = pts.map((m) => +m[1]), ys = pts.map((m) => +m[2]);
+    return { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
+  };
   const tags = s.items
     .map((it, i) => {
       const m = byKey.get(it.key);
       if (!m) return '';
-      return `<span class="tag" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%" aria-hidden="true">${esc(it.name)}</span>`;
+      const bb = bbox(m.d);
+      const small = bb && (bb.x1 - bb.x0 < 70 || bb.y1 - bb.y0 < 45);
+      const top = small ? (bb.y0 / mapMeta.h) * 100 : m.centre[1];
+      return `<span class="tag${small ? ' tag--above' : ''}" data-i="${i}" style="left:${m.centre[0]}%;top:${top.toFixed(2)}%" aria-hidden="true">${esc(it.name)}</span>`;
     })
     .join('');
 
@@ -163,22 +174,28 @@ function geo(t) {
       return m ? `<path id="c${i}" d="${m.d}"/>` : '';
     })
     .join('');
+  /* Мелкие страны рисуются последними, то есть поверх крупных. Иначе
+     поднятый курсором Узбекистан уходил под Казахстан, который стоял в
+     разметке ниже. Порядок в списке от этого не зависит: он хранится
+     в data-i, а не в положении элемента. */
+  const bboxArea = (d) => {
+    const pts = [...d.matchAll(/(-?[0-9.]+) (-?[0-9.]+)/g)];
+    if (!pts.length) return 0;
+    const xs = pts.map((m) => +m[1]), ys = pts.map((m) => +m[2]);
+    return (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys));
+  };
   const groups = s.items
+    .map((it, i) => ({ it, i, area: byKey.has(it.key) ? bboxArea(byKey.get(it.key).d) : 0 }))
+    .sort((a, b) => b.area - a.area)
     .map(
-      (it, i) =>
+      ({ it, i }) =>
         `<g class="cg" data-i="${i}"><g class="ctry"><use class="ctry-edge" href="#c${i}"/><use class="ctry-fill" href="#c${i}"/></g><use class="ctry-hit" href="#c${i}"><title>${esc(it.name)}</title></use></g>`
     )
     .join('');
 
   const rows = s.items
     .map(
-      (it, i) => `<li class="geo__row reveal" data-i="${i}">
-        ${flag(it.flag)}
-        <div>
-          <p class="geo__name">${esc(it.name)}</p>
-          <p class="geo__note">${esc(it.note)}</p>
-        </div>
-      </li>`
+      (it, i) => `<li class="geo__row reveal" data-i="${i}">${flag(it.flag)}<span class="geo__name">${esc(it.name)}</span></li>`
     )
     .join('');
 

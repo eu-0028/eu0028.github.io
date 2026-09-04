@@ -942,6 +942,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   transition: opacity .18s var(--ease), transform .18s var(--ease);
 }
 .tag.is-hot { opacity: 1; transform: translate(-50%, -50%) translateY(-9px); }
+.tag--above { transform: translate(-50%, -100%) translateY(2px); }
+.tag--above.is-hot { transform: translate(-50%, -100%) translateY(-14px); }
 
 .key {
   display: inline-flex;
@@ -972,10 +974,10 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .geo { margin-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--rule); }
 .geo__row {
   position: relative;
-  display: grid;
-  grid-template-columns: 27px minmax(0, 1fr);
-  gap: .9rem;
-  padding: .95rem .5rem .95rem .9rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .8rem .5rem .8rem .9rem;
   border-bottom: 1px solid var(--rule-soft);
   transition: background .2s var(--ease);
 }
@@ -992,13 +994,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 .geo__row.is-hot::before { transform: scaleY(1); }
 .geo__row.is-hot { background: color-mix(in srgb, var(--accent) 6%, transparent); }
-.geo__row .flag { margin-top: .2rem; }
 .geo__name { font-weight: 600; }
-.geo__note { color: var(--ink-3); font-size: var(--t-small); margin-top: .15rem; text-wrap: pretty; }
-
-@media (min-width: 920px) {
-  .geo { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap); }
-}
 
 /* --- 21. Диаграмма занятости ----------------------------- */
 
@@ -1116,9 +1112,12 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 .map, .map * { -webkit-user-select: none; user-select: none; }
 
-.geo--wide { margin-top: clamp(2rem, 4vw, 3rem); }
-@media (min-width: 720px)  { .geo--wide { grid-template-columns: 1fr 1fr; display: grid; column-gap: var(--gap); } }
-@media (min-width: 1100px) { .geo--wide { grid-template-columns: repeat(3, 1fr); } }
+/* Двенадцать стран без пояснений — это указатель, а не список. Колонок
+   всегда столько, чтобы строки делились нацело: 2, 3 или 4. */
+.geo--wide { margin-top: clamp(2rem, 4vw, 3rem); display: grid; column-gap: clamp(1rem, 2vw, 2rem); }
+@media (min-width: 560px)  { .geo--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px)  { .geo--wide { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .geo--wide { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 .contact__kicker {
   display: inline-block;
@@ -1215,7 +1214,6 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 
 .geo__row { grid-template-columns: 2.5rem auto minmax(0, 1fr); align-items: start; }
-.geo__row .flag { margin-top: .2rem; }
 
 /* --- 26. Языки ------------------------------------------- */
 
