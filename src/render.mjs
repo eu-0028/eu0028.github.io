@@ -46,9 +46,8 @@ function header(t, base) {
 
 /* --- обложка -------------------------------------------- */
 
-function hero(t, hasCv, hasPortrait) {
+function hero(t, hasPortrait) {
   const h = t.hero;
-  const cv = hasCv ? `<a class="btn btn--ghost" href="${R}assets/shutov-cv.pdf" download>${esc(t.cvLabel)}</a>` : '';
   return `<section class="hero">
   <div class="shell">
     <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
@@ -59,7 +58,6 @@ function hero(t, hasCv, hasPortrait) {
         <div class="hero__cta reveal">
           <a class="btn" href="#contact">${esc(h.ctaPrimary)}${arrow}</a>
           <a class="btn btn--ghost" href="#work">${esc(h.ctaSecondary)}</a>
-          ${cv}
         </div>
       </div>
       ${hasPortrait ? `<div class="hero__media">
@@ -397,7 +395,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasCv = false, hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
+export function page(t, { hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
@@ -448,7 +446,7 @@ ${jsonLd(t)}
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${header(t, base)}
 <main id="main">
-${hero(t, hasCv, hasPortrait)}
+${hero(t, hasPortrait)}
 ${about(t, logos)}
 ${practice(t)}
 ${work(t, images)}

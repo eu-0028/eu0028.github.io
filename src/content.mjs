@@ -25,7 +25,6 @@ export const ru = {
   skip: 'Перейти к содержанию',
   menu: 'Меню',
   close: 'Закрыть',
-  cvLabel: 'Резюме PDF',
 
   nav: [
     { href: '#about', label: 'О себе', n: '1' },
@@ -318,7 +317,6 @@ export const en = {
   skip: 'Skip to content',
   menu: 'Menu',
   close: 'Close',
-  cvLabel: 'CV (PDF)',
 
   nav: [
     { href: '#about', label: 'About', n: '1' },
