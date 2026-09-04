@@ -819,11 +819,16 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 /* Скрывать текст берется только живой скрипт: атрибут data-js ставит
    строка в <head>. Если скрипт не выполнился, страница остается читаемой,
    а не пустой. */
-[data-js] .reveal { opacity: 0; transform: translateY(28px); }
+/* Ход и длительность выставлены по замеру. При 28 px и 0,8 с подъем
+   заканчивался на 87 процентах высоты экрана, то есть у нижней кромки:
+   пока читатель доводил взгляд, все было кончено, и движение читалось
+   как подрагивание. 52 px и 1,15 с доводят завершение до середины
+   экрана, где на блок и смотрят. */
+[data-js] .reveal { opacity: 0; transform: translateY(52px); }
 [data-js] .reveal.is-in {
   opacity: 1;
   transform: none;
-  transition: opacity .8s var(--ease), transform .8s var(--ease);
+  transition: opacity 1.15s var(--ease), transform 1.15s var(--ease);
 }
 
 /* Показ без движения: для блока, который выскочил в глубине экрана при
@@ -845,7 +850,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   animation-delay: calc(var(--i, 0) * 155ms + 80ms);
 }
 @keyframes rise {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(52px); }
   to   { opacity: 1; transform: none; }
 }
 
