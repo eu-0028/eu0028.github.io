@@ -423,7 +423,12 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="${R}favicon.svg" type="image/svg+xml">
+<!-- ico идет первым: его Chrome запрашивает сам, даже без этой строки,
+     и на нем держится закладка. SVG подхватывают браузеры, которые умеют,
+     он один остается четким на любом экране. -->
+<link rel="icon" href="${R}favicon.ico" sizes="48x48">
+<link rel="icon" href="${R}favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="${R}apple-touch-icon.png">
 <link rel="preload" href="${R}assets/fonts/onest-${pre}-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${R}assets/${fontsName}">
 <link rel="stylesheet" href="${R}assets/${cssName}">

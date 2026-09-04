@@ -68,6 +68,10 @@ await writeFile(`assets/${mapName}`, mapRaw);
 const assetNames = { cssName, jsName, fontsName, mapName };
 
 await copyFile('src/favicon.svg', 'favicon.svg');
+/* Растровые копии значка: Chrome сам просит /favicon.ico, и без него
+   вкладка остается с пустым глобусом, даже когда SVG на месте. */
+await copyFile('src/favicon.ico', 'favicon.ico');
+await copyFile('src/apple-touch-icon.png', 'apple-touch-icon.png');
 
 await writeFile('index.html', page(ru, { hasCv, hasPortrait, images, logos, icons, backdrops, ...assetNames }));
 await writeFile('en/index.html', page(en, { hasCv, hasPortrait, images, logos, icons, backdrops, ...assetNames }));
