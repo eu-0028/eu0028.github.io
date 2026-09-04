@@ -147,11 +147,13 @@ function geo(t) {
   const s = t.geo;
   const byKey = new Map(mapMeta.marks.map((m) => [m.key, m]));
 
-  const pins = s.items
+  /* Вместо номерных меток — подпись страны, которая всплывает при наведении.
+     Нумерация заставляла сверять карту со списком и выглядела как сноски. */
+  const tags = s.items
     .map((it, i) => {
       const m = byKey.get(it.key);
       if (!m) return '';
-      return `<span class="pin" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%;--i:${i}"><i>${i + 1}</i></span>`;
+      return `<span class="tag" data-i="${i}" style="left:${m.centre[0]}%;top:${m.centre[1]}%" aria-hidden="true">${esc(it.name)}</span>`;
     })
     .join('');
 
@@ -171,7 +173,6 @@ function geo(t) {
   const rows = s.items
     .map(
       (it, i) => `<li class="geo__row reveal" data-i="${i}">
-        <span class="geo__n">${i + 1}</span>
         ${flag(it.flag)}
         <div>
           <p class="geo__name">${esc(it.name)}</p>
@@ -198,7 +199,7 @@ function geo(t) {
             <defs>${defs}</defs>
             ${groups}
           </svg>
-          ${pins}
+          ${tags}
         </div>
       </div>
     </figure>
@@ -378,7 +379,8 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
   ICONS = icons;
   BACKDROPS = backdrops;
   MAP = mapName;
-  const base = t.lang === 'en' ? 'index.html' : 'index.html';
+  /* Ссылка на себя ведет в текущий каталог: адрес остается без index.html */
+  const base = './';
   const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
 
   return `<!doctype html>

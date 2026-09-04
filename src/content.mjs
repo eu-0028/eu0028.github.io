@@ -14,7 +14,7 @@ export const ru = {
   dir: 'ltr',
   altLang: 'en',
   altLabel: 'English',
-  altHref: 'en/index.html',
+  altHref: 'en/',
   homeHref: '/',
   title: 'Евгений Шутов. Международные проекты и делегации, португальский C1',
   description:
@@ -113,7 +113,7 @@ export const ru = {
         sub: 'Первая российско-саудовская программа бизнес-акселерации',
         meta: 'ноябрь—декабрь 2025 · Москва',
         role: 'Соорганизатор',
-        d: 'Программа прошла 4–5 декабря 2025 года, в ней участвовали больше 60 человек. Открывали ее председатель Комитета Государственной Думы по международным делам Леонид Слуцкий и посол Саудовской Аравии.',
+        d: 'Программа прошла 4–5 декабря 2025 года, в ней участвовали больше 60 человек. Открывали ее председатель Комитета Государственной Думы по международным делам Леонид Слуцкий и посол Саудовской Аравии Абдулрахман Аль-Ахмед.',
         b: [
           'Продажи и привлечение: 200 звонков и около 1 000 показов в Telegram и в интернете.',
           'Привлек 30 платных участников и организовал 15 деловых встреч между российскими и иностранными компаниями.',
@@ -160,9 +160,11 @@ export const ru = {
         role: 'Руководитель продаж форума',
         d: 'Руководил продажами форума 25–26 апреля 2026 года со стороны Consult Invest ITIC, партнера-исполнителя AGORA.',
         b: [
-          'Общался с иностранными гостями на английском, включая индийскую и южноафриканскую делегации.',
-          'Нашел четырех заинтересованных предпринимателей на площадке форума.',
-          'Форум освещали «Россия-1», НТВ и RuNews24.',
+          'Настроил прием платежей для юрлица клуба: заключил договор эквайринга, подготовил публичную оферту и шаблоны счетов-оферт для корпоративных и частных плательщиков.',
+          'Подготовил договорную базу и вел документооборот с участниками.',
+          'Отвечал за продажи форума 25–26 апреля 2026 года: звонил по клиентским базам, вел цифровые каналы и обрабатывал входящие заявки.',
+          'Принимал иностранных гостей форума, а именно индийскую и южноафриканскую делегации.',
+          'Мероприятие освещали «Россия-1», НТВ и RuNews24.',
         ],
         m: [
           { v: '2', l: 'иностранные делегации' },
@@ -216,7 +218,7 @@ export const ru = {
     n: '4',
     kicker: 'География',
     title: 'С кем я работал',
-    intro: 'Двенадцать стран, с представителями которых были проекты, переговоры или делегации. Номера на карте совпадают с номерами в списке',
+    intro: 'Двенадцать стран, с представителями которых были проекты, переговоры или делегации',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Бразилия', note: 'Делегация «Интервидения», трансляция на бразильском телевидении, фестиваль молодежи' },
       { key: 'Russia', flag: 'ru', name: 'Россия', note: 'База, Москва. Российское направление Consult Invest ITIC, форумы и государственные контракты' },
@@ -262,7 +264,7 @@ export const ru = {
     kicker: 'О себе',
     title: 'Как это выглядит на практике',
     paras: [
-      'Я специалист-международник, специализирующийся на работе со странами БРИКС и Латинской Америки. С бразильской стороной работаю на португальском, без переводчика.',
+      'Я специалист-международник по странам БРИКС и Латинской Америки. С бразильской стороной работаю на португальском, без переводчика.',
       'Проект обычно выглядит так. Компания хочет зайти на внешний рынок, и кто-то должен найти там партнеров и довести дело до подписанного договора. Потом сделку надо исполнить: провести закупки, рассчитаться с подрядчиками и закрыть отчет, который принимает государственный заказчик. Обе части делаю я.',
     ],
     langTitle: 'Языки',
@@ -306,7 +308,7 @@ export const en = {
   dir: 'ltr',
   altLang: 'ru',
   altLabel: 'Русский',
-  altHref: '../index.html',
+  altHref: '../',
   homeHref: '/en/',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
@@ -405,7 +407,7 @@ export const en = {
         sub: 'First Russian-Saudi business acceleration programme',
         meta: 'November-December 2025 · Moscow',
         role: 'Co-organiser',
-        d: 'The programme ran on 4-5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and the Ambassador of Saudi Arabia.',
+        d: 'The programme ran on 4-5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and Abdulrahman Al-Ahmed, Ambassador of Saudi Arabia.',
         b: [
           'Sales and outreach: 200 calls and about 1,000 impressions across Telegram and the web.',
           'Brought in 30 paying participants and arranged 15 business meetings between Russian and foreign companies.',
@@ -452,9 +454,11 @@ export const en = {
         role: 'Head of forum sales',
         d: 'Led sales for the forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
         b: [
-          'Spoke with foreign guests in English, including the Indian and South African delegations.',
-          'Found four interested entrepreneurs at the forum itself.',
-          'The forum was covered by Rossiya-1, NTV and RuNews24.',
+          'Set up payment collection for the club’s legal entity: signed the acquiring contract, drafted the public offer and the invoice-offer templates for corporate and private payers.',
+          'Prepared the contract base and ran document flow with participants.',
+          'Owned sales for the 25-26 April 2026 forum: worked the client lists, ran the digital channels and handled inbound enquiries.',
+          'Hosted the forum’s foreign guests, namely the Indian and South African delegations.',
+          'The event was covered by Rossiya-1, NTV and RuNews24.',
         ],
         m: [
           { v: '2', l: 'foreign delegations' },
@@ -508,7 +512,7 @@ export const en = {
     n: '4',
     kicker: 'Geography',
     title: 'Who I have worked with',
-    intro: 'Twelve countries whose representatives I have worked with on projects, negotiations or delegations. The numbers on the map match the numbers in the list',
+    intro: 'Twelve countries whose representatives I have worked with on projects, negotiations or delegations',
     items: [
       { key: 'Brazil', flag: 'br', name: 'Brazil', note: 'Intervision delegation, the Brazilian television broadcast, the youth festival' },
       { key: 'Russia', flag: 'ru', name: 'Russia', note: 'Base, Moscow. The Russian practice of Consult Invest ITIC, forums and state contracts' },

@@ -158,10 +158,10 @@
   /* --- Карта: страна, метка и строка списка подсвечиваются вместе -- */
   var geoList = document.querySelector('[data-geo]');
   if (geoList) {
-    var pins = document.querySelectorAll('.pin');
+    var tags = document.querySelectorAll('.tag');
     var groups = document.querySelectorAll('.cg');
     var setHot = function (i, on) {
-      [pins[i], groups[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
+      [tags[i], groups[i], geoList.querySelector('[data-i="' + i + '"]')].forEach(function (el) {
         if (el) el.classList.toggle('is-hot', on);
       });
     };
@@ -175,7 +175,6 @@
     /* Курсор ловит неподвижный слой, а поднимается его копия на слое
        отрисовки. Иначе страна уезжает из-под курсора и начинает дребезжать. */
     Array.prototype.forEach.call(geoList.querySelectorAll('[data-i]'), bind);
-    Array.prototype.forEach.call(pins, bind);
     Array.prototype.forEach.call(groups, bind);
   }
 
