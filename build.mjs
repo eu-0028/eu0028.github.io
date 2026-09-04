@@ -10,12 +10,14 @@ const exists = async (p) => access(p, constants.F_OK).then(() => true, () => fal
 
 /* В вёрстку попадают только те фотографии, которые реально лежат в assets/img */
 await mkdir('assets/img', { recursive: true });
-const hasPortrait = await exists('assets/img/portrait.jpg');
+/* Портрет: вырезанная фигура с прозрачным фоном, поэтому webp или png */
+const portraitFile = (await readdir('assets/img')).find((f) => /^portrait\.(webp|png|jpe?g)$/i.test(f)) || '';
 /* Логотип задается основой имени (mgimo, mgimo-en), а сборка находит файл
    с любым подходящим расширением. Так его можно положить как угодно. */
 const logos = new Map();
 for (const f of await readdir('assets/img')) {
   const m = /^([a-z0-9-]+)\.(svg|png|webp)$/i.exec(f);
+  if (m && /^(portrait|bg-)/i.test(m[1])) continue;   // портрет и фоны не логотипы
   if (m && !logos.has(m[1].toLowerCase())) logos.set(m[1].toLowerCase(), f);
 }
 const icons = {};
@@ -72,8 +74,8 @@ await copyFile('src/favicon.svg', 'favicon.svg');
 await copyFile('src/favicon.ico', 'favicon.ico');
 await copyFile('src/apple-touch-icon.png', 'apple-touch-icon.png');
 
-await writeFile('index.html', page(ru, { hasPortrait, images, logos, icons, backdrops, ...assetNames }));
-await writeFile('en/index.html', page(en, { hasPortrait, images, logos, icons, backdrops, ...assetNames }));
+await writeFile('index.html', page(ru, { portraitFile, images, logos, icons, backdrops, ...assetNames }));
+await writeFile('en/index.html', page(en, { portraitFile, images, logos, icons, backdrops, ...assetNames }));
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(
@@ -92,7 +94,7 @@ await writeFile(
 </div></main></body></html>`
 );
 
-const yo = (page(ru, { hasPortrait, images, logos, icons, backdrops, ...assetNames }).match(/[ёЁ]/g) || []).length;
+const yo = (page(ru, { portraitFile, images, logos, icons, backdrops, ...assetNames }).match(/[ёЁ]/g) || []).length;
 if (yo) throw new Error(`В русском тексте снова буква ё: ${yo} шт.`);
 
 const today = new Date().toISOString().slice(0, 10);
@@ -117,7 +119,7 @@ const fonts = (await readdir('assets/fonts')).length;
 console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, robots.txt`);
 console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}, ${mapName}`);
 console.log(`Шрифтов: ${fonts}`);
-console.log(`Портрет: ${hasPortrait ? 'подключено' : 'нет файла assets/img/portrait.jpg — блок скрыт'}`);
+console.log(`Портрет: ${portraitFile || 'нет файла assets/img/portrait.(webp|png|jpg) — блок скрыт'}`);
 console.log(`Фоновые снимки: ${backdrops.size ? [...backdrops].join(', ') : 'нет — секции без фона'}`);
 console.log(`Фотографии проектов: ${images.size ? [...images].join(', ') : 'нет — блоки с фото не выводятся'}`);
 const needLogos = ['mgimo'].filter((n) => !logos.has(n));

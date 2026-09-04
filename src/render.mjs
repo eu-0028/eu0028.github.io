@@ -46,11 +46,11 @@ function header(t, base) {
 
 /* --- обложка -------------------------------------------- */
 
-function hero(t, hasPortrait) {
+function hero(t, portraitFile) {
   const h = t.hero;
   return `<section class="hero">
   <div class="shell">
-    <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
+    <div class="hero__grid" data-hero-grid${portraitFile ? '' : ' data-noportrait="true"'}>
       <div>
         <p class="label hero__eyebrow reveal"><span>${esc(h.eyebrow)}</span></p>
         <h1 class="hero__h1 reveal">${esc(h.lead)} <em>${esc(h.leadEm)}</em>${h.leadTail ? ' ' + esc(h.leadTail) : ''}</h1>
@@ -60,11 +60,8 @@ function hero(t, hasPortrait) {
           <a class="btn btn--ghost" href="#work">${esc(h.ctaSecondary)}</a>
         </div>
       </div>
-      ${hasPortrait ? `<div class="hero__media">
-        <figure class="portrait" data-portrait>
-          <img src="${R}assets/img/portrait.jpg" alt="${attr(h.portraitAlt)}" width="800" height="1000" fetchpriority="high">
-          <figcaption class="portrait__cap">${esc(h.name)}</figcaption>
-        </figure>
+      ${portraitFile ? `<div class="hero__media">
+        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="810" height="1330" fetchpriority="high" decoding="async">
       </div>` : ''}
     </div>
   </div>
@@ -395,7 +392,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { hasPortrait = false, images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
+export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
@@ -446,7 +443,7 @@ ${jsonLd(t)}
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${header(t, base)}
 <main id="main">
-${hero(t, hasPortrait)}
+${hero(t, portraitFile)}
 ${about(t, logos)}
 ${practice(t)}
 ${work(t, images)}

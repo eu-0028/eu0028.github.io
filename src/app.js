@@ -208,18 +208,14 @@
     Array.prototype.forEach.call(groups, bind);
   }
 
-  /* --- Портрет: аккуратная заглушка, если файла нет ------ */
-  var portrait = document.querySelector('[data-portrait]');
+  /* --- Портрет: если файл не отдался, колонка схлопывается -- */
+  var portrait = document.querySelector('.portrait');
   if (portrait) {
-    var img = portrait.querySelector('img');
     var grid = document.querySelector('[data-hero-grid]');
     var markEmpty = function () {
-      portrait.setAttribute('data-empty', 'true');
       if (grid) grid.setAttribute('data-noportrait', 'true');
     };
-    if (img) {
-      if (img.complete && img.naturalWidth === 0) markEmpty();
-      img.addEventListener('error', markEmpty);
-    }
+    if (portrait.complete && portrait.naturalWidth === 0) markEmpty();
+    portrait.addEventListener('error', markEmpty);
   }
 })();
