@@ -97,7 +97,7 @@ export const ru = {
           'Итоговый отчет больше чем на 3 000 страниц: собрал, структурировал и оформил учебные материалы по 25 воркшоп-сессиям.',
           'Конспекты и раздаточные материалы для 12 сессий написал с нуля, потому что исходных материалов не существовало.',
           'Единолично вел финансовую отчетность: сверил 10 договоров с подрядчиками по переводу, кейтерингу, персоналу и логистике.',
-          'Согласовал корректировки документов с поставщиками и подготовил полностью сбалансированный отчет о расходах на 9 млн рублей с первичными документами и внутренними приказами.',
+          'Согласовал корректировки документов с поставщиками и подготовил отчет о расходах на 9 млн рублей, который сошелся до рубля, с первичными документами и внутренними приказами.',
         ],
         m: [
           { v: '3 000+', l: 'страниц отчета' },
@@ -115,7 +115,7 @@ export const ru = {
         role: 'Соорганизатор',
         d: 'Программа прошла 4–5 декабря 2025 года, в ней участвовали больше 60 человек. Открывали ее председатель Комитета Государственной Думы по международным делам Леонид Слуцкий и посол Саудовской Аравии Абдулрахман Аль-Ахмед.',
         b: [
-          'Продажи и привлечение: 200 звонков и около 1 000 показов в Telegram и в интернете.',
+          'Продажи и привлечение: 200 звонков и около 1 000 показов в Telegram и в соцсетях.',
           'Привлек 30 платных участников и организовал 15 деловых встреч между российскими и иностранными компаниями.',
           'Отобрал 9 российских проектов для питч-сессии; три из них получили прямую инвестиционную поддержку и освобождение от платы за коммерческую лицензию от венчурного фонда Value Makers Studio.',
           'Согласовал договоры по площадке и проживанию с московскими отелями и добился ставок ниже рыночных и дополнительных скидок.',
@@ -138,17 +138,16 @@ export const ru = {
         role: 'Привлечение клиентов на рынках России и СНГ',
         d: 'Отвечал за привлечение клиентов для свободной экономической зоны ОАЭ на рынках России и СНГ. Все обращения контрагентов шли через меня.',
         b: [
-          'Охватил 677 предприятий в России, Узбекистане и Казахстане при плане 300–400 за три месяца.',
-          'Получил 313 откликов с первичным интересом при плане 300.',
-          'Разработал и провел кампанию холодных продаж: 512 отобранных предприятий, 275 содержательных ответов.',
+          'Вышел на 677 компаний в России, Узбекистане и Казахстане при плане 300–400 за три месяца.',
+          'Получил 313 ответов с интересом к предложению при плане 300.',
+          'Разработал и провел кампанию холодных продаж: 512 компаний в выборке, 275 ответов по существу.',
           'Выстроил отдельную базу клиентов по каждой из трех стран.',
-          'Довел трех потенциальных клиентов до стадии коммерческого предложения через установочные звонки; вел шесть теплых контактов, включая AKFA Group из Узбекистана, где работает больше 30 000 человек.',
+          'Провел первичные переговоры и довел трех клиентов до коммерческого предложения.',
         ],
         m: [
-          { v: '677', l: 'предприятий охвачено' },
+          { v: '677', l: 'компаний охвачено' },
           { v: '313', l: 'откликов при плане 300' },
-          { v: '275', l: 'содержательных ответов' },
-          { v: '6', l: 'теплых контактов' },
+          { v: '275', l: 'ответов по существу' },
         ],
       },
       {
@@ -162,8 +161,8 @@ export const ru = {
         b: [
           'Настроил прием платежей для юрлица клуба: заключил договор эквайринга, подготовил публичную оферту и шаблоны счетов-оферт для корпоративных и частных плательщиков.',
           'Подготовил договорную базу и вел документооборот с участниками.',
-          'Отвечал за продажи форума 25–26 апреля 2026 года: звонил по клиентским базам, вел цифровые каналы и обрабатывал входящие заявки.',
-          'Принимал иностранных гостей форума, а именно индийскую и южноафриканскую делегации.',
+          'Отвечал за продажи форума 25–26 апреля 2026 года: звонил по клиентским базам, вел продвижение в интернете и обрабатывал входящие заявки.',
+          'Принимал иностранных гостей форума: индийскую и южноафриканскую делегации.',
           'Мероприятие освещали «Россия-1», НТВ и RuNews24.',
         ],
         m: [
@@ -196,7 +195,7 @@ export const ru = {
       {
         t: 'Перевод и языковое сопровождение',
         icon: 'translate',
-        d: 'Португальский и английский на уровне рабочего инструмента',
+        d: 'Португальский и английский в ежедневной работе',
         b: ['Последовательный перевод на форумах', 'Перевод договоров, регламентов и уставных документов', 'Техническая документация', 'Деловая и дипломатическая переписка'],
       },
       {
@@ -319,7 +318,7 @@ export const en = {
   skip: 'Skip to content',
   menu: 'Menu',
   close: 'Close',
-  cvLabel: 'CV in PDF',
+  cvLabel: 'CV (PDF)',
 
   nav: [
     { href: '#about', label: 'About', n: '1' },
@@ -337,9 +336,9 @@ export const en = {
     leadEm: 'actually happen',
     leadTail: '',
     para:
-      'I negotiate in three languages and take business problems through to a finished result. I work with BRICS countries and Latin America.',
+      'I negotiate in three languages and see a business problem through to the result. I work with the BRICS countries and Latin America.',
     ctaPrimary: 'Get in touch',
-    ctaSecondary: 'See the projects',
+    ctaSecondary: 'See the work',
     portraitAlt: 'Evgeny Shutov',
   },
 
@@ -347,15 +346,15 @@ export const en = {
     eyebrow: 'The numbers',
     items: [
       { value: '50', unit: 'mln RUB', label: 'Combined value of the projects I led in 2025' },
-      { value: '13', unit: 'countries', label: 'Whose representatives I have worked with in person' },
-      { value: '5', unit: 'international events', label: 'Held for a combined audience of 2000+' },
+      { value: '13', unit: 'countries', label: 'Whose representatives I have dealt with in person' },
+      { value: '5', unit: 'international events', label: 'Held for a combined audience of more than 2,000' },
     ],
   },
 
   work: {
     n: '3',
     kicker: 'Projects',
-    title: 'What has been delivered',
+    title: 'What I have delivered',
     items: [
       {
         t: 'Intervision 2025',
@@ -364,13 +363,13 @@ export const en = {
         sub: 'International music contest',
         meta: 'August-September 2025 · Live Arena, Moscow',
         role: 'Project manager, national delegations',
-        d: 'I joined the project less than a month before the contest as a Portuguese-speaking specialist. The contest was held under presidential decree with the support of the Russian Foreign Ministry, in a 20,000-seat arena.',
+        d: 'I joined the project less than a month before the contest as a Portuguese-speaking specialist. The contest was held by presidential decree with the backing of the Russian Foreign Ministry, in a 20,000-seat arena.',
         b: [
           'Five national delegations totalling 45 people: Brazil, Madagascar, Kenya, Ethiopia and the UAE.',
           'Handled the co-organiser agreements with national governments, visa support, accommodation, transport and the ten-day visit programme.',
           'Selected and supervised five delegation attachés, one per country.',
           'With the Brazilian side I worked in Portuguese: the artist, the production team, the broadcaster and the ministry of culture.',
-          'Arranged the broadcast of the contest on Brazilian television single-handedly. Prepared and translated the broadcaster’s document package: the organisation’s charter, HR documents, agreements and memoranda.',
+          'Set up the contest broadcast on Brazilian television on my own. Prepared and translated the paperwork the broadcaster needed: the organisation’s charter, HR documents, agreements and memoranda.',
         ],
         m: [
           { v: '45', l: 'delegation members' },
@@ -390,8 +389,8 @@ export const en = {
         b: [
           'Final report of more than 3,000 pages: collected, structured and formatted training materials across 25 workshop sessions.',
           'Wrote summaries and handouts for 12 sessions from scratch, because no source materials existed.',
-          'Handled financial reporting single-handedly: reconciled 10 contractor agreements covering interpreters, catering, staff and logistics.',
-          'Agreed document corrections with suppliers and produced a fully balanced expense report of 9 million roubles, backed by source documents and internal orders.',
+          'Ran the financial reporting on my own: reconciled 10 contractor agreements covering interpreters, catering, staff and logistics.',
+          'Agreed the corrections with suppliers and delivered a 9-million-rouble expense report that reconciled to the rouble, backed by source documents and internal orders.',
         ],
         m: [
           { v: '3,000+', l: 'pages of report' },
@@ -409,12 +408,12 @@ export const en = {
         role: 'Co-organiser',
         d: 'The programme ran on 4-5 December 2025 with more than 60 participants. It was opened by Leonid Slutsky, Chairman of the State Duma Committee on International Affairs, and Abdulrahman Al-Ahmed, Ambassador of Saudi Arabia.',
         b: [
-          'Sales and outreach: 200 calls and about 1,000 impressions across Telegram and the web.',
+          'Sales and outreach: 200 calls and around 1,000 impressions on Telegram and social media.',
           'Brought in 30 paying participants and arranged 15 business meetings between Russian and foreign companies.',
           'Selected 9 Russian projects for the pitch session; three received direct investment support and a commercial licence fee waiver from the venture fund Value Makers Studio.',
           'Negotiated venue and accommodation contracts with Moscow hotels, securing below-market rates and additional discounts.',
           'Set up payment processing and prepared commercial proposal templates and service agreements.',
-          'Correspondence and negotiation with the visiting Saudi delegation ran in English.',
+          'I handled the correspondence and the talks with the visiting Saudi delegation in English.',
         ],
         m: [
           { v: '60+', l: 'participants' },
@@ -432,17 +431,16 @@ export const en = {
         role: 'Client acquisition across Russia and the CIS',
         d: 'Responsible for client acquisition for the UAE free economic zone across Russia and the CIS. Every counterparty enquiry came through me.',
         b: [
-          'Reached 677 companies across Russia, Uzbekistan and Kazakhstan against a plan of 300–400 over three months.',
-          'Generated 313 responses expressing initial interest against a target of 300.',
-          'Designed and ran a cold outreach campaign: 512 selected companies, 275 substantive replies.',
-          'Built a separate client base for each of the three countries.',
-          'Advanced three prospects to the commercial proposal stage through discovery calls; maintained six warm contacts, including AKFA Group in Uzbekistan, which has more than 30,000 employees.',
+          'Contacted 677 companies in Russia, Uzbekistan and Kazakhstan against a three-month target of 300 to 400.',
+          '313 of them came back interested, against a target of 300.',
+          'Built and ran a cold outreach campaign across 512 shortlisted companies, which brought 275 substantive replies.',
+          'Kept a separate client base for each of the three countries.',
+          'Ran the first calls and took three prospects through to a formal proposal.',
         ],
         m: [
           { v: '677', l: 'companies reached' },
-          { v: '313', l: 'responses vs target 300' },
+          { v: '313', l: 'replies against a target of 300' },
           { v: '275', l: 'substantive replies' },
-          { v: '6', l: 'warm contacts' },
         ],
       },
       {
@@ -454,10 +452,10 @@ export const en = {
         role: 'Head of forum sales',
         d: 'Led sales for the forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
         b: [
-          'Set up payment collection for the club’s legal entity: signed the acquiring contract, drafted the public offer and the invoice-offer templates for corporate and private payers.',
-          'Prepared the contract base and ran document flow with participants.',
-          'Owned sales for the 25-26 April 2026 forum: worked the client lists, ran the digital channels and handled inbound enquiries.',
-          'Hosted the forum’s foreign guests, namely the Indian and South African delegations.',
+          'Set up payment collection for the club’s legal entity: signed the card-acquiring agreement, drafted the public offer and the invoice-offer templates for corporate and private payers.',
+          'Prepared the contract templates and ran the paperwork with participants.',
+          'Owned sales for the 25-26 April 2026 forum: worked the client lists, ran the online channels and handled inbound enquiries.',
+          'Hosted the forum’s foreign guests: the Indian and South African delegations.',
           'The event was covered by Rossiya-1, NTV and RuNews24.',
         ],
         m: [
@@ -473,13 +471,13 @@ export const en = {
     n: '2',
     kicker: 'Practice',
     title: 'What I do',
-    intro: 'Five areas. Each one has successful projects behind it, set out below',
+    intro: 'Five areas. Each one has finished projects behind it, set out below',
     items: [
       {
-        t: 'Business development and entry into new markets',
+        t: 'Business development and market entry',
         icon: 'trend-up',
         d: 'Client acquisition across Russia and the CIS against measurable targets',
-        b: ['Lead generation and cold outreach', 'Client base built per country', 'Market research and competitive analysis', 'Financial modelling and unit economics'],
+        b: ['Lead generation and cold outreach', 'A separate client base for each country', 'Market research and competitive analysis', 'Financial modelling and unit economics'],
       },
       {
         t: 'Contracts, procurement and reporting',
@@ -490,17 +488,17 @@ export const en = {
       {
         t: 'Translation and language support',
         icon: 'translate',
-        d: 'Portuguese and English as working tools',
+        d: 'Portuguese and English in daily use at work',
         b: ['Consecutive interpreting at forums', 'Translation of contracts, regulations and statutory documents', 'Technical documentation', 'Business and diplomatic correspondence'],
       },
       {
         t: 'International event management',
         icon: 'microphone-stage',
         d: 'Forums, contests and acceleration programmes',
-        b: ['Business programme and speakers', 'Sales and participant recruitment', 'Venue, accommodation, contractors', 'Payment processing and contract base'],
+        b: ['Business programme and speakers', 'Sales and participant recruitment', 'Venue, accommodation, contractors', 'Payment processing and contract templates'],
       },
       {
-        t: 'Running foreign delegations',
+        t: 'Hosting foreign delegations',
         icon: 'users-three',
         d: 'From the first letter to a ministry through to the group’s departure',
         b: ['Co-organiser agreements with national governments', 'Visa support, accommodation, transport', 'The delegation’s visit programme', 'Selecting and supervising attachés', 'Work with embassies and government agencies'],
@@ -538,7 +536,7 @@ export const en = {
       {
         t: 'International Youth Festival 2026',
         meta: 'Yekaterinburg · 11-17 September 2026',
-        d: 'Coordinating the Brazilian delegation within the festival’s children’s programme: 10,000 participants from 191 countries, including 1,000 teenagers aged 14 to 17. Correspondence with the Brazilian side in Portuguese, collection and verification of participant documents, logistics and accompaniment of the group in Russia.',
+        d: 'Coordinating the Brazilian delegation in the festival’s children’s programme: 10,000 participants from 191 countries, 1,000 of them teenagers aged 14 to 17. I write to the Brazilian side in Portuguese, collect and check the participants’ documents, and run logistics and support for the group in Russia.',
       },
       {
         t: 'Our Generation 2026',
@@ -559,7 +557,7 @@ export const en = {
     title: 'What this looks like in practice',
     paras: [
       'I am an international affairs specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
-      'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with contractors and close the report that the state client signs off. I do both halves.',
+      'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the state client has to sign off. I do both halves.',
     ],
     langTitle: 'Languages',
     langs: [
@@ -584,7 +582,7 @@ export const en = {
     n: '6',
     kicker: 'Contact',
     title: 'Open to offers',
-    d: 'Write to me on Telegram or by email. I reply myself.',
+    d: 'Message me on Telegram or by email. I answer my own messages.',
     emailLabel: 'Email',
     tgLabel: 'Telegram',
   },

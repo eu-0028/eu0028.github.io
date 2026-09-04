@@ -428,6 +428,9 @@ export function page(t, { hasCv = false, hasPortrait = false, images = new Set()
 <link rel="stylesheet" href="${R}assets/${fontsName}">
 <link rel="stylesheet" href="${R}assets/${cssName}">
 ${jsonLd(t)}
+<!-- Появление блоков при прокрутке включается только здесь. Без этой
+     строки (скрипт запрещен, ошибка загрузки) текст остается видимым. -->
+<script>document.documentElement.setAttribute('data-js','')</script>
 </head>
 <body>
 <a class="skip" href="#main">${esc(t.skip)}</a>
