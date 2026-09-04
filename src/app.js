@@ -58,7 +58,20 @@
        соседней метки раздела, которая стоит без анимации. Дальше уводить
        нельзя — подъем закончится за кадром, и читатель его не увидит. */
     }, { rootMargin: '0px 0px 4% 0px', threshold: 0 });
-    Array.prototype.forEach.call(rises, function (el) { io.observe(el); });
+    /* Первый экран не ждет прокрутки: то, что видно при открытии, встает
+       в очередь появления и поднимается сверху вниз. Очередь не длиннее
+       восьми шагов, иначе на высоком экране хвост доезжал бы слишком
+       долго. Все, что ниже кромки, наблюдается как раньше. */
+    var fold = window.innerHeight || document.documentElement.clientHeight;
+    var order = 0;
+    Array.prototype.forEach.call(rises, function (el) {
+      if (el.getBoundingClientRect().top < fold) {
+        el.style.setProperty('--i', Math.min(order++, 8));
+        el.classList.add('is-load');
+        return;
+      }
+      io.observe(el);
+    });
   }
 
   /* --- Подсветка активного пункта навигации -------------- */

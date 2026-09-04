@@ -826,6 +826,38 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
+/* Вход первого экрана. То, что видно сразу при открытии, не ждет
+   прокрутки, а поднимается по очереди сверху вниз: метка, заголовок,
+   текст, кнопки. Порядок повторяет то, как страницу читают, поэтому
+   очередь ведет взгляд, а не просто оживляет верстку. Шаг очереди
+   ставит скрипт в --i. */
+[data-js] .reveal.is-load {
+  animation: rise .8s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 80ms + 40ms);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Линейка за именем вычерчивается слева направо. Тот же прием, что и
+   акцентная черта над меткой раздела: на сайте линии организуют текст,
+   поэтому им и отдана роль в появлении. */
+[data-js] .hero__eyebrow.is-load::after {
+  transform-origin: left center;
+  animation: rule-draw .9s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 80ms + 180ms);
+}
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Шапка проявляется без движения: она закреплена сверху, и сдвиг у нее
+   читался бы как подергивание, а не как появление. */
+[data-js] .hdr { animation: fade-in .6s var(--ease) both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
 /* --- 17. Адаптив ----------------------------------------- */
 
 @media (max-width: 1040px) {
@@ -861,9 +893,13 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .01ms !important;
+    animation-delay: -1ms !important;
     transition-duration: .01ms !important;
   }
-  [data-js] .reveal { opacity: 1; transform: none; }
+  [data-js] .reveal,
+  [data-js] .reveal.is-load { opacity: 1; transform: none; animation: none !important; }
+  [data-js] .hero__eyebrow.is-load::after,
+  [data-js] .hdr { animation: none !important; }
 }
 
 /* --- 18. Печать ------------------------------------------ */

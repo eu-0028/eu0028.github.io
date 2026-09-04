@@ -22,7 +22,7 @@ const flag = (code, eager) =>
   `<img class="flag" src="${R}assets/flags/${attr(code)}.svg" alt="" width="27" height="20"${eager ? '' : ' loading="lazy"'} decoding="async">`;
 
 const aside = (n, kicker) =>
-  `<div class="aside"><span class="aside__k">${esc(kicker)}</span></div>`;
+  `<div class="aside"><span class="aside__k reveal">${esc(kicker)}</span></div>`;
 
 /* --- шапка и меню --------------------------------------- */
 
@@ -53,10 +53,10 @@ function hero(t, hasCv, hasPortrait) {
   <div class="shell">
     <div class="hero__grid" data-hero-grid${hasPortrait ? '' : ' data-noportrait="true"'}>
       <div>
-        <p class="label hero__eyebrow"><span>${esc(h.eyebrow)}</span></p>
-        <h1 class="hero__h1">${esc(h.lead)} <em>${esc(h.leadEm)}</em>${h.leadTail ? ' ' + esc(h.leadTail) : ''}</h1>
-        <div class="prose"><p class="lede">${esc(h.para)}</p></div>
-        <div class="hero__cta">
+        <p class="label hero__eyebrow reveal"><span>${esc(h.eyebrow)}</span></p>
+        <h1 class="hero__h1 reveal">${esc(h.lead)} <em>${esc(h.leadEm)}</em>${h.leadTail ? ' ' + esc(h.leadTail) : ''}</h1>
+        <div class="prose reveal"><p class="lede">${esc(h.para)}</p></div>
+        <div class="hero__cta reveal">
           <a class="btn" href="#contact">${esc(h.ctaPrimary)}${arrow}</a>
           <a class="btn btn--ghost" href="#work">${esc(h.ctaSecondary)}</a>
           ${cv}
@@ -303,8 +303,8 @@ function about(t, logos) {
     <div class="grid2">
       ${aside(s.n, s.kicker)}
       <div>
-        <h2 class="h2">${esc(s.title)}</h2>
-        <div class="prose" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
+        <h2 class="h2 reveal">${esc(s.title)}</h2>
+        <div class="prose reveal" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
       </div>
     </div>
     <div class="stats">${stats}</div>
