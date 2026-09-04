@@ -80,19 +80,26 @@ function work(t, images) {
   const s = t.work;
   const items = s.items
     .map(
-      (p) => `<article class="proj reveal">
+      /* Карточка проекта появляется по частям, а не целиком. Она высотой
+         почти в экран, и при подъеме одним куском анимировалась только
+         верхняя кромка: к середине блок был уже собран, и читатель видел
+         готовый текст. Теперь заголовок, перечень и цифры выходят каждый
+         в свой момент, так что движение сопровождает чтение до конца
+         карточки. Колонка слева закреплена липко, поэтому сдвиг отдан ее
+         содержимому, а не ей самой. */
+      (p) => `<article class="proj">
         <div class="proj__grid">
           <div class="proj__meta">
-            <p class="proj__date">${esc(p.meta)}</p>
-            <p class="proj__role">${esc(p.role)}</p>
+            <p class="proj__date reveal">${esc(p.meta)}</p>
+            <p class="proj__role reveal">${esc(p.role)}</p>
           </div>
           <div>
-            <div class="proj__t"><h3 class="h3">${esc(p.t)}</h3></div>
-            <p class="proj__sub">${esc(p.sub)}</p>
-            <p class="proj__d">${esc(p.d)}</p>
-            ${p.img && images.has(p.img) ? `<figure class="shot"><img src="${R}assets/img/${attr(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
-            <ul class="rules-list">${list(p.b)}</ul>
-            <div class="metrics">${p.m
+            <div class="proj__t reveal"><h3 class="h3">${esc(p.t)}</h3></div>
+            <p class="proj__sub reveal">${esc(p.sub)}</p>
+            <p class="proj__d reveal">${esc(p.d)}</p>
+            ${p.img && images.has(p.img) ? `<figure class="shot reveal"><img src="${R}assets/img/${attr(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
+            <ul class="rules-list reveal">${list(p.b)}</ul>
+            <div class="metrics reveal">${p.m
               .map((m) => `<div class="metric"><span class="metric__v num" data-count="${attr(m.v)}">${esc(m.v)}</span><span class="metric__l">${esc(m.l)}</span></div>`)
               .join('')}</div>
           </div>

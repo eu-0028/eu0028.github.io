@@ -826,6 +826,10 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
+/* Показ без движения: для блока, который выскочил в глубине экрана при
+   резком листании, и для первого экрана при запрете анимации. */
+[data-js] .reveal.is-now { opacity: 1; transform: none; transition: none; }
+
 /* Вход первого экрана. То, что видно сразу при открытии, не ждет
    прокрутки, а поднимается по очереди сверху вниз: метка, заголовок,
    текст, кнопки. Порядок повторяет то, как страницу читают, поэтому
@@ -902,6 +906,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
     transition-duration: .01ms !important;
   }
   [data-js] .reveal,
+  [data-js] .reveal.is-now,
   [data-js] .reveal.is-load { opacity: 1; transform: none; animation: none !important; }
   [data-js] .hero__eyebrow.is-load::after,
   [data-js] .hdr { animation: none !important; }
