@@ -139,7 +139,7 @@ export const ru = {
         d: 'Отвечал за привлечение клиентов для свободной экономической зоны ОАЭ на рынках России и СНГ. Все обращения контрагентов шли через меня.',
         b: [
           'Вышел на 677 компаний в России, Узбекистане и Казахстане при плане 300–400 за три месяца.',
-          'Получил 313 ответов с интересом к предложению при плане 300.',
+          'Получил 313 откликов first-interest при плане в 300.',
           'Разработал и провел кампанию холодных продаж: 512 компаний в выборке, 275 ответов по существу.',
           'Выстроил отдельную базу клиентов по каждой из трех стран.',
           'Провел первичные переговоры и довел трех клиентов до коммерческого предложения.',
@@ -432,7 +432,7 @@ export const en = {
         d: 'Responsible for client acquisition for the UAE free economic zone across Russia and the CIS. Every counterparty enquiry came through me.',
         b: [
           'Contacted 677 companies in Russia, Uzbekistan and Kazakhstan against a three-month target of 300 to 400.',
-          '313 of them came back interested, against a target of 300.',
+          'Received 313 first-interest responses against a plan of 300.',
           'Built and ran a cold outreach campaign across 512 shortlisted companies, which brought 275 substantive replies.',
           'Kept a separate client base for each of the three countries.',
           'Ran the first calls and took three prospects through to a formal proposal.',

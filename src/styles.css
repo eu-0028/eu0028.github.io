@@ -819,15 +819,12 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 /* Скрывать текст берется только живой скрипт: атрибут data-js ставит
    строка в <head>. Если скрипт не выполнился, страница остается читаемой,
    а не пустой. */
-[data-js] .reveal { opacity: 0; transform: translateY(18px); }
+[data-js] .reveal { opacity: 0; transform: translateY(28px); }
 [data-js] .reveal.is-in {
   opacity: 1;
   transform: none;
-  transition: opacity .5s var(--ease), transform .5s var(--ease);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
-/* Первый экран показываем сразу и без движения: посетитель открывает
-   сайт и сразу видит текст, а не пустое место до первой прокрутки. */
-[data-js] .reveal.is-now { opacity: 1; transform: none; transition: none; }
 
 /* --- 17. Адаптив ----------------------------------------- */
 

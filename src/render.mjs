@@ -303,8 +303,8 @@ function about(t, logos) {
     <div class="grid2">
       ${aside(s.n, s.kicker)}
       <div>
-        <h2 class="h2 reveal">${esc(s.title)}</h2>
-        <div class="prose reveal" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
+        <h2 class="h2">${esc(s.title)}</h2>
+        <div class="prose" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
       </div>
     </div>
     <div class="stats">${stats}</div>

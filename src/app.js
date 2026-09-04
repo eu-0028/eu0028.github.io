@@ -53,21 +53,10 @@
       });
     /* Порог нулевой: у высокого блока проценты его собственной высоты
        складываются в пол-экрана, и он появлялся уже прокрученным. Зона
-       наблюдения вынесена ниже экрана, чтобы блок успевал проявиться
-       до того, как читатель до него доскроллит. */
-    }, { rootMargin: '0px 0px 14% 0px', threshold: 0 });
-    /* Все, что попадает в первый экран, показываем сразу и без анимации.
-       Иначе посетитель открывает сайт и видит пустоту там, где должен
-       быть текст, пока не тронет колесо мыши. */
-    var fold = (window.innerHeight || document.documentElement.clientHeight) * 1.2;
-    Array.prototype.forEach.call(rises, function (el) {
-      if (el.getBoundingClientRect().top < fold) {
-        el.classList.add('is-in');
-        el.classList.add('is-now');
-        return;
-      }
-      io.observe(el);
-    });
+       наблюдения чуть выше нижнего края, чтобы подъем начинался в тот
+       момент, когда блок входит в кадр, и читатель успевал его увидеть. */
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+    Array.prototype.forEach.call(rises, function (el) { io.observe(el); });
   }
 
   /* --- Подсветка активного пункта навигации -------------- */
@@ -134,18 +123,14 @@
     if (reduced || !('IntersectionObserver' in window)) return;
 
     /* Обнуляем сразу при загрузке: иначе цифра сбрасывалась на нуль
-       уже на глазах у читателя, когда блок доходил до нужной высоты.
-       Цифру, которая видна с самого начала, не трогаем: отсчет с нуля
-       на неподвижной странице выглядит как незагрузившийся текст. */
-    var seen = node.getBoundingClientRect().top < (window.innerHeight || document.documentElement.clientHeight);
-    if (!seen) node.textContent = fmt(0);
+       уже на глазах у читателя, когда блок доходил до нужной высоты. */
+    node.textContent = fmt(0);
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        if (seen) return;
-        var t0 = null, dur = 1000;
+        var t0 = null, dur = 1200;
         var step = function (ts) {
           if (t0 === null) t0 = ts;
           var p = Math.min((ts - t0) / dur, 1);
@@ -155,7 +140,7 @@
         };
         setTimeout(function () { requestAnimationFrame(step); }, 80);
       });
-    }, { threshold: 0, rootMargin: '0px 0px 5% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
     io.observe(node);
   });
 
