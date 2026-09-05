@@ -470,10 +470,14 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-bottom: calc(-1 * var(--hero-pad-b));
   filter: drop-shadow(0 24px 40px rgba(18, 21, 26, .13));
 }
+/* На темной теме снимок идет в черно-белом: цветное лицо на почти черном
+   фоне выбивается из монохромной палитры страницы. Заодно поднимаем тени
+   (contrast < 1), иначе черный пиджак сливается с фоном и фигура теряет
+   силуэт ниже плеч. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .portrait { filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
+  :root:not([data-theme='light']) .portrait { filter: grayscale(1) contrast(.82) brightness(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
 }
-:root[data-theme='dark'] .portrait { filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
+:root[data-theme='dark'] .portrait { filter: grayscale(1) contrast(.82) brightness(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
 
 /* --- 7. Кнопки ------------------------------------------- */
 
