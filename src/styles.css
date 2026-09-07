@@ -187,6 +187,9 @@ a { color: inherit; text-decoration: none; }
 .num {
   font-variant-numeric: tabular-nums lining-nums;
   font-feature-settings: 'tnum' 1, 'lnum' 1;
+  /* Число не переносится по частям. В тексте пробелы внутри чисел уже
+     неразрывные, а тут подстраховка для крупных цифр в карточках. */
+  white-space: nowrap;
 }
 
 /* Маркированный список с чертой вместо точки */
@@ -470,14 +473,13 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-bottom: calc(-1 * var(--hero-pad-b));
   filter: drop-shadow(0 24px 40px rgba(18, 21, 26, .13));
 }
-/* На темной теме снимок идет в черно-белом: цветное лицо на почти черном
-   фоне выбивается из монохромной палитры страницы. Заодно поднимаем тени
-   (contrast < 1), иначе черный пиджак сливается с фоном и фигура теряет
-   силуэт ниже плеч. */
+/* Снимок цветной в обеих темах. На темном фоне поднимаем тени
+   (contrast < 1): иначе черный пиджак сливается с фоном #0e1116 и
+   фигура теряет силуэт ниже плеч. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .portrait { filter: grayscale(1) contrast(.82) brightness(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
+  :root:not([data-theme='light']) .portrait { filter: contrast(.86) brightness(1.04) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
 }
-:root[data-theme='dark'] .portrait { filter: grayscale(1) contrast(.82) brightness(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
+:root[data-theme='dark'] .portrait { filter: contrast(.86) brightness(1.04) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
 
 /* --- 7. Кнопки ------------------------------------------- */
 
@@ -644,10 +646,13 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-top: 2rem;
 }
 .metric { background: var(--paper); padding: 1.1rem 1.25rem; }
+@media (max-width: 480px) { .metric { padding: .9rem 1rem; } }
 .band--sunk .metric { background: var(--paper-sunk); }
 .metric__v {
   font-family: var(--font-display);
-  font-size: 1.9rem;
+  /* Кегль плавающий: число теперь неразрывное, и на узкой колонке
+     «3 000+» в фиксированном кегле вылезало за край экрана. */
+  font-size: clamp(1.5rem, 1.05rem + 1.4vw, 1.9rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -.035em;
@@ -833,7 +838,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
    десятых секунды. */
 [data-js] .reveal.is-load {
   animation: rise 1.15s var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 155ms + 80ms);
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(52px); }
@@ -846,7 +851,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 [data-js] .hero__eyebrow.is-load::after {
   transform-origin: left center;
   animation: rule-draw 1.3s var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 155ms + 250ms);
+  animation-delay: calc(var(--i, 0) * 90ms + 250ms);
 }
 @keyframes rule-draw {
   from { transform: scaleX(0); }
@@ -1482,3 +1487,88 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 :root[data-theme='dark'] .band--art::before { opacity: .12; }
 @media print { .band--art::before { display: none; } }
+
+/* --- 32. Переключатель оформления ------------------------ */
+/* Без скрипта кнопка ничего не переключает, поэтому и не показывается. */
+
+.tgl { display: none; }
+[data-js] .tgl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--rule);
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.tgl:hover { color: var(--accent); border-color: var(--accent); }
+.tgl__i { width: 1.0625rem; height: 1.0625rem; }
+/* На кнопке нарисовано то, куда она переключит: в светлой теме луна. */
+.tgl__sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .tgl__sun  { display: inline; }
+  :root:not([data-theme='light']) .tgl__moon { display: none; }
+}
+:root[data-theme='dark']  .tgl__sun  { display: inline; }
+:root[data-theme='dark']  .tgl__moon { display: none; }
+:root[data-theme='light'] .tgl__sun  { display: none; }
+:root[data-theme='light'] .tgl__moon { display: inline; }
+
+/* Соседи по шапке выравниваются по одной высоте */
+.lang { display: inline-flex; align-items: center; height: 2.25rem; padding: 0 .6rem; }
+.burger { width: 2.25rem; height: 2.25rem; }
+.hdr__side { gap: .5rem; }
+
+@media print { .tgl { display: none !important; } }
+
+/* --- 33. Полоса о хранении настройки --------------------- */
+/* Обычная полоса внизу экрана, а не окно поверх страницы: она ничего не
+   загораживает и не запрещает читать дальше. Показывается один раз. */
+
+.notice {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 120;
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(100%);
+  transition: transform .45s var(--ease);
+}
+.notice.is-up { transform: none; }
+.notice__in {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: 1rem;
+}
+.notice__t {
+  margin: 0;
+  max-width: 74ch;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+}
+.notice__ok {
+  flex: none;
+  font: inherit;
+  font-size: .875rem;
+  padding: .55rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--paper) 45%, transparent);
+  background: none;
+  color: var(--paper);
+  cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.notice__ok:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+@media (max-width: 640px) {
+  .notice__in { flex-direction: column; align-items: flex-start; gap: .8rem; padding-block: .85rem; }
+  .notice__t { font-size: .875rem; line-height: 1.45; }
+  .notice__ok { align-self: stretch; text-align: center; padding-block: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .notice { transition: none; } }
+@media print { .notice { display: none !important; } }

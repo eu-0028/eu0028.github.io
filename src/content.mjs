@@ -25,6 +25,12 @@ export const ru = {
   skip: 'Перейти к содержанию',
   menu: 'Меню',
   close: 'Закрыть',
+  toTop: 'Наверх, к началу страницы',
+  theme: { toDark: 'Темное оформление', toLight: 'Светлое оформление' },
+  notice: {
+    text: 'Сайт не собирает персональные данные и не считает посетителей. В браузере остается только выбранное оформление.',
+    ok: 'Понятно',
+  },
 
   nav: [
     { href: '#about', label: 'О себе', n: '1' },
@@ -317,6 +323,12 @@ export const en = {
   skip: 'Skip to content',
   menu: 'Menu',
   close: 'Close',
+  toTop: 'Back to the top of the page',
+  theme: { toDark: 'Dark appearance', toLight: 'Light appearance' },
+  notice: {
+    text: 'This site collects no personal data and counts no visitors. The only thing kept in your browser is the appearance you pick.',
+    ok: 'Got it',
+  },
 
   nav: [
     { href: '#about', label: 'About', n: '1' },

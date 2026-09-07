@@ -40,6 +40,85 @@
     });
   }
 
+  /* --- Знак в шапке возвращает к началу страницы --------- */
+  /* Раньше он вел на адрес сайта и страница перезагружалась целиком:
+     заново грузились шрифты и карта, а прокрутка прыгала в начало
+     рывком. Теперь это просто возврат наверх по той же странице. */
+  var toTop = document.querySelector('[data-top]');
+  if (toTop) {
+    toTop.addEventListener('click', function (e) {
+      if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      /* Уводим из адреса якорь раздела, иначе следующее обновление
+         страницы снова утащит вниз. */
+      if (location.hash && history.replaceState) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    });
+  }
+
+  /* --- Светлое и темное оформление ----------------------- */
+  /* Выбор человека сильнее системной настройки и переживает перезагрузку.
+     Пока выбора нет, атрибута нет и работает системная тема. */
+  var toggles = document.querySelectorAll('[data-theme-toggle]');
+  if (toggles.length) {
+    var root = document.documentElement;
+    var dark = window.matchMedia('(prefers-color-scheme: dark)');
+    var mark = document.createElement('meta');
+    mark.setAttribute('name', 'theme-color');
+    document.head.insertBefore(mark, document.head.firstChild);
+    var now = function () {
+      var set = root.getAttribute('data-theme');
+      return set === 'dark' || set === 'light' ? set : (dark.matches ? 'dark' : 'light');
+    };
+    var label = function () {
+      var next = now() === 'dark' ? 'light' : 'dark';
+      var text = toggles[0].getAttribute('data-label-' + next) || '';
+      Array.prototype.forEach.call(toggles, function (b) {
+        b.setAttribute('aria-label', text);
+        b.setAttribute('title', text);
+      });
+      /* Цвет строки состояния в мобильных браузерах. Метка без media
+         стоит первой и перекрывает системные. */
+      mark.setAttribute('content', now() === 'dark' ? '#0e1116' : '#f4f5f6');
+    };
+    label();
+    Array.prototype.forEach.call(toggles, function (b) {
+      b.addEventListener('click', function () {
+        var next = now() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (x) {}
+        label();
+      });
+    });
+    /* Пока человек ничего не выбрал, следуем за системой на лету */
+    var follow = function () { if (!root.getAttribute('data-theme')) label(); };
+    if (dark.addEventListener) dark.addEventListener('change', follow);
+    else if (dark.addListener) dark.addListener(follow);
+  }
+
+  /* --- Уведомление о хранении настройки ------------------ */
+  /* Показываем один раз в жизни браузера. Если хранилище недоступно,
+     запомнить отказ негде — тогда полосу не показываем вовсе, чтобы
+     не встречать человека одним и тем же сообщением каждый раз. */
+  var notice = document.querySelector('[data-notice]');
+  if (notice) {
+    var seen = null;
+    try { seen = localStorage.getItem('notice'); } catch (x) { seen = 'off'; }
+    if (!seen) {
+      setTimeout(function () {
+        notice.hidden = false;
+        requestAnimationFrame(function () { notice.classList.add('is-up'); });
+      }, 1400);
+      notice.querySelector('[data-notice-ok]').addEventListener('click', function () {
+        notice.classList.remove('is-up');
+        try { localStorage.setItem('notice', '1'); } catch (x) {}
+        setTimeout(function () { notice.hidden = true; }, 400);
+      });
+    }
+  }
+
   /* --- Появление блоков при прокрутке -------------------- */
   var rises = document.querySelectorAll('.reveal');
   if (reduced || !('IntersectionObserver' in window)) {
@@ -69,17 +148,21 @@
     }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
     /* Первый экран не ждет прокрутки: то, что видно при открытии, встает
        в очередь появления и поднимается сверху вниз. Очередь не длиннее
-       восьми шагов, иначе на высоком экране хвост доезжал бы слишком
-       долго. Все, что ниже кромки, наблюдается как раньше. */
+       семи шагов, иначе на высоком экране хвост доезжал бы слишком
+       долго. Все, что ниже кромки, наблюдается как раньше.
+
+       В очередь идет только то, что человек видит в это мгновение.
+       Раньше в нее попадало и все прокрученное выше — при обновлении
+       страницы посреди текста экран оставался пустым около полутора
+       секунд, пока очередь доходила до видимой части. */
     var fold = window.innerHeight || document.documentElement.clientHeight;
     var order = 0;
     Array.prototype.forEach.call(rises, function (el) {
-      if (el.getBoundingClientRect().top < fold) {
-        el.style.setProperty('--i', Math.min(order++, 8));
-        el.classList.add('is-load');
-        return;
-      }
-      io.observe(el);
+      var box = el.getBoundingClientRect();
+      if (box.top >= fold) { io.observe(el); return; }
+      if (box.bottom <= 0) { el.classList.add('is-now'); return; }
+      el.style.setProperty('--i', Math.min(order++, 6));
+      el.classList.add('is-load');
     });
   }
 

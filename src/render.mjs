@@ -1,7 +1,20 @@
 import { shared } from './content.mjs';
 import { mapMeta } from './map.generated.mjs';
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/* Число не должно разрываться переносом строки. На узком экране «3 000
+   страниц» уезжало на две строки как «3» и «000 страниц», а «9 млн ₽» —
+   как «9 млн» и «₽». Поэтому пробел внутри числа и пробел перед единицей
+   измерения делаем неразрывными прямо в тексте, а не подпираем версткой. */
+const NBSP = '\u00a0';
+const tight = (s) =>
+  String(s)
+    .replace(/(\d)[ ](?=\d)/g, '$1' + NBSP)
+    /* Границу слова тут не проверяем: в JS \b работает только по
+       латинице, и после «млн» она не срабатывает. */
+    .replace(/(\d)[ ](?=млн|млрд|тыс|руб|₽|%|mln|bn)/g, '$1' + NBSP)
+    .replace(/(млн|млрд|тыс|mln|bn)[ ](?=₽|руб|RUB|USD)/g, '$1' + NBSP);
+
+const esc = (s) => tight(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const attr = (s) => esc(s).replace(/"/g, '&quot;');
 const list = (items) => items.map((b) => `<li>${esc(b)}</li>`).join('');
 
@@ -26,16 +39,32 @@ const aside = (n, kicker) =>
 
 /* --- шапка и меню --------------------------------------- */
 
+/* Переключатель оформления. Виден только при работающем скрипте: без него
+   кнопка ничего не переключает, а подпись к ней некому обновить. */
+const themeBtn = (t) => `<button class="tgl" type="button" data-theme-toggle data-label-dark="${attr(t.theme.toDark)}" data-label-light="${attr(t.theme.toLight)}" aria-label="${attr(t.theme.toDark)}" title="${attr(t.theme.toDark)}">
+        <svg class="tgl__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path class="tgl__moon" d="M20.2 14.9A8.4 8.4 0 0 1 9.1 3.8 8.6 8.6 0 1 0 20.2 14.9Z" fill="currentColor"/>
+          <g class="tgl__sun" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.1"/>
+            <path d="M12 2.7v2.1M12 19.2v2.1M21.3 12h-2.1M4.8 12H2.7M18.6 5.4 17.1 6.9M6.9 17.1l-1.5 1.5M18.6 18.6l-1.5-1.5M6.9 6.9 5.4 5.4"/>
+          </g>
+        </svg>
+      </button>`;
+
 function header(t, base) {
   const nav = t.nav.map((i) => `<a href="${attr(i.href)}" data-nav>${esc(i.label)}</a>`).join('');
   const drawer = t.nav
     .map((i) => `<a href="${attr(i.href)}" data-drawer-link>${esc(i.label)}</a>`)
     .join('');
+  /* Ссылка на корень остается на месте: без скрипта знак должен вести на
+     главную. Со скриптом он просто возвращает к началу страницы, не
+     перезагружая ее. */
   return `<header class="hdr" data-hdr>
   <div class="shell hdr__in">
-    <a class="brand" href="${attr(base)}" aria-label="${attr(t.hero.name)}"><span class="brand__mark">ES</span></a>
+    <a class="brand" href="${attr(base)}" aria-label="${attr(t.toTop)}" data-top><span class="brand__mark">ES</span></a>
     <nav class="hdr__nav" aria-label="${attr(t.footer.navTitle)}">${nav}</nav>
     <div class="hdr__side">
+      ${themeBtn(t)}
       <a class="lang" href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}" lang="${attr(t.altLang)}">${esc(t.altLang.toUpperCase())}</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="${attr(t.menu)}" data-burger><span></span></button>
     </div>
@@ -61,7 +90,7 @@ function hero(t, portraitFile) {
         </div>
       </div>
       ${portraitFile ? `<div class="hero__media">
-        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="810" height="1330" fetchpriority="high" decoding="async">
+        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="810" height="1311" fetchpriority="high" decoding="async">
       </div>` : ''}
     </div>
   </div>
@@ -373,6 +402,20 @@ function footer(t) {
 </footer>`;
 }
 
+/* --- уведомление о хранении данных ----------------------- */
+/* Полоса скрыта в разметке и показывается скриптом — и только тому, кто
+   ее еще не закрывал. Отметку о закрытии храним локально, поэтому второй
+   раз она никому не попадается. */
+
+function notice(t) {
+  return `<div class="notice" data-notice hidden>
+  <div class="shell notice__in">
+    <p class="notice__t">${esc(t.notice.text)}</p>
+    <button class="notice__ok" type="button" data-notice-ok>${esc(t.notice.ok)}</button>
+  </div>
+</div>`;
+}
+
 /* --- микроразметка -------------------------------------- */
 
 function jsonLd(t) {
@@ -436,8 +479,10 @@ export function page(t, { portraitFile = '', images = new Set(), logos = new Map
 <link rel="stylesheet" href="${R}assets/${cssName}">
 ${jsonLd(t)}
 <!-- Появление блоков при прокрутке включается только здесь. Без этой
-     строки (скрипт запрещен, ошибка загрузки) текст остается видимым. -->
-<script>document.documentElement.setAttribute('data-js','')</script>
+     строки (скрипт запрещен, ошибка загрузки) текст остается видимым.
+     Здесь же возвращаем выбранное оформление — до первой отрисовки,
+     иначе страница успевает моргнуть чужой темой. -->
+<script>(function(){var e=document.documentElement;try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')e.setAttribute('data-theme',t)}catch(x){}e.setAttribute('data-js','')})()</script>
 </head>
 <body>
 <a class="skip" href="#main">${esc(t.skip)}</a>
@@ -452,6 +497,7 @@ ${current(t)}
 ${contact(t)}
 </main>
 ${footer(t)}
+${notice(t)}
 <script src="${R}assets/${jsName}" defer></script>
 </body>
 </html>`;
