@@ -28,7 +28,7 @@ export const ru = {
   toTop: 'Наверх, к началу страницы',
   theme: { toDark: 'Темное оформление', toLight: 'Светлое оформление' },
   notice: {
-    text: 'Сайт не собирает персональные данные и не считает посетителей. В браузере остается только выбранное оформление.',
+    text: 'Сайт не использует файлы cookie и не собирает персональные данные. В браузере сохраняются только настройки отображения.',
     ok: 'Понятно',
   },
 
@@ -326,7 +326,7 @@ export const en = {
   toTop: 'Back to the top of the page',
   theme: { toDark: 'Dark appearance', toLight: 'Light appearance' },
   notice: {
-    text: 'This site collects no personal data and counts no visitors. The only thing kept in your browser is the appearance you pick.',
+    text: 'This site uses no cookies and collects no personal data. Only your display settings are kept in the browser.',
     ok: 'Got it',
   },
 
