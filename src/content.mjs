@@ -20,6 +20,7 @@ export const ru = {
   description:
     'Специалист-международник по странам БРИКС и Латинской Америки. Португальский и английский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
   ogLocale: 'ru_RU',
+  ogImageAlt: 'Международные проекты и делегации',
 
   brand: 'Шутов',
   skip: 'Перейти к содержанию',
@@ -318,6 +319,7 @@ export const en = {
   description:
     'International affairs specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
   ogLocale: 'en_US',
+  ogImageAlt: 'International projects and delegations',
 
   brand: 'Shutov',
   skip: 'Skip to content',

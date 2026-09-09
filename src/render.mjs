@@ -458,6 +458,14 @@ export function page(t, { portraitFile = '', images = new Set(), logos = new Map
 <meta property="og:url" content="${attr(canonical)}">
 <meta property="og:locale" content="${attr(t.ogLocale)}">
 <meta property="og:site_name" content="${attr(t.hero.name)}">
+<!-- Карточка для превью ссылки. Без нее мессенджеры показывали пустой
+     прямоугольник: twitter:card обещал большую картинку, а картинки не было.
+     Адрес обязан быть полным, относительный тут не читается. -->
+<meta property="og:image" content="${attr(shared.domain)}/assets/img/${t.lang === 'en' ? 'og-en' : 'og-ru'}.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${attr(t.hero.name)}. ${attr(t.ogImageAlt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">

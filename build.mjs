@@ -17,7 +17,7 @@ const portraitFile = (await readdir('assets/img')).find((f) => /^portrait\.(webp
 const logos = new Map();
 for (const f of await readdir('assets/img')) {
   const m = /^([a-z0-9-]+)\.(svg|png|webp)$/i.exec(f);
-  if (m && /^portrait/i.test(m[1])) continue;          // портрет не логотип
+  if (m && /^(portrait|og-)/i.test(m[1])) continue;    // портрет и карточки соцсетей не логотипы
   if (m && !logos.has(m[1].toLowerCase())) logos.set(m[1].toLowerCase(), f);
 }
 const icons = {};
@@ -30,7 +30,7 @@ for (const f of await readdir('assets/icons')) {
 /* Фотографии проектов: все, что лежит в assets/img, кроме логотипов и портрета */
 const images = new Set(
   (await readdir('assets/img')).filter(
-    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait)[-.]/i.test(f)
+    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait|og)[-.]/i.test(f)
   )
 );
 

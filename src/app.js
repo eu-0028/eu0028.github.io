@@ -229,6 +229,10 @@
     };
     if (reduced || !('IntersectionObserver' in window)) return;
 
+    /* Итоговое значение держим на узле: по нему восстанавливаем число
+       перед печатью, не дожидаясь, пока блок попадет в кадр. */
+    node.setAttribute('data-final', fmt(target));
+
     /* Обнуляем сразу при загрузке: иначе цифра сбрасывалась на нуль
        уже на глазах у читателя, когда блок доходил до нужной высоты. */
     node.textContent = fmt(0);
@@ -239,6 +243,7 @@
         io.unobserve(e.target);
         var t0 = null, dur = 1200;
         var step = function (ts) {
+          if (node.getAttribute('data-frozen')) return;
           if (t0 === null) t0 = ts;
           var p = Math.min((ts - t0) / dur, 1);
           var eased = 1 - Math.pow(1 - p, 4);
@@ -250,6 +255,29 @@
     }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
     io.observe(node);
   });
+
+  /* Печать не ждет прокрутки. Числа обнулены до появления блока в кадре,
+     и при печати сразу после открытия страницы на бумагу уходили нули:
+     «0 млн», «0 участников». Перед печатью проставляем настоящие значения.
+     matchMedia ловит печать в Safari и в мобильных браузерах, где события
+     beforeprint не приходят. */
+  var freeze = function () {
+    Array.prototype.forEach.call(counters, function (node) {
+      var done = node.getAttribute('data-final');
+      if (!done) return;
+      /* Пометка останавливает отсчет: иначе кадр анимации, идущий следом,
+         затирал подставленное значение и на бумагу уходило промежуточное
+         число вроде «32» вместо «50». */
+      node.setAttribute('data-frozen', '1');
+      node.textContent = done;
+    });
+  };
+  if (window.matchMedia) {
+    var forPrint = window.matchMedia('print');
+    if (forPrint.addEventListener) forPrint.addEventListener('change', function (e) { if (e.matches) freeze(); });
+    else if (forPrint.addListener) forPrint.addListener(function (e) { if (e.matches) freeze(); });
+  }
+  window.addEventListener('beforeprint', freeze);
 
   /* --- Карта: на узком экране открываем на странах проектов -- */
   var mapScroll = document.querySelector('.map__scroll');
