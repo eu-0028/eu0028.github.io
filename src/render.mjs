@@ -24,10 +24,14 @@ let R = '';                                   // префикс до корня 
 let ICONS = {};
 let BACKDROPS = new Set();
 let MAP = 'map-base.svg';
-/* Фоновый снимок появляется, только если файл действительно лежит в assets/img */
+/* Фоновый снимок появляется, только если файл действительно лежит в assets/img.
+   Путь от корня сайта, а не относительный: адрес уезжает в переменную --bg,
+   а браузер считает относительный адрес в переменной от файла стилей, а не от
+   страницы. Из-за этого снимок запрашивался по assets/assets/img и не грузился
+   вовсе — подложки не было видно ни на одной странице. */
 const art = (id) => {
   const f = [...BACKDROPS].find((n) => n.startsWith('bg-' + id + '.'));
-  return f ? ` band--art" style="--bg:url(${R}assets/img/${f})` : '';
+  return f ? ` band--art" style="--bg:url(/assets/img/${f})` : '';
 };
 const icon = (name) =>
   ICONS[name] ? `<svg class="ico" viewBox="0 0 256 256" aria-hidden="true" focusable="false">${ICONS[name]}</svg>` : '';

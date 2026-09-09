@@ -33,7 +33,7 @@ const backdrops = new Set(
 /* Фотографии проектов: все, что лежит в assets/img, кроме логотипов и портрета */
 const images = new Set(
   (await readdir('assets/img')).filter(
-    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait)[-.]/i.test(f)
+    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait|bg)[-.]/i.test(f)
   )
 );
 
