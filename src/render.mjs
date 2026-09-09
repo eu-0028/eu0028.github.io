@@ -465,7 +465,7 @@ export function page(t, { portraitFile = '', images = new Set(), logos = new Map
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${attr(t.hero.name)}. ${attr(t.ogImageAlt)}">
+<meta property="og:image:alt" content="${attr(t.hero.name)}. ${attr(t.hero.lead)} ${attr(t.hero.leadEm)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
