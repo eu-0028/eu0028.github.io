@@ -1466,38 +1466,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .practice__head { display: flex; align-items: flex-start; gap: .7rem; }
 .ico { width: 1.5rem; height: 1.5rem; flex: none; color: var(--accent); fill: currentColor; margin-top: .1em; }
 
-/* --- 31. Фоновый снимок раздела -------------------------- */
-/* Включается сам, как только в assets/img появится bg-<раздел>.jpg */
-
-.band--art { position: relative; isolation: isolate; }
-/* Снимок стоит за началом раздела и растворяется книзу, а не тянется на всю
-   его высоту. Раздел с проектами высотой 4300 точек, и при растяжении на всю
-   высоту снимок раздувало так, что от него оставалось одно мутное пятно.
-   Прижатый к верху и ограниченный по высоте, он держит нормальные пропорции
-   кадра — и обходится без background-attachment: fixed, который на iOS
-   работает через раз. */
-.band--art::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: min(100%, 42rem);
-  z-index: -1;
-  background-image: var(--bg);
-  background-size: cover;
-  background-position: center;
-  opacity: .1;
-  filter: grayscale(1) contrast(1.1);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
-  pointer-events: none;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .band--art::before { opacity: .15; }
-}
-:root[data-theme='dark'] .band--art::before { opacity: .15; }
-@media print { .band--art::before { display: none; } }
-
-/* --- 32. Переключатель оформления ------------------------ */
+/* --- 31. Переключатель оформления ------------------------ */
 /* Без скрипта кнопка ничего не переключает, поэтому и не показывается. */
 
 .tgl { display: none; }
@@ -1534,7 +1503,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 @media print { .tgl { display: none !important; } }
 
-/* --- 33. Полоса о хранении настройки --------------------- */
+/* --- 32. Полоса о хранении настройки --------------------- */
 /* Обычная полоса внизу экрана, а не окно поверх страницы: она ничего не
    загораживает и не запрещает читать дальше. Показывается один раз. */
 

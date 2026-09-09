@@ -22,17 +22,7 @@ const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10
 
 let R = '';                                   // префикс до корня сайта
 let ICONS = {};
-let BACKDROPS = new Set();
 let MAP = 'map-base.svg';
-/* Фоновый снимок появляется, только если файл действительно лежит в assets/img.
-   Путь от корня сайта, а не относительный: адрес уезжает в переменную --bg,
-   а браузер считает относительный адрес в переменной от файла стилей, а не от
-   страницы. Из-за этого снимок запрашивался по assets/assets/img и не грузился
-   вовсе — подложки не было видно ни на одной странице. */
-const art = (id) => {
-  const f = [...BACKDROPS].find((n) => n.startsWith('bg-' + id + '.'));
-  return f ? ` band--art" style="--bg:url(/assets/img/${f})` : '';
-};
 const icon = (name) =>
   ICONS[name] ? `<svg class="ico" viewBox="0 0 256 256" aria-hidden="true" focusable="false">${ICONS[name]}</svg>` : '';
 const flag = (code, eager) =>
@@ -135,7 +125,7 @@ function work(t, images) {
       </article>`
     )
     .join('');
-  return `<section class="band band--sunk${art('work')}" id="work">
+  return `<section class="band band--sunk" id="work">
   <div class="shell">
     <div class="grid2" style="margin-bottom:clamp(2rem,4vw,3rem)">
       ${aside(s.n, s.kicker)}
@@ -234,7 +224,7 @@ function geo(t) {
     )
     .join('');
 
-  return `<section class="band${art('geo')}" id="geo">
+  return `<section class="band" id="geo">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -275,7 +265,7 @@ function current(t) {
       </div>`
     )
     .join('');
-  return `<section class="band band--sunk${art('current')}" id="current">
+  return `<section class="band band--sunk" id="current">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -333,7 +323,7 @@ function about(t, logos) {
     )
     .join('');
 
-  return `<section class="band band--sunk${art('about')}" id="about">
+  return `<section class="band band--sunk" id="about">
   <div class="shell">
     <div class="grid2">
       ${aside(s.n, s.kicker)}
@@ -355,7 +345,7 @@ function about(t, logos) {
 
 function contact(t) {
   const s = t.contact;
-  return `<section class="band contact${art('contact')}" id="contact">
+  return `<section class="band contact" id="contact">
   <div class="shell">
     <p class="contact__kicker reveal">${esc(s.kicker)}</p>
     <h2 class="contact__h reveal">${esc(s.title)}</h2>
@@ -439,11 +429,10 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, backdrops = new Set(), cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
+export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
   const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
   R = t.lang === 'en' ? '../' : '';
   ICONS = icons;
-  BACKDROPS = backdrops;
   MAP = mapName;
   /* Ссылка на себя ведет в текущий каталог: адрес остается без index.html */
   const base = './';

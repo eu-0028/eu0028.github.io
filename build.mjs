@@ -17,7 +17,7 @@ const portraitFile = (await readdir('assets/img')).find((f) => /^portrait\.(webp
 const logos = new Map();
 for (const f of await readdir('assets/img')) {
   const m = /^([a-z0-9-]+)\.(svg|png|webp)$/i.exec(f);
-  if (m && /^(portrait|bg-)/i.test(m[1])) continue;   // портрет и фоны не логотипы
+  if (m && /^portrait/i.test(m[1])) continue;          // портрет не логотип
   if (m && !logos.has(m[1].toLowerCase())) logos.set(m[1].toLowerCase(), f);
 }
 const icons = {};
@@ -27,13 +27,10 @@ for (const f of await readdir('assets/icons')) {
   icons[f.replace('.svg', '')] = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').trim();
 }
 
-const backdrops = new Set(
-  (await readdir('assets/img')).filter((f) => /^bg-(about|work|geo|current|contact)\.(jpe?g|png|webp)$/i.test(f))
-);
 /* Фотографии проектов: все, что лежит в assets/img, кроме логотипов и портрета */
 const images = new Set(
   (await readdir('assets/img')).filter(
-    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait|bg)[-.]/i.test(f)
+    (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !/^(mgimo|portrait)[-.]/i.test(f)
   )
 );
 
@@ -74,8 +71,8 @@ await copyFile('src/favicon.svg', 'favicon.svg');
 await copyFile('src/favicon.ico', 'favicon.ico');
 await copyFile('src/apple-touch-icon.png', 'apple-touch-icon.png');
 
-await writeFile('index.html', page(ru, { portraitFile, images, logos, icons, backdrops, ...assetNames }));
-await writeFile('en/index.html', page(en, { portraitFile, images, logos, icons, backdrops, ...assetNames }));
+await writeFile('index.html', page(ru, { portraitFile, images, logos, icons, ...assetNames }));
+await writeFile('en/index.html', page(en, { portraitFile, images, logos, icons, ...assetNames }));
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(
@@ -94,7 +91,7 @@ await writeFile(
 </div></main></body></html>`
 );
 
-const yo = (page(ru, { portraitFile, images, logos, icons, backdrops, ...assetNames }).match(/[ёЁ]/g) || []).length;
+const yo = (page(ru, { portraitFile, images, logos, icons, ...assetNames }).match(/[ёЁ]/g) || []).length;
 if (yo) throw new Error(`В русском тексте снова буква ё: ${yo} шт.`);
 
 const today = new Date().toISOString().slice(0, 10);
@@ -120,7 +117,6 @@ console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, rob
 console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}, ${mapName}`);
 console.log(`Шрифтов: ${fonts}`);
 console.log(`Портрет: ${portraitFile || 'нет файла assets/img/portrait.(webp|png|jpg) — блок скрыт'}`);
-console.log(`Фоновые снимки: ${backdrops.size ? [...backdrops].join(', ') : 'нет — секции без фона'}`);
 console.log(`Фотографии проектов: ${images.size ? [...images].join(', ') : 'нет — блоки с фото не выводятся'}`);
 const needLogos = ['mgimo'].filter((n) => !logos.has(n));
 console.log(
