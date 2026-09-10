@@ -389,7 +389,7 @@ export const en = {
         m: [
           { v: '45', l: 'delegation members' },
           { v: '5', l: 'countries' },
-          { v: '3M+', l: 'broadcast viewers' },
+          { v: '3+ mln', l: 'broadcast viewers' },
           { v: '134', l: 'countries reached' },
         ],
       },
@@ -397,15 +397,15 @@ export const en = {
         t: 'SCO Business Incubator 2025',
         img: 'work-sco.jpg',
         imgAlt: 'SCO Business Incubator, Omsk',
-        sub: 'State contract: reporting and financial audit',
+        sub: 'Government contract: reporting and financial audit',
         meta: 'September-December 2025 · programme held in Omsk',
-        role: 'Head of reporting under the state contract',
+        role: 'Head of reporting under the government contract',
         d: 'Client: the Directorate of the World Youth Festival. The programme ran on 19-23 August 2025, with more than 100 participants from all ten SCO states.',
         b: [
           'Final report of more than 3,000 pages: collected, structured and formatted training materials across 25 workshop sessions.',
           'Wrote summaries and handouts for 12 sessions from scratch, because no source materials existed.',
           'Ran the financial reporting on my own: reconciled 10 contractor agreements covering interpreters, catering, staff and logistics.',
-          'Agreed the corrections with suppliers and delivered a 9-million-rouble expense report that reconciled to the rouble, backed by source documents and internal orders.',
+          'Agreed the corrections with suppliers and delivered a 9-million-rouble expense report that reconciled to the rouble, backed by source documents and internal directives.',
         ],
         m: [
           { v: '3,000+', l: 'pages of report' },
@@ -467,7 +467,7 @@ export const en = {
         role: 'Head of forum sales',
         d: 'Led sales for the forum of 25-26 April 2026 on behalf of Consult Invest ITIC, AGORA’s delivery partner.',
         b: [
-          'Set up payment collection for the club’s legal entity: signed the card-acquiring agreement, drafted the public offer and the invoice-offer templates for corporate and private payers.',
+          'Set up payment collection for the club’s legal entity: signed the card-acquiring agreement, drafted the standard terms and the invoice templates for corporate and private payers.',
           'Prepared the contract templates and ran the paperwork with participants.',
           'Owned sales for the 25-26 April 2026 forum: worked the client lists, ran the online channels and handled inbound enquiries.',
           'Hosted the forum’s foreign guests: the Indian and South African delegations.',
@@ -498,7 +498,7 @@ export const en = {
         t: 'Contracts, procurement and reporting',
         icon: 'file-text',
         d: 'I draft them myself, foreign-language documents included',
-        b: ['Reporting under state contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acts, commercial proposals', 'HR administration and compliance'],
+        b: ['Reporting under government contracts', 'Reconciliation of contractor agreements and source documents', 'Agency agreements, acceptance certificates, commercial proposals', 'HR administration and compliance'],
       },
       {
         t: 'Translation and language support',
@@ -572,7 +572,7 @@ export const en = {
     title: 'What this looks like in practice',
     paras: [
       'I am an international affairs specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
-      'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the state client has to sign off. I do both halves.',
+      'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the government client has to sign off. I do both halves.',
     ],
     langTitle: 'Languages',
     langs: [
@@ -669,9 +669,9 @@ export const pt = {
     title: 'O que já entreguei',
     items: [
       {
-        t: 'Intervisão 2025',
+        t: 'Intervision 2025',
         img: 'work-intervision.jpg',
-        imgAlt: 'Delegações na Intervisão 2025',
+        imgAlt: 'Delegações na Intervision 2025',
         sub: 'Concurso musical internacional',
         meta: 'agosto-setembro de 2025 · Live Arena, Moscou',
         role: 'Gerente de projeto das delegações nacionais',
@@ -701,8 +701,8 @@ export const pt = {
         b: [
           'Relatório final de mais de 3.000 páginas: reuni, estruturei e formatei o material didático de 25 sessões de workshop.',
           'Escrevi do zero as apostilas e os materiais de apoio de 12 sessões, porque não havia material de origem.',
-          'Cuidei sozinho da prestação de contas financeira: conferi 10 contratos com fornecedores de tradução, bufê, pessoal e logística.',
-          'Acertei os ajustes de documentos com os fornecedores e preparei o relatório de despesas de 9 milhões de rublos, que fechou até o último rublo, com documentos primários e portarias internas.',
+          'Cuidei sozinho da prestação de contas financeira: conferi 10 contratos com fornecedores de interpretação, buffet, pessoal e logística.',
+          'Acertei os ajustes de documentos com os fornecedores e preparei o relatório de despesas de 9 milhões de rublos, que fechou até o último rublo, com documentos comprobatórios e atos internos.',
         ],
         m: [
           { v: '3.000+', l: 'páginas de relatório' },
@@ -722,7 +722,7 @@ export const pt = {
         b: [
           'Vendas e captação: 200 ligações e cerca de 1.000 impressões no Telegram e nas redes sociais.',
           'Trouxe 30 participantes pagantes e montei 15 reuniões de negócios entre empresas russas e estrangeiras.',
-          'Selecionei 9 projetos russos para a sessão de pitch; três receberam aporte direto e isenção da taxa de licença comercial do fundo de venture Value Makers Studio.',
+          'Selecionei 9 projetos russos para a sessão de pitch; três receberam aporte direto e isenção da taxa de licença comercial do fundo de venture capital Value Makers Studio.',
           'Negociei os contratos de espaço e hospedagem com hotéis de Moscou e consegui tarifas abaixo do mercado, com descontos adicionais.',
           'Montei a operação de pagamentos, os modelos de proposta comercial e os contratos de prestação de serviço.',
           'Conduzi em inglês a correspondência e as negociações com a delegação saudita que veio ao evento.',
@@ -738,21 +738,21 @@ export const pt = {
         t: 'RAKEZ',
         img: 'work-rakez.jpg',
         imgAlt: 'Trabalho no projeto RAKEZ',
-        sub: 'Zona econômica de Ras Al Khaimah, Emirados Árabes Unidos',
+        sub: 'Zona franca de Ras Al Khaimah, Emirados Árabes Unidos',
         meta: 'janeiro-maio de 2026',
         role: 'Captação de clientes nos mercados da Rússia e da CEI',
-        d: 'Respondi pela captação de clientes para a zona econômica livre dos Emirados nos mercados da Rússia e da CEI. Todo contato de contrapartes passava por mim.',
+        d: 'Respondi pela captação de clientes para a zona franca dos Emirados nos mercados da Rússia e da CEI. Todo contato de contrapartes passava por mim.',
         b: [
           'Cheguei a 677 empresas na Rússia, no Uzbequistão e no Cazaquistão, contra uma meta de 300 a 400 em três meses.',
           'Obtive 313 respostas de primeiro interesse, contra uma meta de 300.',
-          'Desenhei e conduzi uma campanha de vendas frias: 512 empresas na base, 275 respostas de conteúdo.',
+          'Desenhei e conduzi uma campanha de prospecção ativa: 512 empresas na base, 275 respostas qualificadas.',
           'Montei uma base de clientes separada para cada um dos três países.',
           'Conduzi as negociações iniciais e levei três clientes até a proposta comercial.',
         ],
         m: [
           { v: '677', l: 'empresas alcançadas' },
           { v: '313', l: 'respostas contra meta de 300' },
-          { v: '275', l: 'respostas de conteúdo' },
+          { v: '275', l: 'respostas qualificadas' },
         ],
       },
       {
@@ -764,7 +764,7 @@ export const pt = {
         role: 'Responsável pelas vendas do fórum',
         d: 'Dirigi as vendas do fórum de 25 e 26 de abril de 2026 pelo lado da Consult Invest ITIC, parceira executora da AGORA.',
         b: [
-          'Montei a operação de pagamentos da pessoa jurídica do clube: fechei o contrato de adquirência, preparei a oferta pública e os modelos de fatura-oferta para pagadores corporativos e pessoas físicas.',
+          'Montei a operação de pagamentos da pessoa jurídica do clube: fechei o contrato de adquirência, preparei o contrato de adesão e os modelos de fatura para pagadores corporativos e pessoas físicas.',
           'Preparei a base contratual e conduzi a documentação com os participantes.',
           'Respondi pelas vendas do fórum de 25 e 26 de abril de 2026: liguei para as bases de clientes, cuidei da divulgação on-line e tratei as solicitações recebidas.',
           'Recebi os convidados estrangeiros do fórum: as delegações da Índia e da África do Sul.',
@@ -789,19 +789,19 @@ export const pt = {
         t: 'Desenvolvimento de negócios e entrada em novos mercados',
         icon: 'trend-up',
         d: 'Captação de clientes nos mercados da Rússia e da CEI, com números medidos',
-        b: ['Geração de leads e vendas frias', 'Base de clientes por país', 'Pesquisa de mercado e análise da concorrência', 'Modelagem financeira e economia unitária'],
+        b: ['Geração de leads e prospecção ativa', 'Base de clientes por país', 'Pesquisa de mercado e análise da concorrência', 'Modelagem financeira e unit economics'],
       },
       {
         t: 'Contratos, compras e prestação de contas',
         icon: 'file-text',
         d: 'Preparo eu mesmo, inclusive em outros idiomas',
-        b: ['Prestação de contas de contratos públicos', 'Conferência de contratos com fornecedores e de documentos primários', 'Contratos de agenciamento, termos de aceite, propostas comerciais', 'Documentação de pessoal e compliance'],
+        b: ['Prestação de contas de contratos públicos', 'Conferência de contratos com fornecedores e de documentos comprobatórios', 'Contratos de agenciamento, termos de aceite, propostas comerciais', 'Documentação de pessoal e compliance'],
       },
       {
         t: 'Tradução e apoio linguístico',
         icon: 'translate',
         d: 'Português e inglês no trabalho de todo dia',
-        b: ['Tradução consecutiva em fóruns', 'Tradução de contratos, regulamentos e documentos societários', 'Documentação técnica', 'Correspondência comercial e diplomática'],
+        b: ['Interpretação consecutiva em fóruns', 'Tradução de contratos, regulamentos e documentos societários', 'Documentação técnica', 'Correspondência comercial e diplomática'],
       },
       {
         t: 'Organização de eventos internacionais',
@@ -846,17 +846,17 @@ export const pt = {
     intro: 'Projetos que conduzo agora',
     items: [
       {
-        t: 'Festival Mundial da Juventude 2026',
+        t: 'Festival Internacional da Juventude 2026',
         meta: 'Ecaterimburgo · 11 a 17 de setembro de 2026',
         d: 'Coordeno a delegação do Brasil na programação infantojuvenil do festival: 10.000 participantes de 191 países, entre eles 1.000 adolescentes de 14 a 17 anos. Conduzo a correspondência com o lado brasileiro em português, reúno e confiro a documentação dos participantes e respondo pela logística e pelo acompanhamento do grupo na Rússia.',
       },
       {
-        t: '«Nossa Geração» 2026',
+        t: 'Nossa Geração 2026',
         meta: 'Concurso musical infantil internacional',
         d: 'Traduzi para o português todo o pacote de documentos do concurso: regulamento, briefing para as delegações, ficha de inscrição e requisitos das apresentações. Negociei a participação de um jurado brasileiro e escolhi o intérprete que representará o país na final.',
       },
       {
-        t: 'Intervisão 2026',
+        t: 'Intervision 2026',
         meta: 'Riade, Arábia Saudita · dezembro de 2026',
         d: 'Em 2025 conduzi no concurso as delegações de cinco países; agora participo da preparação da edição seguinte.',
       },
