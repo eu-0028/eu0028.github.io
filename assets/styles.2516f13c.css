@@ -1201,7 +1201,9 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Плитки подстраиваются под количество: три канала на широком экране
+     встают в ряд, на узком складываются в столбец без осиротевшей плитки. */
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: clamp(1rem, 2vw, 1.5rem);
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }

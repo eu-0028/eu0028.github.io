@@ -370,6 +370,10 @@ function contact(t) {
         <span class="card__top">${icon('telegram-logo')}<span class="card__k">${esc(s.tgLabel)}</span></span>
         <span class="card__v">${esc(shared.telegram)}</span>
       </a>
+      <a class="card" href="${attr(shared.whatsappHref)}" target="_blank" rel="noopener noreferrer">
+        <span class="card__top">${icon('whatsapp-logo')}<span class="card__k">${esc(s.waLabel)}</span></span>
+        <span class="card__v num">${esc(shared.whatsapp)}</span>
+      </a>
       <a class="card" href="mailto:${attr(shared.email)}">
         <span class="card__top">${icon('envelope-simple')}<span class="card__k">${esc(s.emailLabel)}</span></span>
         <span class="card__v">${esc(shared.email)}</span>
@@ -398,6 +402,7 @@ function footer(t) {
         <p class="ftr__t">${esc(t.footer.contactTitle)}</p>
         <ul>
           <li><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></li>
+          <li><a class="num" href="${attr(shared.whatsappHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.whatsapp)}</a></li>
           <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
           ${shared.locales
             .filter((l) => l.key !== t.lang)

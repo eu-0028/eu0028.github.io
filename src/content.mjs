@@ -5,6 +5,10 @@ export const shared = {
   email: 'mail@e-shutov.ru',
   telegram: '@Taback_1028',
   telegramHref: 'https://t.me/Taback_1028',
+  /* Ссылка на WhatsApp строится по номеру: имена пользователя там пока
+     только резервируются и адресом чата еще не работают. */
+  whatsapp: '+7 933 275-45-85',
+  whatsappHref: 'https://wa.me/79332754585',
   domain: 'https://e-shutov.ru',
   years: '2026',
   /* Языки сайта. Порядок тот же, что в переключателе в шапке.
@@ -300,9 +304,10 @@ export const ru = {
     n: '6',
     kicker: 'Контакты',
     title: 'Открыт к предложениям',
-    d: 'Пишите в Telegram или на почту. Отвечаю сам.',
+    d: 'Пишите в Telegram, в WhatsApp или на почту. Отвечаю сам.',
     emailLabel: 'Почта',
     tgLabel: 'Telegram',
+    waLabel: 'WhatsApp',
   },
 
   footer: {
@@ -597,9 +602,10 @@ export const en = {
     n: '6',
     kicker: 'Contact',
     title: 'Open to offers',
-    d: 'Message me on Telegram or by email. I answer my own messages.',
+    d: 'Message me on Telegram or WhatsApp, or by email. I answer my own messages.',
     emailLabel: 'Email',
     tgLabel: 'Telegram',
+    waLabel: 'WhatsApp',
   },
 
   footer: {
@@ -894,9 +900,10 @@ export const pt = {
     n: '6',
     kicker: 'Contato',
     title: 'Aberto a propostas',
-    d: 'Escreva no Telegram ou por e-mail. Respondo eu mesmo.',
+    d: 'Escreva no Telegram, no WhatsApp ou por e-mail. Respondo eu mesmo.',
     emailLabel: 'E-mail',
     tgLabel: 'Telegram',
+    waLabel: 'WhatsApp',
   },
 
   footer: {
