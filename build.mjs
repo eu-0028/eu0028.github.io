@@ -2,7 +2,7 @@
 import { mkdir, writeFile, copyFile, access, rm, readdir, readFile } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { ru, en, shared } from './src/content.mjs';
+import { ru, en, pt, shared } from './src/content.mjs';
 import { page } from './src/render.mjs';
 
 const exists = async (p) => access(p, constants.F_OK).then(() => true, () => false);
@@ -34,7 +34,7 @@ const images = new Set(
   )
 );
 
-await mkdir('en', { recursive: true });
+for (const l of shared.locales) if (l.path) await mkdir(l.path, { recursive: true });
 await mkdir('assets/img', { recursive: true });
 
 /* Имена файлов со стилями и скриптом несут хеш содержимого.
@@ -71,8 +71,10 @@ await copyFile('src/favicon.svg', 'favicon.svg');
 await copyFile('src/favicon.ico', 'favicon.ico');
 await copyFile('src/apple-touch-icon.png', 'apple-touch-icon.png');
 
-await writeFile('index.html', page(ru, { portraitFile, images, logos, icons, ...assetNames }));
-await writeFile('en/index.html', page(en, { portraitFile, images, logos, icons, ...assetNames }));
+const pages = { ru, en, pt };
+for (const l of shared.locales) {
+  await writeFile(`${l.path}index.html`, page(pages[l.key], { portraitFile, images, logos, icons, ...assetNames }));
+}
 
 /* 404 — уводим на главную, а не в пустоту */
 await writeFile(
@@ -86,8 +88,8 @@ await writeFile(
 </head><body>
 <main id="main" class="band"><div class="shell">
 <p class="label" style="margin-bottom:1.5rem">404</p>
-<h1 class="h2">Такой страницы нет<br><span lang="en">This page does not exist</span></h1>
-<p class="hero__cta"><a class="btn" href="/">На главную</a><a class="btn btn--ghost" href="/en/" lang="en">Home</a></p>
+<h1 class="h2">Такой страницы нет<br><span lang="en">This page does not exist</span><br><span lang="pt-BR">Esta página não existe</span></h1>
+<p class="hero__cta"><a class="btn" href="/">На главную</a><a class="btn btn--ghost" href="/en/" lang="en">Home</a><a class="btn btn--ghost" href="/pt/" lang="pt-BR">Início</a></p>
 </div></main></body></html>`
 );
 
@@ -99,21 +101,20 @@ await writeFile(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>${shared.domain}/</loc><lastmod>${today}</lastmod><priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="${shared.domain}/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${shared.domain}/en/"/>
-  </url>
-  <url><loc>${shared.domain}/en/</loc><lastmod>${today}</lastmod><priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="${shared.domain}/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${shared.domain}/en/"/>
-  </url>
+  ${shared.locales
+    .map(
+      (l) => `<url><loc>${shared.domain}/${l.path}</loc><lastmod>${today}</lastmod><priority>${l.path ? '0.9' : '1.0'}</priority>
+    ${shared.locales.map((a) => `<xhtml:link rel="alternate" hreflang="${a.htmlLang}" href="${shared.domain}/${a.path}"/>`).join('\n    ')}
+  </url>`
+    )
+    .join('\n  ')}
 </urlset>`
 );
 
 await writeFile('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${shared.domain}/sitemap.xml\n`);
 
 const fonts = (await readdir('assets/fonts')).length;
-console.log(`Готово: index.html, en/index.html, 404.html, sitemap.xml, robots.txt`);
+console.log(`Готово: ${shared.locales.map((l) => l.path + 'index.html').join(', ')}, 404.html, sitemap.xml, robots.txt`);
 console.log(`Кеш: ${cssName}, ${jsName}, ${fontsName}, ${mapName}`);
 console.log(`Шрифтов: ${fonts}`);
 console.log(`Портрет: ${portraitFile || 'нет файла assets/img/portrait.(webp|png|jpg) — блок скрыт'}`);

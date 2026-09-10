@@ -274,18 +274,28 @@ a { color: inherit; text-decoration: none; }
 
 .hdr__side { display: flex; align-items: center; gap: 1rem; }
 
+/* Три языка в одной рамке. Текущий не ссылка, а отметка: ряд отдельных
+   кнопок в шапке разъезжался и на узком экране не помещался. */
 .lang {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--rule);
   font-family: var(--font-mono);
   font-size: .75rem;
   font-weight: 500;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--ink-3);
-  border: 1px solid var(--rule);
-  padding: .4rem .6rem;
-  transition: border-color .2s var(--ease), color .2s var(--ease);
 }
-.lang:hover { color: var(--accent); border-color: var(--accent); }
+.lang__i {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 .5rem;
+  color: var(--ink-3);
+  transition: color .2s var(--ease), background .2s var(--ease);
+}
+.lang__i + .lang__i { border-left: 1px solid var(--rule); }
+a.lang__i:hover { color: var(--accent); }
+.lang__i.is-on { color: var(--paper); background: var(--ink); }
 
 .burger {
   display: none;
@@ -1499,7 +1509,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 :root[data-theme='light'] .tgl__moon { display: inline; }
 
 /* Соседи по шапке выравниваются по одной высоте */
-.lang { display: inline-flex; align-items: center; height: 2.25rem; padding: 0 .6rem; }
+.lang { height: 2.25rem; }
 .burger { width: 2.25rem; height: 2.25rem; }
 .hdr__side { gap: .5rem; }
 

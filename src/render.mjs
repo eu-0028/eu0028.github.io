@@ -11,7 +11,7 @@ const tight = (s) =>
     .replace(/(\d)[ ](?=\d)/g, '$1' + NBSP)
     /* Границу слова тут не проверяем: в JS \b работает только по
        латинице, и после «млн» она не срабатывает. */
-    .replace(/(\d)[ ](?=млн|млрд|тыс|руб|₽|%|mln|bn)/g, '$1' + NBSP)
+    .replace(/(\d)[ ](?=млн|млрд|тыс|руб|₽|%|mln|bn|milhões|milhão|mil\b|mi\b)/g, '$1' + NBSP)
     .replace(/(млн|млрд|тыс|mln|bn)[ ](?=₽|руб|RUB|USD)/g, '$1' + NBSP);
 
 const esc = (s) => tight(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -32,6 +32,16 @@ const aside = (n, kicker) =>
   `<div class="aside"><span class="aside__k reveal">${esc(kicker)}</span></div>`;
 
 /* --- шапка и меню --------------------------------------- */
+
+/* Переключатель языка: текущий язык не ссылка, а просто отметка. Три кода
+   в одной рамке, чтобы в шапке не выстраивался ряд отдельных кнопок. */
+const langSwitch = (t) => `<div class="lang" role="group" aria-label="${attr(t.langNav)}">${shared.locales
+  .map((l) =>
+    l.key === t.lang
+      ? `<span class="lang__i is-on" aria-current="true">${esc(l.code)}</span>`
+      : `<a class="lang__i" href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}" title="${attr(l.label)}">${esc(l.code)}</a>`
+  )
+  .join('')}</div>`;
 
 /* Переключатель оформления. Виден только при работающем скрипте: без него
    кнопка ничего не переключает, а подпись к ней некому обновить. */
@@ -59,7 +69,7 @@ function header(t, base) {
     <nav class="hdr__nav" aria-label="${attr(t.footer.navTitle)}">${nav}</nav>
     <div class="hdr__side">
       ${themeBtn(t)}
-      <a class="lang" href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}" lang="${attr(t.altLang)}">${esc(t.altLang.toUpperCase())}</a>
+      ${langSwitch(t)}
       <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="${attr(t.menu)}" data-burger><span></span></button>
     </div>
   </div>
@@ -316,7 +326,12 @@ function about(t, logos) {
         <ul class="edu__tracks">${e.tracks
           .map(
             (k) =>
-              `<li><span class="edu__period num">${esc(k.period)}</span><span class="edu__role">${esc(k.role)}${k.note ? `<span class="edu__note">${esc(k.note)}</span>` : ''}</span></li>`
+              /* Специализаций у направления может быть несколько, каждая
+                 идет своей строкой под названием программы. */
+              `<li><span class="edu__period num">${esc(k.period)}</span><span class="edu__role">${esc(k.role)}${[]
+                .concat(k.note || [])
+                .map((n) => `<span class="edu__note">${esc(n)}</span>`)
+                .join('')}</span></li>`
           )
           .join('')}</ul>
       </div>`
@@ -384,7 +399,10 @@ function footer(t) {
         <ul>
           <li><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></li>
           <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
-          <li><a href="${attr(t.altHref)}" hreflang="${attr(t.altLang)}">${esc(t.altLabel)}</a></li>
+          ${shared.locales
+            .filter((l) => l.key !== t.lang)
+            .map((l) => `<li><a href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}">${esc(l.label)}</a></li>`)
+            .join('')}
         </ul>
       </div>
     </div>
@@ -418,7 +436,7 @@ function jsonLd(t) {
     '@type': 'Person',
     name: t.hero.name,
     description: t.description,
-    url: shared.domain + (t.lang === 'en' ? '/en/' : '/'),
+    url: shared.domain + '/' + t.path,
     email: 'mailto:' + shared.email,
     knowsLanguage: t.about.langs.map((l) => l.l),
     alumniOf: { '@type': 'CollegeOrUniversity', name: t.about.edu[0].org },
@@ -430,16 +448,16 @@ function jsonLd(t) {
 /* --- страница целиком ----------------------------------- */
 
 export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
-  const canonical = shared.domain + (t.lang === 'en' ? '/en/' : '/');
-  R = t.lang === 'en' ? '../' : '';
+  const canonical = shared.domain + '/' + t.path;
+  R = t.path ? '../' : '';                     // все языки лежат на один уровень ниже корня
   ICONS = icons;
   MAP = mapName;
   /* Ссылка на себя ведет в текущий каталог: адрес остается без index.html */
   const base = './';
-  const pre = t.lang === 'en' ? 'latin' : 'cyrillic';
+  const pre = t.lang === 'ru' ? 'cyrillic' : 'latin';
 
   return `<!doctype html>
-<html lang="${attr(t.lang)}" dir="${attr(t.dir)}">
+<html lang="${attr(t.htmlLang)}" dir="${attr(t.dir)}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -449,8 +467,7 @@ export function page(t, { portraitFile = '', images = new Set(), logos = new Map
 <meta name="description" content="${attr(t.description)}">
 <meta name="author" content="${attr(t.hero.name)}">
 <link rel="canonical" href="${attr(canonical)}">
-<link rel="alternate" hreflang="ru" href="${attr(shared.domain)}/">
-<link rel="alternate" hreflang="en" href="${attr(shared.domain)}/en/">
+${shared.locales.map((l) => `<link rel="alternate" hreflang="${attr(l.htmlLang)}" href="${attr(shared.domain)}/${l.path}">`).join('\n')}
 <link rel="alternate" hreflang="x-default" href="${attr(shared.domain)}/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="${attr(t.title)}">
@@ -461,7 +478,7 @@ export function page(t, { portraitFile = '', images = new Set(), logos = new Map
 <!-- Карточка для превью ссылки. Без нее мессенджеры показывали пустой
      прямоугольник: twitter:card обещал большую картинку, а картинки не было.
      Адрес обязан быть полным, относительный тут не читается. -->
-<meta property="og:image" content="${attr(shared.domain)}/assets/img/${t.lang === 'en' ? 'og-en' : 'og-ru'}.png">
+<meta property="og:image" content="${attr(shared.domain)}/assets/img/og-${attr(t.lang)}.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

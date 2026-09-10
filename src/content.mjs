@@ -7,15 +7,21 @@ export const shared = {
   telegramHref: 'https://t.me/Taback_1028',
   domain: 'https://e-shutov.ru',
   years: '2026',
+  /* Языки сайта. Порядок тот же, что в переключателе в шапке.
+     path — каталог от корня, он же попадает в адрес и в карту сайта. */
+  locales: [
+    { key: 'ru', code: 'RU', htmlLang: 'ru',    label: 'Русский',    path: '' },
+    { key: 'en', code: 'EN', htmlLang: 'en',    label: 'English',    path: 'en/' },
+    { key: 'pt', code: 'PT', htmlLang: 'pt-BR', label: 'Português',  path: 'pt/' },
+  ],
 };
 
 export const ru = {
   lang: 'ru',
+  htmlLang: 'ru',
+  path: '',
   dir: 'ltr',
-  altLang: 'en',
-  altLabel: 'English',
-  altHref: 'en/',
-  homeHref: '/',
+  langNav: 'Язык сайта',
   title: 'Евгений Шутов. Международные проекты и делегации, португальский C1',
   description:
     'Специалист-международник по странам БРИКС и Латинской Америки. Португальский и английский C1. Сопровождение иностранных делегаций, организация международных мероприятий, договоры и отчетность по государственным контрактам.',
@@ -283,7 +289,14 @@ export const ru = {
         org: 'МГИМО МИД России',
         logo: 'mgimo',
         tracks: [
-          { period: '2026-2028', role: 'Магистратура, «Экономика»', note: 'Международный финансовый анализ, учет и аудит' },
+          {
+            period: '2026-2028',
+            role: 'Магистратура, «Экономика»',
+            note: [
+              'Международный финансовый анализ, учет и аудит',
+              'Информационно-аналитическое обеспечение принятия управленческих решений',
+            ],
+          },
           { period: '2022-2026', role: 'Бакалавриат, «Международные отношения»', note: 'Специализация: Бразилия и Латинская Америка' },
         ],
       },
@@ -309,11 +322,10 @@ export const ru = {
 
 export const en = {
   lang: 'en',
+  htmlLang: 'en',
+  path: 'en/',
   dir: 'ltr',
-  altLang: 'ru',
-  altLabel: 'Русский',
-  altHref: '../',
-  homeHref: '/en/',
+  langNav: 'Site language',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
     'International affairs specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
@@ -581,7 +593,14 @@ export const en = {
         org: 'MGIMO University',
         logo: 'mgimo',
         tracks: [
-          { period: '2026-2028', role: 'MA, Economics', note: 'International financial analysis, accounting and audit' },
+          {
+            period: '2026-2028',
+            role: 'MA, Economics',
+            note: [
+              'International financial analysis, accounting and audit',
+              'Information and analytical support for management decisions',
+            ],
+          },
           { period: '2022-2026', role: 'BA, International Relations', note: 'Specialisation: Brazil and Latin America' },
         ],
       },
@@ -602,5 +621,309 @@ export const en = {
     navTitle: 'Sections',
     contactTitle: 'Contact',
     tagline: 'International affairs',
+  },
+};
+
+export const pt = {
+  lang: 'pt',
+  htmlLang: 'pt-BR',
+  path: 'pt/',
+  dir: 'ltr',
+  langNav: 'Idioma do site',
+  title: 'Evgeny Shutov. Projetos internacionais e delegações, português C1',
+  description:
+    'Especialista em relações internacionais com foco nos BRICS e na América Latina. Português e inglês em C1. Acompanhamento de delegações estrangeiras, organização de eventos internacionais, contratos e prestação de contas em contratos públicos.',
+  ogLocale: 'pt_BR',
+
+  brand: 'Shutov',
+  skip: 'Ir para o conteúdo',
+  menu: 'Menu',
+  close: 'Fechar',
+  toTop: 'Voltar ao início da página',
+  theme: { toDark: 'Tema escuro', toLight: 'Tema claro' },
+  notice: {
+    text: 'O site não usa cookies e não coleta dados pessoais. No navegador ficam guardadas apenas as preferências de exibição.',
+    ok: 'Entendi',
+  },
+
+  nav: [
+    { href: '#about', label: 'Sobre mim', n: '1' },
+    { href: '#practice', label: 'Áreas', n: '2' },
+    { href: '#work', label: 'Projetos', n: '3' },
+    { href: '#geo', label: 'Geografia', n: '4' },
+    { href: '#current', label: '2026', n: '5' },
+    { href: '#contact', label: 'Contato', n: '6' },
+  ],
+
+  hero: {
+    name: 'Evgeny Shutov',
+    eyebrow: 'Evgeny Shutov',
+    lead: 'Faço com que o projeto internacional',
+    leadEm: 'aconteça',
+    leadTail: '',
+    para:
+      'Negocio em três idiomas e resolvo a demanda do cliente de ponta a ponta. Trabalho com os países do BRICS e da América Latina.',
+    ctaPrimary: 'Escrever',
+    ctaSecondary: 'Ver projetos',
+    portraitAlt: 'Evgeny Shutov',
+  },
+
+  figures: {
+    eyebrow: 'Os números',
+    items: [
+      { value: '50', unit: 'milhões de rublos', label: 'Valor somado dos projetos que dirigi em 2025' },
+      { value: '13', unit: 'países', label: 'Com cujos representantes trabalhei pessoalmente' },
+      { value: '5', unit: 'eventos internacionais', label: 'Realizados para um público somado de mais de 2.000 pessoas' },
+    ],
+  },
+
+  work: {
+    n: '3',
+    kicker: 'Projetos',
+    title: 'O que já entreguei',
+    items: [
+      {
+        t: 'Intervisão 2025',
+        img: 'work-intervision.jpg',
+        imgAlt: 'Delegações na Intervisão 2025',
+        sub: 'Concurso musical internacional',
+        meta: 'agosto-setembro de 2025 · Live Arena, Moscou',
+        role: 'Gerente de projeto das delegações nacionais',
+        d: 'Entrei no projeto a menos de um mês do concurso, como especialista com domínio de português. O concurso foi realizado por decreto presidencial, com apoio do Ministério das Relações Exteriores da Rússia, em uma arena para 20.000 pessoas.',
+        b: [
+          'Cinco delegações nacionais, 45 pessoas ao todo: Brasil, Madagascar, Quênia, Etiópia e Emirados Árabes Unidos.',
+          'Cuidei dos contratos de coorganização com os governos dos países, do apoio para vistos, hospedagem, transporte e da programação dos dez dias de estadia.',
+          'Selecionei e coordenei cinco adidos de delegação, um por país.',
+          'Com o lado brasileiro trabalhei em português: artista, equipe de produção, emissora e Ministério da Cultura.',
+          'Organizei sozinho a transmissão do concurso na televisão brasileira. Preparei e traduzi o pacote de documentos para a emissora: estatuto social, documentos de pessoal, acordos e memorandos.',
+        ],
+        m: [
+          { v: '45', l: 'integrantes das delegações' },
+          { v: '5', l: 'países' },
+          { v: '3+ mi', l: 'espectadores da transmissão' },
+          { v: '134', l: 'países de alcance' },
+        ],
+      },
+      {
+        t: 'Incubadora de Negócios da OCX 2025',
+        img: 'work-sco.jpg',
+        imgAlt: 'Incubadora de Negócios da OCX, Omsk',
+        sub: 'Contrato público: prestação de contas e auditoria financeira',
+        meta: 'setembro-dezembro de 2025 · programa em Omsk',
+        role: 'Responsável pela prestação de contas do contrato público',
+        d: 'O contratante foi a Diretoria do Festival Mundial da Juventude. O programa ocorreu de 19 a 23 de agosto de 2025 e reuniu mais de 100 pessoas dos dez Estados da OCX.',
+        b: [
+          'Relatório final de mais de 3.000 páginas: reuni, estruturei e formatei o material didático de 25 sessões de workshop.',
+          'Escrevi do zero as apostilas e os materiais de apoio de 12 sessões, porque não havia material de origem.',
+          'Cuidei sozinho da prestação de contas financeira: conferi 10 contratos com fornecedores de tradução, bufê, pessoal e logística.',
+          'Acertei os ajustes de documentos com os fornecedores e preparei o relatório de despesas de 9 milhões de rublos, que fechou até o último rublo, com documentos primários e portarias internas.',
+        ],
+        m: [
+          { v: '3.000+', l: 'páginas de relatório' },
+          { v: '9 mi RUB', l: 'consolidados no relatório' },
+          { v: '25', l: 'sessões de workshop' },
+          { v: '10', l: 'Estados da OCX' },
+        ],
+      },
+      {
+        t: 'Russia Bridge Program',
+        img: 'work-bridge.jpg',
+        imgAlt: 'Russia Bridge Program, Moscou',
+        sub: 'Primeiro programa russo-saudita de aceleração de negócios',
+        meta: 'novembro-dezembro de 2025 · Moscou',
+        role: 'Coorganizador',
+        d: 'O programa ocorreu em 4 e 5 de dezembro de 2025 e reuniu mais de 60 pessoas. A abertura ficou a cargo de Leonid Slutsky, presidente da Comissão de Relações Exteriores da Duma, e do embaixador da Arábia Saudita, Abdulrahman Al-Ahmed.',
+        b: [
+          'Vendas e captação: 200 ligações e cerca de 1.000 impressões no Telegram e nas redes sociais.',
+          'Trouxe 30 participantes pagantes e montei 15 reuniões de negócios entre empresas russas e estrangeiras.',
+          'Selecionei 9 projetos russos para a sessão de pitch; três receberam aporte direto e isenção da taxa de licença comercial do fundo de venture Value Makers Studio.',
+          'Negociei os contratos de espaço e hospedagem com hotéis de Moscou e consegui tarifas abaixo do mercado, com descontos adicionais.',
+          'Montei a operação de pagamentos, os modelos de proposta comercial e os contratos de prestação de serviço.',
+          'Conduzi em inglês a correspondência e as negociações com a delegação saudita que veio ao evento.',
+        ],
+        m: [
+          { v: '60+', l: 'participantes' },
+          { v: '30', l: 'participantes pagantes' },
+          { v: '15', l: 'reuniões de negócios' },
+          { v: '3', l: 'projetos com investimento' },
+        ],
+      },
+      {
+        t: 'RAKEZ',
+        img: 'work-rakez.jpg',
+        imgAlt: 'Trabalho no projeto RAKEZ',
+        sub: 'Zona econômica de Ras Al Khaimah, Emirados Árabes Unidos',
+        meta: 'janeiro-maio de 2026',
+        role: 'Captação de clientes nos mercados da Rússia e da CEI',
+        d: 'Respondi pela captação de clientes para a zona econômica livre dos Emirados nos mercados da Rússia e da CEI. Todo contato de contrapartes passava por mim.',
+        b: [
+          'Cheguei a 677 empresas na Rússia, no Uzbequistão e no Cazaquistão, contra uma meta de 300 a 400 em três meses.',
+          'Obtive 313 respostas de primeiro interesse, contra uma meta de 300.',
+          'Desenhei e conduzi uma campanha de vendas frias: 512 empresas na base, 275 respostas de conteúdo.',
+          'Montei uma base de clientes separada para cada um dos três países.',
+          'Conduzi as negociações iniciais e levei três clientes até a proposta comercial.',
+        ],
+        m: [
+          { v: '677', l: 'empresas alcançadas' },
+          { v: '313', l: 'respostas contra meta de 300' },
+          { v: '275', l: 'respostas de conteúdo' },
+        ],
+      },
+      {
+        t: 'AGORA Global Business Club',
+        img: 'work-agora.jpg',
+        imgAlt: 'Fórum AGORA, hotel Soluxe',
+        sub: 'Fórum internacional de negócios',
+        meta: 'janeiro-abril de 2026 · hotel Soluxe, Moscou',
+        role: 'Responsável pelas vendas do fórum',
+        d: 'Dirigi as vendas do fórum de 25 e 26 de abril de 2026 pelo lado da Consult Invest ITIC, parceira executora da AGORA.',
+        b: [
+          'Montei a operação de pagamentos da pessoa jurídica do clube: fechei o contrato de adquirência, preparei a oferta pública e os modelos de fatura-oferta para pagadores corporativos e pessoas físicas.',
+          'Preparei a base contratual e conduzi a documentação com os participantes.',
+          'Respondi pelas vendas do fórum de 25 e 26 de abril de 2026: liguei para as bases de clientes, cuidei da divulgação on-line e tratei as solicitações recebidas.',
+          'Recebi os convidados estrangeiros do fórum: as delegações da Índia e da África do Sul.',
+          'O evento foi coberto pela Rossiya-1, pela NTV e pela RuNews24.',
+        ],
+        m: [
+          { v: '2', l: 'delegações estrangeiras' },
+          { v: '4', l: 'clientes interessados' },
+          { v: '3', l: 'veículos de alcance nacional' },
+        ],
+      },
+    ],
+  },
+
+  practice: {
+    n: '2',
+    kicker: 'Áreas',
+    title: 'O que eu faço',
+    intro: 'Cinco áreas. Em cada uma delas há projetos entregues, detalhados abaixo',
+    items: [
+      {
+        t: 'Desenvolvimento de negócios e entrada em novos mercados',
+        icon: 'trend-up',
+        d: 'Captação de clientes nos mercados da Rússia e da CEI, com números medidos',
+        b: ['Geração de leads e vendas frias', 'Base de clientes por país', 'Pesquisa de mercado e análise da concorrência', 'Modelagem financeira e economia unitária'],
+      },
+      {
+        t: 'Contratos, compras e prestação de contas',
+        icon: 'file-text',
+        d: 'Preparo eu mesmo, inclusive em outros idiomas',
+        b: ['Prestação de contas de contratos públicos', 'Conferência de contratos com fornecedores e de documentos primários', 'Contratos de agenciamento, termos de aceite, propostas comerciais', 'Documentação de pessoal e compliance'],
+      },
+      {
+        t: 'Tradução e apoio linguístico',
+        icon: 'translate',
+        d: 'Português e inglês no trabalho de todo dia',
+        b: ['Tradução consecutiva em fóruns', 'Tradução de contratos, regulamentos e documentos societários', 'Documentação técnica', 'Correspondência comercial e diplomática'],
+      },
+      {
+        t: 'Organização de eventos internacionais',
+        icon: 'microphone-stage',
+        d: 'Fóruns, concursos e programas de aceleração',
+        b: ['Programação de negócios e palestrantes', 'Vendas e captação de participantes', 'Espaço, hospedagem, fornecedores', 'Recebimento de pagamentos e base contratual'],
+      },
+      {
+        t: 'Acompanhamento de delegações estrangeiras',
+        icon: 'users-three',
+        d: 'Da primeira carta ao ministério até a partida do grupo',
+        b: ['Contratos de coorganização com governos', 'Apoio para vistos, hospedagem, transporte', 'Programação da estadia da delegação', 'Seleção e coordenação de adidos', 'Trabalho com embaixadas e órgãos de governo'],
+      },
+    ],
+  },
+
+  geo: {
+    n: '4',
+    kicker: 'Geografia',
+    title: 'Com quem trabalhei',
+    intro: 'Doze países com cujos representantes houve projetos, negociações ou delegações',
+    items: [
+      { key: 'Brazil', flag: 'br', name: 'Brasil' },
+      { key: 'Russia', flag: 'ru', name: 'Rússia' },
+      { key: 'United Arab Emirates', flag: 'ae', name: 'Emirados Árabes Unidos' },
+      { key: 'Saudi Arabia', flag: 'sa', name: 'Arábia Saudita' },
+      { key: 'Ethiopia', flag: 'et', name: 'Etiópia' },
+      { key: 'Kenya', flag: 'ke', name: 'Quênia' },
+      { key: 'Madagascar', flag: 'mg', name: 'Madagascar' },
+      { key: 'China', flag: 'cn', name: 'China' },
+      { key: 'Uzbekistan', flag: 'uz', name: 'Uzbequistão' },
+      { key: 'Kazakhstan', flag: 'kz', name: 'Cazaquistão' },
+      { key: 'India', flag: 'in', name: 'Índia' },
+      { key: 'South Africa', flag: 'za', name: 'África do Sul' },
+    ],
+  },
+
+  current: {
+    n: '5',
+    kicker: 'Em andamento',
+    title: '2026',
+    intro: 'Projetos que conduzo agora',
+    items: [
+      {
+        t: 'Festival Mundial da Juventude 2026',
+        meta: 'Ecaterimburgo · 11 a 17 de setembro de 2026',
+        d: 'Coordeno a delegação do Brasil na programação infantojuvenil do festival: 10.000 participantes de 191 países, entre eles 1.000 adolescentes de 14 a 17 anos. Conduzo a correspondência com o lado brasileiro em português, reúno e confiro a documentação dos participantes e respondo pela logística e pelo acompanhamento do grupo na Rússia.',
+      },
+      {
+        t: '«Nossa Geração» 2026',
+        meta: 'Concurso musical infantil internacional',
+        d: 'Traduzi para o português todo o pacote de documentos do concurso: regulamento, briefing para as delegações, ficha de inscrição e requisitos das apresentações. Negociei a participação de um jurado brasileiro e escolhi o intérprete que representará o país na final.',
+      },
+      {
+        t: 'Intervisão 2026',
+        meta: 'Riade, Arábia Saudita · dezembro de 2026',
+        d: 'Em 2025 conduzi no concurso as delegações de cinco países; agora participo da preparação da edição seguinte.',
+      },
+    ],
+  },
+
+  about: {
+    n: '1',
+    kicker: 'Sobre mim',
+    title: 'Como isso funciona na prática',
+    paras: [
+      'Sou especialista em relações internacionais com foco nos países do BRICS e na América Latina. Com o lado brasileiro trabalho em português, sem intérprete.',
+      'Um projeto costuma ser assim. A empresa quer entrar em um mercado estrangeiro, e alguém precisa encontrar parceiros lá e levar a conversa até o contrato assinado. Depois o negócio tem de ser executado: fazer as compras, acertar com os fornecedores e fechar o relatório que o contratante público aceita. As duas partes ficam comigo.',
+    ],
+    langTitle: 'Idiomas',
+    langs: [
+      { flag: 'br', l: 'Português', cap: 'C1', lvl: 4 },
+      { flag: 'gb', l: 'Inglês', cap: 'C1', lvl: 4 },
+      { flag: 'es', l: 'Espanhol', cap: 'B1', lvl: 2 },
+    ],
+    eduTitle: 'Formação',
+    edu: [
+      {
+        org: 'MGIMO, Ministério das Relações Exteriores da Rússia',
+        logo: 'mgimo',
+        tracks: [
+          {
+            period: '2026-2028',
+            role: 'Mestrado em Economia',
+            note: [
+              'Análise financeira internacional, contabilidade e auditoria',
+              'Informação e análise para a tomada de decisão gerencial',
+            ],
+          },
+          { period: '2022-2026', role: 'Bacharelado em Relações Internacionais', note: 'Especialização: Brasil e América Latina' },
+        ],
+      },
+    ],
+  },
+
+  contact: {
+    n: '6',
+    kicker: 'Contato',
+    title: 'Aberto a propostas',
+    d: 'Escreva no Telegram ou por e-mail. Respondo eu mesmo.',
+    emailLabel: 'E-mail',
+    tgLabel: 'Telegram',
+  },
+
+  footer: {
+    rights: 'Evgeny Shutov. Todos os direitos reservados.',
+    navTitle: 'Seções',
+    contactTitle: 'Contato',
+    tagline: 'Relações internacionais',
   },
 };
