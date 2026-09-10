@@ -289,14 +289,7 @@ export const ru = {
         org: 'МГИМО МИД России',
         logo: 'mgimo',
         tracks: [
-          {
-            period: '2026-2028',
-            role: 'Магистратура, «Экономика»',
-            note: [
-              'Международный финансовый анализ, учет и аудит',
-              'Информационно-аналитическое обеспечение принятия управленческих решений',
-            ],
-          },
+          { period: '2026-2028', role: 'Магистратура, «Экономика»', note: 'Информационно-аналитическое обеспечение принятия управленческих решений' },
           { period: '2022-2026', role: 'Бакалавриат, «Международные отношения»', note: 'Специализация: Бразилия и Латинская Америка' },
         ],
       },
@@ -593,14 +586,7 @@ export const en = {
         org: 'MGIMO University',
         logo: 'mgimo',
         tracks: [
-          {
-            period: '2026-2028',
-            role: 'MA, Economics',
-            note: [
-              'International financial analysis, accounting and audit',
-              'Information and analytical support for management decisions',
-            ],
-          },
+          { period: '2026-2028', role: 'MA, Economics', note: 'Information and analytical support for management decisions' },
           { period: '2022-2026', role: 'BA, International Relations', note: 'Specialisation: Brazil and Latin America' },
         ],
       },
@@ -700,7 +686,7 @@ export const pt = {
         m: [
           { v: '45', l: 'integrantes das delegações' },
           { v: '5', l: 'países' },
-          { v: '3+ mi', l: 'espectadores da transmissão' },
+          { v: '3+ milhões', l: 'de espectadores da transmissão' },
           { v: '134', l: 'países de alcance' },
         ],
       },
@@ -720,7 +706,7 @@ export const pt = {
         ],
         m: [
           { v: '3.000+', l: 'páginas de relatório' },
-          { v: '9 mi RUB', l: 'consolidados no relatório' },
+          { v: '9 milhões', l: 'de rublos consolidados no relatório' },
           { v: '25', l: 'sessões de workshop' },
           { v: '10', l: 'Estados da OCX' },
         ],
@@ -897,14 +883,7 @@ export const pt = {
         org: 'MGIMO, Ministério das Relações Exteriores da Rússia',
         logo: 'mgimo',
         tracks: [
-          {
-            period: '2026-2028',
-            role: 'Mestrado em Economia',
-            note: [
-              'Análise financeira internacional, contabilidade e auditoria',
-              'Informação e análise para a tomada de decisão gerencial',
-            ],
-          },
+          { period: '2026-2028', role: 'Mestrado em Economia', note: 'Informação e análise para a tomada de decisão gerencial' },
           { period: '2022-2026', role: 'Bacharelado em Relações Internacionais', note: 'Especialização: Brasil e América Latina' },
         ],
       },
