@@ -23,9 +23,6 @@ RewriteRule ^ /%1 [R=301,L]
   ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 <IfModule mod_headers.c>
-  # Полгода браузер даже не пробует http для этого домена. Снимается
-  # удалением строки, но у уже заходивших запомнится до истечения срока.
-  Header always set Strict-Transport-Security "max-age=15768000" env=HTTPS
   <FilesMatch "\.(html)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>

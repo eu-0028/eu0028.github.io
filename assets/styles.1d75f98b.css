@@ -1564,3 +1564,18 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 @media (prefers-reduced-motion: reduce) { .notice { transition: none; } }
 @media print { .notice { display: none !important; } }
+
+/* --- 33. Переход между языками --------------------------- */
+/* Смена языка не уводит на другую страницу: это тот же текст другими
+   словами и с той же точки чтения. Кросс-фейд говорит об этом прямо,
+   вместо того чтобы моргнуть белым и начать раздел заново. Браузеры без
+   поддержки переключаются как раньше, ничего не теряя. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .24s;
+  animation-timing-function: var(--ease);
+}

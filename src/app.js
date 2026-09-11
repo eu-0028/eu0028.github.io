@@ -4,6 +4,15 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Пришли со сменой языка: текст тот же и читатель на том же месте, значит
+     показывать страницу заново собирающейся неправильно. Отметку ставит
+     обработчик перед уходом, живет она один переход. */
+  var sameRead = false;
+  try {
+    sameRead = sessionStorage.getItem('lang-switch') === '1';
+    if (sameRead) sessionStorage.removeItem('lang-switch');
+  } catch (e) {}
+
   /* --- Линейка под шапкой появляется при прокрутке ------- */
   var hdr = document.querySelector('[data-hdr]');
   if (hdr) {
@@ -121,7 +130,9 @@
 
   /* --- Появление блоков при прокрутке -------------------- */
   var rises = document.querySelectorAll('.reveal');
-  if (reduced || !('IntersectionObserver' in window)) {
+  if (sameRead) {
+    Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-now'); });
+  } else if (reduced || !('IntersectionObserver' in window)) {
     Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-in'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
@@ -217,6 +228,7 @@
         var id = openSection();
         var url = base + (id ? '#' + id : '');
         a.setAttribute('href', url);
+        try { sessionStorage.setItem('lang-switch', '1'); } catch (x) {}
         /* Открытие в новой вкладке оставляем браузеру: адрес уже поправлен */
         if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
@@ -263,7 +275,7 @@
       if (spaced) str = str.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
       return str + suffix;
     };
-    if (reduced || !('IntersectionObserver' in window)) return;
+    if (reduced || sameRead || !('IntersectionObserver' in window)) return;
 
     /* Итоговое значение держим на узле: по нему восстанавливаем число
        перед печатью, не дожидаясь, пока блок попадет в кадр. */
