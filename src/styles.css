@@ -783,7 +783,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .ftr { border-top: 1px solid var(--rule); padding-block: clamp(2.5rem, 5vw, 4rem) 2rem; }
 .ftr__grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--gap);
   padding-bottom: 2.5rem;
 }

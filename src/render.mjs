@@ -398,18 +398,6 @@ function footer(t) {
         <p class="ftr__t">${esc(t.footer.navTitle)}</p>
         <ul>${nav}</ul>
       </div>
-      <div>
-        <p class="ftr__t">${esc(t.footer.contactTitle)}</p>
-        <ul>
-          <li><a href="${attr(shared.telegramHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.telegram)}</a></li>
-          <li><a class="num" href="${attr(shared.whatsappHref)}" target="_blank" rel="noopener noreferrer">${esc(shared.whatsapp)}</a></li>
-          <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
-          ${shared.locales
-            .filter((l) => l.key !== t.lang)
-            .map((l) => `<li><a data-lang-link href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}">${esc(l.label)}</a></li>`)
-            .join('')}
-        </ul>
-      </div>
     </div>
     <div class="ftr__base">
       <span>© ${esc(shared.years)} ${esc(t.footer.rights)}</span>
@@ -504,8 +492,10 @@ ${jsonLd(t)}
 <!-- Появление блоков при прокрутке включается только здесь. Без этой
      строки (скрипт запрещен, ошибка загрузки) текст остается видимым.
      Здесь же возвращаем выбранное оформление — до первой отрисовки,
-     иначе страница успевает моргнуть чужой темой. -->
-<script>(function(){var e=document.documentElement;try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')e.setAttribute('data-theme',t)}catch(x){}e.setAttribute('data-js','')})()</script>
+     иначе страница успевает моргнуть чужой темой. И здесь же гасим
+     плавную прокрутку, если в адресе есть якорь: иначе браузер рисует
+     начало страницы и с размаху летит вниз через весь текст. -->
+<script>(function(){var e=document.documentElement;try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')e.setAttribute('data-theme',t)}catch(x){}if(location.hash)e.style.scrollBehavior='auto';e.setAttribute('data-js','')})()</script>
 </head>
 <body>
 <a class="skip" href="#main">${esc(t.skip)}</a>

@@ -313,7 +313,6 @@ export const ru = {
   footer: {
     rights: 'Евгений Шутов. Все права защищены.',
     navTitle: 'Разделы',
-    contactTitle: 'Связь',
     tagline: 'Международник',
   },
 };
@@ -611,7 +610,6 @@ export const en = {
   footer: {
     rights: 'Evgeny Shutov. All rights reserved.',
     navTitle: 'Sections',
-    contactTitle: 'Contact',
     tagline: 'International relations',
   },
 };
@@ -909,7 +907,6 @@ export const pt = {
   footer: {
     rights: 'Evgeny Shutov. Todos os direitos reservados.',
     navTitle: 'Seções',
-    contactTitle: 'Contato',
     tagline: 'Relações internacionais',
   },
 };

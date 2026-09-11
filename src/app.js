@@ -367,6 +367,16 @@
     Array.prototype.forEach.call(groups, bind);
   }
 
+  /* --- Возврат плавной прокрутки после прыжка к якорю ---- */
+  /* Гасили ее в head, чтобы открытие адреса с якорем не превращалось
+     в полет через всю страницу. Прыжок уже случился, и плавность снова
+     нужна: по ней работают клики в меню. */
+  if (document.documentElement.style.scrollBehavior === 'auto') {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { document.documentElement.style.scrollBehavior = ''; });
+    });
+  }
+
   /* --- Портрет: если файл не отдался, колонка схлопывается -- */
   var portrait = document.querySelector('.portrait');
   if (portrait) {

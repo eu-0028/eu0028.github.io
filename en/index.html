@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Метка сборки: по ней сразу видно, какая версия реально лежит на сервере -->
-<meta name="build" content="styles.1d75f98b.css map-base.4ff62d7b.svg">
+<meta name="build" content="styles.8fcb4389.css map-base.4ff62d7b.svg">
 <title>Evgeny Shutov. International projects and delegations, Portuguese at C1</title>
 <meta name="description" content="International relations specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and government-contract reporting.">
 <meta name="author" content="Evgeny Shutov">
@@ -38,13 +38,15 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/onest-latin-300800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/fonts.86552c30.css">
-<link rel="stylesheet" href="../assets/styles.1d75f98b.css">
+<link rel="stylesheet" href="../assets/styles.8fcb4389.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Evgeny Shutov","description":"International relations specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and government-contract reporting.","url":"https://e-shutov.ru/en/","email":"mailto:mail@e-shutov.ru","knowsLanguage":["Portuguese","English","Spanish"],"alumniOf":{"@type":"CollegeOrUniversity","name":"MGIMO University"},"sameAs":["https://t.me/Taback_1028"]}</script>
 <!-- Появление блоков при прокрутке включается только здесь. Без этой
      строки (скрипт запрещен, ошибка загрузки) текст остается видимым.
      Здесь же возвращаем выбранное оформление — до первой отрисовки,
-     иначе страница успевает моргнуть чужой темой. -->
-<script>(function(){var e=document.documentElement;try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')e.setAttribute('data-theme',t)}catch(x){}e.setAttribute('data-js','')})()</script>
+     иначе страница успевает моргнуть чужой темой. И здесь же гасим
+     плавную прокрутку, если в адресе есть якорь: иначе браузер рисует
+     начало страницы и с размаху летит вниз через весь текст. -->
+<script>(function(){var e=document.documentElement;try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')e.setAttribute('data-theme',t)}catch(x){}if(location.hash)e.style.scrollBehavior='auto';e.setAttribute('data-js','')})()</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -354,15 +356,6 @@
         <p class="ftr__t">Sections</p>
         <ul><li><a href="#about">About</a></li><li><a href="#practice">Practice</a></li><li><a href="#work">Projects</a></li><li><a href="#geo">Geography</a></li><li><a href="#current">2026</a></li><li><a href="#contact">Contact</a></li></ul>
       </div>
-      <div>
-        <p class="ftr__t">Contact</p>
-        <ul>
-          <li><a href="https://t.me/Taback_1028" target="_blank" rel="noopener noreferrer">@Taback_1028</a></li>
-          <li><a class="num" href="https://wa.me/79332754585" target="_blank" rel="noopener noreferrer">+7 933 275-45-85</a></li>
-          <li><a href="mailto:mail@e-shutov.ru">mail@e-shutov.ru</a></li>
-          <li><a data-lang-link href="/" hreflang="ru" lang="ru">Русский</a></li><li><a data-lang-link href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
-        </ul>
-      </div>
     </div>
     <div class="ftr__base">
       <span>© 2026 Evgeny Shutov. All rights reserved.</span>
@@ -376,6 +369,6 @@
     <button class="notice__ok" type="button" data-notice-ok>Got it</button>
   </div>
 </div>
-<script src="../assets/app.ad5e69fe.js" defer></script>
+<script src="../assets/app.b705fa8c.js" defer></script>
 </body>
 </html>
