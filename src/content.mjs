@@ -326,7 +326,7 @@ export const en = {
   langNav: 'Site language',
   title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
   description:
-    'International affairs specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and state-contract reporting.',
+    'International relations specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and government-contract reporting.',
   ogLocale: 'en_US',
 
   brand: 'Shutov',
@@ -576,7 +576,7 @@ export const en = {
     kicker: 'About',
     title: 'What this looks like in practice',
     paras: [
-      'I am an international affairs specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
+      'I am an international relations specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
       'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the government client has to sign off. I do both halves.',
     ],
     langTitle: 'Languages',
@@ -612,7 +612,7 @@ export const en = {
     rights: 'Evgeny Shutov. All rights reserved.',
     navTitle: 'Sections',
     contactTitle: 'Contact',
-    tagline: 'International affairs',
+    tagline: 'International relations',
   },
 };
 
@@ -886,7 +886,7 @@ export const pt = {
     eduTitle: 'Formação',
     edu: [
       {
-        org: 'MGIMO, Ministério das Relações Exteriores da Rússia',
+        org: 'MGIMO University',
         logo: 'mgimo',
         tracks: [
           { period: '2026-2028', role: 'Mestrado em Economia', note: 'Informação e análise para a tomada de decisão gerencial' },

@@ -189,7 +189,43 @@
     sections.forEach(function (s) { spy.observe(s.el); });
   }
 
-  /* --- Запуск анимаций, привязанных к смыслу ------------- */
+  /* --- Смена языка не сбрасывает чтение в начало --------- */
+  /* К адресу другой версии дописывается раздел, до которого человек
+     дочитал. Идентификаторы разделов во всех языках одинаковы, поэтому
+     якорь переносится как есть. */
+  var langLinks = document.querySelectorAll('[data-lang-link]');
+  if (langLinks.length && sections.length) {
+    var openSection = function () {
+      /* Какой раздел читают, уже знает подсветка в навигации: у ее пункта
+         стоит aria-current. Берем оттуда, чтобы не заводить второе мнение
+         о том же самом. */
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].link.getAttribute('aria-current') === 'true') return sections[i].el.id;
+      }
+      /* Запасной способ, если наблюдатель недоступен: последний раздел,
+         начало которого уже в верхней трети экрана. */
+      var fold = (window.innerHeight || document.documentElement.clientHeight) * 0.35;
+      var here = '';
+      for (var k = 0; k < sections.length; k++) {
+        if (sections[k].el.getBoundingClientRect().top <= fold) here = sections[k].el.id;
+      }
+      return here;
+    };
+    Array.prototype.forEach.call(langLinks, function (a) {
+      var base = a.getAttribute('href');
+      a.addEventListener('click', function (e) {
+        var id = openSection();
+        var url = base + (id ? '#' + id : '');
+        a.setAttribute('href', url);
+        /* Открытие в новой вкладке оставляем браузеру: адрес уже поправлен */
+        if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        location.href = url;
+      });
+    });
+  }
+
+  /* --- Запуск анимаций, привязанных к смыслу ------------- */  /* --- Запуск анимаций, привязанных к смыслу ------------- */
   function runOnce(selector, cb) {
     var el = document.querySelector(selector);
     if (!el) return;

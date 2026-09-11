@@ -39,7 +39,7 @@ const langSwitch = (t) => `<div class="lang" role="group" aria-label="${attr(t.l
   .map((l) =>
     l.key === t.lang
       ? `<span class="lang__i is-on" aria-current="true">${esc(l.code)}</span>`
-      : `<a class="lang__i" href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}" title="${attr(l.label)}">${esc(l.code)}</a>`
+      : `<a class="lang__i" data-lang-link href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}" title="${attr(l.label)}">${esc(l.code)}</a>`
   )
   .join('')}</div>`;
 
@@ -406,7 +406,7 @@ function footer(t) {
           <li><a href="mailto:${attr(shared.email)}">${esc(shared.email)}</a></li>
           ${shared.locales
             .filter((l) => l.key !== t.lang)
-            .map((l) => `<li><a href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}">${esc(l.label)}</a></li>`)
+            .map((l) => `<li><a data-lang-link href="/${l.path}" hreflang="${attr(l.htmlLang)}" lang="${attr(l.htmlLang)}">${esc(l.label)}</a></li>`)
             .join('')}
         </ul>
       </div>
