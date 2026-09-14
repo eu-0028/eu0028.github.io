@@ -46,19 +46,23 @@
   color-scheme: light;
 }
 
+/* Темная тема. Фон держим на #181c24, а не у черного: на чистом черном
+   секции перестают отличаться друг от друга и глазу не за что зацепиться.
+   Три поверхности разведены по светлоте заметно — подложка, утопленная
+   секция, карточка. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper:      #0e1116;
-    --paper-sunk: #131720;
-    --paper-card: #141822;
+    --paper:      #181c24;
+    --paper-sunk: #1e2430;
+    --paper-card: #222936;
     --ink:        #e6e9ee;
-    --ink-2:      #a7aeba;
-    --ink-3:      #838b98;
-    --rule:       #2a303a;
-    --rule-soft:  #1e242c;
+    --ink-2:      #a9b0bc;
+    --ink-3:      #8b93a1;
+    --rule:       #363e4c;
+    --rule-soft:  #29303c;
     --accent:      #7ea3f0;
     --accent-lit:  #9fb9f5;
-    --figs-bg:    #16244a;
+    --figs-bg:    #1b2c58;
     --figs-fg:    #eef2f9;
     --figs-rule:  rgba(255, 255, 255, .22);
     --figs-dim:   rgba(238, 242, 249, .78);
@@ -68,17 +72,17 @@
 }
 
 :root[data-theme='dark'] {
-  --paper:      #0e1116;
-  --paper-sunk: #131720;
-  --paper-card: #141822;
+  --paper:      #181c24;
+  --paper-sunk: #1e2430;
+  --paper-card: #222936;
   --ink:        #e6e9ee;
-  --ink-2:      #a7aeba;
-  --ink-3:      #838b98;
-  --rule:       #2a303a;
-  --rule-soft:  #1e242c;
+  --ink-2:      #a9b0bc;
+  --ink-3:      #8b93a1;
+  --rule:       #363e4c;
+  --rule-soft:  #29303c;
   --accent:      #7ea3f0;
   --accent-lit:  #9fb9f5;
-    --figs-bg:    #16244a;
+    --figs-bg:    #1b2c58;
   --figs-fg:    #eef2f9;
   --figs-rule:  rgba(255, 255, 255, .22);
   --figs-dim:   rgba(238, 242, 249, .78);
@@ -486,7 +490,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   filter: drop-shadow(0 24px 40px rgba(18, 21, 26, .13));
 }
 /* Снимок цветной в обеих темах. На темном фоне поднимаем тени
-   (contrast < 1): иначе черный пиджак сливается с фоном #0e1116 и
+   (contrast < 1): иначе черный пиджак сливается с темным фоном и
    фигура теряет силуэт ниже плеч. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .portrait { filter: contrast(.86) brightness(1.04) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
@@ -1024,10 +1028,10 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .key--marked::before { background: #2f4f96; border-color: #7ea3f0; }
-  :root:not([data-theme='light']) .key--rest::before   { background: #1c212b; border-color: #2a3140; }
+  :root:not([data-theme='light']) .key--rest::before   { background: #232936; border-color: #39414f; }
 }
 :root[data-theme='dark'] .key--marked::before { background: #2f4f96; border-color: #7ea3f0; }
-:root[data-theme='dark'] .key--rest::before   { background: #1c212b; border-color: #2a3140; }
+:root[data-theme='dark'] .key--rest::before   { background: #232936; border-color: #39414f; }
 
 .map__legend { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: .85rem; }
 

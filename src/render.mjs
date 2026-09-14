@@ -478,7 +478,7 @@ ${shared.locales.map((l) => `<link rel="alternate" hreflang="${attr(l.htmlLang)}
 <meta property="og:image:alt" content="${attr(t.hero.name)}. ${attr(t.hero.lead)} ${attr(t.hero.leadEm)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#181c24" media="(prefers-color-scheme: dark)">
 <!-- ico идет первым: его Chrome запрашивает сам, даже без этой строки,
      и на нем держится закладка. SVG подхватывают браузеры, которые умеют,
      он один остается четким на любом экране. -->

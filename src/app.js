@@ -90,7 +90,7 @@
       });
       /* Цвет строки состояния в мобильных браузерах. Метка без media
          стоит первой и перекрывает системные. */
-      mark.setAttribute('content', now() === 'dark' ? '#0e1116' : '#f4f5f6');
+      mark.setAttribute('content', now() === 'dark' ? '#181c24' : '#f4f5f6');
     };
     label();
     Array.prototype.forEach.call(toggles, function (b) {

@@ -54,9 +54,13 @@ const pxPerRad = W / ((LON_SPAN * Math.PI) / 180);
 const H = Math.round(pxPerRad * (yTop - yBot));
 const WRAP = (360 / LON_SPAN) * W;
 
+/* Широту не прижимаем к рамке: раньше все, что севернее LAT_TOP (Земля
+   Франца-Иосифа, Северная Земля, север Гренландии и Канады), ложилось
+   на верхний край одной полосой. Теперь такие куски уходят за кадр
+   и обрезаются рамкой, как на обычной карте. */
 const project = (lon, lat) => [
   ((lon - LON_MIN) / LON_SPAN) * W,
-  ((yTop - millerY(Math.max(LAT_BOT, Math.min(LAT_TOP, lat)))) / (yTop - yBot)) * H,
+  ((yTop - millerY(lat)) / (yTop - yBot)) * H,
 ];
 
 const polysOf = (g) => (g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : []);
@@ -195,8 +199,13 @@ function ringToPath(lonlat) {
   let pts = unwrap(lonlat).map(([lon, lat]) => project(lon, lat));
   const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
   const minX = Math.min(...xs), maxX = Math.max(...xs);
-  if (maxX - minX < MIN_PX && Math.max(...ys) - Math.min(...ys) < MIN_PX) return '';
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  if (maxX - minX < MIN_PX && maxY - minY < MIN_PX) return '';
   if (maxX < -40 || minX > W + 40) return '';
+  /* Кольцо целиком за верхней или нижней рамкой (или заходит в кадр на
+     считанные пиксели) выбрасываем: от него остается только загогулина
+     у самого края. */
+  if (maxY < MIN_PX || minY > H - MIN_PX) return '';
   pts = simplify(pts, TOL);
   if (pts.length < 3) return '';
   let d = ptsToD(pts);
@@ -302,7 +311,7 @@ if (missing.length) throw new Error('Не найдены страны: ' + missi
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="World map">
 <style>
 .l{fill:#e0e4ea;stroke:#cdd3db;stroke-width:.5}
-@media (prefers-color-scheme:dark){.l{fill:#1c212b;stroke:#2a3140}}
+@media (prefers-color-scheme:dark){.l{fill:#232936;stroke:#39414f}}
 </style>
 <path class="l" d="${base}"/>
 </svg>`;
