@@ -1,5 +1,5 @@
 <title>Consult Invest ITIC</title>
-<meta name="description" content="Международные проекты в странах БРИКС, ШОС и ОИС: исследование рынка, поиск партнёров, бизнес-миссии и сопровождение сделок через собственные офисы в 6 странах.">
+<meta name="description" content="Международные проекты в странах БРИКС, ШОС и ОИС: исследование рынка, поиск партнеров, бизнес-миссии и сопровождение сделок через собственные офисы в 6 странах.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap">
@@ -99,7 +99,7 @@ section{padding-block:clamp(56px,8vw,104px)}
 }
 
 /* Цифры */
-.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:0}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:0}
 .fact{padding:28px 24px 28px 0;display:grid;gap:8px;align-content:start}
 .fact + .fact{padding-left:24px;border-left:1px solid var(--line)}
 .fact b{font-family:var(--display);font-weight:600;white-space:nowrap;font-size:clamp(28px,2.8vw,40px);letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
@@ -222,6 +222,13 @@ textarea{min-height:110px;resize:vertical}
 @media (max-width:900px){.contact{grid-template-columns:1fr}}
 @media (max-width:520px){.row{grid-template-columns:1fr}}
 
+/* Пометки «требует проверки» в прототипе */
+.check{text-decoration:underline dashed;text-decoration-color:var(--muted);text-underline-offset:4px;cursor:help}
+.team{margin-top:clamp(40px,5vw,64px);display:grid;gap:18px}
+.team-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.team-list li{display:grid;gap:2px;padding-top:14px;border-top:1px solid var(--line)}
+.team-list span{color:var(--muted);font-size:15px}
+
 /* Подвал */
 footer{border-top:1px solid var(--line);padding-block:40px 56px;font-size:15px;color:var(--muted)}
 footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px}
@@ -243,7 +250,7 @@ footer .cols{display:grid;gap:8px;align-content:start}
       <a href="#platforms">Мероприятия</a>
       <a href="#offices">Представительства</a>
       <a href="#founder">О компании</a>
-      <a href="#news">Новости и СМИ</a>
+      <a href="#news">Новости</a>
     </nav>
     <div class="top-right">
       <div class="langs" role="group" aria-label="Язык сайта">
@@ -263,40 +270,39 @@ footer .cols{display:grid;gap:8px;align-content:start}
     <section class="hero" aria-labelledby="h1">
       <div>
         <h1 id="h1" class="rise">Выход на рынки <em>БРИКС и ШОС</em> через собственные офисы</h1>
-        <p class="lead rise d1">Исследуем рынок, находим партнёров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
+        <p class="lead rise d1">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
         <div class="cta rise d2">
           <a class="btn btn-primary" href="#contact">Обсудить проект</a>
           <a class="btn btn-ghost" href="#projects">Смотреть проекты</a>
         </div>
       </div>
       <figure class="rise d3">
-        <img src="img/n04.jpg" alt="Команда Consult Invest ITIC на производстве партнёра в Китае" width="840" height="473" fetchpriority="high">
-        <figcaption>Визит на производство партнёров в Китае, март 2026</figcaption>
+        <img src="img/n04.jpg" alt="Команда Consult Invest ITIC на производстве партнера в Китае" width="840" height="473" fetchpriority="high">
+        <figcaption>Визит на производство партнеров в Китае, март 2026</figcaption>
       </figure>
     </section>
 
     <div class="facts" aria-label="Компания в цифрах">
-      <div class="fact"><b>6 стран</b><span>собственные офисы и представительства</span></div>
-      <div class="fact"><b>$700 млн+</b><span>инвестиций и софинансирования привлекла основатель компании</span></div>
-      <div class="fact"><b>400+</b><span>участников из 20 стран на форуме БРИКС+</span></div>
-      <div class="fact"><b>28+ стран</b><span>в сети делового клуба AGORA</span></div>
+      <div class="fact"><b>6 стран</b><span>с офисами и представительствами</span></div>
+      <div class="fact"><b>9 стран</b><span>где реализованы проекты: Узбекистан, Казахстан, Кыргызстан, Китай, Индия, Пакистан, Ирак, Саудовская Аравия, ОАЭ</span></div>
+      <div class="fact"><b class="check" title="Требует проверки">? лет</b><span>на рынке, число уточняется</span></div>
     </div>
 
     <section id="services" aria-labelledby="h-services">
       <div class="sec-head">
         <h2 id="h-services">С кем и как мы работаем</h2>
-        <p class="lead">Помогаем компаниям выйти на новые рынки, а иностранным компаниям прийти в Россию и Центральную Азию. Для госструктур ведём международную часть проектов.</p>
+        <p class="lead">Помогаем компаниям выйти на новые рынки, а иностранным компаниям прийти в Россию и Центральную Азию. Для госструктур ведем международную часть проектов.</p>
       </div>
       <div class="paths">
         <div class="path biz">
           <h3>Бизнесу</h3>
           <ol class="steps">
-            <li><b>Маркетинговое исследование и конкурентный анализ</b><span>Объём рынка, игроки, регуляторика, свободные ниши</span></li>
-            <li><b>Поиск профильных бизнес-партнёров</b><span>Дистрибьюторы, поставщики, производственные площадки, соинвесторы</span></li>
+            <li><b>Маркетинговое исследование и конкурентный анализ</b><span>Объем рынка, игроки, требования регуляторов, свободные ниши</span></li>
+            <li><b>Поиск профильных бизнес-партнеров</b><span>Дистрибьюторы, поставщики, производственные площадки, соинвесторы</span></li>
             <li><b>Бизнес-миссия</b><span>Переговоры на месте: заводы, министерства, индустриальные парки</span></li>
-            <li><b>Сопровождение под ключ</b><span>Структура сделки, due diligence, локализация, работа с госорганами</span></li>
+            <li><b>Инвестиционное сопровождение</b><span>Структурирование сделки, инвестиционная модель, due diligence</span></li>
+            <li><b>Сопровождение под ключ</b><span>Локализация, работа с госорганами, сопровождение до подписания и после</span></li>
           </ol>
-          <p class="also">Отдельно: <b>инвестиционное сопровождение</b> и <b>логистика и международная торговля</b>.</p>
           <a class="btn btn-ghost" href="#contact">Обсудить проект</a>
         </div>
         <div class="path gov">
@@ -304,7 +310,7 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <ul class="gov-list">
             <li><b>Крупные международные мероприятия</b><span>Форумы, конкурсы и деловые программы с участниками из десятков стран</span></li>
             <li><b>Представительства за рубежом</b><span>Запуск офисов особых экономических зон и продвижение регионов</span></li>
-            <li><b>Международный контур проектов</b><span>Привлечение зарубежных участников, партнёров и СМИ</span></li>
+            <li><b>Международный контур проектов</b><span>Привлечение зарубежных участников, партнеров и СМИ</span></li>
             <li><b>Межправительственное взаимодействие</b><span>Встречи с министерствами, согласования, механизмы сотрудничества</span></li>
           </ul>
           <a class="btn btn-ghost" href="#projects">Смотреть проекты</a>
@@ -320,7 +326,7 @@ footer .cols{display:grid;gap:8px;align-content:start}
         <button class="chip" type="button" data-f="all" aria-pressed="true">Все</button>
         <button class="chip" type="button" data-f="ca" aria-pressed="false">Центральная Азия</button>
         <button class="chip" type="button" data-f="cn" aria-pressed="false">Китай</button>
-        <button class="chip" type="button" data-f="gulf" aria-pressed="false">Ближний Восток</button>
+        <button class="chip" type="button" data-f="gulf" aria-pressed="false">Страны Залива</button>
         <button class="chip" type="button" data-f="in" aria-pressed="false">Индия</button>
         <button class="chip" type="button" data-f="ru" aria-pressed="false">Россия</button>
       </div>
@@ -337,26 +343,31 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <span class="where">Китай, Шэньчжэнь</span>
           <h3>Представительство ОЭЗ «Технополис Москва»</h3>
           <p>Модель работы офиса, связи с госструктурами, индустриальными парками и технологическими компаниями Китая.</p>
+          <p class="res check" title="Требует проверки">Результат: уточняется</p>
         </article>
         <article class="case" data-r="cn">
           <span class="where">Китай, Гуанчжоу, Шанхай, Гонконг</span>
           <h3>Деловая миссия «Мегамаркета»</h3>
           <p>Переговоры с поставщиками, логистическими операторами и e-commerce-платформами для трансграничных поставок.</p>
+          <p class="res check" title="Требует проверки">Результат: уточняется</p>
         </article>
         <article class="case" data-r="ca gulf">
           <span class="where">Казахстан, Кыргызстан, Узбекистан, Пакистан, Ирак</span>
           <h3>Intellico (Швейцария)</h3>
-          <p class="res">GR-сопровождение: национальные шлюзы международного A2P-трафика запущены в пяти странах.</p>
+          <p>Роль CI ITIC: GR-сопровождение, переговоры с профильными ведомствами пяти стран.</p>
+          <p class="res">Национальные шлюзы международного A2P-трафика запущены в Узбекистане, Казахстане, Кыргызстане, Ираке и Пакистане.</p>
         </article>
         <article class="case" data-r="in">
           <span class="where">Индия, экология</span>
           <h3>Рынок мусоропереработки для GreenRTech</h3>
-          <p>Операторы, регуляторика, модели инвестиций. Итог: сегменты для входа, потенциальные партнёры и план пилотных проектов.</p>
+          <p>Операторы, требования регуляторов, модели инвестиций.</p>
+          <p class="res">Определены сегменты для входа, потенциальные партнеры и план пилотных проектов.</p>
         </article>
         <article class="case" data-r="cn">
           <span class="where">Китай, Шанхай</span>
           <h3>АНО «Моспром» и 7 московских заводов</h3>
           <p>B2B-переговоры с китайскими производителями, визиты на предприятия и в свободные экономические зоны.</p>
+          <p class="res check" title="Требует проверки">Результат: уточняется</p>
         </article>
         <article class="case" data-r="ru">
           <span class="where">Россия, 22 страны-участницы</span>
@@ -368,6 +379,17 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <h3>Международный госпиталь IGHS (Португалия)</h3>
           <p>Переговоры с замминистра здравоохранения, мэром Ташкента и советником Президента Узбекистана, параметры размещения в Central Asia University.</p>
         </article>
+        <article class="case" data-r="ca gulf">
+          <span class="where">Узбекистан, Саудовская Аравия</span>
+          <h3>Бизнес-миссия инвестиционного клуба Dome Foundation</h3>
+          <p>Переговоры с профильными министерствами, фондами и компаниями двух стран, B2B-встречи и презентации проектов.</p>
+        </article>
+        <article class="case" data-r="ca">
+          <span class="where">Кыргызстан, Узбекистан</span>
+          <h3>Представительства Китайского центра трансфера технологий ШОС</h3>
+          <p>Встречи и переговоры с профильными министерствами Кыргызстана и Узбекистана.</p>
+          <p class="res">Инициативу поддержало Правительство Кыргызской Республики, проект согласован с вице-премьер-министром.</p>
+        </article>
         <p class="cases-empty" id="cases-empty" hidden>По этому региону пока нет опубликованных проектов. Выберите другой регион или посмотрите все проекты.</p>
       </div>
       <p class="more"><a class="btn btn-ghost" href="#projects">Все проекты</a></p>
@@ -375,21 +397,20 @@ footer .cols{display:grid;gap:8px;align-content:start}
 
     <section id="platforms" aria-labelledby="h-platforms">
       <div class="sec-head">
-        <h2 id="h-platforms">Собственные площадки</h2>
-        <p class="lead">Форумы, премии и акселераторы, где участники находят партнёров и инвесторов. Здесь же открыт приём заявок.</p>
+        <h2 id="h-platforms">Мероприятия</h2>
+        <p class="lead">Форумы, премии и акселераторы, где участники находят партнеров и инвесторов. <span class="check" title="Требует проверки">Здесь же открыт прием заявок.</span></p>
       </div>
-      <div class="rail" tabindex="0" aria-label="Площадки компании, прокрутка вбок">
+      <div class="rail" tabindex="0" aria-label="Мероприятия компании, прокрутка вбок">
         <article class="plat">
           <img src="img/n08.jpg" alt="Бизнес-инкубатор ШОС в Китае, 2025" width="1280" height="853">
-          <div class="in"><h3>Бизнес-инкубатор ШОС</h3><p>Дубна и Москва в 2024, Омск и Китай в 2025. Включён в Тяньцзиньскую декларацию ШОС.</p></div>
+          <div class="in"><h3>Бизнес-инкубатор ШОС</h3><p>Дубна и Москва в 2024, Омск и Китай в 2025. Включен в Тяньцзиньскую декларацию ШОС.</p></div>
         </article>
         <article class="plat">
           <img src="img/n02.jpg" alt="Запуск премии ТОП-100 предпринимателей БРИКС в Москве" width="840" height="560">
-          <div class="in"><h3>ТОП-100 предпринимателей БРИКС</h3><p>Международная премия. Второй сезон стартовал в апреле 2026 года.</p></div>
+          <div class="in"><h3>ТОП-100 предпринимателей БРИКС</h3><p>Международная премия. <span class="check" title="Требует проверки">Второй сезон стартовал в апреле 2026 года.</span></p></div>
         </article>
         <article class="plat">
-          <div class="ph" aria-hidden="true">400+</div>
-          <div class="in"><h3>Деловой форум БРИКС+</h3><p>Более 400 участников из 20 стран: бизнес, инвесторы и институты развития.</p></div>
+          <div class="in"><h3>Деловой форум БРИКС+</h3><p>2022 год: более 400 участников из 20 стран, среди них бизнес, инвесторы и институты развития.</p></div>
         </article>
         <article class="plat">
           <img src="img/n07.jpg" alt="Итоги акселератора Russia Bridge Program" width="1280" height="853">
@@ -400,22 +421,21 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <div class="in"><h3>Деловой клуб AGORA</h3><p>Закрытое сообщество предпринимателей, инвесторов и представителей власти, сеть в 28+ странах.</p></div>
         </article>
         <article class="plat">
-          <div class="ph" aria-hidden="true">БРИКС</div>
           <div class="in"><h3>Бизнес-инкубатор БРИКС</h3><p>Программа для предпринимательских и инновационных проектов из всех стран объединения.</p></div>
         </article>
       </div>
-      <p class="rail-hint">Листайте вбок, чтобы увидеть все шесть площадок.</p>
+      <p class="rail-hint">Листайте вбок, чтобы увидеть все шесть мероприятий и программ.</p>
     </section>
 
     <section id="offices" aria-labelledby="h-offices">
       <div class="sec-head">
         <h2 id="h-offices">Представительства</h2>
-        <p class="lead">Свои люди на месте: переговоры с госорганами и партнёрами идут напрямую, без цепочки посредников.</p>
+        <p class="lead">Переговоры с госорганами и партнерами ведут сотрудники офиса в стране.</p>
       </div>
       <div class="offices">
         <div class="office"><h3>Россия</h3><span class="city">Москва</span><span class="tel">+7 929 773-11-04</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></div>
         <div class="office cn"><h3>Китай</h3><span class="city">Нанкин и Циндао</span><span class="tel">+86 133 6121 0641</span><span class="msg"><a href="#contact">WeChat</a><a href="#contact">WhatsApp</a></span></div>
-        <div class="office"><h3>Узбекистан</h3><span class="city">Ташкент</span><span class="tel">+998 99 604-76-36</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></div>
+        <div class="office"><h3>Узбекистан</h3><span class="city">Ташкент</span><span class="tel">+998 90 906-82-23</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></div>
         <div class="office"><h3>Казахстан</h3><span class="city">Город уточняется</span><span class="tel">+7 701 622-66-61</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></div>
         <div class="office"><h3>Кыргызстан</h3><span class="city">Город уточняется</span><span class="tel">+996 505 500 900</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></div>
         <div class="office"><h3>Саудовская Аравия</h3><span class="city">Город уточняется</span><span class="tel todo">Номер уточняется</span><span class="msg"><a href="#contact">WhatsApp</a></span></div>
@@ -436,6 +456,14 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <a class="btn btn-ghost" href="#founder">Об основателе и команде</a>
         </div>
       </div>
+      <div class="team" aria-labelledby="h-team">
+        <h3 id="h-team">Команда</h3>
+        <ul class="team-list">
+          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Генеральный директор</span></li>
+          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Руководитель офиса в России</span></li>
+          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Руководитель офиса в Узбекистане</span></li>
+        </ul>
+      </div>
     </section>
 
     <section id="news" aria-labelledby="h-news">
@@ -450,8 +478,8 @@ footer .cols{display:grid;gap:8px;align-content:start}
         </a>
         <div class="side">
           <a href="#news">
-            <img src="img/n11.jpg" alt="Молодёжный лагерь ШОС в Циндао" width="1280" height="853">
-            <div style="display:grid;gap:6px"><time datetime="2025-11-18">18 ноября 2025</time><h3>Молодёжный лагерь ШОС торжественно открыт</h3></div>
+            <img src="img/n11.jpg" alt="Молодежный лагерь ШОС в Циндао" width="1280" height="853">
+            <div style="display:grid;gap:6px"><time datetime="2025-11-18">18 ноября 2025</time><h3>Молодежный лагерь ШОС торжественно открыт</h3></div>
           </a>
           <a href="#news">
             <img src="img/n12.jpg" alt="Бизнес-инкубатор ШОС в Омске" width="840" height="560">
@@ -461,7 +489,6 @@ footer .cols{display:grid;gap:8px;align-content:start}
       </div>
       <div class="news-foot">
         <a href="#news">Все новости</a>
-        <a href="#news">CI ITIC в СМИ</a>
       </div>
     </section>
 
@@ -469,12 +496,7 @@ footer .cols{display:grid;gap:8px;align-content:start}
       <div class="contact">
         <div>
           <h2 id="h-contact">Обсудить проект</h2>
-          <p class="lead" style="margin-top:16px">Опишите задачу в двух словах. Ответим и предложим формат работы.</p>
-          <ol class="next">
-            <li><b>Ответ в течение рабочего дня</b><span>Менеджер офиса в нужной стране свяжется удобным вам способом</span></li>
-            <li><b>Созвон на 30 минут</b><span>Уточним цели, сроки и ограничения, при необходимости подпишем NDA</span></li>
-            <li><b>Предложение с этапами</b><span>Что делаем, в какие сроки и что получите на каждом шаге</span></li>
-          </ol>
+          <p class="lead" style="margin-top:16px">Свяжемся, уточним задачу и предложим формат работы.</p>
         </div>
         <form id="form" novalidate>
           <div class="row">
@@ -485,15 +507,15 @@ footer .cols{display:grid;gap:8px;align-content:start}
           <div class="row">
             <div class="field"><label for="f-task">Задача</label>
               <select id="f-task" name="task">
-                <option>Исследование рынка</option><option>Поиск партнёров</option><option>Бизнес-миссия</option><option>Сопровождение под ключ</option><option>Мероприятие или госпроект</option><option>Участие в площадках</option><option>Другое</option>
+                <option>Исследование рынка</option><option>Поиск партнеров</option><option>Бизнес-миссия</option><option>Сопровождение под ключ</option><option>Мероприятие или госпроект</option><option>Участие в мероприятиях</option><option>Другое</option>
               </select></div>
             <div class="field"><label for="f-region">Регион</label>
               <select id="f-region" name="region">
-                <option>Китай</option><option>Центральная Азия</option><option>Россия</option><option>Ближний Восток</option><option>Индия</option><option>Пока не определились</option>
+                <option>Китай</option><option>Центральная Азия</option><option>Россия</option><option>Страны Залива</option><option>Индия</option><option>Пока не определились</option>
               </select></div>
           </div>
           <div class="field"><label for="f-msg">Коротко о задаче</label><textarea id="f-msg" name="msg" placeholder="Например: ищем дистрибьютора оборудования в Узбекистане"></textarea></div>
-          <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" required><span>Согласен на обработку персональных данных по политике конфиденциальности</span></label>
+          <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" required><span>Даю согласие на обработку персональных данных в соответствии с <a href="privacy.html#consent">политикой конфиденциальности</a> (152-ФЗ)</span></label>
           <span class="err" id="e-ok" hidden>Нужно согласие, чтобы отправить заявку</span>
           <button class="btn btn-primary" type="submit" style="justify-self:start">Отправить заявку</button>
           <p class="ok" id="ok" hidden role="status">Заявка принята. В прототипе она никуда не уходит, на сайте здесь будет отправка в CRM.</p>
@@ -509,12 +531,15 @@ footer .cols{display:grid;gap:8px;align-content:start}
       <b style="color:var(--ink)">Consult Invest ITIC</b>
       <span>Международная торгово-инвестиционная компания</span>
       <span style="user-select:all">info@consultinvestitic.com</span>
+      <span>ООО «Международная торгово-инвестиционная компания «Консалт Инвест АйТиАйСи»</span>
+      <span class="check" title="Заглушка">ИНН уточняется, ОГРН уточняется</span>
+      <span class="check" title="Заглушка">Юридический адрес уточняется</span>
     </div>
     <div class="cols">
       <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#platforms">Мероприятия</a><a href="#offices">Представительства</a>
     </div>
     <div class="cols">
-      <a href="#founder">О компании</a><a href="#news">Новости и СМИ</a><a href="#contact">Политика конфиденциальности</a>
+      <a href="#founder">О компании</a><a href="#news">Новости</a><a href="privacy.html">Политика конфиденциальности</a>
     </div>
   </div>
 </footer>
