@@ -2,7 +2,7 @@
 title: "Компания \"Consult Invest ITIC\" будет представлять Европейскую Корпорацию \"IGHS GROUP\" в Центральной Азии"
 date: 2022-09-30
 cover: "/uploads/news/2022-09-30-predstavitelstvo-ighs-group-v-tsentralnoy-azii.jpg"
-coverAlt: "Consult Invest ITIC и IGHS GROUP"
+coverAlt: "Представители Consult Invest ITIC и IGHS GROUP"
 excerpt: "В период с 20 по 23 сентября т.г. по приглашению Международной торгово-инвестиционной компании \"Consult Invest ITIC\" состоялся визит в Республику Узбекистан"
 draft: false
 ---

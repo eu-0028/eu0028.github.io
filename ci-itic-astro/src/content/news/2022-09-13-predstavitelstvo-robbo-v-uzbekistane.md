@@ -2,7 +2,7 @@
 title: "Consut Invest ITIC будет представлять российскую компанию «РОББО» в Узбекистане"
 date: 2022-09-13
 cover: "/uploads/news/2022-09-13-predstavitelstvo-robbo-v-uzbekistane.jpg"
-coverAlt: "Consult Invest ITIC и компания РОББО"
+coverAlt: "Consult Invest ITIC будет представлять компанию «РОББО» в Узбекистане"
 excerpt: "2 сентября 2022 года подписан Партнерский Договор между компанией \"Consult Invest ITIC\" и ведущим разработчиком образовательной системы в сфере робототехники в России «РОББО»."
 draft: false
 ---

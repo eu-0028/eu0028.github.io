@@ -2,7 +2,7 @@
 title: "Компания «Consult Invest ITIC» совместно с китайским партнером создали совместное предприятие в г. Циндао для расширения торгово-экономических связей"
 date: 2025-02-03
 cover: "/uploads/news/2025-02-03-sovmestnoe-predpriyatie-v-tsindao.jpg"
-coverAlt: "Подписание документов о совместном предприятии в Циндао"
+coverAlt: "Создание совместного предприятия Consult Invest ITIC в Циндао"
 excerpt: "Компания «Consult Invest ITIC» совместно с китайской группой компаний «Lunay» зарегистрировали новую совместную компанию «Qingdao Consult Invest ITIC»"
 draft: false
 ---

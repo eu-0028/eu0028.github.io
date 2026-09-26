@@ -2,7 +2,7 @@
 title: "Компания Consult Invest ITIC расширяет свои возможности в Центральной Азии"
 date: 2023-02-08
 cover: "/uploads/news/2023-02-08-rasshirenie-vozmozhnostey-v-tsentralnoy-azii.jpg"
-coverAlt: "Consult Invest ITIC в Центральной Азии"
+coverAlt: "Consult Invest ITIC расширяет возможности в Центральной Азии"
 excerpt: "22 января 2023 года состоялось расширенное заседание партнеров и представителей Международной торгово-инвестиционной компании Consult Invest ITIC Казахстана, Кыргызстана и Узбекистана."
 draft: false
 ---

@@ -2,7 +2,7 @@
 title: "Компания \"Consult Invest ITIC\" приобрела статус официального представителя RAKEZ в России, Казахстане и Узбекистане"
 date: 2025-12-28
 cover: "/uploads/news/2025-12-28-ofitsialnyy-predstavitel-rakez.jpg"
-coverAlt: "Consult Invest ITIC – официальный представитель RAKEZ"
+coverAlt: "Логотип RAKEZ – Ras Al Khaimah Economic Zone"
 excerpt: "Международная торгово-инвестиционная компания \"Consult Invest ITIC\" приобрела статус официального представителя Свободной экономической зоны эмирата Рас-эль-Хайма “Rakez” (ОАЭ) в России, Казахстане и Узбекистане"
 draft: false
 ---

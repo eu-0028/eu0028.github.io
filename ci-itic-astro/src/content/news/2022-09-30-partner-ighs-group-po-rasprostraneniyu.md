@@ -2,7 +2,7 @@
 title: "Компания \"Consult Invest ITIC\" приобрела статус партнера по распространению продукции Европейской Корпорации \"IGHS GROUP\" в Центральной Азии"
 date: 2022-09-30
 cover: "/uploads/news/2022-09-30-partner-ighs-group-po-rasprostraneniyu.jpg"
-coverAlt: "Consult Invest ITIC – партнер IGHS GROUP"
+coverAlt: "Представители Consult Invest ITIC и IGHS GROUP"
 excerpt: "21 сентября т.г. между \"Consult Invest ITIC\" и \"IGHS GROUP\" подписано Соглашение, предусматривающее распространение продукции \"KELO.CELL\" в Центральной Азии."
 draft: false
 ---

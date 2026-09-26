@@ -2,7 +2,7 @@
 title: "Компания «Consult Invest ITIC» будет представлять интересы ОЭЗ «Дубна» в странах Центральной Азии"
 date: 2024-10-08
 cover: "/uploads/news/2024-10-08-predstavitelstvo-oez-dubna-v-tsentralnoy-azii.jpg"
-coverAlt: "ОЭЗ «Дубна» и Consult Invest ITIC"
+coverAlt: "Представители Consult Invest ITIC и ОЭЗ «Дубна»"
 excerpt: "27 сентября в рамках очного этапа Бизнес-инкубатора Шанхайской организации сотрудничества в г. Дубне (Московской области) состоялось подписание Соглашения о сотрудничестве между компанией “Consult Invest ITIC” и ОЭЗ «Дубна»"
 draft: false
 ---
