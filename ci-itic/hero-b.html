@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Consult Invest ITIC – вариант Б</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="variants.css">
+<style>
+/* Вариант Б: чисто типографический экран, страны проектов как графический элемент */
+.hero{border-bottom:1px solid var(--line-dark)}
+.hero-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);width:100%;gap:0;padding-block:0}
+.hero-main{padding-block:clamp(56px,8vw,112px) clamp(40px,6vw,72px);padding-right:clamp(24px,4vw,56px);display:grid;align-content:space-between;gap:48px}
+.hero h1{font-size:clamp(46px,6.6vw,100px)}
+.hero .lead{font-size:clamp(18px,1.6vw,21px);max-width:46ch;color:var(--on-dark-muted)}
+.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:28px}
+.map{border-left:1px solid var(--line-dark);display:grid;grid-template-rows:auto 1fr}
+.map-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:clamp(56px,8vw,112px) 0 20px 32px;border-bottom:1px solid var(--line-dark)}
+.map-head b{font-weight:600;font-size:clamp(40px,4.4vw,64px);letter-spacing:-0.03em;line-height:1}
+.map-head span{color:var(--on-dark-muted);font-size:15px;text-align:right}
+.map ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.map li{padding:22px 12px 22px 24px;border-bottom:1px solid var(--line-dark);border-left:1px solid var(--line-dark);font-size:clamp(16px,1.35vw,19px);line-height:1.25;font-weight:500;letter-spacing:-0.01em;display:flex;align-items:center;gap:12px}
+.map li:nth-child(3n+1){border-left:0;padding-left:32px}
+.map li::before{content:"";width:7px;height:7px;background:var(--green);flex:none}
+@media (max-width:900px){
+  .hero-body{grid-template-columns:1fr}
+  .hero-main{padding-right:0}
+  .map{border-left:0;border-top:1px solid var(--line-dark)}
+  .map-head,.map li:nth-child(3n+1){padding-left:0}
+  .map li{padding-left:14px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><img src="img/logo-light.png" alt="Consult Invest ITIC" width="420" height="154"></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="#">Услуги</a><a href="#">Проекты</a><a href="#">Мероприятия</a><a href="#">Представительства</a><a href="#">О компании</a><a href="#">Новости</a>
+    </nav>
+    <div class="top-right">
+      <div class="langs"><b>RU</b><span>EN</span><span lang="zh">中文</span></div>
+      <a class="btn btn-green" href="#">Обсудить проект</a>
+      <button class="burger" type="button">Меню</button>
+    </div>
+  </div>
+</header>
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-body wrap">
+    <div class="hero-main">
+      <h1 id="h1">Выход на рынки БРИКС и ШОС</h1>
+      <div>
+        <p class="lead">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
+        <div class="cta">
+          <a class="btn btn-green" href="#">Обсудить проект</a>
+          <a class="link" href="#">Смотреть проекты</a>
+        </div>
+      </div>
+    </div>
+    <div class="map" aria-label="Страны, где реализованы проекты">
+      <div class="map-head"><b>9 стран</b><span>где реализованы<br>проекты</span></div>
+      <ol>
+        <li>Узбекистан</li><li>Казахстан</li><li>Кыргызстан</li><li>Китай</li><li>Индия</li><li>Пакистан</li><li>Ирак</li><li>Саудовская Аравия</li><li>ОАЭ</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</body>
+</html>

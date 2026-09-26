@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Consult Invest ITIC – вариант А</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="variants.css">
+<style>
+/* Вариант А: фотография во всю ширину */
+.hero{position:relative;min-height:min(92dvh,860px);display:grid;grid-template-rows:auto 1fr;background:var(--dark)}
+.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(10,12,11,.58)}
+.hero .top{background:transparent;border-bottom-color:rgba(238,240,238,.18)}
+.hero-body{position:relative;z-index:1;align-self:end;width:100%;padding-block:clamp(48px,8vw,96px) clamp(36px,5vw,56px)}
+.hero h1{font-size:clamp(44px,7.4vw,112px);max-width:12ch}
+.hero .lead{margin-top:28px;font-size:clamp(18px,1.6vw,21px);max-width:52ch;color:var(--on-dark)}
+.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:36px}
+.hero .cap{position:absolute;z-index:1;right:var(--gut);bottom:20px;font-size:13px;color:var(--on-dark-muted)}
+/* Цифры под первым экраном: крупная типографика и линии */
+.facts{border-top:1px solid var(--line-dark)}
+.facts .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+.fact{padding-block:32px 36px;display:grid;gap:10px;align-content:start}
+.fact + .fact{padding-left:32px;border-left:1px solid var(--line-dark)}
+.fact b{font-weight:600;font-size:clamp(40px,4.6vw,64px);letter-spacing:-0.03em;line-height:1}
+.fact span{color:var(--on-dark-muted);font-size:15px}
+.countries{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 24px;font-size:clamp(17px,1.5vw,20px);font-weight:500;margin-top:4px}
+@media (max-width:760px){
+  .facts .wrap{grid-template-columns:1fr}
+  .fact + .fact{padding-left:0;border-left:0;border-top:1px solid var(--line-dark)}
+  .countries{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero .cap{position:relative;right:auto;bottom:auto;padding:0 var(--gut) 16px}
+}
+</style>
+</head>
+<body>
+<section class="hero" aria-labelledby="h1">
+  <img src="img/hero-forum.jpg" alt="Пленарный зал форума ШОС, несколько сотен участников" width="1680" height="1120" fetchpriority="high">
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="#"><img src="img/logo-light.png" alt="Consult Invest ITIC" width="420" height="154"></a>
+      <nav class="nav" aria-label="Основное меню">
+        <a href="#">Услуги</a><a href="#">Проекты</a><a href="#">Мероприятия</a><a href="#">Представительства</a><a href="#">О компании</a><a href="#">Новости</a>
+      </nav>
+      <div class="top-right">
+        <div class="langs"><b>RU</b><span>EN</span><span lang="zh">中文</span></div>
+        <a class="btn btn-green" href="#">Обсудить проект</a>
+        <button class="burger" type="button">Меню</button>
+      </div>
+    </div>
+  </header>
+  <div class="hero-body wrap">
+    <h1 id="h1">Выход на рынки БРИКС и ШОС</h1>
+    <p class="lead">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
+    <div class="cta">
+      <a class="btn btn-green" href="#">Обсудить проект</a>
+      <a class="link" href="#">Смотреть проекты</a>
+    </div>
+  </div>
+  <p class="cap">Бизнес-инкубатор ШОС, Омск, 2025</p>
+</section>
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><b>9 стран</b><span>где реализованы проекты</span></div>
+    <div class="fact">
+      <div class="countries"><span>Узбекистан</span><span>Казахстан</span><span>Кыргызстан</span><span>Китай</span><span>Индия</span><span>Пакистан</span><span>Ирак</span><span>Саудовская Аравия</span><span>ОАЭ</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
