@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Consult Invest ITIC – вариант Б</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="fonts/inter-tight.css">
 <link rel="stylesheet" href="variants.css">
 <style>
 /* Вариант Б: чисто типографический экран, страны проектов как графический элемент */
@@ -27,7 +27,12 @@
   .hero-main{padding-right:0}
   .map{border-left:0;border-top:1px solid var(--line-dark)}
   .map-head,.map li:nth-child(3n+1){padding-left:0}
-  .map li{padding-left:14px}
+  .map ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .map li{padding-left:14px;border-left:0}
+  .map li:nth-child(3n+1){padding-left:14px}
+  .map li:nth-child(odd){padding-left:0}
+  .map li:nth-child(even){border-left:1px solid var(--line-dark)}
+  .map li:last-child{grid-column:1/-1;border-left:0;padding-left:0}
 }
 </style>
 </head>
