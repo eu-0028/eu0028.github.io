@@ -20,11 +20,12 @@
   --wrap:1320px;
   --gut:clamp(16px,4vw,48px);
   --r:2px;
+  --fade:rgba(247,248,246,.55);
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#121513;--surface:#1A1E1B;--footer:#0E110F;--ink:#EEF0EE;--muted:#A3ABA5;
-  --line:#2C322E;--line-strong:#EEF0EE;--accent:#3DD36A;--err:#FF8A80;
+  --line:#2C322E;--line-strong:#EEF0EE;--accent:#3DD36A;--err:#FF8A80;--fade:rgba(18,21,19,.55);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -40,9 +41,9 @@ p{margin:0}
 .lead{font-size:clamp(18px,1.5vw,20px);color:var(--muted);max-width:56ch}
 section{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
 .head{display:grid;gap:18px;margin-bottom:clamp(36px,5vw,64px);max-width:760px}
-.logo .l-dark{display:none}
-:root[data-theme="dark"] .logo .l-light{display:none}
-:root[data-theme="dark"] .logo .l-dark{display:block}
+footer .logo .l-dark{display:none}
+:root[data-theme="dark"] footer .logo .l-light{display:none}
+:root[data-theme="dark"] footer .logo .l-dark{display:block}
 
 /* Кнопки и ссылки: радиус 2px, без теней, анимация только цвета */
 .btn{display:inline-flex;align-items:center;font:600 16px/1 var(--font);padding:16px 24px;border-radius:var(--r);text-decoration:none;white-space:nowrap;border:1px solid transparent;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
@@ -54,47 +55,42 @@ section{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
 .link:hover{color:var(--ink)}
 .check{text-decoration:underline dashed;text-decoration-thickness:1px;text-underline-offset:4px;cursor:help}
 
-/* Шапка */
-.top{border-bottom:1px solid var(--line);background:var(--bg);position:relative;z-index:3}
+/* Шапка поверх фото: белый логотип и светлое меню */
+.top{position:relative;z-index:3;border-bottom:1px solid rgba(238,240,238,.18)}
 .top .wrap{display:flex;align-items:center;gap:32px;height:72px}
 .logo img{height:40px;width:auto;display:block}
 .nav{display:flex;gap:26px;font-size:15px;font-weight:500}
-.nav a{text-decoration:none;color:var(--muted);transition:color .15s}
-.nav a:hover{color:var(--ink)}
+.nav a{text-decoration:none;color:#A9B1AB;transition:color .15s}
+.nav a:hover{color:#EEF0EE}
 .top-right{margin-left:auto;display:flex;align-items:center;gap:18px}
 .langs{display:flex;gap:4px;font-size:14px;font-weight:500}
-.langs button,.burger,.theme{font:500 14px var(--font);background:none;border:0;color:var(--muted);padding:6px;cursor:pointer;border-radius:var(--r);transition:color .15s,border-color .15s}
-.langs button:hover,.theme:hover{color:var(--ink)}
-.langs button[aria-pressed="true"]{color:var(--ink);font-weight:600}
+.langs button,.burger{font:500 14px var(--font);background:none;border:0;color:#A9B1AB;padding:6px;cursor:pointer;border-radius:var(--r);transition:color .15s}
+.langs button:hover{color:#EEF0EE}
+.langs button[aria-pressed="true"]{color:#EEF0EE;font-weight:600}
 .top .btn{padding:12px 18px;font-size:15px}
-.burger{display:none;border:1px solid var(--line);padding:9px 12px;color:var(--ink);font-size:15px}
+.burger{display:none;border:1px solid rgba(238,240,238,.3);padding:9px 12px;color:#EEF0EE;font-size:15px}
 @media (max-width:1100px){
   .nav{display:none}
   .burger{display:inline-block}
-  .nav.open{display:grid;position:absolute;top:72px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px var(--gut) 20px;gap:0}
-  .nav.open a{padding:14px 0;font-size:18px;color:var(--ink);border-bottom:1px solid var(--line)}
+  .nav.open{display:grid;position:absolute;top:72px;left:0;right:0;background:#111412;border-bottom:1px solid #2B312D;padding:8px var(--gut) 20px;gap:0}
+  .nav.open a{padding:14px 0;font-size:18px;color:#EEF0EE;border-bottom:1px solid #2B312D}
 }
 @media (max-width:640px){.top .btn,.langs{display:none}.top-right{gap:10px}}
 
-/* Первый экран: текст на светлом фоне, ниже фото полосой во всю ширину */
-.hero{border-top:0;padding-block:clamp(48px,7vw,96px) clamp(36px,5vw,56px)}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end}
-.hero h1{font-size:clamp(40px,5.6vw,84px);letter-spacing:-0.035em;line-height:1;max-width:13ch}
-.hero .lead{margin-top:24px}
-.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:32px}
-.hero-facts{display:none;border-top:1px solid var(--line-strong)}
-.hero-facts div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line)}
-.hero-facts b{font-weight:600;font-size:clamp(34px,3.4vw,48px);letter-spacing:-0.03em;line-height:1;color:var(--accent)}
-.hero-facts span{color:var(--muted);font-size:15px}
-.v-b .hero-facts{display:block}
-.v-b .facts{display:none}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
-.band{margin:0}
-.band img{display:block;width:100%;height:clamp(220px,40vw,600px);object-fit:cover;object-position:50% 18%}
-.band figcaption{font-size:13px;color:var(--muted);text-align:right;padding-top:10px}
+/* Первый экран: полноэкранное фото, затемнение растворяется в цвет фона страницы */
+.hero{position:relative;min-height:100dvh;display:grid;grid-template-rows:auto 1fr;border-top:0;padding-block:0;color:#EEF0EE;background:var(--bg)}
+.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 35%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,12,.62) 0%,rgba(10,14,12,.55) 48%,rgba(10,14,12,.32) 68%,var(--fade) 86%,var(--bg) 100%)}
+.hero-body{position:relative;z-index:1;align-self:center;padding-block:clamp(32px,5vw,64px) 20vh}
+.hero h1{font-size:clamp(44px,6.4vw,96px);letter-spacing:-0.035em;line-height:1;max-width:13ch}
+.hero .lead{margin-top:26px;color:#EEF0EE;max-width:52ch}
+.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:34px}
+.hero .link{color:#EEF0EE}
+.hero .link:hover{color:var(--green)}
+.hero .cap{position:absolute;z-index:1;right:var(--gut);top:88px;font-size:13px;color:#C9CFCA}
 
 /* Цифры: тот же фон, тонкие линии */
-.facts{border-top:0;padding-block:clamp(40px,5vw,64px) 0}
+.facts{border-top:0;padding-block:0;margin-top:-1px}
 .facts .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .fact{padding-block:28px 32px;display:grid;gap:10px;align-content:start}
 .fact + .fact{padding-left:32px;border-left:1px solid var(--line)}
@@ -220,47 +216,38 @@ footer .col{display:grid;gap:8px;align-content:start}
 @media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
 </style>
 
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="#top" aria-label="Consult Invest ITIC, на главную">
-      <img class="l-light" src="img/logo-black.webp" alt="Consult Invest ITIC" width="2000" height="720">
-      <img class="l-dark" src="img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720">
-    </a>
-    <nav class="nav" id="nav" aria-label="Основное меню">
-      <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">География</a><a href="#founder">О компании</a><a href="#news">Новости</a>
-    </nav>
-    <div class="top-right">
-      <div class="langs" role="group" aria-label="Язык сайта">
-        <button type="button" aria-pressed="true">RU</button><button type="button" aria-pressed="false">EN</button><button type="button" aria-pressed="false" lang="zh">中文</button>
-      </div>
-      <a class="btn btn-green" href="#contact">Обсудить проект</a>
-      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">Меню</button>
-    </div>
-  </div>
-</header>
+
 
 <main id="top">
   <section class="hero" aria-labelledby="h1">
-    <div class="wrap">
-      <div>
-        <h1 id="h1">Выход на рынки БРИКС и ШОС</h1>
-        <p class="lead">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
-        <div class="cta">
+    <img src="img/hero-sco-panel.jpg" alt="Татьяна Селиверстова модерирует панельную сессию форума ШОС и программы «Бизнес-инкубатор ШОС», Омск, 2025" width="1680" height="1120" fetchpriority="high">
+    <header class="top">
+      <div class="wrap">
+        <a class="logo" href="#top" aria-label="Consult Invest ITIC, на главную">
+          <img src="img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720">
+        </a>
+        <nav class="nav" id="nav" aria-label="Основное меню">
+          <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">География</a><a href="#founder">О компании</a><a href="#news">Новости</a>
+        </nav>
+        <div class="top-right">
+          <div class="langs" role="group" aria-label="Язык сайта">
+            <button type="button" aria-pressed="true">RU</button><button type="button" aria-pressed="false">EN</button><button type="button" aria-pressed="false" lang="zh">中文</button>
+          </div>
           <a class="btn btn-green" href="#contact">Обсудить проект</a>
-          <a class="link" href="#projects">Смотреть проекты</a>
+          <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">Меню</button>
         </div>
       </div>
-      <div class="hero-facts" aria-label="Компания в цифрах">
-        <div><b>9 стран</b><span>с реализованными проектами</span></div>
-        <div><b>2 офиса</b><span>в Москве и Ташкенте, представители еще в 4 странах</span></div>
+    </header>
+    <div class="hero-body wrap">
+      <h1 id="h1">Выход на рынки БРИКС и ШОС</h1>
+      <p class="lead">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
+      <div class="cta">
+        <a class="btn btn-green" href="#contact">Обсудить проект</a>
+        <a class="link" href="#projects">Смотреть проекты</a>
       </div>
     </div>
+    <p class="cap">Бизнес-инкубатор ШОС, Омск, 2025</p>
   </section>
-
-  <figure class="band">
-    <img src="img/hero-sco-panel.jpg" alt="Татьяна Селиверстова модерирует панельную сессию форума ШОС и программы «Бизнес-инкубатор ШОС», Омск, 2025" width="1680" height="1120" fetchpriority="high">
-    <figcaption class="wrap">Бизнес-инкубатор ШОС, Омск, 2025</figcaption>
-  </figure>
 
   <section class="facts" aria-label="Компания в цифрах">
     <div class="wrap">
