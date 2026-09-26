@@ -67,7 +67,7 @@ section{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
 .langs button,.theme,.burger{font:500 14px var(--font);background:none;border:0;color:var(--on-dark-muted);padding:6px;cursor:pointer;border-radius:var(--r);transition:color .15s,border-color .15s}
 .langs button:hover,.theme:hover{color:var(--on-dark)}
 .langs button[aria-pressed="true"]{color:var(--on-dark);font-weight:600}
-.theme{border:1px solid rgba(238,240,238,.25);padding:8px 10px;white-space:nowrap}
+.theme{justify-self:start;margin-top:12px;border:1px solid var(--line-dark);padding:9px 12px;white-space:nowrap}
 .top .btn{padding:12px 18px;font-size:15px}
 .burger{display:none;border:1px solid rgba(238,240,238,.25);padding:9px 12px;color:var(--on-dark);font-size:15px}
 @media (max-width:1180px){
@@ -148,7 +148,9 @@ section{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
 @media (max-width:900px){.events{grid-template-columns:1fr}.events img{aspect-ratio:16/10}.ev li{grid-template-columns:1fr;gap:6px}}
 
 /* Представительства: строки контактов */
-.offices{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.group{font-size:15px;font-weight:600;letter-spacing:0;color:var(--muted);margin:0 0 12px}
+.offices{list-style:none;margin:0 0 44px;padding:0;border-top:1px solid var(--ink)}
+.offices:last-child{margin-bottom:0}
 .offices li{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .offices b{font-weight:600;font-size:19px}
 .offices .tel{font-variant-numeric:tabular-nums;user-select:all}
@@ -165,12 +167,7 @@ section{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
 .founder .num span{display:block;font-size:15px;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:10px;line-height:1.5}
 .regalia{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .regalia li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted)}
-.team{margin-top:clamp(48px,6vw,80px);display:grid;gap:20px}
-.team ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
-.team li{padding:18px 20px 18px 0;display:grid;gap:4px}
-.team li + li{padding-left:20px;border-left:1px solid var(--line)}
-.team li span{color:var(--muted);font-size:15px}
-@media (max-width:900px){.founder{grid-template-columns:1fr}.team ul{grid-template-columns:1fr}.team li + li{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+@media (max-width:900px){.founder{grid-template-columns:1fr}}
 
 /* Новости */
 .news{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px)}
@@ -221,13 +218,12 @@ footer .col{display:grid;gap:8px;align-content:start}
     <div class="wrap">
       <a class="logo" href="#top" aria-label="Consult Invest ITIC, на главную"><img src="img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720"></a>
       <nav class="nav" id="nav" aria-label="Основное меню">
-        <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">Представительства</a><a href="#founder">О компании</a><a href="#news">Новости</a>
+        <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">География</a><a href="#founder">О компании</a><a href="#news">Новости</a>
       </nav>
       <div class="top-right">
         <div class="langs" role="group" aria-label="Язык сайта">
           <button type="button" aria-pressed="true">RU</button><button type="button" aria-pressed="false">EN</button><button type="button" aria-pressed="false" lang="zh">中文</button>
         </div>
-        <button class="theme" type="button" id="theme" aria-pressed="false">Темная тема</button>
         <a class="btn btn-green" href="#contact">Обсудить проект</a>
         <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">Меню</button>
       </div>
@@ -248,7 +244,7 @@ footer .col{display:grid;gap:8px;align-content:start}
   <div class="wrap">
     <div class="fact"><b>9 стран</b><span>где реализованы проекты</span></div>
     <div class="fact"><div class="countries"><span>Узбекистан</span><span>Казахстан</span><span>Кыргызстан</span><span>Китай</span><span>Индия</span><span>Пакистан</span><span>Ирак</span><span>Саудовская Аравия</span><span>ОАЭ</span></div></div>
-    <div class="fact"><b class="check" title="Требует проверки">? лет</b><span>на рынке, число уточняется</span></div>
+    <div class="fact"><b>2 офиса</b><span>в Москве и Ташкенте, представители еще в 4 странах</span></div>
   </div>
 </div>
 
@@ -310,9 +306,9 @@ footer .col{display:grid;gap:8px;align-content:start}
         <li class="row" data-r="ca gulf"><span class="c">Казахстан, Кыргызстан, Узбекистан, Пакистан, Ирак</span><b>Intellico (Швейцария)</b><p><span class="role">Роль CI ITIC: GR-сопровождение.</span> Национальные шлюзы международного A2P-трафика запущены в пяти странах.</p></li>
         <li class="row" data-r="ca"><span class="c">Кыргызстан, Узбекистан</span><b>Представительства Китайского центра трансфера технологий ШОС</b><p>Инициативу поддержало Правительство Кыргызской Республики, проект согласован с вице-премьер-министром.</p></li>
         <li class="row" data-r="ca gulf"><span class="c">Узбекистан, Саудовская Аравия</span><b>Бизнес-миссия инвестиционного клуба Dome Foundation</b><p>Переговоры с профильными министерствами, фондами и компаниями двух стран, B2B-встречи и презентации проектов.</p></li>
-        <li class="row" data-r="cn"><span class="c">Китай, Шэньчжэнь</span><b>Представительство ОЭЗ «Технополис Москва»</b><p class="check" title="Требует проверки">Результат: уточняется</p></li>
-        <li class="row" data-r="cn"><span class="c">Китай, Гуанчжоу, Шанхай, Гонконг</span><b>Деловая миссия «Мегамаркета»</b><p class="check" title="Требует проверки">Результат: уточняется</p></li>
-        <li class="row" data-r="cn"><span class="c">Китай, Шанхай</span><b>АНО «Моспром» и 7 московских заводов</b><p class="check" title="Требует проверки">Результат: уточняется</p></li>
+        <li class="row" data-r="cn"><span class="c">Китай, Шэньчжэнь</span><b>Представительство ОЭЗ «Технополис Москва»</b><p>Модель работы офиса, связи с госструктурами, индустриальными парками и технологическими компаниями Китая.<br><span class="check" title="Требует проверки">Результат: уточняется</span></p></li>
+        <li class="row" data-r="cn"><span class="c">Китай, Гуанчжоу, Шанхай, Гонконг</span><b>Деловая миссия «Мегамаркета»</b><p>Переговоры с поставщиками, логистическими операторами и e-commerce-платформами для трансграничных поставок.<br><span class="check" title="Требует проверки">Результат: уточняется</span></p></li>
+        <li class="row" data-r="cn"><span class="c">Китай, Шанхай</span><b>АНО «Моспром» и 7 московских заводов</b><p>B2B-переговоры с китайскими производителями, визиты на предприятия и в свободные экономические зоны.<br><span class="check" title="Требует проверки">Результат: уточняется</span></p></li>
         <li class="row" data-r="in"><span class="c">Индия</span><b>Рынок мусоропереработки для GreenRTech</b><p>Определены сегменты для входа, потенциальные партнеры и план пилотных проектов.</p></li>
         <li class="row" data-r="ca"><span class="c">Узбекистан, Ташкент</span><b>Международный госпиталь IGHS (Португалия)</b><p>Переговоры с замминистра здравоохранения, мэром Ташкента и советником Президента Узбекистана.</p></li>
         <li class="row" data-r="ru"><span class="c">Россия, 22 страны-участницы</span><b>«Интервидение-2025»</b><p>Международный контур конкурса: артисты из 22 стран и национальные телекомпании для трансляции.</p></li>
@@ -347,12 +343,16 @@ footer .col{display:grid;gap:8px;align-content:start}
   <section id="offices" aria-labelledby="h-offices">
     <div class="wrap">
       <div class="head">
-        <h2 id="h-offices">Представительства</h2>
-        <p class="lead">Переговоры с госорганами и партнерами ведут сотрудники офиса в стране.</p>
+        <h2 id="h-offices">Офисы и представители</h2>
+        <p class="lead">В Москве и Ташкенте работают наши офисы, в Китае, Казахстане, Кыргызстане и Саудовской Аравии – представители компании.</p>
       </div>
+      <h3 class="group">Офисы</h3>
       <ul class="offices">
-        <li><b>Россия</b><span class="muted">Москва</span><span class="tel">+7 929 773-11-04</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
-        <li><b>Узбекистан</b><span class="muted">Ташкент</span><span class="tel">+998 90 906-82-23</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
+        <li><b>Москва</b><span class="muted">Россия</span><span class="tel">+7 929 773-11-04</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
+        <li><b>Ташкент</b><span class="muted">Узбекистан</span><span class="tel">+998 90 906-82-23</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
+      </ul>
+      <h3 class="group">Представители</h3>
+      <ul class="offices">
         <li><b>Китай</b><span class="muted">Нанкин и Циндао</span><span class="tel">+86 133 6121 0641</span><span class="msg"><a href="#contact">WeChat</a><a href="#contact">WhatsApp</a></span></li>
         <li><b>Казахстан</b><span class="muted check" title="Требует проверки">Город уточняется</span><span class="tel">+7 701 622-66-61</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
         <li><b>Кыргызстан</b><span class="muted check" title="Требует проверки">Город уточняется</span><span class="tel">+996 505 500 900</span><span class="msg"><a href="#contact">WhatsApp</a><a href="#contact">Telegram</a></span></li>
@@ -376,14 +376,6 @@ footer .col{display:grid;gap:8px;align-content:start}
           </ul>
         </div>
       </div>
-      <div class="team" aria-labelledby="h-team">
-        <h3 id="h-team">Команда</h3>
-        <ul>
-          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Генеральный директор</span></li>
-          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Руководитель офиса в России</span></li>
-          <li><b class="check" title="Заглушка">Имя уточняется</b><span>Руководитель офиса в Узбекистане</span></li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -392,14 +384,14 @@ footer .col{display:grid;gap:8px;align-content:start}
       <div class="head"><h2 id="h-news">Новости</h2></div>
       <div class="news">
         <a class="big" href="#news">
-          <img src="img/n05.jpg" alt="Руководство Consult Invest ITIC на выставке «Иннопром» в Саудовской Аравии" width="958" height="777">
-          <time datetime="2026-02-24">24 февраля 2026</time>
-          <h3>Руководство компании приняло участие в выставке «Иннопром» в Саудовской Аравии</h3>
+          <img src="img/news-2026-07-09.jpg" alt="Татьяна Селиверстова модерирует международную сессию на форуме «Больше чем бизнес»" width="1680" height="1120">
+          <time datetime="2026-07-09">9 июля 2026</time>
+          <h3>Основатель компании Татьяна Селиверстова выступила модератором международной сессии на форуме «Больше чем бизнес» – 2026</h3>
         </a>
         <div class="list">
-          <a href="#news"><time datetime="2026-07-09">9 июля 2026</time><h3>Татьяна Селиверстова модерировала международную сессию на форуме «Больше чем бизнес»</h3></a>
-          <a href="#news"><time datetime="2026-04-28">28 апреля 2026</time><h3>Запуск II Международной премии «ТОП-100 предпринимателей БРИКС» в Москве</h3></a>
-          <a href="#news"><time datetime="2025-09-19">19 сентября 2025</time><h3>В Омске состоялся Бизнес-инкубатор ШОС</h3></a>
+          <a href="#news"><time datetime="2026-04-29">29 апреля 2026</time><h3>Consult Invest ITIC выступила соорганизатором форума в Москве «Как, где и с кем делать международный бизнес в следующие 10 лет»</h3></a>
+          <a href="#news"><time datetime="2026-04-28">28 апреля 2026</time><h3>Церемония запуска II Международной премии «ТОП-100 предпринимателей БРИКС» в Москве</h3></a>
+          <a href="#news"><time datetime="2026-04-01">1 апреля 2026</time><h3>Consult Invest ITIC объединяет ведущие образовательные организации России и Узбекистана</h3></a>
         </div>
       </div>
       <p class="news-foot"><a class="link" href="#news">Все новости</a></p>
@@ -423,7 +415,7 @@ footer .col{display:grid;gap:8px;align-content:start}
             <div class="field"><label for="f-task">Задача</label>
               <select id="f-task" name="task"><option>Исследование рынка</option><option>Поиск партнеров</option><option>Бизнес-миссия</option><option>Инвестиционное сопровождение</option><option>Сопровождение под ключ</option><option>Мероприятие или госпроект</option><option>Участие в мероприятиях</option><option>Другое</option></select></div>
             <div class="field"><label for="f-region">Регион</label>
-              <select id="f-region" name="region"><option>Китай</option><option>Центральная Азия</option><option>Россия</option><option>Страны Залива</option><option>Индия</option><option>Пока не определились</option></select></div>
+              <select id="f-region" name="region"><option selected>Пока не определились</option><option>Китай</option><option>Центральная Азия</option><option>Россия</option><option>Страны Залива</option><option>Индия</option></select></div>
           </div>
           <div class="field"><label for="f-msg">Коротко о задаче</label><textarea id="f-msg" name="msg" placeholder="Например: ищем дистрибьютора оборудования в Узбекистане"></textarea></div>
           <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" required><span>Даю согласие на обработку персональных данных в соответствии с <a href="privacy.html#consent">политикой конфиденциальности</a> (152-ФЗ)</span></label>
@@ -441,16 +433,17 @@ footer .col{display:grid;gap:8px;align-content:start}
     <div class="col">
       <a class="logo" href="#top"><img src="img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720"></a>
       <span>ООО «Международная торгово-инвестиционная компания «Консалт Инвест АйТиАйСи»</span>
-      <span class="check" title="Заглушка">ИНН уточняется, ОГРН уточняется</span>
-      <span class="check" title="Заглушка">Юридический адрес уточняется</span>
+      <span>ИНН 9723203351, КПП 772301001, ОГРН 1237700449953</span>
+      <span>109380, г. Москва, ул. Чагинская, д. 4, стр. 13, пом. 14/4</span>
     </div>
     <div class="col">
-      <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">Представительства</a><a href="#founder">О компании</a><a href="#news">Новости</a>
+      <a href="#services">Услуги</a><a href="#projects">Проекты</a><a href="#events">Мероприятия</a><a href="#offices">География</a><a href="#founder">О компании</a><a href="#news">Новости</a>
     </div>
     <div class="col">
       <span style="user-select:all;color:var(--on-dark)">info@consultinvestitic.com</span>
       <a href="privacy.html">Политика конфиденциальности</a>
       <a href="privacy.html#consent">Согласие на обработку персональных данных</a>
+      <button class="theme" type="button" id="theme" aria-pressed="false">Темная тема</button>
     </div>
   </div>
 </footer>
