@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const items = await getCollection('news', ({ data }) => !data.draft);
+  return items.map((n) => ({ params: { slug: n.id }, props: { n } }));
+}
+const { n } = Astro.props;
+const { Content } = await render(n);
+const date = n.data.date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).replace(' г.', '');
+---
+<Base title={n.data.title} description={n.data.excerpt} ogImage={n.data.cover}>
+  <section class="page">
+    <div class="wrap">
+      <article class="article">
+        <p class="crumbs"><a href="/news/">Новости</a></p>
+        <h1>{n.data.title}</h1>
+        <p class="meta"><time datetime={n.data.date.toISOString().slice(0, 10)}>{date}</time></p>
+        {n.data.cover && <img class="cover" src={n.data.cover} alt={n.data.coverAlt ?? ''}>}
+        <div class="prose"><Content /></div>
+      </article>
+    </div>
+  </section>
+</Base>

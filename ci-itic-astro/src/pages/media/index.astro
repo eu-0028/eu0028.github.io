@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('media', ({ data }) => !data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).replace(' г.', '');
+---
+<Base title="CI ITIC в СМИ" description="Публикации о Consult Invest ITIC и Татьяне Селиверстовой в СМИ.">
+  <section class="page">
+    <div class="wrap">
+      <div class="head"><h1 style="font-size:clamp(36px,4.6vw,64px)">CI ITIC в СМИ</h1></div>
+      {items.length === 0 ? (
+        <p class="empty">Публикаций пока нет. Раздел появится в меню, когда в админке будет добавлена первая запись.</p>
+      ) : (
+        <ul class="news-index">
+          {items.map((m) => (
+            <li><a href={m.data.url} target="_blank" rel="noopener">
+              <time datetime={m.data.date.toISOString().slice(0, 10)}>{fmt(m.data.date)}</time>
+              <div><h3>{m.data.title}</h3><p>{m.data.outlet}{m.data.quote && <>: «{m.data.quote}»</>}</p></div>
+              <span></span>
+            </a></li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>

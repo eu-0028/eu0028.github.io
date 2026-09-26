@@ -1,0 +1,25 @@
+---
+import { nav } from '../data/site';
+interface Props { solid?: boolean }
+const { solid = false } = Astro.props;
+const path = Astro.url.pathname;
+---
+<header class:list={['top', { solid }]}>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Consult Invest ITIC, на главную">
+      <img class="l-light" src="/img/logo-black.webp" alt="Consult Invest ITIC" width="2000" height="720">
+      <img class="l-white" src="/img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720">
+    </a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      {nav.map((i) => <a href={i.href} aria-current={path.startsWith(i.href) && i.href !== '/' ? 'page' : undefined}>{i.label}</a>)}
+      {Astro.props.showMedia && <a href="/media/">СМИ</a>}
+    </nav>
+    <div class="top-right">
+      <div class="langs" role="group" aria-label="Язык сайта">
+        <button type="button" aria-pressed="true">RU</button><button type="button" aria-pressed="false">EN</button><button type="button" aria-pressed="false" lang="zh">中文</button>
+      </div>
+      <a class="btn btn-green" href="/#contact">Обсудить проект</a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">Меню</button>
+    </div>
+  </div>
+</header>

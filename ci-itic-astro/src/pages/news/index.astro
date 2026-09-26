@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const news = (await getCollection('news', ({ data }) => !data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).replace(' г.', '');
+---
+<Base title="Новости" description="Новости Consult Invest ITIC: форумы, бизнес-миссии, проекты в странах БРИКС и ШОС.">
+  <section class="page">
+    <div class="wrap">
+      <div class="head"><h1 style="font-size:clamp(36px,4.6vw,64px)">Новости</h1></div>
+      <ul class="news-index">
+        {news.map((n) => (
+          <li><a href={`/news/${n.id}/`}>
+            <time datetime={n.data.date.toISOString().slice(0, 10)}>{fmt(n.data.date)}</time>
+            <div><h3>{n.data.title}</h3>{n.data.excerpt && <p>{n.data.excerpt}</p>}</div>
+            {n.data.cover ? <img src={n.data.cover} alt={n.data.coverAlt ?? ''} loading="lazy" width="400" height="267"> : <span></span>}
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { REGIONS } from '../../content.config';
+export async function getStaticPaths() {
+  const items = await getCollection('projects', ({ data }) => !data.draft);
+  return items.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+---
+<Base title={p.data.title} description={p.data.summary} ogImage={p.data.cover}>
+  <section class="page">
+    <div class="wrap">
+      <article class="article">
+        <p class="crumbs"><a href="/projects/">Проекты</a></p>
+        <h1>{p.data.title}</h1>
+        <p class="meta">{p.data.where} · {p.data.regions.map((r) => REGIONS[r]).join(', ')}</p>
+        {p.data.cover && <img class="cover" src={p.data.cover} alt={p.data.coverAlt ?? ''}>}
+        <div class="prose">
+          {p.data.role && <p><b>Роль CI ITIC:</b> {p.data.role}</p>}
+          {p.data.result && <p><b>Результат:</b> {p.data.result}</p>}
+          <Content />
+        </div>
+        <p style="margin-top:40px"><a class="btn btn-green" href="/#contact">Обсудить проект</a></p>
+      </article>
+    </div>
+  </section>
+</Base>

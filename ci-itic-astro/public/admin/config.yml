@@ -1,0 +1,103 @@
+# Настройки админки Decap CMS.
+# repo: заменить на владелец/название нового репозитория на GitHub.
+backend:
+  name: github
+  repo: OWNER/consultinvestitic-site
+  branch: main
+  # Для входа через GitHub на своем хостинге нужен OAuth-прокси (см. README):
+  # base_url: https://auth.example.com
+
+# Локальная работа: `npm run cms` в одном терминале и `npm run dev` в другом,
+# затем открыть http://localhost:4321/admin/
+local_backend: true
+
+locale: ru
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: editorial_workflow   # черновик → на проверке → опубликовано
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: news
+    label: Новости
+    label_singular: Новость
+    folder: src/content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    media_folder: /public/uploads/news
+    public_folder: /uploads/news
+    sortable_fields: [date, title]
+    summary: "{{day}}.{{month}}.{{year}} – {{title}}"
+    fields:
+      - { label: Заголовок, name: title, widget: string }
+      - { label: Дата, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD.MM.YYYY, time_format: false }
+      - { label: Обложка, name: cover, widget: image, required: false }
+      - { label: Описание обложки (alt), name: coverAlt, widget: string, required: false, hint: "Что изображено на фото: событие, место, год" }
+      - { label: Анонс, name: excerpt, widget: text, required: false, hint: "1–2 предложения для списка новостей" }
+      - { label: Черновик, name: draft, widget: boolean, default: false, hint: "Черновики не показываются на сайте" }
+      - { label: Текст, name: body, widget: markdown }
+
+  - name: projects
+    label: Проекты
+    label_singular: Проект
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    media_folder: /public/uploads/projects
+    public_folder: /uploads/projects
+    sortable_fields: [order, title]
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { label: Название, name: title, widget: string }
+      - { label: Где, name: where, widget: string, hint: "Страны и города, например: Узбекистан, Ташкент" }
+      - label: Регионы (для фильтра)
+        name: regions
+        widget: select
+        multiple: true
+        min: 1
+        options:
+          - { label: Центральная Азия, value: ca }
+          - { label: Китай, value: cn }
+          - { label: Страны Залива, value: gulf }
+          - { label: Индия, value: in }
+          - { label: Россия, value: ru }
+      - { label: Что сделано, name: summary, widget: text, hint: "1–2 предложения" }
+      - { label: Результат, name: result, widget: text, required: false, hint: "Одна фраза. Если результата пока нет, оставьте пустым" }
+      - { label: Роль CI ITIC, name: role, widget: string, required: false }
+      - { label: Главный проект на главной, name: featured, widget: boolean, default: false, hint: "Включайте только у одного проекта" }
+      - { label: Порядок, name: order, widget: number, value_type: int, default: 100, hint: "Чем меньше число, тем выше в списке" }
+      - { label: Фото, name: cover, widget: image, required: false }
+      - { label: Описание фото (alt), name: coverAlt, widget: string, required: false }
+      - { label: Черновик, name: draft, widget: boolean, default: false }
+      - { label: Подробное описание, name: body, widget: markdown, required: false }
+
+  - name: media
+    label: CI ITIC в СМИ
+    label_singular: Публикация
+    folder: src/content/media
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{day}}.{{month}}.{{year}} – {{outlet}}: {{title}}"
+    fields:
+      - { label: Заголовок публикации, name: title, widget: string }
+      - { label: Издание, name: outlet, widget: string }
+      - { label: Дата, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD.MM.YYYY, time_format: false }
+      - { label: Ссылка, name: url, widget: string, pattern: ['^https?://', 'Ссылка должна начинаться с http:// или https://'] }
+      - { label: Цитата, name: quote, widget: text, required: false, hint: "Короткая цитата Татьяны или о компании, до 3 строк" }
+      - { label: Черновик, name: draft, widget: boolean, default: false }
+
+  - name: events
+    label: Мероприятия
+    label_singular: Мероприятие
+    folder: src/content/events
+    create: true
+    slug: "{{slug}}"
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { label: Название, name: title, widget: string }
+      - { label: Описание, name: text, widget: text, hint: "Одно-два предложения" }
+      - { label: Порядок, name: order, widget: number, value_type: int, default: 100 }
+      - { label: Черновик, name: draft, widget: boolean, default: false }

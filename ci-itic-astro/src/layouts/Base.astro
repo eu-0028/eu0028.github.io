@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import { company, nav } from '../data/site';
+import { getCollection } from 'astro:content';
+
+interface Props { title?: string; description?: string; solid?: boolean; ogImage?: string }
+const {
+  title,
+  description = 'Международные проекты в странах БРИКС и ШОС: исследование рынка, поиск партнеров, бизнес-миссии, инвестиционное сопровождение и работа с госорганами.',
+  solid = true,
+  ogImage = '/img/hero-forum.jpg',
+} = Astro.props;
+const fullTitle = title ? `${title} – Consult Invest ITIC` : 'Consult Invest ITIC – выход на рынки БРИКС и ШОС';
+// Раздел «CI ITIC в СМИ» показываем в меню, только когда есть публикации
+const showMedia = (await getCollection('media', ({ data }) => !data.draft)).length > 0;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={new URL(ogImage, Astro.site)}>
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/fonts/inter-tight.css">
+  <link rel="preload" href="/fonts/inter-tight-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <script is:inline>try{if(localStorage.getItem('ci-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+</head>
+<body>
+  <slot name="hero" />
+  {solid && <Header solid showMedia={showMedia} />}
+  <main id="top">
+    <slot />
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="col">
+        <a class="logo" href="/">
+          <img class="l-light" src="/img/logo-black.webp" alt="Consult Invest ITIC" width="2000" height="720">
+          <img class="l-dark" src="/img/logo-white.webp" alt="Consult Invest ITIC" width="2000" height="720">
+        </a>
+        <span>{company.legal}</span>
+        <span>{company.ids}</span>
+        <span>{company.address}</span>
+      </div>
+      <div class="col">
+        {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+        {showMedia && <a href="/media/">CI ITIC в СМИ</a>}
+      </div>
+      <div class="col">
+        <span style="user-select:all;color:var(--ink)">{company.email}</span>
+        <a href="/privacy/">Политика конфиденциальности</a>
+        <a href="/privacy/#consent">Согласие на обработку персональных данных</a>
+        <button class="theme" type="button" id="theme" aria-pressed="false">Темная тема</button>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const root = document.documentElement;
+    const tb = document.getElementById('theme');
+    const setTheme = (d: boolean) => {
+      root.setAttribute('data-theme', d ? 'dark' : 'light');
+      tb?.setAttribute('aria-pressed', String(d));
+      if (tb) tb.textContent = d ? 'Светлая тема' : 'Темная тема';
+    };
+    setTheme(root.getAttribute('data-theme') === 'dark');
+    tb?.addEventListener('click', () => {
+      const d = root.getAttribute('data-theme') !== 'dark';
+      setTheme(d);
+      try { localStorage.setItem('ci-theme', d ? 'dark' : 'light'); } catch (e) {}
+    });
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    burger?.addEventListener('click', () => {
+      const o = nav?.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(o));
+    });
+    nav?.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).tagName === 'A') { nav.classList.remove('open'); burger?.setAttribute('aria-expanded', 'false'); }
+    });
+    document.querySelectorAll('.langs button').forEach((b, _, all) => b.addEventListener('click', () => all.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))));
+  </script>
+</body>
+</html>

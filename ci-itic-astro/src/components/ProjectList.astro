@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { REGIONS } from '../content.config';
+interface Props { projects: CollectionEntry<'projects'>[]; links?: boolean }
+const { projects, links = true } = Astro.props;
+const featured = projects.find((p) => p.data.featured);
+const rows = projects.filter((p) => p !== featured);
+const used = new Set(projects.flatMap((p) => p.data.regions));
+const regions = Object.entries(REGIONS).filter(([k]) => used.has(k as keyof typeof REGIONS));
+---
+<div class="filter" role="group" aria-label="Фильтр по региону">
+  <button type="button" data-f="all" aria-pressed="true">Все</button>
+  {regions.map(([k, label]) => <button type="button" data-f={k} aria-pressed="false">{label}</button>)}
+</div>
+{featured && (
+  <article class="feature" data-r={featured.data.regions.join(' ')}>
+    <div>
+      <span class="where">{featured.data.where}</span>
+      <h3>{links ? <a href={`/projects/${featured.id}/`} style="text-decoration:none">{featured.data.title}</a> : featured.data.title}</h3>
+    </div>
+    <div>
+      {featured.data.result && <p class="res">{featured.data.result}</p>}
+      <p>{featured.data.summary}</p>
+    </div>
+  </article>
+)}
+<ul class="rows">
+  {rows.map((p) => (
+    <li class="row" data-r={p.data.regions.join(' ')}>
+      <span class="c">{p.data.where}</span>
+      <b>{links ? <a href={`/projects/${p.id}/`} style="text-decoration:none">{p.data.title}</a> : p.data.title}</b>
+      <p>
+        {p.data.role && <span class="role">Роль CI ITIC: {p.data.role}. </span>}
+        {p.data.result ?? p.data.summary}
+      </p>
+    </li>
+  ))}
+</ul>
+<script>
+  document.querySelectorAll<HTMLElement>('.filter').forEach((bar) => {
+    const buttons = bar.querySelectorAll<HTMLButtonElement>('button');
+    const scope = bar.parentElement!;
+    const items = scope.querySelectorAll<HTMLElement>('.feature,.row');
+    buttons.forEach((c) => c.addEventListener('click', () => {
+      buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+      const f = c.dataset.f!;
+      items.forEach((k) => { k.hidden = !(f === 'all' || k.dataset.r!.split(' ').includes(f)); });
+    }));
+  });
+</script>

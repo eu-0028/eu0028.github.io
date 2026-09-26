@@ -1,0 +1,196 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { getCollection } from 'astro:content';
+import { projectCountries, offices, representatives, representativesLabel } from '../data/site';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const homeProjects = projects.slice(0, 10);
+const events = (await getCollection('events', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const news = (await getCollection('news', ({ data }) => !data.draft)).sort((a, b) => +b.data.date - +a.data.date).slice(0, 4);
+const showMedia = (await getCollection('media', ({ data }) => !data.draft)).length > 0;
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).replace(' г.', '');
+const [lead, ...rest] = news;
+---
+<Base solid={false}>
+  <section class="hero" aria-labelledby="h1" slot="hero">
+    <img src="/img/hero-forum.jpg" alt="Пленарный зал форума ШОС, несколько сотен участников" width="1680" height="1120" fetchpriority="high">
+    <Header showMedia={showMedia} />
+    <div class="hero-body wrap">
+      <h1 id="h1">Выход на рынки БРИКС и ШОС</h1>
+      <p class="lead">Исследуем рынок, находим партнеров и выстраиваем диалог с госорганами в России, Китае, Центральной Азии, Индии и странах Залива.</p>
+      <div class="cta">
+        <a class="btn btn-green" href="#contact">Обсудить проект</a>
+        <a class="link" href="/projects/">Смотреть проекты</a>
+      </div>
+    </div>
+    <p class="cap">Бизнес-инкубатор ШОС, Омск, 2025</p>
+  </section>
+
+  <section class="facts" aria-label="Компания в цифрах">
+    <div class="wrap">
+      <div class="grid">
+        <div class="fact"><b>{projectCountries.length} стран</b><span>где реализованы проекты</span></div>
+        <div class="fact"><div class="countries">{projectCountries.map((c) => <span>{c}</span>)}</div></div>
+        <div class="fact"><b>{offices.length} офиса</b><span>в Москве и Ташкенте, представители еще в {representatives.length} странах</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" aria-labelledby="h-services">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-services">С кем и как мы работаем</h2>
+        <p class="lead">Помогаем компаниям выйти на новые рынки, а иностранным компаниям прийти в Россию и Центральную Азию. Для госструктур ведем международную часть проектов.</p>
+      </div>
+      <div class="paths">
+        <div class="path biz">
+          <h3>Бизнесу</h3>
+          <ol class="steps">
+            <li><b>Маркетинговое исследование и конкурентный анализ</b><span>Объем рынка, игроки, требования регуляторов, свободные ниши</span></li>
+            <li><b>Поиск профильных бизнес-партнеров</b><span>Дистрибьюторы, поставщики, производственные площадки, соинвесторы</span></li>
+            <li><b>Бизнес-миссия</b><span>Переговоры на месте: заводы, министерства, индустриальные парки</span></li>
+            <li><b>Инвестиционное сопровождение</b><span>Структурирование сделки, инвестиционная модель, due diligence</span></li>
+            <li><b>Сопровождение под ключ</b><span>Локализация, работа с госорганами, сопровождение до подписания и после</span></li>
+          </ol>
+          <a class="btn btn-line" href="#contact" style="justify-self:start">Обсудить проект</a>
+        </div>
+        <div class="path">
+          <h3>Госструктурам и институтам развития</h3>
+          <ul class="gov-list">
+            <li><b>Крупные международные мероприятия</b><span>Форумы, конкурсы и деловые программы с участниками из десятков стран</span></li>
+            <li><b>Представительства за рубежом</b><span>Запуск офисов особых экономических зон и продвижение регионов</span></li>
+            <li><b>Международный контур проектов</b><span>Привлечение зарубежных участников, партнеров и СМИ</span></li>
+            <li><b>Межправительственное взаимодействие</b><span>Встречи с министерствами, согласования, механизмы сотрудничества</span></li>
+          </ul>
+          <a class="link" href="/projects/" style="justify-self:start">Смотреть проекты</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="h-projects">
+    <div class="wrap">
+      <div class="head"><h2 id="h-projects">Проекты</h2></div>
+      <ProjectList projects={homeProjects} />
+      <p class="more"><a class="link" href="/projects/">Все проекты</a></p>
+    </div>
+  </section>
+
+  <section id="events" aria-labelledby="h-events">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-events">Мероприятия</h2>
+        <p class="lead">Форумы, премии и акселераторы, где участники находят партнеров и инвесторов.</p>
+      </div>
+      <div class="events">
+        <figure>
+          <img src="/img/events-sco-omsk.jpg" alt="Участники Бизнес-инкубатора ШОС с подписанными соглашениями на фоне символики ШОС, Омск, 2025" width="1680" height="1120" loading="lazy">
+          <figcaption>Бизнес-инкубатор ШОС, Омск, 2025</figcaption>
+        </figure>
+        <ul class="ev">
+          {events.map((e) => <li><b>{e.data.title}</b><p>{e.data.text}</p></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="offices" aria-labelledby="h-offices">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-offices">Офисы и представители</h2>
+        <p class="lead">В Москве и Ташкенте работают наши офисы, в Китае, Казахстане, Кыргызстане и Саудовской Аравии – представители компании.</p>
+      </div>
+      <h3 class="group">Офисы</h3>
+      <ul class="offices">
+        {offices.map((o) => <li><b>{o.city}</b><span class="muted">{o.country}</span><span class="tel">{o.tel}</span><span class="msg">{o.msg.map((m) => <a href="#contact">{m}</a>)}</span></li>)}
+      </ul>
+      <h3 class="group">{representativesLabel}</h3>
+      <ul class="offices">
+        {representatives.map((r) => <li><b>{r.country}</b><span class="muted">{r.city}</span><span class="tel">{r.tel}</span><span class="msg">{r.msg.map((m) => <a href="#contact">{m}</a>)}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section id="founder" aria-labelledby="h-founder">
+    <div class="wrap">
+      <div class="founder">
+        <img loading="lazy" src="/img/hero-sco-panel.jpg" alt="Татьяна Селиверстова модерирует панельную сессию форума ШОС и программы «Бизнес-инкубатор ШОС», Омск, 2025" width="1680" height="1120">
+        <div class="txt">
+          <h2 id="h-founder">Татьяна Селиверстова, основатель</h2>
+          <p class="lead">16 лет руководит международными проектами в бизнесе, на госслужбе и в общественных организациях.</p>
+          <p class="num">$700 млн+<span>инвестиций и софинансирования привлечено для международных коммерческих и гуманитарных проектов</span></p>
+          <ul class="regalia">
+            <li>Советник директора Китайского центра трансфера технологий государств ШОС</li>
+            <li>Директор Бизнес-инкубаторов БРИКС и ШОС, премии «ТОП-100 предпринимателей БРИКС»</li>
+            <li>Сооснователь делового клуба AGORA, член Российско-Китайского комитета дружбы, мира и развития</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" aria-labelledby="h-news">
+    <div class="wrap">
+      <div class="head"><h2 id="h-news">Новости</h2></div>
+      {lead && (
+        <div class="news">
+          <a class="big" href={`/news/${lead.id}/`}>
+            {lead.data.cover && <img src={lead.data.cover} alt={lead.data.coverAlt ?? ''} width="1600" height="1000" loading="lazy">}
+            <time datetime={lead.data.date.toISOString().slice(0, 10)}>{fmt(lead.data.date)}</time>
+            <h3>{lead.data.title}</h3>
+          </a>
+          <div class="list">
+            {rest.map((n) => <a href={`/news/${n.id}/`}><time datetime={n.data.date.toISOString().slice(0, 10)}>{fmt(n.data.date)}</time><h3>{n.data.title}</h3></a>)}
+          </div>
+        </div>
+      )}
+      <p class="news-foot"><a class="link" href="/news/">Все новости</a></p>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="h-contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2 id="h-contact">Обсудить проект</h2>
+          <p class="lead">Свяжемся, уточним задачу и предложим формат работы.</p>
+        </div>
+        <form id="form" novalidate>
+          <div class="two">
+            <div class="field"><label for="f-name">Имя</label><input id="f-name" name="name" autocomplete="name" required><span class="err" id="e-name" hidden>Укажите, как к вам обращаться</span></div>
+            <div class="field"><label for="f-company">Компания или организация</label><input id="f-company" name="company" autocomplete="organization"></div>
+          </div>
+          <div class="field"><label for="f-contact">Телефон, e-mail или ник в мессенджере</label><input id="f-contact" name="contact" required><span class="help">Можно указать WhatsApp, Telegram или WeChat</span><span class="err" id="e-contact" hidden>Оставьте контакт, чтобы мы могли ответить</span></div>
+          <div class="two">
+            <div class="field"><label for="f-task">Задача</label>
+              <select id="f-task" name="task"><option>Исследование рынка</option><option>Поиск партнеров</option><option>Бизнес-миссия</option><option>Инвестиционное сопровождение</option><option>Сопровождение под ключ</option><option>Мероприятие или госпроект</option><option>Участие в мероприятиях</option><option>Другое</option></select></div>
+            <div class="field"><label for="f-region">Регион</label>
+              <select id="f-region" name="region"><option selected>Пока не определились</option><option>Китай</option><option>Центральная Азия</option><option>Россия</option><option>Страны Залива</option><option>Индия</option></select></div>
+          </div>
+          <div class="field"><label for="f-msg">Коротко о задаче</label><textarea id="f-msg" name="msg" placeholder="Например: ищем дистрибьютора оборудования в Узбекистане"></textarea></div>
+          <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" required><span>Даю согласие на обработку персональных данных в соответствии с <a href="/privacy/#consent">политикой конфиденциальности</a> (152-ФЗ)</span></label>
+          <span class="err" id="e-ok" hidden>Нужно согласие, чтобы отправить заявку</span>
+          <button class="btn btn-green" type="submit" style="justify-self:start">Отправить заявку</button>
+          <p class="ok" id="ok" hidden role="status">Заявка принята. Мы свяжемся с вами.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+<script>
+  const form = document.getElementById('form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let bad = false;
+    [['f-name', 'e-name'], ['f-contact', 'e-contact']].forEach(([f, er]) => {
+      const el = document.getElementById(f) as HTMLInputElement; const v = !el.value.trim();
+      document.getElementById(er)!.hidden = !v; el.setAttribute('aria-invalid', String(v)); if (v) bad = true;
+    });
+    const ok = document.getElementById('f-ok') as HTMLInputElement;
+    document.getElementById('e-ok')!.hidden = ok.checked; if (!ok.checked) bad = true;
+    // TODO: отправка заявки в CRM или на почту (обработчик на сервере в РФ, 152-ФЗ)
+    document.getElementById('ok')!.hidden = bad;
+  });
+</script>
+</Base>
