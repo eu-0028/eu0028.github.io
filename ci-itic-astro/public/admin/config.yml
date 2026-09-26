@@ -8,7 +8,7 @@ backend:
   # base_url: https://auth.example.com
 
 # Локальная работа: `npm run cms` в одном терминале и `npm run dev` в другом,
-# затем открыть http://localhost:4321/admin/
+# затем открыть http://localhost:4321/admin/index.html
 local_backend: true
 
 locale: ru
