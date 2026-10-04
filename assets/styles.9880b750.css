@@ -43,6 +43,8 @@
   --t-label:   0.78125rem;
 
   --ease: cubic-bezier(.22,.61,.36,1);
+  /* Для появления и прокрутки: резкий старт, долгий выход. */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
   color-scheme: light;
 }
 
@@ -826,21 +828,29 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 /* Скрывать текст берется только живой скрипт: атрибут data-js ставит
    строка в <head>. Если скрипт не выполнился, страница остается читаемой,
    а не пустой. */
-/* Ход и длительность выставлены по замеру. При 28 px и 0,8 с подъем
-   заканчивался на 87 процентах высоты экрана, то есть у нижней кромки:
-   пока читатель доводил взгляд, все было кончено, и движение читалось
-   как подрагивание. 52 px и 1,15 с доводят завершение до середины
-   экрана, где на блок и смотрят. */
-[data-js] .reveal { opacity: 0; transform: translateY(52px); }
+/* Короткий ход и долгий выход: 24 px за 0,9 с по кривой с резким стартом
+   и длинным затуханием. Раньше стояли 52 px за 1,15 с — такой подъем
+   видно как отдельное событие, блок будто подъезжает. Теперь движение
+   только обозначает появление и не спорит с чтением.
+
+   Блок трогается, когда вошел в кадр на 12 процентов: наблюдатель внизу
+   поднят на столько же. Соседи по родителю идут лесенкой по 70 мс. */
+[data-js] .reveal { opacity: 0; transform: translateY(24px); }
 [data-js] .reveal.is-in {
   opacity: 1;
-  transform: none;
-  transition: opacity 1.15s var(--ease), transform 1.15s var(--ease);
+  transform: translateY(var(--par, 0px));
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
 }
 
 /* Показ без движения: для блока, который выскочил в глубине экрана при
    резком листании, и для первого экрана при запрете анимации. */
-[data-js] .reveal.is-now { opacity: 1; transform: none; transition: none; }
+[data-js] .reveal.is-now { opacity: 1; transform: translateY(var(--par, 0px)); transition: none; }
+
+/* Пока блок едет, он живет на своем слое. Снимаем сразу после приезда:
+   постоянный will-change держит слой впустую и ест память. */
+[data-js] .reveal.is-in, [data-js] .reveal.is-load { will-change: opacity, transform; }
+[data-js] .reveal.is-done { will-change: auto; }
 
 /* Вход первого экрана. То, что видно сразу при открытии, не ждет
    прокрутки, а поднимается по очереди сверху вниз: метка, заголовок,
@@ -853,12 +863,14 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
    по странице такой темп мешал бы читать, поэтому там свои восемь
    десятых секунды. */
 [data-js] .reveal.is-load {
-  animation: rise 1.15s var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+  animation: rise .9s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 80ms);
 }
 @keyframes rise {
-  from { opacity: 0; transform: translateY(52px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(24px); }
+  /* Конец совпадает с состоянием покоя: там же лежит сдвиг параллакса,
+     иначе заголовок дергался бы в тот миг, когда анимация отпускает его. */
+  to   { opacity: 1; transform: translateY(var(--par, 0px)); }
 }
 
 /* Линейка за именем вычерчивается слева направо. Тот же прием, что и
@@ -1582,4 +1594,73 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 ::view-transition-new(root) {
   animation-duration: .24s;
   animation-timing-function: var(--ease);
+}
+
+/* --- 34. Плавная прокрутка и движение по прокрутке -------- */
+/* Колесо мыши двигает страницу рывками в один шаг прокрутки. Lenis
+   перехватывает колесо и ведет положение к цели плавно. Включается он
+   только там, где есть мышь или тачпад: на сенсорном экране родная
+   прокрутка и так плавная, а чужая только мешает пальцу. */
+
+/* Официальные правила Lenis. Вписаны сюда, а не отдельным файлом:
+   381 байт не стоят лишнего запроса. */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+.lenis.lenis-autoToggle { transition-property: overflow; transition-duration: 1ms; transition-behavior: allow-discrete; }
+
+/* Плавная прокрутка средствами браузера конфликтует с Lenis: обе ведут
+   одно и то же положение, и страница начинает дрожать. Пока Lenis
+   работает, прыжки к якорям делает он сам. */
+html.lenis { scroll-behavior: auto; }
+
+/* Первый экран: текст уходит вверх и гаснет, фигура отстает и как бы
+   погружается. Слой с текстом отдельный, поэтому появление его дочерних
+   блоков остается нетронутым. */
+[data-hero-layer] {
+  transform: translateY(var(--hero-y, 0px));
+  opacity: var(--hero-o, 1);
+}
+.portrait { transform: translateY(var(--pic-y, 0px)); }
+/* Слой заводим только пока первый экран на виду и движение включено:
+   постоянный will-change держал бы два слоя в памяти впустую. */
+.hero.is-fx [data-hero-layer] { will-change: transform, opacity; }
+.hero.is-fx .portrait { will-change: transform; }
+
+/* Линия над проектом прочерчивается, пока проект идет по экрану: видно,
+   сколько из него прочитано. Это та же линейка, что уже разделяет
+   проекты, только акцентным цветом поверх. */
+.proj { position: relative; }
+.proj::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(var(--fill, 0));
+  transform-origin: left center;
+}
+
+/* Страны на карте проявляются по очереди, пока блок въезжает в экран */
+.cg { opacity: var(--lit, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-layer] { transform: none; opacity: 1; will-change: auto; }
+  .portrait { transform: none; }
+  .proj::before { display: none; }
+  .cg { opacity: 1; }
+}
+
+@media print {
+  [data-hero-layer] { transform: none !important; opacity: 1 !important; }
+  .portrait { transform: none !important; }
+  .proj::before { display: none !important; }
+  .cg { opacity: 1 !important; }
+  .reveal { will-change: auto !important; }
 }

@@ -1,18 +1,72 @@
-/* e-shutov.ru — поведение интерфейса. Без зависимостей. */
+/* e-shutov.ru — поведение интерфейса. Единственная зависимость — Lenis,
+   он лежит в проекте файлом и подключается до этого скрипта. */
 (function () {
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* --- Линейка под шапкой появляется при прокрутке ------- */
   var hdr = document.querySelector('[data-hdr]');
-  if (hdr) {
-    var onScroll = function () {
-      hdr.setAttribute('data-stuck', window.scrollY > 8 ? 'true' : 'false');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* --- Плавная прокрутка --------------------------------- */
+  /* Колесо мыши двигает страницу рывками: браузер отрабатывает каждый
+     щелчок отдельным прыжком. Lenis перехватывает колесо и ведет
+     положение к цели с задержкой, отчего ход становится слитным.
+
+     Включаем только при мыши или тачпаде. На сенсорном экране родная
+     прокрутка идет на стороне системы и уже плавная, а подмена ломала бы
+     привычную инерцию пальца. При запрете анимации — тоже не включаем. */
+  var lenis = null;
+  if (!reduced && window.matchMedia('(pointer: fine)').matches && window.Lenis) {
+    lenis = new window.Lenis({
+      lerp: 0.1,
+      wheelMultiplier: 0.95,
+      smoothWheel: true,
+      autoRaf: true,
+      /* Якоря ведем сами: обработчик Lenis не смотрит на preventDefault,
+         и вместе с нашими кликами по меню прокрутка запускалась дважды. */
+      anchors: false
+    });
   }
+
+  /* Отступ сверху при прыжке к разделу. Ровно тот же, что дает разделам
+     scroll-margin-top, иначе Lenis остановился бы на другой высоте. */
+  var headOffset = function () {
+    var tall = hdr ? hdr.getBoundingClientRect().height : 68;
+    return tall + 24;
+  };
+
+  /* Один путь для всех переходов по странице: и для Lenis, и без него */
+  var goTo = function (target) {
+    if (lenis) {
+      lenis.scrollTo(target === 0 ? 0 : target, { offset: -headOffset(), duration: 1.2 });
+      return;
+    }
+    var how = reduced ? 'auto' : 'smooth';
+    if (target === 0) window.scrollTo({ top: 0, behavior: how });
+    else target.scrollIntoView({ behavior: how, block: 'start' });
+  };
+
+  /* Один обработчик на все ссылки-якоря: меню, кнопки, подвал. Пока
+     работает Lenis, родная плавная прокрутка отключена, поэтому вести
+     их должен он, иначе переходы стали бы мгновенными. */
+  document.addEventListener('click', function (e) {
+    if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) !== '#' || href.length < 2) return;
+    var el = document.getElementById(href.slice(1));
+    if (!el) return;
+    e.preventDefault();
+    goTo(el);
+    /* Адрес меняем как раньше: раздел виден в строке и копируется ссылкой */
+    if (history.pushState) history.pushState(null, '', href);
+  });
+
+  /* Кнопка «назад» возвращает к предыдущему разделу тем же ходом */
+  window.addEventListener('popstate', function () {
+    var el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+    goTo(el || 0);
+  });
 
   /* --- Мобильное меню ------------------------------------ */
   var burger = document.querySelector('[data-burger]');
@@ -22,6 +76,9 @@
       burger.setAttribute('aria-expanded', String(open));
       drawer.setAttribute('data-open', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
+      /* Под открытым меню страница стоит: иначе она продолжала бы ехать
+         под пальцем, пока читают пункты. */
+      if (lenis) { if (open) lenis.stop(); else lenis.start(); }
     };
     burger.addEventListener('click', function () {
       setDrawer(burger.getAttribute('aria-expanded') !== 'true');
@@ -49,7 +106,7 @@
     toTop.addEventListener('click', function (e) {
       if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      goTo(0);
       /* Уводим из адреса якорь раздела, иначе следующее обновление
          страницы снова утащит вниз. */
       if (location.hash && history.replaceState) {
@@ -120,9 +177,30 @@
   }
 
   /* --- Появление блоков при прокрутке -------------------- */
+  /* Шаг лесенки. Соседи по родителю выходят друг за другом, поэтому
+     группа читается как группа: три языка, пять строк проекта, карточки
+     направлений. У строк списка стран свой номер в data-i — берем его,
+     чтобы порядок совпал с порядком на карте. Больше шести шагов не
+     даем: у длинного списка хвост доезжал бы слишком долго. */
+  var stagger = function (el) {
+    var given = el.getAttribute('data-i');
+    if (given !== null && given !== '') return Math.min(+given || 0, 6);
+    var n = 0;
+    for (var sib = el.parentNode && el.parentNode.firstElementChild; sib && sib !== el; sib = sib.nextElementSibling) {
+      if (sib.className && String(sib.className).indexOf('reveal') > -1) n++;
+    }
+    return Math.min(n, 6);
+  };
+  /* Слой под анимацию снимаем, как только блок приехал */
+  var settle = function (e) {
+    if (e.target.classList.contains('reveal')) e.target.classList.add('is-done');
+  };
+  document.addEventListener('transitionend', settle, true);
+  document.addEventListener('animationend', settle, true);
+
   var rises = document.querySelectorAll('.reveal');
   if (reduced || !('IntersectionObserver' in window)) {
-    Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-in'); });
+    Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-in', 'is-done'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -134,7 +212,11 @@
            к этому моменту успевал уйти вглубь кадра. */
         var deep = entry.boundingClientRect.top <
           (window.innerHeight || document.documentElement.clientHeight) * 0.2;
-        entry.target.classList.add(deep ? 'is-now' : 'is-in');
+        if (deep) entry.target.classList.add('is-now', 'is-done');
+        else {
+          entry.target.style.setProperty('--i', stagger(entry.target));
+          entry.target.classList.add('is-in');
+        }
         io.unobserve(entry.target);
       });
     /* Порог нулевой: у высокого блока проценты его собственной высоты
@@ -144,8 +226,11 @@
        подъем: блок начинал вставать до того, как показаться, и к моменту
        появления был уже собран. Ровная кромка при этом не оставляет
        пустоты: блок начинает движение в тот же миг, когда входит в кадр,
-       а не висит прозрачным на экране. */
-    }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
+       а не висит прозрачным на экране.
+
+       Нижняя кромка поднята на 12 процентов экрана: блок трогается с
+       места, когда уже заметно вошел в кадр, а не краем. */
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
     /* Первый экран не ждет прокрутки: то, что видно при открытии, встает
        в очередь появления и поднимается сверху вниз. Очередь не длиннее
        семи шагов, иначе на высоком экране хвост доезжал бы слишком
@@ -160,7 +245,7 @@
     Array.prototype.forEach.call(rises, function (el) {
       var box = el.getBoundingClientRect();
       if (box.top >= fold) { io.observe(el); return; }
-      if (box.bottom <= 0) { el.classList.add('is-now'); return; }
+      if (box.bottom <= 0) { el.classList.add('is-now', 'is-done'); return; }
       el.style.setProperty('--i', Math.min(order++, 6));
       el.classList.add('is-load');
     });
@@ -364,6 +449,125 @@
       requestAnimationFrame(function () { document.documentElement.style.scrollBehavior = ''; });
     });
   }
+
+  /* --- Движение по прокрутке ----------------------------- */
+  /* Один цикл на всю страницу. Пока работает Lenis, он сам зовет нас
+     внутри своего кадра — иначе параллакс отставал бы от прокрутки на
+     кадр и подрагивал. Без Lenis слушаем прокрутку один раз и сводим
+     работу к одному кадру.
+
+     Внутри кадра сначала читаем все положения, потом пишем все стили:
+     вперемешку браузер пересчитывал бы разметку на каждом элементе. */
+  var fx = [];
+  var paint = function () {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var y = window.scrollY || window.pageYOffset || 0;
+    if (hdr) hdr.setAttribute('data-stuck', y > 8 ? 'true' : 'false');
+    var i;
+    for (i = 0; i < fx.length; i++) fx[i].read(vh, y);
+    for (i = 0; i < fx.length; i++) fx[i].write();
+  };
+
+  if (!reduced) {
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var px = function (v) { return v.toFixed(1) + 'px'; };
+
+    /* Первый экран. Текст уходит вверх и гаснет, фигура отстает: взгляд
+       отпускает обложку раньше, чем она уедет, и переход к тексту не
+       выглядит обрывом. */
+    var hero = document.querySelector('.hero');
+    var layer = document.querySelector('[data-hero-layer]');
+    var pic = document.querySelector('.portrait');
+    if (hero && (layer || pic)) {
+      hero.classList.add('is-fx');
+      var hp = 0, picH = 0, heroY = 0;
+      fx.push({
+        read: function (vh, y) {
+          picH = pic ? pic.offsetHeight : 0;
+          if (!layer) { hp = clamp(y / (hero.offsetHeight || vh)); return; }
+          /* Считаем по уходу самого текста за верхнюю кромку, а не по
+             высоте секции: секция начинает уезжать сразу, а текст стоит
+             ниже шапки и гаснуть в полную силу ему еще рано.
+             Свой сдвиг прибавляем обратно — rect его уже учел, и без
+             поправки слой мерил бы себя по себе же и сползал. */
+          var r = layer.getBoundingClientRect();
+          hp = clamp(-(r.top - heroY) / (r.height || 1));
+        },
+        write: function () {
+          if (layer) {
+            heroY = -40 * hp;
+            layer.style.setProperty('--hero-y', px(heroY));
+            layer.style.setProperty('--hero-o', (1 - hp).toFixed(3));
+          }
+          if (pic) pic.style.setProperty('--pic-y', px(picH * 0.12 * hp));
+          /* Экран уехал — слои под анимацию больше не нужны */
+          hero.classList.toggle('is-fx', hp < 1);
+        }
+      });
+    }
+
+    /* Заголовки разделов идут чуть медленнее своего раздела. Сдвиг малый:
+       это глубина, а не самостоятельное движение. */
+    Array.prototype.forEach.call(document.querySelectorAll('.band .h2'), function (el) {
+      var p = 0;
+      fx.push({
+        read: function (vh) {
+          var r = el.getBoundingClientRect();
+          p = clamp((vh - r.top) / (vh + r.height));
+        },
+        write: function () { el.style.setProperty('--par', px(-24 * p)); }
+      });
+    });
+
+    /* Линейка над проектом прочерчивается, пока проект идет по экрану:
+       видно, сколько из него пройдено. Отсчет начинается, когда верх
+       проекта доходит до строки чтения — шести десятых высоты экрана. */
+    Array.prototype.forEach.call(document.querySelectorAll('.proj'), function (el) {
+      var p = 0;
+      fx.push({
+        read: function (vh) {
+          var r = el.getBoundingClientRect();
+          p = clamp((vh * 0.6 - r.top) / (r.height || 1));
+        },
+        write: function () { el.style.setProperty('--fill', p.toFixed(3)); }
+      });
+    });
+
+    /* Страны на карте разгораются по очереди, пока карта въезжает в кадр.
+       Порядок берем из data-i — тот же, что в списке под картой, а не
+       порядок отрисовки: там страны разложены по площади. */
+    var map = document.querySelector('.map');
+    var cgs = Array.prototype.slice.call(document.querySelectorAll('.cg'));
+    if (map && cgs.length) {
+      cgs.sort(function (a, b) { return (+a.getAttribute('data-i') || 0) - (+b.getAttribute('data-i') || 0); });
+      var mp = 0;
+      fx.push({
+        read: function (vh) {
+          var r = map.getBoundingClientRect();
+          mp = clamp((vh - r.top) / (vh * 0.65));
+        },
+        write: function () {
+          for (var k = 0; k < cgs.length; k++) {
+            var lit = clamp((mp - (k / cgs.length) * 0.55) / 0.45);
+            cgs[k].style.setProperty('--lit', (0.25 + 0.75 * lit).toFixed(3));
+          }
+        }
+      });
+    }
+  }
+
+  if (lenis) lenis.on('scroll', paint);
+  else {
+    var queued = false;
+    window.addEventListener('scroll', function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; paint(); });
+    }, { passive: true });
+  }
+  window.addEventListener('resize', paint, { passive: true });
+  window.addEventListener('load', paint);
+  paint();
 
   /* --- Портрет: если файл не отдался, колонка схлопывается -- */
   var portrait = document.querySelector('.portrait');

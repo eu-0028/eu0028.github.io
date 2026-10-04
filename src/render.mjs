@@ -74,7 +74,7 @@ function header(t, base) {
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" data-drawer data-open="false">${drawer}</div>`;
+<div class="drawer" id="drawer" data-drawer data-open="false" data-lenis-prevent>${drawer}</div>`;
 }
 
 /* --- обложка -------------------------------------------- */
@@ -84,7 +84,7 @@ function hero(t, portraitFile) {
   return `<section class="hero">
   <div class="shell">
     <div class="hero__grid" data-hero-grid${portraitFile ? '' : ' data-noportrait="true"'}>
-      <div>
+      <div data-hero-layer>
         <p class="label hero__eyebrow reveal"><span>${esc(h.eyebrow)}</span></p>
         <h1 class="hero__h1 reveal">${esc(h.lead)} <em>${esc(h.leadEm)}</em>${h.leadTail ? ' ' + esc(h.leadTail) : ''}</h1>
         <div class="prose reveal"><p class="lede">${esc(h.para)}</p></div>
@@ -244,7 +244,9 @@ function geo(t) {
       </div>
     </div>
     <figure class="map map--bleed reveal">
-      <div class="map__scroll">
+      <!-- data-lenis-prevent: у карты своя прокрутка вбок, и плавная
+           прокрутка страницы не должна перехватывать здесь колесо. -->
+      <div class="map__scroll" data-lenis-prevent>
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
           <img src="${R}assets/${MAP}" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
           <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" focusable="false">
@@ -440,7 +442,7 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
+export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', lenisName = 'lenis.min.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
   const canonical = shared.domain + '/' + t.path;
   R = t.path ? '../' : '';                     // все языки лежат на один уровень ниже корня
   ICONS = icons;
@@ -511,6 +513,9 @@ ${contact(t)}
 </main>
 ${footer(t)}
 ${notice(t)}
+<!-- Плавная прокрутка. Идет до app.js: оба с defer, значит выполнятся
+     по порядку, и к запуску app.js globalThis.Lenis уже на месте. -->
+<script src="${R}assets/${lenisName}" defer></script>
 <script src="${R}assets/${jsName}" defer></script>
 </body>
 </html>`;
