@@ -1647,14 +1647,23 @@ html.lenis { scroll-behavior: auto; }
   transform-origin: left center;
 }
 
-/* Страны на карте проявляются по очереди, пока блок въезжает в экран */
-.cg { opacity: var(--lit, 1); }
+/* Страны разгораются по очереди, когда карта входит в кадр. Один раз и
+   переходом, а не покадрово: прозрачность на группе SVG заставляет
+   браузер отрисовывать контуры страны в отдельный слой и собирать их
+   заново каждый кадр — на карте из двенадцати стран это и есть те самые
+   рывки. После показа класс снимается, и свойства не остается вовсе. */
+[data-js] .map--seq .cg {
+  opacity: .25;
+  transition: opacity .7s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+[data-js] .map--seq.is-lit .cg { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   [data-hero-layer] { transform: none; opacity: 1; will-change: auto; }
   .portrait { transform: none; }
   .proj::before { display: none; }
-  .cg { opacity: 1; }
+  [data-js] .map--seq .cg { opacity: 1; transition: none; }
 }
 
 @media print {
@@ -1662,5 +1671,6 @@ html.lenis { scroll-behavior: auto; }
   .portrait { transform: none !important; }
   .proj::before { display: none !important; }
   .cg { opacity: 1 !important; }
+  .map--seq .cg { opacity: 1 !important; }
   .reveal { will-change: auto !important; }
 }

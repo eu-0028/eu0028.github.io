@@ -23,7 +23,15 @@
       autoRaf: true,
       /* Якоря ведем сами: обработчик Lenis не смотрит на preventDefault,
          и вместе с нашими кликами по меню прокрутка запускалась дважды. */
-      anchors: false
+      anchors: false,
+      /* У карты своя прокрутка вбок. Отдаем ей только боковой жест:
+         помеченная целиком, она съедала и движение вниз, и страница
+         над картой переставала листаться вовсе. */
+      virtualScroll: function (e) {
+        if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return true;
+        var t = e.event && e.event.target;
+        return !(t && t.closest && t.closest('.map__scroll'));
+      }
     });
   }
 
@@ -331,6 +339,31 @@
   /* Метки на карте появляются по очереди, ведя взгляд по географии */
   runOnce('.map', function (el) { el.classList.add('is-run'); });
 
+  /* Страны разгораются по очереди, когда карта входит в кадр. Порядок
+     берем из data-i — тот же, что в списке под картой, а не порядок
+     отрисовки: там страны разложены по площади.
+
+     Показ одноразовый, переходом. Раньше прозрачность пересчитывалась
+     каждый кадр прокрутки, и браузер заново собирал двенадцать групп
+     SVG с контурами стран — на подъезде к карте это заметно дергалось.
+     Доиграв, снимаем класс: свойства прозрачности на группах не
+     остается, и карта дальше ничего не стоит. */
+  var mapFig = document.querySelector('.map');
+  var cgs = mapFig ? mapFig.querySelectorAll('.cg') : [];
+  if (!reduced && cgs.length) {
+    var last = 0;
+    Array.prototype.forEach.call(cgs, function (g) {
+      var i = +g.getAttribute('data-i') || 0;
+      g.style.setProperty('--i', i);
+      if (i > last) last = i;
+    });
+    mapFig.classList.add('map--seq');
+    runOnce('.map', function (el) {
+      el.classList.add('is-lit');
+      setTimeout(function () { el.classList.remove('map--seq', 'is-lit'); }, 700 + last * 55 + 120);
+    });
+  }
+
   /* Цифры отсчитываются, чтобы читатель их действительно прочитал.
      Настоящее значение стоит в разметке сразу: если наблюдатель почему-то
      не сработает, посетитель увидит число, а не ноль. */
@@ -471,6 +504,14 @@
   if (!reduced) {
     var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
     var px = function (v) { return v.toFixed(1) + 'px'; };
+    /* Пишем, только когда значение правда изменилось. Иначе браузер
+       пересчитывает стили на каждом кадре, даже если ничего не поехало:
+       у неподвижных разделов величина та же от кадра к кадру. */
+    var set = function (el, name, val) {
+      if (el['_' + name] === val) return;
+      el['_' + name] = val;
+      el.style.setProperty(name, val);
+    };
 
     /* Первый экран. Текст уходит вверх и гаснет, фигура отстает: взгляд
        отпускает обложку раньше, чем она уедет, и переход к тексту не
@@ -496,10 +537,10 @@
         write: function () {
           if (layer) {
             heroY = -40 * hp;
-            layer.style.setProperty('--hero-y', px(heroY));
-            layer.style.setProperty('--hero-o', (1 - hp).toFixed(3));
+            set(layer, '--hero-y', px(heroY));
+            set(layer, '--hero-o', (1 - hp).toFixed(3));
           }
-          if (pic) pic.style.setProperty('--pic-y', px(picH * 0.12 * hp));
+          if (pic) set(pic, '--pic-y', px(picH * 0.12 * hp));
           /* Экран уехал — слои под анимацию больше не нужны */
           hero.classList.toggle('is-fx', hp < 1);
         }
@@ -515,7 +556,7 @@
           var r = el.getBoundingClientRect();
           p = clamp((vh - r.top) / (vh + r.height));
         },
-        write: function () { el.style.setProperty('--par', px(-24 * p)); }
+        write: function () { set(el, '--par', px(-24 * p)); }
       });
     });
 
@@ -529,31 +570,10 @@
           var r = el.getBoundingClientRect();
           p = clamp((vh * 0.6 - r.top) / (r.height || 1));
         },
-        write: function () { el.style.setProperty('--fill', p.toFixed(3)); }
+        write: function () { set(el, '--fill', p.toFixed(3)); }
       });
     });
 
-    /* Страны на карте разгораются по очереди, пока карта въезжает в кадр.
-       Порядок берем из data-i — тот же, что в списке под картой, а не
-       порядок отрисовки: там страны разложены по площади. */
-    var map = document.querySelector('.map');
-    var cgs = Array.prototype.slice.call(document.querySelectorAll('.cg'));
-    if (map && cgs.length) {
-      cgs.sort(function (a, b) { return (+a.getAttribute('data-i') || 0) - (+b.getAttribute('data-i') || 0); });
-      var mp = 0;
-      fx.push({
-        read: function (vh) {
-          var r = map.getBoundingClientRect();
-          mp = clamp((vh - r.top) / (vh * 0.65));
-        },
-        write: function () {
-          for (var k = 0; k < cgs.length; k++) {
-            var lit = clamp((mp - (k / cgs.length) * 0.55) / 0.45);
-            cgs[k].style.setProperty('--lit', (0.25 + 0.75 * lit).toFixed(3));
-          }
-        }
-      });
-    }
   }
 
   if (lenis) lenis.on('scroll', paint);

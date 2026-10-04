@@ -244,9 +244,7 @@ function geo(t) {
       </div>
     </div>
     <figure class="map map--bleed reveal">
-      <!-- data-lenis-prevent: у карты своя прокрутка вбок, и плавная
-           прокрутка страницы не должна перехватывать здесь колесо. -->
-      <div class="map__scroll" data-lenis-prevent>
+      <div class="map__scroll">
         <div class="map__frame" style="--ar:${(1 / mapMeta.ratio).toFixed(4)}">
           <img src="${R}assets/${MAP}" alt="" width="${mapMeta.w}" height="${mapMeta.h}" loading="lazy" decoding="async">
           <svg class="map__hot" viewBox="0 0 ${mapMeta.w} ${mapMeta.h}" focusable="false">
