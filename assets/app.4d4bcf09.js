@@ -5,6 +5,9 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hdr = document.querySelector('[data-hdr]');
+  /* Скорость прокрутки в пикселях на миллисекунду. Считает общий цикл
+     ниже, читает наблюдатель за появлением блоков. */
+  var speed = 0;
 
   /* --- Плавная прокрутка --------------------------------- */
   /* Колесо мыши двигает страницу рывками: браузер отрабатывает каждый
@@ -185,20 +188,6 @@
   }
 
   /* --- Появление блоков при прокрутке -------------------- */
-  /* Шаг лесенки. Соседи по родителю выходят друг за другом, поэтому
-     группа читается как группа: три языка, пять строк проекта, карточки
-     направлений. У строк списка стран свой номер в data-i — берем его,
-     чтобы порядок совпал с порядком на карте. Больше шести шагов не
-     даем: у длинного списка хвост доезжал бы слишком долго. */
-  var stagger = function (el) {
-    var given = el.getAttribute('data-i');
-    if (given !== null && given !== '') return Math.min(+given || 0, 6);
-    var n = 0;
-    for (var sib = el.parentNode && el.parentNode.firstElementChild; sib && sib !== el; sib = sib.nextElementSibling) {
-      if (sib.className && String(sib.className).indexOf('reveal') > -1) n++;
-    }
-    return Math.min(n, 6);
-  };
   /* Слой под анимацию снимаем, как только блок приехал */
   var settle = function (e) {
     if (e.target.classList.contains('reveal')) e.target.classList.add('is-done');
@@ -211,18 +200,40 @@
     Array.prototype.forEach.call(rises, function (el) { el.classList.add('is-in', 'is-done'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
+      /* Лесенку считаем по тому, что вошло в кадр вместе, сверху вниз, а
+         не по номеру в разметке. Раньше номер был постоянный, и строка,
+         доехавшая до кромки в одиночку, все равно отстаивала свою
+         очередь: у двенадцатой строки списка стран набегало 420 мс
+         задержки поверх 900 мс перехода, и читатель видел пустоту. */
+      var queue = entries.filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+      var step = 0;
+      queue.forEach(function (entry) {
         /* Без анимации показываем только то, что при обнаружении уже
            почти ушло за верх экрана: там подъем бессмыслен. Раньше порог
            стоял на 60 процентах и отменял анимацию при обычной прокрутке,
            потому что обработчик наблюдателя вызывается с задержкой и блок
            к этому моменту успевал уйти вглубь кадра. */
-        var deep = entry.boundingClientRect.top <
-          (window.innerHeight || document.documentElement.clientHeight) * 0.2;
-        if (deep) entry.target.classList.add('is-now', 'is-done');
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        /* Положение читаем заново, а не берем entry.boundingClientRect:
+           там снимок на момент пересечения, и при быстрой прокрутке он
+           успевает устареть на сотни пикселей. Блок, уже уехавший на
+           середину кадра, по снимку выглядел как едва показавшийся из-за
+           нижней кромки — и вместо мгновенного показа получал подъем. */
+        var top = entry.target.getBoundingClientRect().top;
+        /* Порог поднят с 20 до 55 процентов высоты экрана. При быстрой
+           прокрутке наблюдатель сообщает о блоке, когда тот уже забрался
+           на середину кадра: на него смотрят сейчас, и подъем длиной в
+           девять десятых секунды означает, что читатель упирается в
+           пустое место. Такому показываем сразу. */
+        /* Очередь имеет смысл, пока читают спокойно. На быстрой
+           прокрутке блок успевает уехать за середину экрана, пока
+           отстаивает свои две сотни миллисекунд, — читатель упирается
+           ровно в то пустое место, из-за которого все затевалось.
+           Поэтому: летим — показываем сразу, идем шагом — очередь. */
+        if (top < vh * 0.55 || speed > 2.5) entry.target.classList.add('is-now', 'is-done');
         else {
-          entry.target.style.setProperty('--i', stagger(entry.target));
+          entry.target.style.setProperty('--i', speed > 1 ? 0 : Math.min(step++, 4));
           entry.target.classList.add('is-in');
         }
         io.unobserve(entry.target);
@@ -236,9 +247,11 @@
        пустоты: блок начинает движение в тот же миг, когда входит в кадр,
        а не висит прозрачным на экране.
 
-       Нижняя кромка поднята на 12 процентов экрана: блок трогается с
-       места, когда уже заметно вошел в кадр, а не краем. */
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+       Поднимал кромку на 12 процентов, чтобы блок трогался, уже заметно
+       войдя в кадр. Вместе с задержкой лесенки это откладывало показ
+       почти на полторы секунды, и при быстрой прокрутке читатель
+       упирался в пустое место. Кромка вернулась на место. */
+    }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
     /* Первый экран не ждет прокрутки: то, что видно при открытии, встает
        в очередь появления и поднимается сверху вниз. Очередь не длиннее
        семи шагов, иначе на высоком экране хвост доезжал бы слишком
@@ -254,7 +267,7 @@
       var box = el.getBoundingClientRect();
       if (box.top >= fold) { io.observe(el); return; }
       if (box.bottom <= 0) { el.classList.add('is-now', 'is-done'); return; }
-      el.style.setProperty('--i', Math.min(order++, 6));
+      el.style.setProperty('--i', Math.min(order++, 4));
       el.classList.add('is-load');
     });
   }
@@ -492,9 +505,13 @@
      Внутри кадра сначала читаем все положения, потом пишем все стили:
      вперемешку браузер пересчитывал бы разметку на каждом элементе. */
   var fx = [];
+  var lastY = 0, lastT = 0;
   var paint = function () {
     var vh = window.innerHeight || document.documentElement.clientHeight;
     var y = window.scrollY || window.pageYOffset || 0;
+    var now = window.performance && performance.now ? performance.now() : +new Date();
+    if (lastT && now > lastT) speed = Math.abs(y - lastY) / (now - lastT);
+    lastY = y; lastT = now;
     if (hdr) hdr.setAttribute('data-stuck', y > 8 ? 'true' : 'false');
     var i;
     for (i = 0; i < fx.length; i++) fx[i].read(vh, y);

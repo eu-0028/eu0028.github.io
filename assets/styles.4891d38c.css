@@ -840,7 +840,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   opacity: 1;
   transform: translateY(var(--par, 0px));
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 
 /* Показ без движения: для блока, который выскочил в глубине экрана при
@@ -1270,7 +1270,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 .tl.is-run .bar {
   transform: translateY(-50%) scaleX(1);
   transition: transform .7s var(--ease);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 
 .btn:active { transform: translateY(1px); }
@@ -1647,23 +1647,32 @@ html.lenis { scroll-behavior: auto; }
   transform-origin: left center;
 }
 
-/* Страны разгораются по очереди, когда карта входит в кадр. Один раз и
-   переходом, а не покадрово: прозрачность на группе SVG заставляет
-   браузер отрисовывать контуры страны в отдельный слой и собирать их
-   заново каждый кадр — на карте из двенадцати стран это и есть те самые
-   рывки. После показа класс снимается, и свойства не остается вовсе. */
-[data-js] .map--seq .cg {
-  opacity: .25;
-  transition: opacity .7s var(--ease-out);
+/* Страны разгораются по очереди, когда карта входит в кадр.
+
+   Гасим не группу, а заливку и обводку самого контура. Прозрачность на
+   группе заставляет браузер рисовать ее в отдельный буфер и склеивать
+   поверх карты — двенадцать стран дают двенадцать таких буферов на
+   каждый кадр перехода. fill-opacity и stroke-opacity считаются прямо
+   при закраске, без буфера.
+
+   Показ одноразовый, переходом; после него класс снимается, и никаких
+   свойств прозрачности на карте не остается. */
+[data-js] .map--seq .ctry-fill,
+[data-js] .map--seq .ctry-edge {
+  transition: fill-opacity .7s var(--ease-out), stroke-opacity .7s var(--ease-out);
   transition-delay: calc(var(--i, 0) * 55ms);
 }
-[data-js] .map--seq.is-lit .cg { opacity: 1; }
+[data-js] .map--seq .ctry-fill { fill-opacity: .2; }
+[data-js] .map--seq .ctry-edge { stroke-opacity: .2; }
+[data-js] .map--seq.is-lit .ctry-fill { fill-opacity: 1; }
+[data-js] .map--seq.is-lit .ctry-edge { stroke-opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   [data-hero-layer] { transform: none; opacity: 1; will-change: auto; }
   .portrait { transform: none; }
   .proj::before { display: none; }
-  [data-js] .map--seq .cg { opacity: 1; transition: none; }
+  [data-js] .map--seq .ctry-fill { fill-opacity: 1; transition: none; }
+  [data-js] .map--seq .ctry-edge { stroke-opacity: 1; transition: none; }
 }
 
 @media print {
@@ -1671,6 +1680,7 @@ html.lenis { scroll-behavior: auto; }
   .portrait { transform: none !important; }
   .proj::before { display: none !important; }
   .cg { opacity: 1 !important; }
-  .map--seq .cg { opacity: 1 !important; }
+  .map--seq .ctry-fill { fill-opacity: 1 !important; }
+  .map--seq .ctry-edge { stroke-opacity: 1 !important; }
   .reveal { will-change: auto !important; }
 }
