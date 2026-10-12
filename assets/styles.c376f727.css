@@ -1647,40 +1647,15 @@ html.lenis { scroll-behavior: auto; }
   transform-origin: left center;
 }
 
-/* Страны разгораются по очереди, когда карта входит в кадр.
-
-   Гасим не группу, а заливку и обводку самого контура. Прозрачность на
-   группе заставляет браузер рисовать ее в отдельный буфер и склеивать
-   поверх карты — двенадцать стран дают двенадцать таких буферов на
-   каждый кадр перехода. fill-opacity и stroke-opacity считаются прямо
-   при закраске, без буфера.
-
-   Показ одноразовый, переходом; после него класс снимается, и никаких
-   свойств прозрачности на карте не остается. */
-[data-js] .map--seq .ctry-fill,
-[data-js] .map--seq .ctry-edge {
-  transition: fill-opacity .7s var(--ease-out), stroke-opacity .7s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 55ms);
-}
-[data-js] .map--seq .ctry-fill { fill-opacity: .2; }
-[data-js] .map--seq .ctry-edge { stroke-opacity: .2; }
-[data-js] .map--seq.is-lit .ctry-fill { fill-opacity: 1; }
-[data-js] .map--seq.is-lit .ctry-edge { stroke-opacity: 1; }
-
 @media (prefers-reduced-motion: reduce) {
   [data-hero-layer] { transform: none; opacity: 1; will-change: auto; }
   .portrait { transform: none; }
   .proj::before { display: none; }
-  [data-js] .map--seq .ctry-fill { fill-opacity: 1; transition: none; }
-  [data-js] .map--seq .ctry-edge { stroke-opacity: 1; transition: none; }
 }
 
 @media print {
   [data-hero-layer] { transform: none !important; opacity: 1 !important; }
   .portrait { transform: none !important; }
   .proj::before { display: none !important; }
-  .cg { opacity: 1 !important; }
-  .map--seq .ctry-fill { fill-opacity: 1 !important; }
-  .map--seq .ctry-edge { stroke-opacity: 1 !important; }
   .reveal { will-change: auto !important; }
 }
