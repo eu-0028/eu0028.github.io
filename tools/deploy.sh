@@ -36,13 +36,17 @@ fail=0
 up() {
   local f="$1" dir="$ROOT"
   [ "$(dirname "$f")" != "." ] && dir="$ROOT/$(dirname "$f")"
-  if curl -sS --max-time 180 -X POST "$HOST/mancgi/upload" \
+  # Ответ сначала целиком в переменную: grep -q в конвейере выходит на
+  # первом совпадении, curl получает обрыв записи, и pipefail выдает
+  # удачную загрузку за ошибку.
+  local r
+  r=$(curl -sS --max-time 180 -X POST "$HOST/mancgi/upload" \
       -F "out=json" -F "func=file.upload" -F "sok=ok" -F "type=data" -F "mgrname=ispmgr" \
-      --form-string "auth=$SID" --form-string "plid=$dir" -F "filename=@$f" | grep -q '"ok"'; then
-    echo "  залит   $f"
-  else
-    echo "  ОШИБКА  $f" >&2; fail=1
-  fi
+      --form-string "auth=$SID" --form-string "plid=$dir" -F "filename=@$f") || r=""
+  case "$r" in
+    *'"ok"'*) echo "  залит   $f" ;;
+    *) echo "  ОШИБКА  $f" >&2; fail=1 ;;
+  esac
 }
 while read -r f; do [ -n "$f" ] && up "$f"; done < <(echo "$FILES" | grep -v '\.html$' || true)
 while read -r f; do [ -n "$f" ] && up "$f"; done < <(echo "$FILES" | grep '\.html$' || true)
