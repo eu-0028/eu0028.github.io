@@ -23,6 +23,9 @@ const arrow = '<svg class="btn__arrow" width="14" height="10" viewBox="0 0 14 10
 let R = '';                                   // префикс до корня сайта
 let ICONS = {};
 let MAP = 'map-base.svg';
+let VER = {};
+/* Адрес картинки с версией файла: замена снимка сразу видна, кеш не мешает */
+const pic = (name) => `assets/img/${attr(name)}${VER[name] ? '?v=' + VER[name] : ''}`;
 const icon = (name) =>
   ICONS[name] ? `<svg class="ico" viewBox="0 0 256 256" aria-hidden="true" focusable="false">${ICONS[name]}</svg>` : '';
 const flag = (code, eager) =>
@@ -94,7 +97,7 @@ function hero(t, portraitFile) {
         </div>
       </div>
       ${portraitFile ? `<div class="hero__media">
-        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="1120" height="1440" fetchpriority="high" decoding="async">
+        <img class="portrait" src="${R}${pic(portraitFile)}" alt="${attr(h.portraitAlt)}" width="1120" height="1440" fetchpriority="high" decoding="async">
       </div>` : ''}
     </div>
   </div>
@@ -125,7 +128,7 @@ function work(t, images) {
             <div class="proj__t reveal"><h3 class="h3">${esc(p.t)}</h3></div>
             <p class="proj__sub reveal">${esc(p.sub)}</p>
             <p class="proj__d reveal">${esc(p.d)}</p>
-            ${p.img && images.has(p.img) ? `<figure class="shot reveal"><img src="${R}assets/img/${attr(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
+            ${p.img && images.has(p.img) ? `<figure class="shot reveal"><img src="${R}${pic(p.img)}" alt="${attr(p.imgAlt)}" loading="lazy" decoding="async"><figcaption>${esc(p.imgAlt)}</figcaption></figure>` : ''}
             <ul class="rules-list reveal">${list(p.b)}</ul>
             <div class="metrics reveal">${p.m
               .map((m) => `<div class="metric"><span class="metric__v num" data-count="${attr(m.v)}">${esc(m.v)}</span><span class="metric__l">${esc(m.l)}</span></div>`)
@@ -371,7 +374,7 @@ function gallery(t, images) {
     .map((ph) => {
       const m = shared.photos[ph.img];
       return `<figure class="gal__i reveal">
-        <a class="gal__pic" href="${R}assets/img/${attr(ph.img)}" data-lb><img src="${R}assets/img/${attr(ph.img)}" alt="${attr(ph.alt)}" width="${m.w}" height="${m.h}" style="--at:${attr(m.at)}" loading="lazy" decoding="async"></a>
+        <a class="gal__pic" href="${R}${pic(ph.img)}" data-lb><img src="${R}${pic(ph.img)}" alt="${attr(ph.alt)}" width="${m.w}" height="${m.h}" style="--at:${attr(m.at)}" loading="lazy" decoding="async"></a>
         <figcaption>${esc(ph.cap)}</figcaption>
       </figure>`;
     })
@@ -482,11 +485,12 @@ function jsonLd(t) {
 
 /* --- страница целиком ----------------------------------- */
 
-export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', lenisName = 'lenis.min.js', fontsName = 'fonts.css', mapName = 'map-base.svg' } = {}) {
+export function page(t, { portraitFile = '', images = new Set(), logos = new Map(), icons = {}, cssName = 'styles.css', jsName = 'app.js', lenisName = 'lenis.min.js', fontsName = 'fonts.css', mapName = 'map-base.svg', imgVer = {} } = {}) {
   const canonical = shared.domain + '/' + t.path;
   R = t.path ? '../' : '';                     // все языки лежат на один уровень ниже корня
   ICONS = icons;
   MAP = mapName;
+  VER = imgVer;
   /* Ссылка на себя ведет в текущий каталог: адрес остается без index.html */
   const base = './';
   const pre = t.lang === 'ru' ? 'cyrillic' : 'latin';
@@ -513,7 +517,7 @@ ${shared.locales.map((l) => `<link rel="alternate" hreflang="${attr(l.htmlLang)}
 <!-- Карточка для превью ссылки. Без нее мессенджеры показывали пустой
      прямоугольник: twitter:card обещал большую картинку, а картинки не было.
      Адрес обязан быть полным, относительный тут не читается. -->
-<meta property="og:image" content="${attr(shared.domain)}/assets/img/og-${attr(t.lang)}.png">
+<meta property="og:image" content="${attr(shared.domain)}/${pic(`og-${t.lang}.png`)}">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

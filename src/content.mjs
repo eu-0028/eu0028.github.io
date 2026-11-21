@@ -16,8 +16,7 @@ export const shared = {
   /* Снимки галереи. w и h — размер файла, at — точка, которая остается
      в кадре, когда плитка обрезает снимок под свою пропорцию. */
   photos: {
-    'gallery-panel.webp': { w: 1600, h: 1066, at: '35% 50%' },
-    'gallery-panel-2.webp': { w: 1600, h: 1067, at: '38% 40%' },
+    'gallery-panel-2.webp': { w: 1600, h: 1067, at: '45% 35%' },
     'gallery-mtpp.webp': { w: 1620, h: 1080, at: '50% 28%' },
     'gallery-intervision.webp': { w: 1600, h: 1034, at: '55% 50%' },
     'gallery-agora.webp': { w: 1600, h: 1067, at: '50% 50%' },
@@ -247,9 +246,8 @@ export const ru = {
     prev: 'Предыдущее фото',
     next: 'Следующее фото',
     items: [
-      { img: 'gallery-panel.webp', cap: 'Панельная дискуссия на МИПФ-2026', alt: 'Евгений Шутов на панельной дискуссии МИПФ-2026' },
-      { img: 'gallery-mtpp.webp', cap: 'Встреча в МТПП', alt: 'Участники встречи в Московской торгово-промышленной палате' },
       { img: 'gallery-panel-2.webp', cap: 'Панельная дискуссия на МИПФ-2026', alt: 'Евгений Шутов с микрофоном на панельной дискуссии МИПФ-2026' },
+      { img: 'gallery-mtpp.webp', cap: 'Встреча в МТПП', alt: 'Участники встречи в Московской торгово-промышленной палате' },
       { img: 'gallery-intervision.webp', cap: 'Интервидение-2025', alt: 'Делегации на «Интервидении-2025»' },
       { img: 'gallery-agora.webp', cap: 'Форум AGORA', alt: 'Форум AGORA, отель Soluxe' },
       { img: 'gallery-meeting.webp', cap: 'Рабочая встреча', alt: 'Евгений Шутов на рабочей встрече' },
@@ -560,9 +558,8 @@ export const en = {
     prev: 'Previous photo',
     next: 'Next photo',
     items: [
-      { img: 'gallery-panel.webp', cap: 'Panel discussion, Moscow Investment and Industrial Forum 2026', alt: 'Evgeny Shutov on a panel at the Moscow Investment and Industrial Forum 2026' },
-      { img: 'gallery-mtpp.webp', cap: 'Meeting at the Moscow Chamber of Commerce and Industry', alt: 'Meeting participants at the Moscow Chamber of Commerce and Industry' },
       { img: 'gallery-panel-2.webp', cap: 'Panel discussion, Moscow Investment and Industrial Forum 2026', alt: 'Evgeny Shutov speaking on a panel at the Moscow Investment and Industrial Forum 2026' },
+      { img: 'gallery-mtpp.webp', cap: 'Meeting at the Moscow Chamber of Commerce and Industry', alt: 'Meeting participants at the Moscow Chamber of Commerce and Industry' },
       { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegations at Intervision 2025' },
       { img: 'gallery-agora.webp', cap: 'AGORA forum', alt: 'AGORA forum, Soluxe Hotel' },
       { img: 'gallery-meeting.webp', cap: 'Working meeting', alt: 'Evgeny Shutov at a working meeting' },
@@ -873,9 +870,8 @@ export const pt = {
     prev: 'Foto anterior',
     next: 'Próxima foto',
     items: [
-      { img: 'gallery-panel.webp', cap: 'Painel de debate, Fórum de Investimento e Indústria de Moscou 2026', alt: 'Evgeny Shutov em um painel do Fórum de Investimento e Indústria de Moscou 2026' },
-      { img: 'gallery-mtpp.webp', cap: 'Reunião na Câmara de Comércio e Indústria de Moscou', alt: 'Participantes de reunião na Câmara de Comércio e Indústria de Moscou' },
       { img: 'gallery-panel-2.webp', cap: 'Painel de debate, Fórum de Investimento e Indústria de Moscou 2026', alt: 'Evgeny Shutov falando em um painel do Fórum de Investimento e Indústria de Moscou 2026' },
+      { img: 'gallery-mtpp.webp', cap: 'Reunião na Câmara de Comércio e Indústria de Moscou', alt: 'Participantes de reunião na Câmara de Comércio e Indústria de Moscou' },
       { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegações na Intervision 2025' },
       { img: 'gallery-agora.webp', cap: 'Fórum AGORA', alt: 'Fórum AGORA, hotel Soluxe' },
       { img: 'gallery-meeting.webp', cap: 'Reunião de trabalho', alt: 'Evgeny Shutov em uma reunião de trabalho' },

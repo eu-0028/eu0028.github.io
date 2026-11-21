@@ -67,7 +67,12 @@ await writeFile(`assets/${jsName}`, jsRaw);
 await writeFile(`assets/${lenisName}`, lenisRaw);
 await writeFile(`assets/${fontsName}`, fontsRaw);
 await writeFile(`assets/${mapName}`, mapRaw);
-const assetNames = { cssName, jsName, lenisName, fontsName, mapName };
+/* У картинок имя без хеша, поэтому версия идет в адресе: ?v=<хеш>. Иначе
+   после замены снимка браузер и мессенджеры держат в кеше старый файл
+   под тем же именем. */
+const imgVer = {};
+for (const f of await readdir('assets/img')) imgVer[f] = hash(await readFile(`assets/img/${f}`));
+const assetNames = { cssName, jsName, lenisName, fontsName, mapName, imgVer };
 
 await copyFile('src/favicon.svg', 'favicon.svg');
 /* Растровые копии значка: Chrome сам просит /favicon.ico, и без него

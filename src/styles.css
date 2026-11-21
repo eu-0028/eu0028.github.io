@@ -1664,7 +1664,7 @@ html.lenis { scroll-behavior: auto; }
 }
 
 /* --- 35. Фотогалерея -------------------------------------- */
-/* Мозаика в два ряда: сверху два крупных кадра, под ними четыре поменьше.
+/* Мозаика в два ряда: сверху два крупных кадра, под ними три поменьше.
    Высота ряда задана, снимок заполняет плитку и подрезается под ее
    пропорцию; что при этом держать в кадре, говорит --at у каждого
    снимка. Снимки цветные: обесцвеченными они сливались в серую ленту,
@@ -1676,13 +1676,14 @@ html.lenis { scroll-behavior: auto; }
   gap: clamp(1.5rem, 2.6vw, 2.25rem) clamp(.75rem, 1.4vw, 1.25rem);
   margin-top: clamp(2.5rem, 5vw, 4rem);
 }
-.gal__i { margin: 0; grid-column: span 3; }
-.gal__i:nth-child(1) { grid-column: span 5; }
-.gal__i:nth-child(2) { grid-column: span 7; }
+.gal__i { margin: 0; grid-column: span 4; }
+/* Два верхних кадра одной ширины: плитка выходит почти в пропорции
+   самого снимка, и общий план не теряет людей по краям. */
+.gal__i:nth-child(-n+2) { grid-column: span 6; }
 .gal__pic {
   display: block;
   overflow: hidden;
-  height: clamp(9rem, 17vw, 14.5rem);
+  height: clamp(11rem, 22vw, 19rem);
   background: var(--paper-sunk);
   cursor: zoom-in;
 }
@@ -1711,7 +1712,7 @@ html.lenis { scroll-behavior: auto; }
 /* Планшет: все плитки одного размера, по две в ряд */
 @media (max-width: 1000px) {
   .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .gal__i, .gal__i:nth-child(1), .gal__i:nth-child(2) { grid-column: auto; }
+  .gal__i, .gal__i:nth-child(-n+2) { grid-column: auto; }
   .gal__pic, .gal__i:nth-child(-n+2) .gal__pic { height: auto; aspect-ratio: 3 / 2; }
 }
 @media (max-width: 620px) {
