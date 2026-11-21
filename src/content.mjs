@@ -80,7 +80,7 @@ export const ru = {
     items: [
       {
         t: 'Интервидение-2025',
-        img: 'work-intervision.jpg',
+        img: 'work-intervision.webp',
         imgAlt: 'Делегации на «Интервидении-2025»',
         sub: 'Международный музыкальный конкурс',
         meta: 'август—сентябрь 2025 · Live Arena, Москва',
@@ -167,7 +167,7 @@ export const ru = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.jpg',
+        img: 'work-agora.webp',
         imgAlt: 'Форум AGORA, отель Soluxe',
         sub: 'Международный деловой форум',
         meta: 'январь—апрель 2026 · отель Soluxe, Москва',
@@ -281,6 +281,11 @@ export const ru = {
       'Я специалист-международник по странам БРИКС и Латинской Америки. С бразильской стороной работаю на португальском, без переводчика.',
       'Проект обычно выглядит так. Компания хочет зайти на внешний рынок, и кто-то должен найти там партнеров и довести дело до подписанного договора. Потом сделку надо исполнить: провести закупки, рассчитаться с подрядчиками и закрыть отчет, который принимает государственный заказчик. Обе части делаю я.',
     ],
+    /* Описание читает экранный диктор, на странице его не видно */
+    photos: [
+      { img: 'about-panel.webp', alt: 'Евгений Шутов на панельной дискуссии' },
+      { img: 'about-meeting.webp', alt: 'Евгений Шутов на рабочей встрече' },
+    ],
     langTitle: 'Языки',
     langs: [
       { flag: 'br', l: 'Португальский', cap: 'C1', lvl: 4 },
@@ -377,7 +382,7 @@ export const en = {
     items: [
       {
         t: 'Intervision 2025',
-        img: 'work-intervision.jpg',
+        img: 'work-intervision.webp',
         imgAlt: 'Delegations at Intervision 2025',
         sub: 'International music contest',
         meta: 'August-September 2025 · Live Arena, Moscow',
@@ -464,7 +469,7 @@ export const en = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.jpg',
+        img: 'work-agora.webp',
         imgAlt: 'AGORA forum, Soluxe Hotel',
         sub: 'International business forum',
         meta: 'January-April 2026 · Soluxe Hotel, Moscow',
@@ -578,6 +583,10 @@ export const en = {
       'I am an international relations specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
       'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the government client has to sign off. I do both halves.',
     ],
+    photos: [
+      { img: 'about-panel.webp', alt: 'Evgeny Shutov speaking on a panel' },
+      { img: 'about-meeting.webp', alt: 'Evgeny Shutov at a working meeting' },
+    ],
     langTitle: 'Languages',
     langs: [
       { flag: 'br', l: 'Portuguese', cap: 'C1', lvl: 4 },
@@ -674,7 +683,7 @@ export const pt = {
     items: [
       {
         t: 'Intervision 2025',
-        img: 'work-intervision.jpg',
+        img: 'work-intervision.webp',
         imgAlt: 'Delegações na Intervision 2025',
         sub: 'Concurso musical internacional',
         meta: 'agosto-setembro de 2025 · Live Arena, Moscou',
@@ -761,7 +770,7 @@ export const pt = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.jpg',
+        img: 'work-agora.webp',
         imgAlt: 'Fórum AGORA, hotel Soluxe',
         sub: 'Fórum internacional de negócios',
         meta: 'janeiro-abril de 2026 · hotel Soluxe, Moscou',
@@ -874,6 +883,10 @@ export const pt = {
     paras: [
       'Sou especialista em relações internacionais com foco nos países do BRICS e na América Latina. Com o lado brasileiro trabalho em português, sem intérprete.',
       'Um projeto costuma ser assim. A empresa quer entrar em um mercado estrangeiro, e alguém precisa encontrar parceiros lá e levar a conversa até o contrato assinado. Depois o negócio tem de ser executado: fazer as compras, acertar com os fornecedores e fechar o relatório que o contratante público aceita. As duas partes ficam comigo.',
+    ],
+    photos: [
+      { img: 'about-panel.webp', alt: 'Evgeny Shutov em um painel de debate' },
+      { img: 'about-meeting.webp', alt: 'Evgeny Shutov em uma reunião de trabalho' },
     ],
     langTitle: 'Idiomas',
     langs: [

@@ -477,27 +477,26 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 
 /* Портрет */
-/* Портрет — вырезанная фигура без рамки и подложки: она стоит в правой
-   колонке обложки и уходит за нижнюю кромку блока. Рамка вокруг снимка
-   делала из него карточку, а тут человек просто стоит на странице. */
+/* Портрет — снимок в полный кадр, со своим фоном. Раньше здесь стояла
+   вырезанная фигура в рост. Новый кадр поясной, плечи в нем уходят за
+   края, и вырезка оставила бы по бокам прямые срезы. Темный фон снимка
+   сам держит форму, поэтому ни рамки, ни тени: прямоугольник стоит на
+   нижней кромке блока так же, как стояла фигура.
+
+   Высота задана от экрана, ширина следует из пропорции 2:3. В узкой
+   колонке ширины не хватает — тогда кадр подрезается по бокам, а не
+   сплющивается; точка привязки держит в кадре лицо. */
 .hero__media { display: flex; justify-content: flex-end; align-items: flex-end; }
 .portrait {
   display: block;
   width: auto;
   max-width: 100%;
-  /* Рост задан от высоты экрана: обложка должна помещаться целиком,
-     а фигура при этом доставать до нижней кромки блока. */
   height: clamp(24rem, 64vh, 38rem);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: 50% 18%;
   margin-bottom: calc(-1 * var(--hero-pad-b));
-  filter: drop-shadow(0 24px 40px rgba(18, 21, 26, .13));
 }
-/* Снимок цветной в обеих темах. На темном фоне поднимаем тени
-   (contrast < 1): иначе черный пиджак сливается с темным фоном и
-   фигура теряет силуэт ниже плеч. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .portrait { filter: contrast(.86) brightness(1.04) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
-}
-:root[data-theme='dark'] .portrait { filter: contrast(.86) brightness(1.04) drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); }
 
 /* --- 7. Кнопки ------------------------------------------- */
 
@@ -907,7 +906,10 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
      кромки: сверху она перекрывала заголовок и съедала первый экран. */
   .hero__grid { grid-template-columns: 1fr; align-items: start; }
   .hero__media { justify-content: flex-end; }
-  .portrait { height: clamp(17rem, 46vh, 24rem); margin-right: calc(-1 * var(--gutter) / 2); }
+  /* На телефоне снимок встает на всю ширину колонки. На планшете та же
+     ширина дала бы кадр выше экрана, поэтому она ограничена и снимок
+     стоит справа, там же, где стояла фигура. */
+  .portrait { width: min(100%, 24rem); height: auto; aspect-ratio: 4 / 5; }
   .grid2, .proj__grid, .current__row, .ftr__grid { grid-template-columns: minmax(0, 1fr); }
   .aside, .proj__meta { position: static; }
   .aside__k { padding-top: .7rem; }
@@ -963,9 +965,13 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 
 /* --- 19. Фотография проекта ------------------------------ */
 
-.shot { margin: 1.75rem 0 0; }
+/* Отступ снизу нужен из-за подписи: без него она прилипала к первой
+   строке перечня и читалась как его заголовок. */
+.shot { margin: 1.75rem 0; }
 .shot img {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid var(--rule);
@@ -981,7 +987,20 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   color: var(--ink-3);
   margin-top: .7rem;
 }
-@media print { .shot { display: none; } }
+
+/* Пара снимков под текстом раздела: кадры одной пропорции стоят в ряд,
+   на узком экране — друг под другом. Подписи у них нет. */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.shots .shot { margin: 0; }
+.shot--still img { aspect-ratio: 4 / 3; }
+@media (max-width: 620px) { .shots { grid-template-columns: minmax(0, 1fr); } }
+
+@media print { .shot, .shots { display: none; } }
 
 /* --- 20. Карта географии --------------------------------- */
 
