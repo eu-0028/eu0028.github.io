@@ -589,6 +589,86 @@
   window.addEventListener('load', paint);
   paint();
 
+  /* --- Галерея: просмотр снимка во весь экран ------------ */
+  /* Плитка в сетке подрезает кадр под свою пропорцию, а здесь снимок
+     виден целиком и крупно. Листать можно стрелками на экране, клавишами
+     влево и вправо и движением пальца; закрывает крестик, Esc или щелчок
+     мимо снимка. Окно — родной <dialog>: фокус в нем запирает и после
+     закрытия возвращает на плитку сам браузер. Без него (старый браузер)
+     плитка остается обычной ссылкой на файл. */
+  var lb = document.querySelector('[data-lb-dialog]');
+  var tiles = document.querySelectorAll('[data-lb]');
+  if (lb && tiles.length && typeof lb.showModal === 'function') {
+    var lbImg = lb.querySelector('[data-lb-img]');
+    var lbCap = lb.querySelector('[data-lb-cap]');
+    var lbN = lb.querySelector('[data-lb-n]');
+    var cur = 0;
+    var warm = function (i) {
+      var a = tiles[(i + tiles.length) % tiles.length];
+      if (a && !a._warm) { a._warm = new Image(); a._warm.src = a.href; }
+    };
+    var show = function (i) {
+      cur = (i + tiles.length) % tiles.length;
+      var a = tiles[cur];
+      var thumb = a.querySelector('img');
+      var cap = a.parentNode.querySelector('figcaption');
+      lbCap.textContent = cap ? cap.textContent : '';
+      lbN.textContent = (cur + 1) + ' / ' + tiles.length;
+      /* Прежний кадр гасим, новый показываем, когда он загрузился: иначе
+         под новой подписью секунду висел бы старый снимок. */
+      lbImg.classList.remove('is-on');
+      var next = new Image();
+      next.onload = next.onerror = function () {
+        if (tiles[cur] !== a) return;          /* успели перелистнуть дальше */
+        lbImg.src = a.href;
+        lbImg.alt = thumb ? thumb.alt : '';
+        requestAnimationFrame(function () { lbImg.classList.add('is-on'); });
+      };
+      next.src = a.href;
+      warm(cur + 1); warm(cur - 1);
+    };
+    Array.prototype.forEach.call(tiles, function (a, i) {
+      a.addEventListener('click', function (e) {
+        /* Открытие в новой вкладке оставляем браузеру */
+        if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        show(i);
+        lb.showModal();
+        document.body.style.overflow = 'hidden';
+        if (lenis) lenis.stop();
+      });
+    });
+    lb.addEventListener('close', function () {
+      document.body.style.overflow = '';
+      if (lenis) lenis.start();
+      lbImg.classList.remove('is-on');
+    });
+    lb.querySelector('[data-lb-close]').addEventListener('click', function () { lb.close(); });
+    lb.querySelector('[data-lb-prev]').addEventListener('click', function () { show(cur - 1); });
+    lb.querySelector('[data-lb-next]').addEventListener('click', function () { show(cur + 1); });
+    /* Щелчок по темному полю вокруг снимка закрывает просмотр */
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb || e.target.classList.contains('lb__fig')) lb.close();
+    });
+    lb.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+    });
+    /* Листание пальцем: считаем жест горизонтальным, если он заметно
+       длиннее вбок, чем вверх-вниз. */
+    var sx = 0, sy = 0;
+    lb.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var t = e.changedTouches[0];
+      if (!t) return;
+      var dx = t.clientX - sx, dy = t.clientY - sy;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
   /* --- Портрет: если файл не отдался, колонка схлопывается -- */
   var portrait = document.querySelector('.portrait');
   if (portrait) {

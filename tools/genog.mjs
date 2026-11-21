@@ -35,10 +35,9 @@ body{width:1200px;height:630px;background:#f4f5f6;color:#12151a;font-family:Ones
 .e{font-family:Plex,monospace;font-weight:500;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#454b55;margin-top:20px}
 h1{font-size:50px;line-height:1.08;font-weight:600;letter-spacing:-.02em;margin-top:22px;text-wrap:balance}
 em{font-style:normal;font-weight:700;color:#1e4bad}
-/* Фигура вырезана по контуру и стоит на сером блоке, как на обложке сайта */
-.p{position:relative;align-self:end;justify-self:end;margin-right:64px;height:596px;aspect-ratio:1000/1444}
-.p::before{content:'';position:absolute;inset:46% 0 0 0;background:#e9ebee}
-img{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Фигура вырезана по контуру и стоит на нижней кромке, как на обложке сайта */
+.p{align-self:end;justify-self:end;margin-right:48px;height:596px;aspect-ratio:1120/1440}
+img{width:100%;height:100%;display:block}
 </style><body><div class="t"><div class="m">ES</div><div class="r"></div><p class="e">${esc(t.hero.eyebrow)}</p><h1>${esc(t.hero.lead)} <em>${esc(t.hero.leadEm)}</em>${t.hero.leadTail ? ' ' + esc(t.hero.leadTail) : ''}</h1></div><div class="p"><img src="${url('assets/img/portrait.webp')}" alt=""></div></body></html>`;
 
 const dir = mkdtempSync(join(tmpdir(), 'og-'));

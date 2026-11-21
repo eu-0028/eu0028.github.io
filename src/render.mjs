@@ -94,7 +94,7 @@ function hero(t, portraitFile) {
         </div>
       </div>
       ${portraitFile ? `<div class="hero__media">
-        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="1000" height="1444" fetchpriority="high" decoding="async">
+        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="1120" height="1440" fetchpriority="high" decoding="async">
       </div>` : ''}
     </div>
   </div>
@@ -364,17 +364,20 @@ function about(t, logos) {
    только то, что реально лежит в assets/img. */
 function gallery(t, images) {
   const s = t.gallery;
+  /* Плитка — ссылка на сам снимок. Со скриптом она открывает просмотр во
+     весь экран с листанием, без скрипта просто ведет на файл. */
   const items = s.items
     .filter((ph) => images.has(ph.img) && shared.photos[ph.img])
     .map((ph) => {
       const m = shared.photos[ph.img];
       return `<figure class="gal__i reveal">
-        <div class="gal__pic"><img src="${R}assets/img/${attr(ph.img)}" alt="${attr(ph.alt)}" width="${m.w}" height="${m.h}" style="--at:${attr(m.at)}" loading="lazy" decoding="async"></div>
+        <a class="gal__pic" href="${R}assets/img/${attr(ph.img)}" data-lb><img src="${R}assets/img/${attr(ph.img)}" alt="${attr(ph.alt)}" width="${m.w}" height="${m.h}" style="--at:${attr(m.at)}" loading="lazy" decoding="async"></a>
         <figcaption>${esc(ph.cap)}</figcaption>
       </figure>`;
     })
     .join('');
   if (!items) return '';
+  const chev = (d) => `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="${d}" stroke="currentColor" stroke-width="1.5"/></svg>`;
   return `<section class="band" id="photos">
   <div class="shell">
     <div class="grid2">
@@ -383,6 +386,15 @@ function gallery(t, images) {
     </div>
     <div class="gal">${items}</div>
   </div>
+  <dialog class="lb" data-lb-dialog aria-label="${attr(s.title)}">
+    <button class="lb__x" type="button" data-lb-close aria-label="${attr(t.close)}">${chev('M4 4l14 14M18 4L4 18')}</button>
+    <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="${attr(s.prev)}">${chev('M14 3l-8 8 8 8')}</button>
+    <figure class="lb__fig">
+      <img class="lb__img" alt="" data-lb-img>
+      <figcaption class="lb__cap"><span data-lb-cap></span><span class="lb__n num" data-lb-n></span></figcaption>
+    </figure>
+    <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="${attr(s.next)}">${chev('M8 3l8 8-8 8')}</button>
+  </dialog>
 </section>`;
 }
 

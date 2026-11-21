@@ -477,46 +477,22 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 
 /* Портрет */
-/* Портрет — вырезанная по контуру фигура, фона у снимка нет. Кадр поясной,
-   и левый рукав в нем уходит за край: у вырезки там ровный вертикальный
-   срез. Чтобы он не висел в воздухе, за фигурой стоит блок цвета
-   следующего раздела. Его левый и нижний края совпадают со срезами
-   фигуры, а верх проходит на уровне подбородка: срез рукава целиком
-   лежит на краю блока, над плечами блок виден, а голова выступает из
-   него. Читается это так, будто человек стоит перед выступом следующего
-   раздела.
+/* Портрет — вырезанная по контуру фигура, фона у снимка нет: человек
+   просто стоит на странице и уходит за нижнюю кромку блока. В исходном
+   кадре левый рукав обрезан краем снимка; недостающая полоса достроена в
+   самом файле, поэтому у фигуры живой контур с обеих сторон и никакой
+   подложки за ней не нужно. Как готовился файл, сказано в README.
 
-   Высота портрета лежит в --pic-h: от нее считается и верх блока. */
+   Высота лежит в --pic-h. В узкой колонке фигура уменьшается целиком,
+   а не подрезается: срез по рукаву выглядел бы как брак. */
 .hero { --pic-h: clamp(24rem, 64vh, 38rem); }
-.hero__media {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: fit-content;
-  max-width: 100%;
-  margin-left: auto;
-}
-.hero__media::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(var(--pic-h) * .46);
-  bottom: calc(-1 * var(--hero-pad-b));
-  background: var(--paper-sunk);
-}
+.hero__media { display: flex; justify-content: flex-end; align-items: flex-end; }
 .portrait {
-  position: relative;
   display: block;
-  height: var(--pic-h);
   width: auto;
+  height: auto;
   max-width: 100%;
-  aspect-ratio: 1000 / 1444;
-  /* В узкой колонке фигура подрезается справа, под край блока. Слева
-     резать нельзя: срез рукава должен остаться на краю. */
-  object-fit: cover;
-  object-position: 0 100%;
+  max-height: var(--pic-h);
   margin-bottom: calc(-1 * var(--hero-pad-b));
 }
 
@@ -1688,21 +1664,28 @@ html.lenis { scroll-behavior: auto; }
 }
 
 /* --- 35. Фотогалерея -------------------------------------- */
-/* Мозаика в два ряда: сверху два крупных кадра, под ними три поменьше.
+/* Мозаика в два ряда: сверху два крупных кадра, под ними четыре поменьше.
    Высота ряда задана, снимок заполняет плитку и подрезается под ее
    пропорцию; что при этом держать в кадре, говорит --at у каждого
    снимка. Снимки цветные: обесцвеченными они сливались в серую ленту,
-   а здесь каждая площадка узнается по своему цвету. */
+   а здесь каждая площадка узнается по своему цвету. Плитка открывает
+   просмотр во весь экран, где кадр виден целиком. */
 .gal {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(1.5rem, 2.6vw, 2.25rem) clamp(.75rem, 1.4vw, 1.25rem);
   margin-top: clamp(2.5rem, 5vw, 4rem);
 }
-.gal__i { margin: 0; grid-column: span 4; }
+.gal__i { margin: 0; grid-column: span 3; }
 .gal__i:nth-child(1) { grid-column: span 5; }
 .gal__i:nth-child(2) { grid-column: span 7; }
-.gal__pic { overflow: hidden; height: clamp(11rem, 22vw, 19rem); background: var(--paper-sunk); }
+.gal__pic {
+  display: block;
+  overflow: hidden;
+  height: clamp(9rem, 17vw, 14.5rem);
+  background: var(--paper-sunk);
+  cursor: zoom-in;
+}
 .gal__i:nth-child(-n+2) .gal__pic { height: clamp(14rem, 30vw, 26rem); }
 .gal__pic img {
   display: block;
@@ -1713,6 +1696,7 @@ html.lenis { scroll-behavior: auto; }
   transition: transform 1.2s var(--ease-out);
 }
 .gal__i:hover .gal__pic img { transform: scale(1.035); }
+.gal__pic:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .gal__i figcaption {
   font-family: var(--font-mono);
   font-size: var(--t-label);
@@ -1724,12 +1708,103 @@ html.lenis { scroll-behavior: auto; }
   margin-top: .7rem;
 }
 
-@media (max-width: 700px) {
-  .gal { grid-template-columns: minmax(0, 1fr); }
+/* Планшет: все плитки одного размера, по две в ряд */
+@media (max-width: 1000px) {
+  .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gal__i, .gal__i:nth-child(1), .gal__i:nth-child(2) { grid-column: auto; }
   .gal__pic, .gal__i:nth-child(-n+2) .gal__pic { height: auto; aspect-ratio: 3 / 2; }
 }
+@media (max-width: 620px) {
+  .gal { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Просмотр во весь экран. Темный в обеих темах: снимку нужен нейтральный
+   фон, а не бумага страницы. Стрелки стоят по бокам кадра, на телефоне —
+   под ним; листать можно и стрелками клавиатуры, и пальцем. */
+.lb {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* Фон сплошной: сквозь полупрозрачный просвечивали подписи страницы */
+  background: #0c0e12;
+  color: #f4f5f6;
+  overflow: hidden;
+}
+.lb::backdrop { background: #0c0e12; }
+.lb[open] {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  animation: lb-in .28s var(--ease-out);
+}
+@keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+.lb__fig {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.75rem 0 1.5rem;
+}
+.lb__img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 9rem);
+  max-height: calc(100dvh - 9rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .28s var(--ease-out);
+}
+.lb__img.is-on { opacity: 1; }
+.lb__cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100rem;
+  margin-top: .9rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: rgba(244, 245, 246, .72);
+}
+.lb__n { white-space: nowrap; }
+.lb__nav, .lb__x {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(244, 245, 246, .72);
+  cursor: pointer;
+  transition: color .2s var(--ease);
+}
+.lb__nav { width: clamp(3rem, 7vw, 5.5rem); }
+.lb__nav:hover, .lb__x:hover { color: #fff; }
+.lb__nav:focus-visible, .lb__x:focus-visible { outline: 2px solid #9fb9f5; outline-offset: -6px; }
+.lb__x { position: absolute; top: .5rem; right: .5rem; width: 3rem; height: 3rem; z-index: 1; }
+
+@media (max-width: 700px) {
+  .lb[open] { grid-template-columns: minmax(0, 1fr); }
+  .lb__fig { padding: 3.75rem .75rem 4.5rem; }
+  .lb__img { max-height: calc(100vh - 13rem); max-height: calc(100dvh - 13rem); }
+  .lb__nav { position: absolute; bottom: .75rem; width: 3.25rem; height: 3.25rem; }
+  .lb__nav--prev { left: calc(50% - 3.75rem); }
+  .lb__nav--next { right: calc(50% - 3.75rem); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .gal__pic img { transition: none; }
+  .gal__pic img, .lb__img { transition: none; }
   .gal__i:hover .gal__pic img { transform: none; }
+  .lb[open] { animation: none; }
 }
