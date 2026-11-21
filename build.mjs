@@ -17,7 +17,7 @@ const portraitFile = (await readdir('assets/img')).find((f) => /^portrait\.(webp
 const logos = new Map();
 for (const f of await readdir('assets/img')) {
   const m = /^([a-z0-9-]+)\.(svg|png|webp)$/i.exec(f);
-  if (m && /^(portrait|og-|work-|about-)/i.test(m[1])) continue;    // портрет, снимки и карточки соцсетей не логотипы
+  if (m && /^(portrait|og-|work-|gallery-)/i.test(m[1])) continue;    // портрет, снимки и карточки соцсетей не логотипы
   if (m && !logos.has(m[1].toLowerCase())) logos.set(m[1].toLowerCase(), f);
 }
 const icons = {};

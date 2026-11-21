@@ -477,24 +477,46 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
 }
 
 /* Портрет */
-/* Портрет — снимок в полный кадр, со своим фоном. Раньше здесь стояла
-   вырезанная фигура в рост. Новый кадр поясной, плечи в нем уходят за
-   края, и вырезка оставила бы по бокам прямые срезы. Темный фон снимка
-   сам держит форму, поэтому ни рамки, ни тени: прямоугольник стоит на
-   нижней кромке блока так же, как стояла фигура.
+/* Портрет — вырезанная по контуру фигура, фона у снимка нет. Кадр поясной,
+   и левый рукав в нем уходит за край: у вырезки там ровный вертикальный
+   срез. Чтобы он не висел в воздухе, за фигурой стоит блок цвета
+   следующего раздела. Его левый и нижний края совпадают со срезами
+   фигуры, а верх проходит на уровне подбородка: срез рукава целиком
+   лежит на краю блока, над плечами блок виден, а голова выступает из
+   него. Читается это так, будто человек стоит перед выступом следующего
+   раздела.
 
-   Высота задана от экрана, ширина следует из пропорции 2:3. В узкой
-   колонке ширины не хватает — тогда кадр подрезается по бокам, а не
-   сплющивается; точка привязки держит в кадре лицо. */
-.hero__media { display: flex; justify-content: flex-end; align-items: flex-end; }
+   Высота портрета лежит в --pic-h: от нее считается и верх блока. */
+.hero { --pic-h: clamp(24rem, 64vh, 38rem); }
+.hero__media {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+}
+.hero__media::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--pic-h) * .46);
+  bottom: calc(-1 * var(--hero-pad-b));
+  background: var(--paper-sunk);
+}
 .portrait {
+  position: relative;
   display: block;
+  height: var(--pic-h);
   width: auto;
   max-width: 100%;
-  height: clamp(24rem, 64vh, 38rem);
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1000 / 1444;
+  /* В узкой колонке фигура подрезается справа, под край блока. Слева
+     резать нельзя: срез рукава должен остаться на краю. */
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: 0 100%;
   margin-bottom: calc(-1 * var(--hero-pad-b));
 }
 
@@ -906,10 +928,8 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
      кромки: сверху она перекрывала заголовок и съедала первый экран. */
   .hero__grid { grid-template-columns: 1fr; align-items: start; }
   .hero__media { justify-content: flex-end; }
-  /* На телефоне снимок встает на всю ширину колонки. На планшете та же
-     ширина дала бы кадр выше экрана, поэтому она ограничена и снимок
-     стоит справа, там же, где стояла фигура. */
-  .portrait { width: min(100%, 24rem); height: auto; aspect-ratio: 4 / 5; }
+  /* На узком экране фигура ниже и стоит справа под текстом */
+  .hero { --pic-h: clamp(17rem, 46vh, 24rem); }
   .grid2, .proj__grid, .current__row, .ftr__grid { grid-template-columns: minmax(0, 1fr); }
   .aside, .proj__meta { position: static; }
   .aside__k { padding-top: .7rem; }
@@ -949,7 +969,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
     --ink: #000; --ink-2: #222; --ink-3: #444;
     --rule: #bbb; --rule-soft: #ddd; --accent: #14357a;
   }
-  .hdr, .drawer, .burger, .hero__cta, .skip, .portrait { display: none !important; }
+  .hdr, .drawer, .burger, .hero__cta, .skip, .hero__media, #photos { display: none !important; }
   body { font-size: 10.5pt; line-height: 1.42; }
   .band { padding-block: 1.1rem; }
   .hero { padding-top: 0; }
@@ -988,19 +1008,7 @@ section[id] { scroll-margin-top: calc(var(--hdr) + 1.5rem); }
   margin-top: .7rem;
 }
 
-/* Пара снимков под текстом раздела: кадры одной пропорции стоят в ряд,
-   на узком экране — друг под другом. Подписи у них нет. */
-.shots {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(.75rem, 1.5vw, 1.25rem);
-  margin-top: clamp(2rem, 4vw, 3rem);
-}
-.shots .shot { margin: 0; }
-.shot--still img { aspect-ratio: 4 / 3; }
-@media (max-width: 620px) { .shots { grid-template-columns: minmax(0, 1fr); } }
-
-@media print { .shot, .shots { display: none; } }
+@media print { .shot { display: none; } }
 
 /* --- 20. Карта географии --------------------------------- */
 
@@ -1677,4 +1685,51 @@ html.lenis { scroll-behavior: auto; }
   .portrait { transform: none !important; }
   .proj::before { display: none !important; }
   .reveal { will-change: auto !important; }
+}
+
+/* --- 35. Фотогалерея -------------------------------------- */
+/* Мозаика в два ряда: сверху два крупных кадра, под ними три поменьше.
+   Высота ряда задана, снимок заполняет плитку и подрезается под ее
+   пропорцию; что при этом держать в кадре, говорит --at у каждого
+   снимка. Снимки цветные: обесцвеченными они сливались в серую ленту,
+   а здесь каждая площадка узнается по своему цвету. */
+.gal {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.6vw, 2.25rem) clamp(.75rem, 1.4vw, 1.25rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+.gal__i { margin: 0; grid-column: span 4; }
+.gal__i:nth-child(1) { grid-column: span 5; }
+.gal__i:nth-child(2) { grid-column: span 7; }
+.gal__pic { overflow: hidden; height: clamp(11rem, 22vw, 19rem); background: var(--paper-sunk); }
+.gal__i:nth-child(-n+2) .gal__pic { height: clamp(14rem, 30vw, 26rem); }
+.gal__pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--at, 50% 50%);
+  transition: transform 1.2s var(--ease-out);
+}
+.gal__i:hover .gal__pic img { transform: scale(1.035); }
+.gal__i figcaption {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: .7rem;
+}
+
+@media (max-width: 700px) {
+  .gal { grid-template-columns: minmax(0, 1fr); }
+  .gal__i, .gal__i:nth-child(1), .gal__i:nth-child(2) { grid-column: auto; }
+  .gal__pic, .gal__i:nth-child(-n+2) .gal__pic { height: auto; aspect-ratio: 3 / 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gal__pic img { transition: none; }
+  .gal__i:hover .gal__pic img { transform: none; }
 }

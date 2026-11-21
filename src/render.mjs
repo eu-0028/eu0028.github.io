@@ -94,7 +94,7 @@ function hero(t, portraitFile) {
         </div>
       </div>
       ${portraitFile ? `<div class="hero__media">
-        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="900" height="1350" fetchpriority="high" decoding="async">
+        <img class="portrait" src="${R}assets/img/${attr(portraitFile)}" alt="${attr(h.portraitAlt)}" width="1000" height="1444" fetchpriority="high" decoding="async">
       </div>` : ''}
     </div>
   </div>
@@ -291,17 +291,9 @@ function current(t) {
 
 /* --- о себе: текст, языки, образование ------------------ */
 
-function about(t, logos, images) {
+function about(t, logos) {
   const s = t.about;
   const paras = s.paras.map((p) => `<p>${esc(p)}</p>`).join('');
-
-  /* Снимки с работы идут парой под текстом. Как и у проектов, в разметку
-     попадает только то, что реально лежит в assets/img. Подписи нет:
-     что на снимке, видно и так, а название события тут ничего не решает. */
-  const photos = (s.photos || [])
-    .filter((ph) => images.has(ph.img))
-    .map((ph) => `<figure class="shot shot--still reveal"><img src="${R}assets/img/${attr(ph.img)}" alt="${attr(ph.alt)}" width="1120" height="840" loading="lazy" decoding="async"></figure>`)
-    .join('');
 
   const stats = t.figures.items
     .map(
@@ -353,7 +345,6 @@ function about(t, logos, images) {
       <div>
         <h2 class="h2 reveal">${esc(s.title)}</h2>
         <div class="prose reveal" style="margin-top:clamp(1.5rem,3vw,2.5rem)">${paras}</div>
-        ${photos ? `<div class="shots">${photos}</div>` : ''}
       </div>
     </div>
     <div class="stats">${stats}</div>
@@ -361,6 +352,36 @@ function about(t, logos, images) {
     <div class="lngs">${langs}</div>
     <p class="subhead subhead--wide">${esc(s.eduTitle)}</p>
     <div class="edus">${edu}</div>
+  </div>
+</section>`;
+}
+
+/* --- фотогалерея ---------------------------------------- */
+
+/* Все снимки собраны в одном разделе, цветные. Раньше они стояли внутри
+   проектов и текста «О себе» — там каждый снимок спорил с соседним
+   текстом, а вместе они складываются в один рассказ. В разметку попадает
+   только то, что реально лежит в assets/img. */
+function gallery(t, images) {
+  const s = t.gallery;
+  const items = s.items
+    .filter((ph) => images.has(ph.img) && shared.photos[ph.img])
+    .map((ph) => {
+      const m = shared.photos[ph.img];
+      return `<figure class="gal__i reveal">
+        <div class="gal__pic"><img src="${R}assets/img/${attr(ph.img)}" alt="${attr(ph.alt)}" width="${m.w}" height="${m.h}" style="--at:${attr(m.at)}" loading="lazy" decoding="async"></div>
+        <figcaption>${esc(ph.cap)}</figcaption>
+      </figure>`;
+    })
+    .join('');
+  if (!items) return '';
+  return `<section class="band" id="photos">
+  <div class="shell">
+    <div class="grid2">
+      ${aside('', s.kicker)}
+      <div><h2 class="h2 reveal">${esc(s.title)}</h2></div>
+    </div>
+    <div class="gal">${items}</div>
   </div>
 </section>`;
 }
@@ -511,9 +532,10 @@ ${jsonLd(t)}
 ${header(t, base)}
 <main id="main">
 ${hero(t, portraitFile)}
-${about(t, logos, images)}
+${about(t, logos)}
 ${practice(t)}
 ${work(t, images)}
+${gallery(t, images)}
 ${geo(t)}
 ${current(t)}
 ${contact(t)}

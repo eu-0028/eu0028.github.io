@@ -13,6 +13,15 @@ export const shared = {
   years: '2026',
   /* Языки сайта. Порядок тот же, что в переключателе в шапке.
      path — каталог от корня, он же попадает в адрес и в карту сайта. */
+  /* Снимки галереи. w и h — размер файла, at — точка, которая остается
+     в кадре, когда плитка обрезает снимок под свою пропорцию. */
+  photos: {
+    'gallery-panel.webp': { w: 1600, h: 1066, at: '35% 50%' },
+    'gallery-mtpp.webp': { w: 1620, h: 1080, at: '50% 28%' },
+    'gallery-intervision.webp': { w: 1600, h: 1034, at: '55% 50%' },
+    'gallery-agora.webp': { w: 1600, h: 1067, at: '50% 50%' },
+    'gallery-meeting.webp': { w: 1440, h: 1080, at: '50% 30%' },
+  },
   locales: [
     { key: 'ru', code: 'RU', htmlLang: 'ru',    label: 'Русский',    path: '' },
     { key: 'en', code: 'EN', htmlLang: 'en',    label: 'English',    path: 'en/' },
@@ -46,6 +55,7 @@ export const ru = {
     { href: '#about', label: 'О себе', n: '1' },
     { href: '#practice', label: 'Направления', n: '2' },
     { href: '#work', label: 'Проекты', n: '3' },
+    { href: '#photos', label: 'Фото', n: '' },
     { href: '#geo', label: 'География', n: '4' },
     { href: '#current', label: '2026', n: '5' },
     { href: '#contact', label: 'Контакты', n: '6' },
@@ -80,7 +90,7 @@ export const ru = {
     items: [
       {
         t: 'Интервидение-2025',
-        img: 'work-intervision.webp',
+        img: 'work-intervision.jpg',
         imgAlt: 'Делегации на «Интервидении-2025»',
         sub: 'Международный музыкальный конкурс',
         meta: 'август—сентябрь 2025 · Live Arena, Москва',
@@ -167,7 +177,7 @@ export const ru = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.webp',
+        img: 'work-agora.jpg',
         imgAlt: 'Форум AGORA, отель Soluxe',
         sub: 'Международный деловой форум',
         meta: 'январь—апрель 2026 · отель Soluxe, Москва',
@@ -228,6 +238,20 @@ export const ru = {
     ],
   },
 
+  /* Подписи к двум снимкам (панель и рабочая встреча) общие: названий
+     этих событий в резюме нет. Остальные — по названиям проектов. */
+  gallery: {
+    kicker: 'Галерея',
+    title: 'Фотографии',
+    items: [
+      { img: 'gallery-panel.webp', cap: 'Панельная дискуссия', alt: 'Евгений Шутов на панельной дискуссии' },
+      { img: 'gallery-mtpp.webp', cap: 'Встреча в МТПП', alt: 'Участники встречи в Московской торгово-промышленной палате' },
+      { img: 'gallery-intervision.webp', cap: 'Интервидение-2025', alt: 'Делегации на «Интервидении-2025»' },
+      { img: 'gallery-agora.webp', cap: 'Форум AGORA', alt: 'Форум AGORA, отель Soluxe' },
+      { img: 'gallery-meeting.webp', cap: 'Рабочая встреча', alt: 'Евгений Шутов на рабочей встрече' },
+    ],
+  },
+
   geo: {
     n: '4',
     kicker: 'География',
@@ -280,11 +304,6 @@ export const ru = {
     paras: [
       'Я специалист-международник по странам БРИКС и Латинской Америки. С бразильской стороной работаю на португальском, без переводчика.',
       'Проект обычно выглядит так. Компания хочет зайти на внешний рынок, и кто-то должен найти там партнеров и довести дело до подписанного договора. Потом сделку надо исполнить: провести закупки, рассчитаться с подрядчиками и закрыть отчет, который принимает государственный заказчик. Обе части делаю я.',
-    ],
-    /* Описание читает экранный диктор, на странице его не видно */
-    photos: [
-      { img: 'about-panel.webp', alt: 'Евгений Шутов на панельной дискуссии' },
-      { img: 'about-meeting.webp', alt: 'Евгений Шутов на рабочей встрече' },
     ],
     langTitle: 'Языки',
     langs: [
@@ -348,6 +367,7 @@ export const en = {
     { href: '#about', label: 'About', n: '1' },
     { href: '#practice', label: 'Practice', n: '2' },
     { href: '#work', label: 'Projects', n: '3' },
+    { href: '#photos', label: 'Photos', n: '' },
     { href: '#geo', label: 'Geography', n: '4' },
     { href: '#current', label: '2026', n: '5' },
     { href: '#contact', label: 'Contact', n: '6' },
@@ -382,7 +402,7 @@ export const en = {
     items: [
       {
         t: 'Intervision 2025',
-        img: 'work-intervision.webp',
+        img: 'work-intervision.jpg',
         imgAlt: 'Delegations at Intervision 2025',
         sub: 'International music contest',
         meta: 'August-September 2025 · Live Arena, Moscow',
@@ -469,7 +489,7 @@ export const en = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.webp',
+        img: 'work-agora.jpg',
         imgAlt: 'AGORA forum, Soluxe Hotel',
         sub: 'International business forum',
         meta: 'January-April 2026 · Soluxe Hotel, Moscow',
@@ -530,6 +550,18 @@ export const en = {
     ],
   },
 
+  gallery: {
+    kicker: 'Gallery',
+    title: 'Photos',
+    items: [
+      { img: 'gallery-panel.webp', cap: 'Panel discussion', alt: 'Evgeny Shutov speaking on a panel' },
+      { img: 'gallery-mtpp.webp', cap: 'Meeting at the Moscow Chamber of Commerce and Industry', alt: 'Meeting participants at the Moscow Chamber of Commerce and Industry' },
+      { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegations at Intervision 2025' },
+      { img: 'gallery-agora.webp', cap: 'AGORA forum', alt: 'AGORA forum, Soluxe Hotel' },
+      { img: 'gallery-meeting.webp', cap: 'Working meeting', alt: 'Evgeny Shutov at a working meeting' },
+    ],
+  },
+
   geo: {
     n: '4',
     kicker: 'Geography',
@@ -582,10 +614,6 @@ export const en = {
     paras: [
       'I am an international relations specialist working with the BRICS countries and Latin America. With the Brazilian side I work in Portuguese, without an interpreter.',
       'A project usually looks like this. A company wants to enter a foreign market, and someone has to find partners there and carry it through to a signed contract. Then the deal has to be delivered: run the procurement, settle with the contractors and close the report that the government client has to sign off. I do both halves.',
-    ],
-    photos: [
-      { img: 'about-panel.webp', alt: 'Evgeny Shutov speaking on a panel' },
-      { img: 'about-meeting.webp', alt: 'Evgeny Shutov at a working meeting' },
     ],
     langTitle: 'Languages',
     langs: [
@@ -649,6 +677,7 @@ export const pt = {
     { href: '#about', label: 'Sobre mim', n: '1' },
     { href: '#practice', label: 'Áreas', n: '2' },
     { href: '#work', label: 'Projetos', n: '3' },
+    { href: '#photos', label: 'Fotos', n: '' },
     { href: '#geo', label: 'Geografia', n: '4' },
     { href: '#current', label: '2026', n: '5' },
     { href: '#contact', label: 'Contato', n: '6' },
@@ -683,7 +712,7 @@ export const pt = {
     items: [
       {
         t: 'Intervision 2025',
-        img: 'work-intervision.webp',
+        img: 'work-intervision.jpg',
         imgAlt: 'Delegações na Intervision 2025',
         sub: 'Concurso musical internacional',
         meta: 'agosto-setembro de 2025 · Live Arena, Moscou',
@@ -770,7 +799,7 @@ export const pt = {
       },
       {
         t: 'AGORA Global Business Club',
-        img: 'work-agora.webp',
+        img: 'work-agora.jpg',
         imgAlt: 'Fórum AGORA, hotel Soluxe',
         sub: 'Fórum internacional de negócios',
         meta: 'janeiro-abril de 2026 · hotel Soluxe, Moscou',
@@ -831,6 +860,18 @@ export const pt = {
     ],
   },
 
+  gallery: {
+    kicker: 'Galeria',
+    title: 'Fotos',
+    items: [
+      { img: 'gallery-panel.webp', cap: 'Painel de debate', alt: 'Evgeny Shutov em um painel de debate' },
+      { img: 'gallery-mtpp.webp', cap: 'Reunião na Câmara de Comércio e Indústria de Moscou', alt: 'Participantes de reunião na Câmara de Comércio e Indústria de Moscou' },
+      { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegações na Intervision 2025' },
+      { img: 'gallery-agora.webp', cap: 'Fórum AGORA', alt: 'Fórum AGORA, hotel Soluxe' },
+      { img: 'gallery-meeting.webp', cap: 'Reunião de trabalho', alt: 'Evgeny Shutov em uma reunião de trabalho' },
+    ],
+  },
+
   geo: {
     n: '4',
     kicker: 'Geografia',
@@ -883,10 +924,6 @@ export const pt = {
     paras: [
       'Sou especialista em relações internacionais com foco nos países do BRICS e na América Latina. Com o lado brasileiro trabalho em português, sem intérprete.',
       'Um projeto costuma ser assim. A empresa quer entrar em um mercado estrangeiro, e alguém precisa encontrar parceiros lá e levar a conversa até o contrato assinado. Depois o negócio tem de ser executado: fazer as compras, acertar com os fornecedores e fechar o relatório que o contratante público aceita. As duas partes ficam comigo.',
-    ],
-    photos: [
-      { img: 'about-panel.webp', alt: 'Evgeny Shutov em um painel de debate' },
-      { img: 'about-meeting.webp', alt: 'Evgeny Shutov em uma reunião de trabalho' },
     ],
     langTitle: 'Idiomas',
     langs: [

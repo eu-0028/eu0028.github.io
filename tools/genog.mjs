@@ -28,15 +28,18 @@ const card = (t) => `<!doctype html><html lang="${t.htmlLang}"><meta charset="ut
 @font-face{font-family:Plex;font-weight:500;src:url('${url('assets/fonts/ibm-plex-mono-cyrillic-500-normal.woff2')}') format('woff2');unicode-range:U+0400-045F}
 @font-face{font-family:Plex;font-weight:500;src:url('${url('assets/fonts/ibm-plex-mono-latin-500-normal.woff2')}') format('woff2');unicode-range:U+0000-00FF}
 *{box-sizing:border-box;margin:0}
-body{width:1200px;height:630px;background:#f4f5f6;color:#12151a;font-family:Onest,Arial,sans-serif;display:grid;grid-template-columns:1fr 420px}
+body{width:1200px;height:630px;background:#f4f5f6;color:#12151a;font-family:Onest,Arial,sans-serif;display:grid;grid-template-columns:1fr 480px;overflow:hidden}
 .t{padding:72px 56px 72px 80px;display:flex;flex-direction:column}
 .m{width:50px;height:50px;border:2px solid #1e4bad;color:#1e4bad;font-weight:800;font-size:20px;display:grid;place-items:center}
 .r{width:112px;height:3px;background:#1e4bad;margin-top:auto}
 .e{font-family:Plex,monospace;font-weight:500;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#454b55;margin-top:20px}
 h1{font-size:50px;line-height:1.08;font-weight:600;letter-spacing:-.02em;margin-top:22px;text-wrap:balance}
 em{font-style:normal;font-weight:700;color:#1e4bad}
-img{width:100%;height:630px;object-fit:cover;object-position:50% 16%;display:block}
-</style><body><div class="t"><div class="m">ES</div><div class="r"></div><p class="e">${esc(t.hero.eyebrow)}</p><h1>${esc(t.hero.lead)} <em>${esc(t.hero.leadEm)}</em>${t.hero.leadTail ? ' ' + esc(t.hero.leadTail) : ''}</h1></div><img src="${url('assets/img/portrait.webp')}" alt=""></body></html>`;
+/* Фигура вырезана по контуру и стоит на сером блоке, как на обложке сайта */
+.p{position:relative;align-self:end;justify-self:end;margin-right:64px;height:596px;aspect-ratio:1000/1444}
+.p::before{content:'';position:absolute;inset:46% 0 0 0;background:#e9ebee}
+img{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style><body><div class="t"><div class="m">ES</div><div class="r"></div><p class="e">${esc(t.hero.eyebrow)}</p><h1>${esc(t.hero.lead)} <em>${esc(t.hero.leadEm)}</em>${t.hero.leadTail ? ' ' + esc(t.hero.leadTail) : ''}</h1></div><div class="p"><img src="${url('assets/img/portrait.webp')}" alt=""></div></body></html>`;
 
 const dir = mkdtempSync(join(tmpdir(), 'og-'));
 const browser = await chromium.launch();
