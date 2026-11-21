@@ -349,7 +349,7 @@ export const en = {
   path: 'en/',
   dir: 'ltr',
   langNav: 'Site language',
-  title: 'Evgeny Shutov. International projects and delegations, Portuguese at C1',
+  title: 'Evgenii Shutov. International projects and delegations, Portuguese at C1',
   description:
     'International relations specialist for BRICS and Latin America. Portuguese and English at C1. Foreign delegations, international event management, contracts and government-contract reporting.',
   ogLocale: 'en_US',
@@ -376,8 +376,8 @@ export const en = {
   ],
 
   hero: {
-    name: 'Evgeny Shutov',
-    eyebrow: 'Evgeny Shutov',
+    name: 'Evgenii Shutov',
+    eyebrow: 'Evgenii Shutov',
     lead: 'I make international projects',
     leadEm: 'actually happen',
     leadTail: '',
@@ -385,7 +385,7 @@ export const en = {
       'I negotiate in three languages and see a business problem through to the result. I work with the BRICS countries and Latin America.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See the work',
-    portraitAlt: 'Evgeny Shutov',
+    portraitAlt: 'Evgenii Shutov',
   },
 
   figures: {
@@ -558,11 +558,11 @@ export const en = {
     prev: 'Previous photo',
     next: 'Next photo',
     items: [
-      { img: 'gallery-panel-2.webp', cap: 'Panel discussion, Moscow Investment and Industrial Forum 2026', alt: 'Evgeny Shutov speaking on a panel at the Moscow Investment and Industrial Forum 2026' },
+      { img: 'gallery-panel-2.webp', cap: 'Panel discussion, Moscow Investment and Industrial Forum 2026', alt: 'Evgenii Shutov speaking on a panel at the Moscow Investment and Industrial Forum 2026' },
       { img: 'gallery-mtpp.webp', cap: 'Meeting at the Moscow Chamber of Commerce and Industry', alt: 'Meeting participants at the Moscow Chamber of Commerce and Industry' },
       { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegations at Intervision 2025' },
       { img: 'gallery-agora.webp', cap: 'AGORA forum', alt: 'AGORA forum, Soluxe Hotel' },
-      { img: 'gallery-meeting.webp', cap: 'Working meeting', alt: 'Evgeny Shutov at a working meeting' },
+      { img: 'gallery-meeting.webp', cap: 'Working meeting', alt: 'Evgenii Shutov at a working meeting' },
     ],
   },
 
@@ -649,7 +649,7 @@ export const en = {
   },
 
   footer: {
-    rights: 'Evgeny Shutov. All rights reserved.',
+    rights: 'Evgenii Shutov. All rights reserved.',
     navTitle: 'Sections',
     tagline: 'International relations',
   },
@@ -661,7 +661,7 @@ export const pt = {
   path: 'pt/',
   dir: 'ltr',
   langNav: 'Idioma do site',
-  title: 'Evgeny Shutov. Projetos internacionais e delegações, português C1',
+  title: 'Evgenii Shutov. Projetos internacionais e delegações, português C1',
   description:
     'Especialista em relações internacionais com foco nos BRICS e na América Latina. Português e inglês em C1. Acompanhamento de delegações estrangeiras, organização de eventos internacionais, contratos e prestação de contas em contratos públicos.',
   ogLocale: 'pt_BR',
@@ -688,8 +688,8 @@ export const pt = {
   ],
 
   hero: {
-    name: 'Evgeny Shutov',
-    eyebrow: 'Evgeny Shutov',
+    name: 'Evgenii Shutov',
+    eyebrow: 'Evgenii Shutov',
     lead: 'Faço com que o projeto internacional',
     leadEm: 'aconteça',
     leadTail: '',
@@ -697,7 +697,7 @@ export const pt = {
       'Negocio em três idiomas e resolvo a demanda do cliente de ponta a ponta. Trabalho com os países do BRICS e da América Latina.',
     ctaPrimary: 'Escrever',
     ctaSecondary: 'Ver projetos',
-    portraitAlt: 'Evgeny Shutov',
+    portraitAlt: 'Evgenii Shutov',
   },
 
   figures: {
@@ -870,11 +870,11 @@ export const pt = {
     prev: 'Foto anterior',
     next: 'Próxima foto',
     items: [
-      { img: 'gallery-panel-2.webp', cap: 'Painel de debate, Fórum de Investimento e Indústria de Moscou 2026', alt: 'Evgeny Shutov falando em um painel do Fórum de Investimento e Indústria de Moscou 2026' },
+      { img: 'gallery-panel-2.webp', cap: 'Painel de debate, Fórum de Investimento e Indústria de Moscou 2026', alt: 'Evgenii Shutov falando em um painel do Fórum de Investimento e Indústria de Moscou 2026' },
       { img: 'gallery-mtpp.webp', cap: 'Reunião na Câmara de Comércio e Indústria de Moscou', alt: 'Participantes de reunião na Câmara de Comércio e Indústria de Moscou' },
       { img: 'gallery-intervision.webp', cap: 'Intervision 2025', alt: 'Delegações na Intervision 2025' },
       { img: 'gallery-agora.webp', cap: 'Fórum AGORA', alt: 'Fórum AGORA, hotel Soluxe' },
-      { img: 'gallery-meeting.webp', cap: 'Reunião de trabalho', alt: 'Evgeny Shutov em uma reunião de trabalho' },
+      { img: 'gallery-meeting.webp', cap: 'Reunião de trabalho', alt: 'Evgenii Shutov em uma reunião de trabalho' },
     ],
   },
 
@@ -961,7 +961,7 @@ export const pt = {
   },
 
   footer: {
-    rights: 'Evgeny Shutov. Todos os direitos reservados.',
+    rights: 'Evgenii Shutov. Todos os direitos reservados.',
     navTitle: 'Seções',
     tagline: 'Relações internacionais',
   },
